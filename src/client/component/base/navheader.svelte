@@ -51,6 +51,11 @@
 
 	function checktemplatepanel(){
 		//console.log("Test");
+		if(templatepanel){
+			templatepanel.toggledisplay()
+			//templatepanel.show();
+		}
+
 		if(templatepanel == null){
 			templatepanel = new Panel({
 				target: document.body,
@@ -60,8 +65,8 @@
 				}
 			});
 		}
-		console.log(templatepanel)
-		templatepanel.OBJECT_OT_Panel();
+		//console.log(templatepanel)
+		//templatepanel.OBJECT_OT_Panel();
 	}
 
 	//===============================================

@@ -5,7 +5,11 @@
     const dispatch = createEventDispatcher();
 
     //onMount(async () => {	
-	//});
+    //});
+    
+    onMount(() => {
+        console.log("mount")
+	});
 </script>
 
 <style>

@@ -18,6 +18,8 @@
 	import SSplitter from './component/base/splitter.svelte'
 	import SContextmenu from './component/base/scontextmenu.svelte'
 
+	import Sdivwindow from './component/base/sdivwindow.svelte'
+
 	import Scontext from './component/base/scontext.svelte'
 	
 	import { count, UserName, SessionHash, Sl_blogin } from './stores.js';
@@ -186,7 +188,9 @@
 	<NavFooter></NavFooter>
 </div>
 <SContextmenu></SContextmenu>
+
 <!--
+<Sdivwindow></Sdivwindow>
 <DivResize></DivResize>
 -->
 <!--

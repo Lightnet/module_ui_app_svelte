@@ -10,6 +10,15 @@
 
 	export let name = "Panel";
 	export let id = "0";
+	export let bdisplay = true;
+
+	export function show(bool = false){//default set if null
+		bdisplay = bool;
+	}
+
+	export function toggledisplay(){
+		bdisplay = !bdisplay;
+	}
 
 	// register function
 	export function OBJECT_OT_Panel(){
@@ -31,11 +40,6 @@
 			x: $coords.x + event.detail.dx,
 			y: $coords.y + event.detail.dy
         }));
-        
-		//coords.update($coords => ({
-			//x: $coords.x + event.detail.dx,
-			//y: $coords.y + event.detail.dy
-		//}));
 	}
 
 	function handlePanEnd(event) {
@@ -66,24 +70,21 @@
 		left: calc(50% - var(--width) / 2);
 		top: calc(50% - var(--height) / 2);
 		border-radius: 4px;
-		background-color: #ff3e00;
+		background-color: #333;
 		cursor: move;
 	}
 </style>
 
+{#if bdisplay == true}
 <div class="box"
 	use:pannable
 	on:panstart={handlePanStart}
 	on:panmove={handlePanMove}
 	on:panend={handlePanEnd}
 	style="transform:
-		translate({$coords.x}px,{$coords.y}px)
-		"
->
-<slot name='header'></slot>
-<slot></slot>
+		translate({$coords.x}px,{$coords.y}px);
+	">
+	<slot name='header'></slot>
+	<slot></slot>
 </div>
-<!--
-rotate({$coords.x * 0.2}deg)
-
--->
+{/if}
