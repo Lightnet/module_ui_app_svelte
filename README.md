@@ -36,6 +36,12 @@ Code languages:
  * Client browser build test.
  * 
 
+# Github:
+ * https://github.com/Lightnet/module_ui_app_svelte
+
+# Glitch:
+ * https://glitch.com/edit/#!/lightnet-module-ui-app-svelte
+
 # Run:
 ```
 npm install

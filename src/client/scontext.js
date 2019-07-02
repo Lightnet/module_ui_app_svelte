@@ -1,3 +1,13 @@
+/*
+ Project: module_ui_app_svelte
+
+ Created by: Lightnet
+
+ License: MIT
+
+ Information: Work in progres.
+ */
+
 import { writable } from 'svelte/store';
 //https://medium.com/@etherealm/named-export-vs-default-export-in-es6-affb483a0910
 //https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export
@@ -10,29 +20,11 @@ export const sl_context = writable('None');
 
 export const Sl_Mouseregion = writable('None');
 
-//static varaible
-export const scenes = {};
-export const objects = {};
-export const materials = {};
-export const textures = {};
-export const nodes = {};
-export const ops = {};
-
-export const screens = {};
-
 export default {
-    objects,
-    scenes,
-    materials,
-    textures,
-    nodes,
-    ops,
-    screens,
+    currentregion,
+    sl_viewregion,
+    sl_category,
+    sl_category,
+    sl_context,
+    Sl_Mouseregion
 }
-
-//export default ops;
-//export default class obj{
-    //constructor(){
-        //this.text = "test";
-    //}
-//}

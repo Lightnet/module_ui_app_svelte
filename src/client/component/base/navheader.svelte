@@ -73,59 +73,69 @@
 		for(var obj in mjs.ops){
 			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "FILE_MENU"){
+				console.log(mjs.ops[obj].sm_label)
 				//filemenus.push(mjs.ops[obj])
-				filemenus[obj] = mjs.ops[obj]
+				filemenus[obj] = {}
+				filemenus[obj].sm_label = mjs.ops[obj].sm_label;
+				//filemenus[obj].sm_idname = mjs.ops[obj].sm_idname;
+				//mjs.ops[obj]
+				//filemenus[obj]
 			}
 		}
-
+		
 		for(var obj in mjs.ops){
 			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "EDIT_MENU"){
-				//filemenus.push(mjs.ops[obj])
-				editmenus[obj] = mjs.ops[obj]
+				//editmenus[obj] = mjs.ops[obj]
+				editmenus[obj] = {}
+				editmenus[obj].sm_label = mjs.ops[obj].sm_label;
 			}
 		}
 
 		for(var obj in mjs.ops){
 			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "VIEW_MENU"){
-				//filemenus.push(mjs.ops[obj])
-				viewmenus[obj] = mjs.ops[obj]
+				//viewmenus[obj] = mjs.ops[obj]
+				viewmenus[obj] = {}
+				viewmenus[obj].sm_label = mjs.ops[obj].sm_label;
 			}
 		}
 
 		for(var obj in mjs.ops){
 			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "REDNER_MENU"){
-				//filemenus.push(mjs.ops[obj])
-				rendermenus[obj] = mjs.ops[obj]
+				//rendermenus[obj] = mjs.ops[obj]
+				rendermenus[obj] = {}
+				rendermenus[obj].sm_label = mjs.ops[obj].sm_label;
 			}
 		}
 
 		for(var obj in mjs.ops){
 			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "WINDOW_MENU"){
-				//filemenus.push(mjs.ops[obj])
-				windowmenus[obj] = mjs.ops[obj]
+				//windowmenus[obj] = mjs.ops[obj]
+				windowmenus[obj] = {}
+				windowmenus[obj].sm_label = mjs.ops[obj].sm_label;
 			}
 		}
 
 		for(var obj in mjs.ops){
 			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "ACCESS_MENU"){
-				//filemenus.push(mjs.ops[obj])
-				accessmenus[obj] = mjs.ops[obj]
+				//accessmenus[obj] = mjs.ops[obj]
+				accessmenus[obj] = {}
+				accessmenus[obj].sm_label = mjs.ops[obj].sm_label;
 			}
 		}
 
 		for(var obj in mjs.ops){
 			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "HELP_MENU"){
-				//filemenus.push(mjs.ops[obj])
-				helpmenus[obj] = mjs.ops[obj]
+				//helpmenus[obj] = mjs.ops[obj]
+				helpmenus[obj] = {}
+				helpmenus[obj].sm_label = mjs.ops[obj].sm_label;
 			}
 		}
-
 	});
 
 	function handleMousemove(event){
@@ -138,8 +148,27 @@
 		//console.log(mjs)
 		//console.log(typeof(mjs.ops.object_ot_calltest))
 		//console.log(mjs.ops.object_ot_calltest)
+
+		//mjs.ops.object_ot_calltest()
+		//console.log(mjs.ops.object_ot_calltest().sm_label);
+		//let o = mjs.ops.object_ot_calltest;
+		//console.dir(o.obj);
+		//let o = mjs.ops.object_ot_calltest();
+		//console.log("o.sm_label");
+		//console.log(o.sm_label);
+		//console.dir(o);
+
+		//console.log(mjs.ops.object_ot_calltest().sm_label);
+
+
+		console.log(mjs.ops.object_ot_calltest.sm_label);
+		mjs.ops.object_ot_calltest()
+		
+
+		//console.log(mjs.ops.object_ot_calltest().sm_label)
 		//mjs.ops.object_ot_calltest();//need to rework this.
-		mjs.ops.object_ot_calltest.execute();
+		//mjs.ops.object_ot_calltest.execute();
+
 	}
 
 </script>
@@ -172,29 +201,21 @@
 
 	<DropMenu name="File" prefix="_menuheader" itemlist={filemenus}>
 	</DropMenu>
-
 	<DropMenu name="Edit" prefix="_menuheader" itemlist={editmenus}>
 	</DropMenu>
-
 	<DropMenu name="View" prefix="_menuheader" itemlist={viewmenus}>
 	</DropMenu>
-
 	<!--
 	<DropMenu name="Render" prefix="_menuheader" itemlist={rendermenus}>
 	</DropMenu>
 	-->
-
 	<DropMenu name="Window" prefix="_menuheader" itemlist={windowmenus}>
 	</DropMenu>
-
 	<DropMenu name="Access" prefix="_menuheader" itemlist={accessmenus}>
 	</DropMenu>
-
 	<DropMenu name="Help" prefix="_menuheader" itemlist={helpmenus}>
 	</DropMenu>
-
 	<a href="/#" on:click={testcall}>Test Call</a>
-
 	<a href="/#" on:click={checktemplatepanel}>Test Panel</a>
 	<!--
 	<div class="dropdown">

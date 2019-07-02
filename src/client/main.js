@@ -1,6 +1,13 @@
-//===============================================
-//
-//===============================================
+/*
+ Project: module_ui_app_svelte
+
+ Created by: Lightnet
+
+ License: MIT
+
+ Information: Work in progres.
+ */
+
 import App from './App.svelte';
 import svelte from 'svelte/compiler';
 console.log(`running svelte version ${svelte.VERSION}`);

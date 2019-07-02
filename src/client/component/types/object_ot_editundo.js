@@ -1,3 +1,13 @@
+/*
+ Project: module_ui_app_svelte
+
+ Created by: Lightnet
+
+ License: MIT
+
+ Information: Work in progres.
+ */
+
 import { Operator } from './operator';
 
 export default class object_ot_editundo extends Operator{
@@ -8,7 +18,8 @@ export default class object_ot_editundo extends Operator{
         this.sm_context = "EDIT_MENU";
     }
 
-    execute() {
+    execute(context) {
+        super.execute(context);
         console.log("edit Undo")
     }
 

@@ -1,3 +1,13 @@
+/*
+ Project: module_ui_app_svelte
+
+ Created by: Lightnet
+
+ License: MIT
+
+ Information: Work in progres.
+ */
+
 //https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
 // dec2hex :: Integer -> String
 // i.e. 0-255 -> '00'-'ff'

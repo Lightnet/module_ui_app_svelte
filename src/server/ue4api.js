@@ -1,10 +1,13 @@
-// ==============================================
-//
-// Project Name:
-//
-// Created by: Lightnet
-//
-// ==============================================
+/*
+ Project: module_ui_app_svelte
+
+ Created by: Lightnet
+
+ License: MIT
+
+ Information: Work in progres.
+ */
+
 //import { promiseTimeout } from './timeout-promise';
 var promiseTimeout = require('./timeout-promise').promiseTimeout;
 

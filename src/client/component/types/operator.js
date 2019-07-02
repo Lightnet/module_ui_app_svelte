@@ -1,13 +1,18 @@
 /*
-* Work in progres testing.
-*/
+ Project: module_ui_app_svelte
 
+ Created by: Lightnet
+
+ License: MIT
+
+ Work in progres testing.
+ */
 
 export class Operator{
 
     constructor(){
         this.sm_description = "";
-        this.sm_idname = this.constructor.name
+        this.sm_idname = this.constructor.name;
         this.sm_label = "";
         this.sm_context = "";//not part of this just testing...
         this.sm_options = [];
@@ -29,7 +34,7 @@ export class Operator{
     }
 
     execute(context) {
-        console.log("test")
+        //console.log("test")
         return ['FINISHED'];
     }
 

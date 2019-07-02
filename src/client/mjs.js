@@ -1,3 +1,12 @@
+/*
+ Project: module_ui_app_svelte
+
+ Created by: Lightnet
+
+ License: MIT
+
+ */
+
 import { writable } from 'svelte/store';
 //https://medium.com/@etherealm/named-export-vs-default-export-in-es6-affb483a0910
 //https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export
@@ -68,6 +77,20 @@ export const wins = {};
 export const screens = {};
 export const types = {};
 export const props = {};
+export const context = {};
+
+data.objects = objects;
+data.scenes = scenes;
+data.materials = materials;
+data.textures = textures;
+data.nodes = nodes;
+data.actions = actions;
+data.animations = animations;
+
+context.screens = screens;
+context.scene = {};
+
+
 
 props.StringProperty = StringProperty
 
@@ -121,7 +144,19 @@ function register_class(obj){
         //console.log(tmp)
         //console.log(tmp.name)
         if(tmp instanceof Operator){
-            ops[tmp.sm_idname] = tmp;
+            //ops[tmp.sm_idname] = tmp;
+            ops[tmp.sm_idname] = function(args){
+                if(args == null){
+                    tmp.execute(context);
+                }
+                //this.obj = tmp;
+                return tmp;
+                //return this.obj;
+            }
+            ops[tmp.sm_idname].sm_label = tmp.sm_label;
+            ops[tmp.sm_idname].sm_context = tmp.sm_context;
+            ops[tmp.sm_idname].sm_options = tmp.sm_options;
+            ops[tmp.sm_idname].sm_translation_context = tmp.sm_translation_context;
             //console.log("fun Operator found");
         }
     }
@@ -149,23 +184,14 @@ function unregister_class(obj){
 utils.unregister_class = unregister_class;
 
 
+
+
 export default {
     data,
     types,
     props,
-    data:{
-        objects,
-        scenes,
-        materials,
-        textures,
-        nodes,
-        actions,
-        animations,
-    },
     ops,
     wins,
-    context:{
-        screens
-    },
+    context,
     utils,
 }

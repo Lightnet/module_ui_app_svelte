@@ -4,6 +4,7 @@
     import { count, UserName, SessionHash, Sl_blogin } from '../../stores.js';
 
     import { generateId } from '../helper/generateid.js';
+    import mjs from '../../mjs.js';
 
     const dispatch = createEventDispatcher();
 
@@ -110,7 +111,10 @@
     </button>
     <div class="dropdown-content {btoggle === true ? 'show' : ''}" id="{id}">
         {#each Object.keys(itemlist) as item}
-            <a href="/#" on:click={itemlist[item].execute}>{itemlist[item].sm_label}</a>
+            <a href="/#" on:click={()=>{mjs.ops[item]()}}>  {itemlist[item].sm_label}</a>
+            <!--
+            <a href="/#" on:click={ itemlist[item] } > {itemlist[item]}  {itemlist[item].sm_label}</a>
+            -->
         {/each}
         <!--
         <a href="/#">Link 1</a>

@@ -1,3 +1,13 @@
+/*
+ Project: module_ui_app_svelte
+
+ Created by: Lightnet
+
+ License: MIT
+
+ Information: Work in progres.
+ */
+
 export class StringProperty{
     constructor(args={name:"",default:""}){
         this.name = args.name === 'string' ? "" : args.name ;
