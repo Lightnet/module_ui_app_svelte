@@ -24,7 +24,9 @@ Code languages:
 
 # Features:
  * simple right menu (wip)
- * simple menu
+ * simple menu (wip)
+ * operator (wip)
+ * Layout Management (wip)
  * 3D (threejs) (not worked on)
  * Data Flow Node Editor (not worked on)
  * SVG (not worked on)

@@ -54,6 +54,12 @@ import object_ot_helpabout from './component/types/object_ot_helpabout'
 import object_ot_helpmanual from './component/types/object_ot_helpmanual'
 import object_ot_helpreportabug from './component/types/object_ot_helpreportabug'
 
+//area right click menu
+import object_ot_joinarea from './component/types/object_ot_joinarea'
+import object_ot_splitarea from './component/types/object_ot_splitarea'
+import object_ot_headershowmenus from './component/types/object_ot_headershowmenus'
+
+
 //===============================================
 // access view area
 //===============================================
@@ -128,6 +134,11 @@ register_class(object_ot_accessadmin);
 register_class(object_ot_helpabout);
 register_class(object_ot_helpmanual);
 register_class(object_ot_helpreportabug);
+
+register_class(object_ot_joinarea);
+register_class(object_ot_splitarea);
+
+register_class(object_ot_headershowmenus);
 
 
 //register_class(new object_ot_test());

@@ -24,7 +24,8 @@ const app = new App({
 	}
 });
 
-let strtest = new mjs.props.StringProperty({name:"test",default:"beta"});
+//let strtest = new mjs.props.StringProperty({name:"test",default:"beta"});
+console.log(mjs);
 
 export default app;
 

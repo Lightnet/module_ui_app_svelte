@@ -68,12 +68,12 @@
 
 	onMount(async () => {
 		//console.log(mjs.ops)
-		console.log(mjs);
+		//console.log(mjs);
 
 		for(var obj in mjs.ops){
 			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "FILE_MENU"){
-				console.log(mjs.ops[obj].sm_label)
+				//console.log(mjs.ops[obj].sm_label)
 				//filemenus.push(mjs.ops[obj])
 				filemenus[obj] = {}
 				filemenus[obj].sm_label = mjs.ops[obj].sm_label;
