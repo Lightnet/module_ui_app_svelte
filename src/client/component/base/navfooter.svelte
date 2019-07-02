@@ -39,41 +39,40 @@
 </script>
 
 <style>
-  .navbar {
-    overflow: hidden;
-    background-color: #333;
-  font-family: Arial, Helvetica, sans-serif;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  }
+    .navbar {
+        overflow: hidden;
+        background-color: #333;
+        font-family: Arial, Helvetica, sans-serif;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
 
-  .navbar a {
-    float: left;
-    font-size: 12px;
-    color: white;
-    text-align: center;
-    padding: 4px 4px;
-    text-decoration: none;
-  }
+    .navbar a {
+        float: left;
+        font-size: 12px;
+        color: white;
+        text-align: center;
+        padding: 4px 4px;
+        text-decoration: none;
+    }
 
-  .navbar label {
-    float: left;
-    font-size: 12px;
-    color: white;
-    text-align: center;
-    padding: 4px 4px;
-    text-decoration: none;
-  }
+    .navbar label {
+        float: left;
+        font-size: 12px;
+        color: white;
+        text-align: center;
+        padding: 4px 4px;
+        text-decoration: none;
+    }
 
-  .navbar a:hover {
-    background-color: red;
-  }
+    .navbar a:hover {
+        background-color: red;
+    }
 </style>
 
 <div on:mousemove={handleMousemove} class="navbar">
-  <a href="/#"> {name} </a>
-  <label>Status:Normal</label>
-
-  <label>Mouse Region:{MouseRegion}</label>
+    <a href="/#"> {name} </a>
+    <label>Status:Normal</label>
+    <label>Mouse Region:{MouseRegion}</label>
 </div>

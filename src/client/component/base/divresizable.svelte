@@ -1,7 +1,7 @@
 
 
 <script>
-/*Make resizable div by Hung Nguyen*/
+
 function makeResizableDiv(div) {
     console.log("resize")
   const element = document.querySelector(div);

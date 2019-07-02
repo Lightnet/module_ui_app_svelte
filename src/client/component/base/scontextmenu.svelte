@@ -53,7 +53,7 @@
 
     window.addEventListener("contextmenu", e => {
         //console.log("contextmenu");
-        e.preventDefault();
+        //e.preventDefault();
         const origin = {
             left: e.pageX,
             top: e.pageY

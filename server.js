@@ -3,10 +3,7 @@
 // server.js
 // where your node app starts
 //===============================================
-
-
 //const path = require('path');
-
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();

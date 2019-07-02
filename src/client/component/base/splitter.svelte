@@ -25,7 +25,7 @@
         m.x = event.clientX;
         m.y = event.clientY;
         //console.log(m);
-        Sl_Mouseregion.set("header_splitter");
+        Sl_Mouseregion.set("splitter");
     }
     function handleMouseclick(event){
         //console.log(event);

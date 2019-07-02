@@ -1,7 +1,6 @@
 <script>
-//https://svelte.dev/docs#setContext
+    //https://svelte.dev/docs#setContext
     import { UserName } from '../../stores.js';
-
     //let username = "Guest";
     //let charactername = "Guest Name";
     //let accesslevel = "member";

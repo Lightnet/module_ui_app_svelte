@@ -4,22 +4,27 @@
 
 	import { onMount, setContext } from 'svelte'
 
-	import Modal from './component/basic/modalcomponent.svelte';
+	import Modal from './component/base/modalcomponent.svelte';
 
-	import Home from './component/basic/homecomponent.svelte'
-	import News from './component/basic/newscomponent.svelte'
+	import Home from './component/base/homecomponent.svelte'
+	import News from './component/base/newscomponent.svelte'
 	import Account from './component/account/accountcomponent.svelte'
 	import Login from './component/account/logincomponent.svelte'
 	import Server from './component/admin/servercomponent.svelte'
 	import Admin from './component/admin/admincomponent.svelte'
-	import Panel from './component/basic/panel.svelte'
-	import NavHeader from './component/basic/navheader.svelte'
-	import NavFooter from './component/basic/navfooter.svelte'
-	//import DivResize from './component/basic/divresizable.svelte'
-	import SSplitter from './component/basic/splitter.svelte'
-	import SContextmenu from './component/basic/scontextmenu.svelte'
+	import Panel from './component/base/panel.svelte'
+	import NavHeader from './component/base/navheader.svelte'
+	import NavFooter from './component/base/navfooter.svelte'
+	import SSplitter from './component/base/splitter.svelte'
+	import SContextmenu from './component/base/scontextmenu.svelte'
+
+	import Scontext from './component/base/scontext.svelte'
 	
 	import { count, UserName, SessionHash, Sl_blogin } from './stores.js';
+
+	import mjs from './mjs.js';
+
+	//import {ops} from './scontext.js';
 
 	export let name;
 
@@ -28,47 +33,29 @@
 	let view = "account";
 	let msgmodal = "None";
 	//let sessionhash = "";
-
 	let compparam = "Panel";
-
 	let count_value;
 
 	const unsubscribe = count.subscribe(value => {
 		count_value = value;
 	});
-
 	const bloginunsubscribe = Sl_blogin.subscribe(value => {
 		blogin = value;
 		//console.log(value);
 	});
-
 	function handleview(_view){
 		view = _view;
 		//console.log(_view);
 	}
-
 	function logouthandle(){
 		blogin = false;
 		SessionHash.set('');
 		UserName.set('Guest');
 	}
-
-//===============================================
-// onMount
-//===============================================
-
-	onMount(async () => {
-		//console.log("onMount");
-		//const res = await fetch(`https://jsonplaceholder.typicode.com/photos?_limit=20`);
-		//photos = await res.json();
-		//console.log(this);
-	});
-	
 	function showmodal(msg){
 		showModal = true;
 		msgmodal = msg;
 	}
-
 	function handle_msg(event){
 		if(event.detail.msg){
 			console.log("event.detail.message:"+event.detail.msg);
@@ -105,8 +92,6 @@
 	//let gdiv = document.createElement('div');
 	//gdiv.setAttribute("id", "test");
 	//document.body.appendChild(gdiv);
-
-	//let self = this;
 
 	function testfun(){
 		console.log("test");
@@ -150,18 +135,41 @@
 			//console.log(event.detail);
 		}
 	}
+
+	//===============================================
+	// onMount
+	//===============================================
+
+	onMount(async () => {
+		console.log(mjs);
+		console.dir(mjs);
+
+		//scontext.ops.push({text:"test"});
+		//let ops = scontext.ops;
+		//let ops = {}
+		
+		//ops.push({text:"test"});
+		//console.log(ops);
+		//console.log(ops);
+		//ops["text"] = "test";
+		//console.log(ops);
+		//let obj = new scontext();
+		//console.log(obj)
+		//console.log("onMount");
+		//const res = await fetch(`https://jsonplaceholder.typicode.com/photos?_limit=20`);
+		//photos = await res.json();
+		//console.log(this);
+	});
 </script>
 	
 <style>
 	.panelc {
 		background-color: dimgrey;
 	}
-
 	.sheight{
 		height:calc(100vh - 44px);
 		background-color: dodgerblue;
 	}
-
 </style>
 
 <div>
@@ -169,20 +177,18 @@
 		name={name}
 		on:navmenu={navheader_handle} >
 	</NavHeader>
-
 	<div class="panelc sheight ">
-		<!--<div id="splitterh"></div>-->
 		<SSplitter></SSplitter>
-		<div>
-		Hello World
-		</div>
+		<Scontext></Scontext>
+		<!--<div id="splitterh"></div>
+		-->
 	</div>
 	<NavFooter></NavFooter>
 </div>
 <SContextmenu></SContextmenu>
 <!--
-	<DivResize></DivResize>
-	-->
+<DivResize></DivResize>
+-->
 <!--
 {#if blogin === true}
 	{#if view == "account"}
@@ -209,10 +215,7 @@
 		<Home />
 	{/if}	
 {/if}
-
-
 -->
-
 <!--
 Test
 <button on:click="{() => showModal = true}">

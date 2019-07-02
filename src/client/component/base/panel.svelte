@@ -3,8 +3,18 @@
 	import { pannable } from './pannable.js';
 	import { onMount, setContext } from 'svelte'
 
+	export let Sl_information={
+		name:"test",
+		version:"0.0.1",
+	}
+
 	export let name = "Panel";
 	export let id = "0";
+
+	// register function
+	export function OBJECT_OT_Panel(){
+		console.log("test");
+	}
 
 	const coords = spring({ x: 0, y: 0 }, {
 		stiffness: 0.2,
