@@ -16,7 +16,7 @@
     "build": "rollup -c",
     "autobuild": "rollup -c -w",
     "dev": "run-p start:dev autobuild",
-    "start": "gulp default",
+    "start": "gulp buildscript && node backend.js",
     "startsirv": "sirv public",
     "start:dev": "sirv public --dev"
   },

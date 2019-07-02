@@ -158,8 +158,8 @@ exports.browser_sync = browser_sync;
 
 const build = gulp.series(frontrollup_build, backend_build, copy_css, copy_html, watch, serve, browser_sync);
 
-//const buildserver = gulp.series( backend_build, watch, serve);
-//exports.buildserver = buildserver;
+const buildscript = gulp.series( frontrollup_build, backend_build, copy_css, copy_html);
+exports.buildscript = buildscript;
 
 /*
  * Export a default task
