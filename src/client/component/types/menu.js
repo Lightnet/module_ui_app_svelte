@@ -3,17 +3,15 @@
 */
 
 
-export class Operator{
+export class Menu{
 
     constructor(){
         this.sm_description = "";
-        this.sm_idname = this.constructor.name
+        this.sm_idname = "object_mt";
         this.sm_label = "";
         this.sm_context = "";//not part of this just testing...
         this.sm_options = [];
         this.sm_translation_context = "Operator";
-        //console.log(this.constructor.name)
-        return this;
     }
 
     __init__(){
@@ -25,28 +23,30 @@ export class Operator{
     }
 
     poll(context){
-        return context;
+
+        return null;
     }
 
     execute(context) {
         console.log("test")
+
         return ['FINISHED'];
     }
 
     draw(context){
-        return ['FINISHED'];
+
     }
 
     modal(context, event){
-        return ['RUNNING_MODAL'];
+
     }
 
     invoke(context,event){
-        return ['FINISHED']
+        return ['RUNNING_MODAL']
     }
 
     cancel(context){
-        return ['CANCELED']
+
     }
 
 }

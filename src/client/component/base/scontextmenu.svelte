@@ -3,27 +3,13 @@
     //https://jsfiddle.net/softvar/6ny94/
     import { onMount, setContext, createEventDispatcher } from 'svelte'
     import { count, UserName, SessionHash, Sl_blogin } from '../../stores.js';
+    import { generateId } from '../helper/generateid.js';
 
     let div1;
     let div2;
     let m = {x:0,y:0};
     let bresize = false;
 
-    //https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
-	// dec2hex :: Integer -> String
-    // i.e. 0-255 -> '00'-'ff'
-    /*
-	function dec2hex (dec) {
-		return ('0' + dec.toString(16)).substr(-2)
-	}
-
-	// generateId :: Integer -> String
-	function generateId (len) {
-		var arr = new Uint8Array((len || 40) / 2)
-		window.crypto.getRandomValues(arr)
-		return Array.from(arr, dec2hex).join('')
-	}
-    */
     //let idmenu = generateId(20);
     let idmenu = "scontextmenu"
     let menu;

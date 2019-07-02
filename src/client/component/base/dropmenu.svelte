@@ -110,9 +110,8 @@
     </button>
     <div class="dropdown-content {btoggle === true ? 'show' : ''}" id="{id}">
         {#each Object.keys(itemlist) as item}
-            <a href="/#" on:click={itemlist[item].execute}>{itemlist[item].SLabel}</a>
+            <a href="/#" on:click={itemlist[item].execute}>{itemlist[item].sm_label}</a>
         {/each}
-
         <!--
         <a href="/#">Link 1</a>
         <a href="/#">Link 2</a>

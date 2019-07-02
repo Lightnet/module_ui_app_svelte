@@ -23,7 +23,7 @@
 	import { count, UserName, SessionHash, Sl_blogin } from './stores.js';
 
 
-	import object_ot_test from './component/types/object_ot_test.js'
+	//import object_ot_test from './component/types/object_ot_test.js'
 
 
 
@@ -162,7 +162,7 @@
 		//console.log(obj)
 		//console.log("onMount");
 
-		mjs.ops.object_ot_test = new object_ot_test();
+		//mjs.ops.object_ot_test = new object_ot_test();
 
 		//mjs.ops.object_ot_test
 

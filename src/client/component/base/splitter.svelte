@@ -1,6 +1,7 @@
 <script>
     import { onMount, setContext, createEventDispatcher } from 'svelte'
     import { count, UserName, SessionHash, Sl_blogin, Sl_Mouseregion } from '../../stores.js';
+    import { generateId } from '../helper/generateid.js';
 
     let div1;
     let div2;
@@ -10,16 +11,7 @@
     let sheight = '100%';
     let swidth = '4px';
     let resizetag = 'n-resize';
-    function dec2hex (dec) {
-		return ('0' + dec.toString(16)).substr(-2)
-	}
 
-	// generateId :: Integer -> String
-	function generateId (len) {
-		var arr = new Uint8Array((len || 40) / 2)
-		window.crypto.getRandomValues(arr)
-		return Array.from(arr, dec2hex).join('')
-    }
     let idsplitter = generateId(20);
     function handleMousemove(event){
         m.x = event.clientX;

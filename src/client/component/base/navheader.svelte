@@ -72,9 +72,57 @@
 
 		for(var obj in mjs.ops){
 			//console.log(obj);
-			if(mjs.ops[obj].SContext == "FILE_MENU"){
+			if(mjs.ops[obj].sm_context == "FILE_MENU"){
 				//filemenus.push(mjs.ops[obj])
 				filemenus[obj] = mjs.ops[obj]
+			}
+		}
+
+		for(var obj in mjs.ops){
+			//console.log(obj);
+			if(mjs.ops[obj].sm_context == "EDIT_MENU"){
+				//filemenus.push(mjs.ops[obj])
+				editmenus[obj] = mjs.ops[obj]
+			}
+		}
+
+		for(var obj in mjs.ops){
+			//console.log(obj);
+			if(mjs.ops[obj].sm_context == "VIEW_MENU"){
+				//filemenus.push(mjs.ops[obj])
+				viewmenus[obj] = mjs.ops[obj]
+			}
+		}
+
+		for(var obj in mjs.ops){
+			//console.log(obj);
+			if(mjs.ops[obj].sm_context == "REDNER_MENU"){
+				//filemenus.push(mjs.ops[obj])
+				rendermenus[obj] = mjs.ops[obj]
+			}
+		}
+
+		for(var obj in mjs.ops){
+			//console.log(obj);
+			if(mjs.ops[obj].sm_context == "WINDOW_MENU"){
+				//filemenus.push(mjs.ops[obj])
+				windowmenus[obj] = mjs.ops[obj]
+			}
+		}
+
+		for(var obj in mjs.ops){
+			//console.log(obj);
+			if(mjs.ops[obj].sm_context == "ACCESS_MENU"){
+				//filemenus.push(mjs.ops[obj])
+				accessmenus[obj] = mjs.ops[obj]
+			}
+		}
+
+		for(var obj in mjs.ops){
+			//console.log(obj);
+			if(mjs.ops[obj].sm_context == "HELP_MENU"){
+				//filemenus.push(mjs.ops[obj])
+				helpmenus[obj] = mjs.ops[obj]
 			}
 		}
 
@@ -83,6 +131,15 @@
 	function handleMousemove(event){
 		//console.log("header");
 		Sl_Mouseregion.set("header");
+	}
+
+	function testcall(event){
+		//console.log(event)
+		//console.log(mjs)
+		//console.log(typeof(mjs.ops.object_ot_calltest))
+		//console.log(mjs.ops.object_ot_calltest)
+		//mjs.ops.object_ot_calltest();//need to rework this.
+		mjs.ops.object_ot_calltest.execute();
 	}
 
 </script>
@@ -116,23 +173,29 @@
 	<DropMenu name="File" prefix="_menuheader" itemlist={filemenus}>
 	</DropMenu>
 
-	<DropMenu name="Edit" prefix="_menuheader">
+	<DropMenu name="Edit" prefix="_menuheader" itemlist={editmenus}>
 	</DropMenu>
 
-	<DropMenu name="View" prefix="_menuheader">
+	<DropMenu name="View" prefix="_menuheader" itemlist={viewmenus}>
 	</DropMenu>
 
-	<DropMenu name="Render" prefix="_menuheader">
+	<!--
+	<DropMenu name="Render" prefix="_menuheader" itemlist={rendermenus}>
+	</DropMenu>
+	-->
+
+	<DropMenu name="Window" prefix="_menuheader" itemlist={windowmenus}>
 	</DropMenu>
 
-	<DropMenu name="Window" prefix="_menuheader">
+	<DropMenu name="Access" prefix="_menuheader" itemlist={accessmenus}>
 	</DropMenu>
 
-	<DropMenu name="Access" prefix="_menuheader">
+	<DropMenu name="Help" prefix="_menuheader" itemlist={helpmenus}>
 	</DropMenu>
 
-	<DropMenu name="Help" prefix="_menuheader">
-	</DropMenu>
+	<a href="/#" on:click={testcall}>Test Call</a>
+
+	<a href="/#" on:click={checktemplatepanel}>Test Panel</a>
 	<!--
 	<div class="dropdown">
     	<button class="dropbtn" on:click={()=>{togglecontent()}}>View

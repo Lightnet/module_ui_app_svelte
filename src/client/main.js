@@ -5,14 +5,19 @@ import App from './App.svelte';
 import svelte from 'svelte/compiler';
 console.log(`running svelte version ${svelte.VERSION}`);
 
+//import {StringProperty} from './component/props/StringProperty'
+import mjs from './mjs'
+
 localStorage.clear();
 
 const app = new App({
 	target: document.body,
 	props: {
-		name: 'Rest App.'
+		name: 'MSJ App.'
 	}
 });
+
+let strtest = new mjs.props.StringProperty({name:"test",default:"beta"});
 
 export default app;
 
