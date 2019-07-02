@@ -1,22 +1,59 @@
 <script>
-    import { onMount, setContext, createEventDispatcher } from 'svelte'
+    //https://stackoverflow.com/questions/42737693/is-it-possible-in-svelte-to-have-each-loops-with-two-way-binding-to-nested-obje
+    import { onMount, onDestroy, createEventDispatcher } from 'svelte'
     import { count, UserName, SessionHash, Sl_blogin } from '../../stores.js';
+
+    import { generateId } from '../helper/generateid.js';
 
     const dispatch = createEventDispatcher();
 
-    export let name;
-    export let id;
+    export let name = "menu";
+    export let id = generateId(20);
+    export let prefix = generateId(20);
+
+    export let itemlist = {};
+    let items = {};
 
     let btoggle = false;
+
+    function onclick(e) {
+        //console.log("click");
+        //console.log(e.target)
+		//if (!e.target.matches('.dropbtn')){
+        if (!e.target.matches("#"+name+prefix)){
+			//var myDropdown = document.getElementById(iddropmenu);
+			//if (myDropdown.classList.contains('show')) {
+            if (btoggle == true) {
+      			//myDropdown.classList.remove('show');
+      			btoggle = false
+			}
+		}
+    }
+
+    //window.onclick = onclick;
+    
+    onMount(()=>{
+        //console.log("mount");
+        window.addEventListener("click",onclick);
+        //console.log(itemlist);
+        //items = itemlist;
+        //for(var item in itemlist){
+            //console.log(itemlist[item])
+        //}
+    });
+
+    onDestroy(()=>{
+        //console.log("destroy");
+        window.removeEventListener("click",onclick);
+    });
 
     /* When the user clicks on the button, 
     toggle between hiding and showing the dropdown content */
     function togglecontent() {
-		console.log("toggle");
+		//console.log("toggle");
         btoggle = !btoggle;
     }
 </script>
-
 
 <style>
     .dropdown {
@@ -68,12 +105,18 @@
 </style>
 
 <div class="dropdown">
-    <button class="dropbtn" on:click={()=>{togglecontent()}}>Dropdown
+    <button id="{name}{prefix}" class="dropbtn" on:click={()=>{togglecontent()}}>{name}
         <i class="fa fa-caret-down"></i>
     </button>
-    <div class="dropdown-content {btoggle === true ? 'show' : ''}" id="myDropdown">
+    <div class="dropdown-content {btoggle === true ? 'show' : ''}" id="{id}">
+        {#each Object.keys(itemlist) as item}
+            <a href="/#" on:click={itemlist[item].execute}>{itemlist[item].SLabel}</a>
+        {/each}
+
+        <!--
         <a href="/#">Link 1</a>
         <a href="/#">Link 2</a>
         <a href="/#">Link 3</a>
+        -->
     </div>
 </div>

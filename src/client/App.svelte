@@ -19,10 +19,13 @@
 	import SContextmenu from './component/base/scontextmenu.svelte'
 
 	import Sdivwindow from './component/base/sdivwindow.svelte'
-
 	import Scontext from './component/base/scontext.svelte'
-	
 	import { count, UserName, SessionHash, Sl_blogin } from './stores.js';
+
+
+	import object_ot_test from './component/types/object_ot_test.js'
+
+
 
 	import mjs from './mjs.js';
 
@@ -143,8 +146,8 @@
 	//===============================================
 
 	onMount(async () => {
-		console.log(mjs);
-		console.dir(mjs);
+		//console.log(mjs);
+		//console.dir(mjs);
 
 		//scontext.ops.push({text:"test"});
 		//let ops = scontext.ops;
@@ -158,12 +161,17 @@
 		//let obj = new scontext();
 		//console.log(obj)
 		//console.log("onMount");
-		//const res = await fetch(`https://jsonplaceholder.typicode.com/photos?_limit=20`);
-		//photos = await res.json();
-		//console.log(this);
+
+		mjs.ops.object_ot_test = new object_ot_test();
+
+		//mjs.ops.object_ot_test
+
+		//console.log(mjs.ops.object_ot_test)
 	});
 </script>
-	
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
 	.panelc {
 		background-color: dimgrey;

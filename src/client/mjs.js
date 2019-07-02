@@ -27,8 +27,6 @@ export const types = {};
 
 export const screens = {};
 
-
-
 export default {
     types,
     data:{
