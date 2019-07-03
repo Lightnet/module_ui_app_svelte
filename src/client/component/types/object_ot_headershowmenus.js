@@ -15,13 +15,13 @@ export default class object_ot_headershowmenus extends Operator{
     constructor(){
         super();
         this.sm_idname = "object_ot_headershowmenus";
-        this.sm_label = "show menus";
+        this.sm_label = "Show Menus";
         this.sm_context = "header";
     }
 
     execute(context) {
         super.execute(context);
-        console.log("edit ")
+        console.log("show menus")
     }
 
 }

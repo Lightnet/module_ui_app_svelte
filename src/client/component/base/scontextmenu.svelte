@@ -61,13 +61,13 @@
         }
         //console.log(count)
         if(count == 0){
-            if(menuVisible)toggleMenu("hide");
+            toggleMenu("hide");
         }
     }
 
     window.addEventListener("contextmenu", e => {
         //console.log("contextmenu");
-        //e.preventDefault();
+        e.preventDefault();
         const origin = {
             left: e.pageX,
             top: e.pageY
@@ -79,56 +79,61 @@
 </script>
 
 <style>
-.menuitem {
-    list-style:none;
-    margin:0px;
-    margin-top:4px;
-    padding-left:10px;
-    padding-right:10px;
-    padding-bottom:3px;
-    font-size:17px;
-    color: #333333;
-}
+    .menuitem {
+        list-style:none;
+        margin:0px;
+        margin-top:4px;
+        padding-left:4px;
+        padding-right:4px;
+        padding-bottom:4px;
+        font-size:12px;
+        color: #333333;
+    }
 
-.menuitem :hover{
-   color: white;
-  background:#284570;
-  border-radius:2px;
-}
+    .menuitem :hover{
+        color: white;
+        background:lightslategrey;
+        border-radius:2px;
+    }
 
-hr { width: 85%; 
-    background-color:#E4E4E4;
-    border-color:#E4E4E4;
-    color:#E4E4E4;
-}
+    hr { width: 85%; 
+        background-color:#E4E4E4;
+        border-color:#E4E4E4;
+        color:#E4E4E4;
+    }
 
-.cntnr{
-    display:none;
-    position:fixed;
-    left:0;
-    top:0;
-    border:1px solid #B2B2B2;
-    width:150px;      background:#F9F9F9;
-    box-shadow: 3px 3px 2px #E9E9E9;
-    border-radius:4px;
-}
+    .cntnr{
+        display:none;
+        position:fixed;
+        left:0;
+        top:0;
+        border:1px solid #B2B2B2;
+        width:150px;      
+        background:#333;
+        /*box-shadow: 3px 3px 2px #E9E9E9;*/
+        border-radius:4px;
+    }
 
-li{
-    padding: 3px;
-    padding-left:10px;
-}
+    li{
+        text-align: center;
+        padding: 3px;
+        padding-left:4px;
+    }
+
+    li a{
+        text-decoration: none;
+        display: block;
+        font-size: 12px;
+        color: white;
+    }
 </style>
 
 <div id="{idmenu}" class="cntnr">
     <ul id="contextmenulist" class="menuitem">
         {#each Object.keys(itemlist) as item}
             <li><a href="/#" on:click={()=>{mjs.ops[item]()}}>  {itemlist[item].sm_label}</a></li>
-            
-            <!--
-            <a href="/#" on:click={ itemlist[item] } > {itemlist[item]}  {itemlist[item].sm_label}</a>
-            -->
+            <!--<a href="/#" on:click={ itemlist[item] } > {itemlist[item]}  {itemlist[item].sm_label}</a>-->
         {/each}
-    
         <!--
         <li>Back</li>
         <li>Reload</li>

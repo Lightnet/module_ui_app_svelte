@@ -191,7 +191,7 @@
   	}
 
   	.navbar a:hover {
-    	background-color: red;
+    	background-color: lightslategrey;
   	}
 
 </style>

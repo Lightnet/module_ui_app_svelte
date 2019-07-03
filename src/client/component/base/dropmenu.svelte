@@ -64,7 +64,7 @@
 
     .dropdown .dropbtn {
         cursor: pointer;
-        font-size: 12px;  
+        font-size: 12px;
         border: none;
         outline: none;
         color: white;
@@ -75,13 +75,13 @@
     }
 
     .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
-        background-color: red;
+        background-color: lightslategrey;
     }
 
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #f9f9f9;
+        background-color: #333;
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
@@ -89,15 +89,16 @@
 
     .dropdown-content a {
         float: none;
-        color: black;
+        font-size: 12px;
         padding: 4px 4px;
         text-decoration: none;
         display: block;
         text-align: left;
+        color: white;
     }
 
     .dropdown-content a:hover {
-        background-color: #ddd;
+        background-color: lightslategrey;
     }
 
     .show {
