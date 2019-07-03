@@ -9,6 +9,8 @@
     export let screen = "3dviewport";
 
     //let viewport = "3dviewport";
+    export let idheader;
+    export let viewport = "3dviewport";
 
     export let name = "menu";
     export let id = generateId(20);
@@ -42,7 +44,6 @@
         itemlist['3dviewport'] = {};
         itemlist['3dviewport'].sm_label = '3dviewport';
 
-        
         //itemlist['imageeditor'] = {};
         //itemlist['imageeditor'].sm_label = 'imageeditor';
 
@@ -76,14 +77,16 @@
         itemlist['outliner'] = {};
         itemlist['outliner'].sm_label = 'outliner';
 
-        itemlist['Properties'] = {};
-        itemlist['Properties'].sm_label = 'Properties';
+        itemlist['properties'] = {};
+        itemlist['properties'].sm_label = 'properties';
 
         itemlist['filebrowser'] = {};
         itemlist['filebrowser'].sm_label = 'filebrowser';
 
         itemlist['preferences'] = {};
         itemlist['preferences'].sm_label = 'preferences';
+
+        screen = viewport;
     });
 
     onDestroy(() => {
@@ -186,7 +189,7 @@
 
 </style>
 
-<div on:mousemove={handleMousemove} class="navbar">
+<div id="{idheader}" on:mousemove={handleMousemove} class="navbar">
     <a href="/#">Editor</a>
 
     <div class="dropdown">

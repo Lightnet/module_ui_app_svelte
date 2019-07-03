@@ -37,11 +37,9 @@
 </style>
 
 <div id="{id1}" class="panel1">
-    <EditorComponent></EditorComponent>
+    <EditorComponent viewport="3dviewport"></EditorComponent>
 </div>
-
 <SSplitter bhorizontal={false} bresize={true} iddiv1={id1} iddiv2={id2}></SSplitter>
-
 <div id="{id2}" class="panel2">
-    Test2
+    <EditorComponent viewport="properties"></EditorComponent>
 </div>

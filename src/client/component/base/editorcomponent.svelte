@@ -3,13 +3,16 @@
     import { Sl_Mouseregion } from '../../stores.js';
 
     import mjs from '../../mjs.js';
+    import { generateId } from '../helper/generateid.js';
 
     import EditorHeaderComponent from './editorheadercomponent.svelte';
     import ContentComponent from './contentcomponent.svelte';
 
     const dispatch = createEventDispatcher();
 
-    let viewport = "3dviewport";
+    export let viewport = "3dviewport";
+
+    let idheader = generateId(20);
 
     //onMount(async () => {	
     //});
@@ -18,22 +21,20 @@
         //console.log("mount")
     });
 
-    function handledivresize(event){
-        console.log("resize");
-
-        let editorheadercompoent = document.querySelector('EditorHeaderComponent');
-        console.log(editorheadercompoent);
-    }
+    //function handledivresize(event){
+        //console.log("resize");
+        //let editorheadercompoent = document.querySelector('EditorHeaderComponent');
+        //console.log(editorheadercompoent);
+    //}
 
     afterUpdate(() => {
         //console.log("afterUpdate")
-
-        window.addEventListener('resize', handledivresize);
+        //window.addEventListener('resize', handledivresize);
     });
 
     onDestroy(() => {
         //console.log("onDestroy")
-        window.addEventListener('resize', handledivresize);
+        //window.addEventListener('resize', handledivresize);
     });
 
     function handle_viewport(event){
@@ -50,6 +51,6 @@
     }
 </style>
 <div class="editorscreen">
-    <EditorHeaderComponent id="editor" on:viewport={handle_viewport}></EditorHeaderComponent>
-    <ContentComponent viewport={viewport}></ContentComponent>
+    <EditorHeaderComponent idheader={idheader} viewport={viewport} on:viewport={handle_viewport}></EditorHeaderComponent>
+    <ContentComponent viewport={viewport} idheader={idheader}></ContentComponent>
 </div>
