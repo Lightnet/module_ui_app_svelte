@@ -5,6 +5,7 @@
 	import { onMount, setContext } from 'svelte'
 
 	import Modal from './component/base/modalcomponent.svelte';
+	import { count, UserName, SessionHash, Sl_blogin } from './stores.js';
 
 	import Home from './component/base/homecomponent.svelte'
 	import News from './component/base/newscomponent.svelte'
@@ -18,18 +19,12 @@
 	import SSplitter from './component/base/splitter.svelte'
 	import SContextmenu from './component/base/scontextmenu.svelte'
 
-	import Sdivwindow from './component/base/sdivwindow.svelte'
+	//import Sdivwindow from './component/base/sdivwindow.svelte'
 	import Scontext from './component/base/scontext.svelte'
-	import { count, UserName, SessionHash, Sl_blogin } from './stores.js';
 
-
-	//import object_ot_test from './component/types/object_ot_test.js'
-
-
-
+	import SDivdivider from './component/base/sdivdivider.svelte'
+	
 	import mjs from './mjs.js';
-
-	//import {ops} from './scontext.js';
 
 	export let name;
 
@@ -44,23 +39,28 @@
 	const unsubscribe = count.subscribe(value => {
 		count_value = value;
 	});
+
 	const bloginunsubscribe = Sl_blogin.subscribe(value => {
 		blogin = value;
 		//console.log(value);
 	});
+
 	function handleview(_view){
 		view = _view;
 		//console.log(_view);
 	}
+
 	function logouthandle(){
 		blogin = false;
 		SessionHash.set('');
 		UserName.set('Guest');
 	}
+
 	function showmodal(msg){
 		showModal = true;
 		msgmodal = msg;
 	}
+
 	function handle_msg(event){
 		if(event.detail.msg){
 			console.log("event.detail.message:"+event.detail.msg);
@@ -178,20 +178,20 @@
 	}
 	.sheight{
 		height:calc(100vh - 44px);
+		width:100%;
 		background-color: dodgerblue;
 	}
 </style>
-
+<!-- 
+<SDivdivider></SDivdivider>
+-->
 <div>
 	<NavHeader 
 		name={name}
 		on:navmenu={navheader_handle} >
 	</NavHeader>
 	<div class="panelc sheight ">
-		<SSplitter></SSplitter>
-		<Scontext></Scontext>
-		<!--<div id="splitterh"></div>
-		-->
+		<SDivdivider></SDivdivider>
 	</div>
 	<NavFooter></NavFooter>
 </div>
@@ -227,14 +227,9 @@
 		<Home />
 	{/if}	
 {/if}
--->
-<!--
-Test
 <button on:click="{() => showModal = true}">
 	show modal
 </button>
--->
-<!--
 {#if showModal}
 	<Modal on:close="{() => showModal = false}">
 		<h2 slot="header">
@@ -243,8 +238,4 @@ Test
 		<p>{msgmodal}</p>
 	</Modal>
 {/if}
-
-<Panel>
-	<label>Test</label>
-</Panel>
 -->

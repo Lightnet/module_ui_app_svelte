@@ -67,7 +67,7 @@
 
     window.addEventListener("contextmenu", e => {
         //console.log("contextmenu");
-        e.preventDefault();
+        //e.preventDefault();
         const origin = {
             left: e.pageX,
             top: e.pageY
@@ -96,11 +96,12 @@
         border-radius:2px;
     }
 
+    /*
     hr { width: 85%; 
         background-color:#E4E4E4;
         border-color:#E4E4E4;
         color:#E4E4E4;
-    }
+    }*/
 
     .cntnr{
         display:none;

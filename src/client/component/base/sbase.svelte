@@ -1,5 +1,5 @@
 <script>
-    import { onMount, setContext, createEventDispatcher } from 'svelte'
+    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
 
     const dispatch = createEventDispatcher();
@@ -8,8 +8,16 @@
     //});
     
     onMount(() => {
-        console.log("mount")
-	});
+        //console.log("mount")
+    });
+
+    afterUpdate(() => {
+        //console.log("afterUpdate")
+    });
+
+    onDestroy(() => {
+        //console.log("onDestroy")
+    });
 </script>
 
 <style>

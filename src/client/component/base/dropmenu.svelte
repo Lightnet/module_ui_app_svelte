@@ -13,7 +13,7 @@
     export let prefix = generateId(20);
 
     export let itemlist = {};
-    let items = {};
+    //let items = {};
 
     let btoggle = false;
 

@@ -4,6 +4,9 @@
 
 # License: MIT
 
+# Stage Phase:
+ * Prototype build testing layouts.
+ 
 Code languages:
  * babeljs 6
  * javascript

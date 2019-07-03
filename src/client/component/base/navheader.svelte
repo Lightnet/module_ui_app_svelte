@@ -217,30 +217,4 @@
 	</DropMenu>
 	<a href="/#" on:click={testcall}>Test Call</a>
 	<a href="/#" on:click={checktemplatepanel}>Test Panel</a>
-	<!--
-	<div class="dropdown">
-    	<button class="dropbtn" on:click={()=>{togglecontent()}}>View
-    		<i class="fa fa-caret-down"></i>
-    	</button>
-      	<div class="dropdown-content {btoggle === true ? 'show' : ''}" id={iddropmenu}>
-      		<a href="/#" on:click={()=>{handleview('home')}}>Home</a>
-			<a href="/#" on:click={()=>{handleview('news')}}>News</a>
-      	</div>
-  	</div>
-	-->
-	<!--
-	<a href="/#" on:click={()=>{handleview('account')}}>Account</a>
-	<a href="/#" on:click={()=>{handleview('character')}}>Character</a>
-	<a href="/#" on:click={()=>{handleview('creatures')}}>Creatures</a>
-	<a href="/#" on:click={()=>{handleview('shop')}}>Shop</a>
-	<a href="/#" on:click={()=>{handleview('map')}}>Map</a>
-	<a href="/#" on:click={()=>{handleview('server')}}>Server</a>
-	<a href="/#" on:click={()=>{checktemplatepanel()}}>Template Panel</a>
-	<a href="/#" on:click={()=>{handleview('admin')}}>Admin</a>
-	{#if blogin === true}
-		<a href="/#" on:click={logouthandle}>Logout</a>
-	{:else}
-		<a href="/#" on:click={()=>{handleview('login')}}>Login</a>
-	{/if}
-	-->
 </div>
