@@ -2,6 +2,16 @@
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
 
+
+    import Viewport3DComponent from '../viewport3d/viewport3dcomponent.svelte';
+    import FileBrowserComponent from '../filebrowser/filebrowsercomponent.svelte';
+    import InfoComponent from './infocomponent.svelte';
+    import OutlinerComponent from '../outliner/outlinercomponent.svelte';
+    import PreferencesComponent from '../preferences/preferencescomponent.svelte';
+    import PropertiesComponent from '../properties/propertiescomponent.svelte';
+    import TexteditorComponent from '../texteditor/texteditorcomponent.svelte';
+    import ScriptConsoleComponent from './scriptconsolecomponent.svelte';
+    
     const dispatch = createEventDispatcher();
 
     export let viewport = "3dviewport";
@@ -23,34 +33,43 @@
     
 </script>
 <style>
-
+    .screen{
+        height: calc(100% - 20px);
+        width:100%;
+    }
 </style>
-<div>
+<div class="screen">
     {#if viewport === '3dviewport'}
-        <label>Hello 3dviewport</label>
+        <Viewport3DComponent />
     {/if}
 
     {#if viewport === 'texteditor'}
-        <label>Hello texteditor</label>
+        <TexteditorComponent />
     {/if}
 
     {#if viewport === 'info'}
-        <label>Hello info</label>
+        <InfoComponent />
     {/if}
 
     {#if viewport === 'outliner'}
-        <label>Hello outliner</label>
+        <OutlinerComponent />
     {/if}
 
     {#if viewport === 'Properties'}
-        <label>Hello Properties</label>
+        <PropertiesComponent />
     {/if}
 
     {#if viewport === 'filebrowser'}
-        <label>Hello filebrowser</label>
+        <FileBrowserComponent />
     {/if}
 
     {#if viewport === 'preferences'}
-        <label>Hello preferences</label>
+        <PreferencesComponent />
     {/if}
+
+    {#if viewport === 'scriptconsole'}
+        <ScriptConsoleComponent />
+    {/if}
+
+    
 </div>

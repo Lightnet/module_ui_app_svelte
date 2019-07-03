@@ -143,7 +143,7 @@
     });
 
     onDestroy(()=>{
-
+        window.removeEventListener('resize', handledivresize);
     });
 
     

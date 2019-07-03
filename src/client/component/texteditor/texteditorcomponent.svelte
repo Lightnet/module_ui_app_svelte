@@ -24,5 +24,5 @@
 
 </style>
 <div>
-
+    Text Editor
 </div>

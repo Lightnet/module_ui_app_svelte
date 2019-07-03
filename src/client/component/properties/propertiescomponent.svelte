@@ -24,5 +24,5 @@
 
 </style>
 <div>
-
+    Properties
 </div>

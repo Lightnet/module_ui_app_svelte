@@ -18,12 +18,22 @@
         //console.log("mount")
     });
 
+    function handledivresize(event){
+        console.log("resize");
+
+        let editorheadercompoent = document.querySelector('EditorHeaderComponent');
+        console.log(editorheadercompoent);
+    }
+
     afterUpdate(() => {
         //console.log("afterUpdate")
+
+        window.addEventListener('resize', handledivresize);
     });
 
     onDestroy(() => {
         //console.log("onDestroy")
+        window.addEventListener('resize', handledivresize);
     });
 
     function handle_viewport(event){
@@ -31,14 +41,15 @@
         //console.log(event.detail);
         viewport = event.detail;
     }
-    
-
 </script>
 
 <style>
-
+    .editorscreen{
+        height:100%;
+        width:100%;
+    }
 </style>
-<div>
-    <EditorHeaderComponent on:viewport={handle_viewport}></EditorHeaderComponent>
+<div class="editorscreen">
+    <EditorHeaderComponent id="editor" on:viewport={handle_viewport}></EditorHeaderComponent>
     <ContentComponent viewport={viewport}></ContentComponent>
 </div>
