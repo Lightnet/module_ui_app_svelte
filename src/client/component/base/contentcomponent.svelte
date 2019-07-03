@@ -21,16 +21,12 @@
     let idcontent = generateId(20);
     let elementcontent;
 
-
-    //onMount(async () => {	
-    //});
-    
     onMount(() => {
         //console.log("mount")
     });
 
     function handledivresize(event){
-        console.log("resize");
+        //console.log("resize");
         //let editorheadercompoent = document.querySelector('EditorHeaderComponent');
         //console.log(editorheadercompoent);
         let parent = elementheader.parentNode;
@@ -43,6 +39,7 @@
         elementcontent = document.getElementById(idcontent);
         //console.log(elementheader);
         //console.log(elementheader.clientHeight);
+        handledivresize();
         window.addEventListener('resize', handledivresize);
     });
 
@@ -50,11 +47,11 @@
         //console.log("onDestroy")
         window.addEventListener('resize', handledivresize);
     });
-    
+    //height: calc(100% - 20px);
 </script>
 <style>
     .screen{
-        height: calc(100% - 20px);
+        height:100% ;
         width:100%;
     }
 </style>
@@ -90,6 +87,4 @@
     {#if viewport === 'scriptconsole'}
         <ScriptConsoleComponent />
     {/if}
-
-    
 </div>

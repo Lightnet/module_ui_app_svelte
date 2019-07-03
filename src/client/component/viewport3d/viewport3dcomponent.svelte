@@ -64,9 +64,11 @@
         height:100%;
         width:100%;
     }
+    /*
     .a-canvasReference{
         cursor:none;
     }
+    */
 </style>
 <div class="viewport3dscreen">
     <a-scene 

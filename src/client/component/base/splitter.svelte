@@ -47,7 +47,6 @@
     }
 
     function resetPosition(nowX){
-
         let parent = splitter.parentNode;
         window_width = parent.clientWidth;
         window_height = parent.clientHeight;
