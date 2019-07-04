@@ -28,21 +28,20 @@
     //});
     
     onMount(() => {
-        console.log("mount")
+        //console.log("mount")
     });
 
     afterUpdate(() => {
-        console.log("afterUpdate");
+        //console.log("afterUpdate");
         //console.log(document.querySelector('a-scene').object3D);
         let scene = document.querySelector('a-scene').object3D;
         //console.log(scene)
         //console.dir(scene)
-
         //scene.addEventListener("loaded", (e)=> { (.a-canvasReference).style.cursor = "none")})
     });
 
     onDestroy(() => {
-        console.log("onDestroy")
+        //console.log("onDestroy")
         let scene = document.querySelector('a-scene').object3D;
         scene.dispose();
         console.log(scene);

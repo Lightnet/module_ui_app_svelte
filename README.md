@@ -55,3 +55,24 @@ npm install
 ```
 gulp default
 ```
+
+# Guide & Design:
+ There will be static or root access to variable, functions, class and other things to keep things clean and simple. But it under going prototype testing of ideas. There no root acess when creating Svelte 3 html with javascript setup to instance the object or html.
+
+```javascript
+ //svelte 3
+ import mjs from './mjs'
+```
+mjs short is module javascript
+
+```python
+import bpy
+```
+
+(need to fixed this later)
+
+ It base on Blender3D python import bpy and layout design but have not worked out the structure design yet. Although it will hard to get access to parent to nodes linking to each others. That will take while to figure how to clean way to access.
+
+ The reason to have module design and layout is to keep thing clean like blender3d to sort best to access. Since the scene is can be remade as long the objects are save in object data format like json.
+
+ The static function and variable is used for object management as well holding data. For curent viewport screen when dealing with workspace area.

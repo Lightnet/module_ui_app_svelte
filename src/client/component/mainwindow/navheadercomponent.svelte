@@ -2,21 +2,19 @@
 	//https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp
 	//https://www.w3schools.com/howto/howto_js_dropdown.asp
 	import { onMount, setContext, createEventDispatcher } from 'svelte'
-	import Panel from './panel.svelte'
-	import DropMenu from './dropmenu.svelte';
-	import { count, UserName, SessionHash, Sl_blogin, Sl_Mouseregion } from '../../stores.js';
+	import Panel from '../base/panel.svelte'
+	import DropMenu from '../base/dropmenu.svelte';
+	import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
 
 	import mjs from '../../mjs.js';
 	//import { generateId } from '../helper/generateid.js';
 
-    export let name;
+	export let name;
+	export let idassign;
     const dispatch = createEventDispatcher();
 	let blogin = false;
-	let msgmodal = "None";
-  	let btoggle = false;
 	let menus = [];
 	let templatepanel;
-	//let iddropmenu = generateId(20);
 
 	let filemenus = {};
 	let editmenus = {};
@@ -30,17 +28,6 @@
 		blogin = value;
 		//console.log(value);
 	});
-
-	function handleview(_view){
-        //console.log(_view);        
-        dispatch('navmenu', _view);
-	}
-
-	function logouthandle(){
-		SessionHash.set('');
-		UserName.set('Guest');
-		Sl_blogin.set(false);
-	}
 
 	function checktemplatepanel(){
 		//console.log("Test");
@@ -144,31 +131,8 @@
 	}
 
 	function testcall(event){
-		//console.log(event)
-		//console.log(mjs)
-		//console.log(typeof(mjs.ops.object_ot_calltest))
-		//console.log(mjs.ops.object_ot_calltest)
-
-		//mjs.ops.object_ot_calltest()
-		//console.log(mjs.ops.object_ot_calltest().sm_label);
-		//let o = mjs.ops.object_ot_calltest;
-		//console.dir(o.obj);
-		//let o = mjs.ops.object_ot_calltest();
-		//console.log("o.sm_label");
-		//console.log(o.sm_label);
-		//console.dir(o);
-
-		//console.log(mjs.ops.object_ot_calltest().sm_label);
-
-
 		console.log(mjs.ops.object_ot_calltest.sm_label);
 		mjs.ops.object_ot_calltest()
-		
-
-		//console.log(mjs.ops.object_ot_calltest().sm_label)
-		//mjs.ops.object_ot_calltest();//need to rework this.
-		//mjs.ops.object_ot_calltest.execute();
-
 	}
 
 </script>
@@ -196,7 +160,7 @@
 
 </style>
 
-<div on:mousemove={handleMousemove} class="navbar">
+<div id="{idassign}" on:mousemove={handleMousemove} class="navbar">
 	<a href="/#"> {name} </a>
 
 	<DropMenu name="File" prefix="_menuheader" itemlist={filemenus}>

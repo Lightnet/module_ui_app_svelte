@@ -4,12 +4,12 @@
 
     import Viewport3DComponent from '../viewport3d/viewport3dcomponent.svelte';
     import FileBrowserComponent from '../filebrowser/filebrowsercomponent.svelte';
-    import InfoComponent from './infocomponent.svelte';
+    import InfoComponent from '../base/infocomponent.svelte';
     import OutlinerComponent from '../outliner/outlinercomponent.svelte';
     import PreferencesComponent from '../preferences/preferencescomponent.svelte';
     import PropertiesComponent from '../properties/propertiescomponent.svelte';
     import TexteditorComponent from '../texteditor/texteditorcomponent.svelte';
-    import ScriptConsoleComponent from './scriptconsolecomponent.svelte';
+    import ScriptConsoleComponent from '../base/scriptconsolecomponent.svelte';
     
     import { generateId } from '../helper/generateid.js';
 

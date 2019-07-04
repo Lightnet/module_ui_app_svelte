@@ -26,6 +26,8 @@
 //===============================================
 // onMount
 //===============================================
+
+    export let idassign;
     onMount(async () => {
         //console.log("onMount");
         //const res = await fetch(`https://jsonplaceholder.typicode.com/photos?_limit=20`);
@@ -71,7 +73,7 @@
     }
 </style>
 
-<div on:mousemove={handleMousemove} class="navbar">
+<div id="{idassign}" on:mousemove={handleMousemove} class="navbar">
     <a href="/#"> {name} </a>
     <label>Status:Normal</label>
     <label>Mouse Region:{MouseRegion}</label>

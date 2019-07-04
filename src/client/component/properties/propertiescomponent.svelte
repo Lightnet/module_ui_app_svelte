@@ -41,6 +41,7 @@
     }
 </style>
 <div class="context">
+    <!--
     <div class="tab">
         tab
     </div>
@@ -48,5 +49,5 @@
     <div class="panel">
         panel
     </div>
-    
+    -->
 </div>
