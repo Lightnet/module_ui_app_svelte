@@ -13,8 +13,8 @@
     //let id2 = "test2";
     let id1 = generateId(20);
     let id2 = generateId(20);
-    //let screen2 = "properties"
-    let screen2 = "outliner"
+    let screen2 = "properties";
+    //let screen2 = "outliner"
 
     function handledivresize(event){
         //console.log("resize");
