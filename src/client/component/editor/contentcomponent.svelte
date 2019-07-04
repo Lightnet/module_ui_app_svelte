@@ -12,6 +12,7 @@
     import ScriptConsoleComponent from '../base/scriptconsolecomponent.svelte';
     
     import { generateId } from '../helper/generateid.js';
+    //import mjs from '../../mjs.js';
 
     const dispatch = createEventDispatcher();
 

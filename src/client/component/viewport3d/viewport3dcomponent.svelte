@@ -9,7 +9,7 @@
     //https://threejs.org/docs/#api/en/scenes/Scene
     //https://stackoverflow.com/questions/52503165/hide-mouse-pointer-small-hand-in-a-frame-scene
     //https://stackoverflow.com/questions/50795874/aframe-disable-raycaster-of-the-mouse/50800065
-    //
+    //https://stackoverflow.com/questions/51380941/aframe-size-of-model/51381516
     //
     //
     //
@@ -19,6 +19,7 @@
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
+    import mjs from '../../mjs.js';
 
     //import 'aframe';
     //require('aframe');
@@ -37,6 +38,7 @@
         //console.log(editorheadercompoent);
         let parent = elementcontent.parentNode;
         //elementcontent.style.height = parent.clientHeight - elementheader.clientHeight + 'px';
+        elementcontent.style.height = parent.clientHeight + 'px';
         elementcontent.style.width = parent.clientWidth + 'px';
     }
     
@@ -45,6 +47,18 @@
         elementcontent = document.getElementById(idcontent);
         window.addEventListener('resize', handledivresize);
     });
+    //do put it here
+    //AFRAME.registerComponent('natural-size', {
+        //init(){
+            //console.log(this.el);
+        //},
+        //update(){
+
+        //},
+        //remove() {
+            //console.log(this.el);
+        //}
+    //});
 
     afterUpdate(() => {
         //console.log("afterUpdate");
@@ -59,7 +73,7 @@
         //console.log("onDestroy")
         let scene = document.querySelector('a-scene').object3D;
         scene.dispose();
-        console.log(scene);
+        //console.log(scene);
         window.addEventListener('resize', handledivresize);
     });
 
@@ -67,6 +81,10 @@
     look-controls-enabled="false" 
     wasd-controls-enabled="false"
     look-controls="pointerLockEnabled: false;"
+    mouse-cursor
+
+
+
     */
 </script>
 
@@ -75,11 +93,8 @@
         height:100%;
         width:100%;
     }
-    a-scene{
-        height:100%;
-        width:100%;
-    }
     /*
+    
     .a-canvasReference{
         cursor:none;
     }
@@ -87,16 +102,17 @@
 </style>
 <div id="{idcontent}" class="viewport3dscreen">
     <a-scene 
+    natural-size
     embedded log="Hello, Scene!" 
     vr-mode-ui="enabled:false"
-    mouse-cursor
     >
         <a-camera 
         look-controls-enabled="true"
-        
         >
-        <a-entity mouse-cursor></a-entity>
+            <a-entity mouse-cursor></a-entity>
         </a-camera>
+
+        <a-entity mouse-cursor></a-entity>
         <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
         <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
         <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>

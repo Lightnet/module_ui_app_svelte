@@ -70,20 +70,22 @@ export const sl_context = writable('None');
 export const Sl_Mouseregion = writable('None');
 
 //static varaible
-export const scenes = {};
-export const objects = {};
-export const materials = {};
-export const textures = {};
-export const nodes = {};
+export const scenes = [];
+export const objects = [];
+export const materials = [];
+export const textures = [];
+export const nodes = [];
 export const data = {};
-export const actions = {};
-export const animations = {};
+export const actions = [];
+export const animations = [];
 export const ops = {};
 export const wins = {};
 export const screens = {};
 export const types = {};
 export const props = {};
 export const context = {};
+
+export const view_layer = {};
 
 data.objects = objects;
 data.scenes = scenes;
@@ -95,6 +97,11 @@ data.animations = animations;
 
 context.screens = screens;
 context.scene = {};
+
+context.view_layer = view_layer;
+
+context.view_layer.objects = objects;
+context.view_layer.objects.active = {};
 
 
 

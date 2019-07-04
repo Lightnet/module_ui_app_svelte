@@ -5,10 +5,6 @@
     import EditorComponent from '../editor/editorcomponent.svelte'
     import { generateId } from '../helper/generateid.js';
     //const dispatch = createEventDispatcher();
-    //onMount(async () => {	
-    //});
-    
-
 
     let idcontent = generateId(20);
     let elementcontent;
@@ -17,6 +13,8 @@
     //let id2 = "test2";
     let id1 = generateId(20);
     let id2 = generateId(20);
+    //let screen2 = "properties"
+    let screen2 = "outliner"
 
     function handledivresize(event){
         //console.log("resize");
@@ -41,8 +39,6 @@
         //console.log("onDestroy")
         window.addEventListener('resize', handledivresize);
     });
-
-   
 </script>
 
 <style>
@@ -76,6 +72,6 @@
     </div>
     <SplitterComponent bhorizontal={false} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
     <div id="{id2}" class="panel2">
-        <EditorComponent viewport="properties"></EditorComponent>
+        <EditorComponent viewport="{screen2}"></EditorComponent>
     </div>
 </div>

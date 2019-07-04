@@ -1,23 +1,41 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
+    import { generateId } from '../helper/generateid.js';
+    import mjs from '../../mjs.js';
 
     const dispatch = createEventDispatcher();
 
-    //onMount(async () => {	
-    //});
+    let idtab = generateId(20);
+    let elementtab;
+    let idcontent = generateId(20);
+    let elementcontent;
+    let activeobject;
+
+    function handledivresize(event){
+        //console.log("resize");
+        let parent = elementcontent.parentNode;
+        elementcontent.style.height = parent.clientHeight + 'px';
+        elementcontent.style.width = parent.clientWidth - elementtab.clientWidth + 'px';
+    }
     
-    //onMount(() => {
+    onMount(() => {
         //console.log("mount")
-    //});
+        window.addEventListener('resize', handledivresize);
+        activeobject = mjs.context.view_layer.objects.active;
+    });
 
-    //afterUpdate(() => {
+    afterUpdate(() => {
         //console.log("afterUpdate")
-    //});
+        elementtab = document.getElementById(idtab);
+        elementcontent = document.getElementById(idcontent);
+        activeobject = mjs.context.view_layer.objects.active;
+    });
 
-    //onDestroy(() => {
+    onDestroy(() => {
         //console.log("onDestroy")
-    //});
+        window.addEventListener('resize', handledivresize);
+    });
 </script>
 
 <style>
@@ -39,15 +57,35 @@
         height:100%;
         background-color: gray;
     }
+
+    button{
+        background-color:#333;
+        font-size: 12px;
+        color:white;
+        height:22px;
+        /*align-self: auto;*/
+        /*text-align: center;*/
+        /*padding-bottom:10px;*/
+        padding: 0px 4px 10px 4px;
+    }
+
+    button:hover{
+        background-color: lightslategrey;
+    }
 </style>
 <div class="context">
-    <!--
-    <div class="tab">
+    
+    <div id={idtab} class="tab">
         tab
     </div>
 
-    <div class="panel">
-        panel
+    <div id="{idcontent}" class="panel">
+        {#if activeobject != null}
+            {#if activeobject.el != null}
+                <label> Name: {activeobject.el.localName}  </label>
+                <button on:click={()=>{activeobject.visible = !activeobject.visible}}> Visible: {activeobject.visible}  </button>
+                
+            {/if}
+        {/if}
     </div>
-    -->
 </div>

@@ -17,10 +17,22 @@ import mjs from './mjs'
 
 localStorage.clear();
 
+AFRAME.registerComponent('natural-size', {
+	init(){
+		//console.log(this.el);
+	},
+	update(){
+
+	},
+	remove() {
+		//console.log(this.el);
+	}
+});
+
 const app = new App({
 	target: document.body,
 	props: {
-		name: 'MSJ App.'
+		name: 'MJS App.'
 	}
 });
 
