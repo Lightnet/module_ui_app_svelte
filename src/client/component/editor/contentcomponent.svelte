@@ -31,6 +31,7 @@
         //console.log(editorheadercompoent);
         let parent = elementheader.parentNode;
         elementcontent.style.height = parent.clientHeight - elementheader.clientHeight + 'px';
+        elementcontent.style.width = parent.clientWidth + 'px';
     }
 
     afterUpdate(() => {

@@ -24,6 +24,7 @@
         //console.log(editorheadercompoent);
         let parent = elementcontent.parentNode;
         elementcontent.style.height = parent.clientHeight + 'px';
+        elementcontent.style.width = parent.clientWidth + 'px';
     }
 
     onMount(() => {

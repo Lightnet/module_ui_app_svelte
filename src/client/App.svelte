@@ -51,7 +51,7 @@
 	function resizediv(){
 		//console.log("resize")
 		elementcontent.style.height = (window.innerHeight - elementheader.clientHeight - elementfooter.clientHeight) + 'px';
-		elementcontent.style.width = window.innerWidth;
+		elementcontent.style.width = window.innerWidth + 'px';
 	}
 
 	onMount(async () => {
