@@ -18,17 +18,32 @@
 
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
+    import { generateId } from '../helper/generateid.js';
 
     //import 'aframe';
     //require('aframe');
 
     const dispatch = createEventDispatcher();
 
+    let idcontent = generateId(20);
+    let elementcontent;
+
     //onMount(async () => {	
     //});
+
+    function handledivresize(event){
+        //console.log("resize");
+        //let editorheadercompoent = document.querySelector('EditorHeaderComponent');
+        //console.log(editorheadercompoent);
+        let parent = elementcontent.parentNode;
+        //elementcontent.style.height = parent.clientHeight - elementheader.clientHeight + 'px';
+        elementcontent.style.width = parent.clientWidth + 'px';
+    }
     
     onMount(() => {
         //console.log("mount")
+        elementcontent = document.getElementById(idcontent);
+        window.addEventListener('resize', handledivresize);
     });
 
     afterUpdate(() => {
@@ -45,6 +60,7 @@
         let scene = document.querySelector('a-scene').object3D;
         scene.dispose();
         console.log(scene);
+        window.addEventListener('resize', handledivresize);
     });
 
     /*
@@ -69,7 +85,7 @@
     }
     */
 </style>
-<div class="viewport3dscreen">
+<div id="{idcontent}" class="viewport3dscreen">
     <a-scene 
     embedded log="Hello, Scene!" 
     vr-mode-ui="enabled:false"

@@ -23,6 +23,7 @@
 
     onMount(() => {
         //console.log("mount")
+        window.addEventListener('resize', handledivresize);
     });
 
     function handledivresize(event){
@@ -41,7 +42,6 @@
         //console.log(elementheader);
         //console.log(elementheader.clientHeight);
         handledivresize();
-        window.addEventListener('resize', handledivresize);
     });
 
     onDestroy(() => {

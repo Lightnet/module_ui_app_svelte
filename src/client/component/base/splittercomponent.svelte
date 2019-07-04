@@ -44,14 +44,14 @@
             //elementdiv1
             //console.log(splitter);
             //splitter.style.left = m.x + 'px';
-            splitter.style.marginLeft = m.x + 'px';
-            //resetPosition(event.clientX);
-            resetPosition();
+            //splitter.style.marginLeft = m.x + 'px';
+            resetPosition(event.clientX);
+            //resetPosition();
         }
     }
 
-    //function resetPosition(nowX){
-    function resetPosition(){
+    function resetPosition(nowX){
+    //function resetPosition(){
         //let parent = splitter.parentNode;
         //window_width = parent.clientWidth;
         //window_height = parent.clientHeight;
@@ -60,6 +60,7 @@
         //cont2.style.height = window_height +'px';
         //console.log(splitter.style.marginLeft)
         
+        /*
         let dxf = splitter.style.marginLeft;
         var dx = parseFloat(dxf.replace('px', ''))
         cont1.style.width=dx+"px";
@@ -67,8 +68,9 @@
         cont2.style.marginLeft=dx+"px";
         dx=window_width-dx;
         cont2.style.width=dx+"px";
+        */
 
-        /*
+        
         var dx=nowX-last_x;
         dx+=cont1.clientWidth;
         cont1.style.width=dx+"px";
@@ -78,7 +80,8 @@
         dx=window_width-dx;
         cont2.style.width=dx+"px";
         last_x=nowX;
-        */
+        window.dispatchEvent(new Event('resize'));
+        
     }
 
     function handledivresize(){
@@ -88,32 +91,19 @@
         //cont1 = document.getElementById(iddiv1);
         let parent = splitter.parentNode;
         window_width = parent.clientWidth;
-        console.log(window_width);
+        //console.log(window_width);
         window_height = parent.clientHeight;
 
         splitter.style.height = window_height +'px';
         cont1.style.height = window_height +'px';
         cont2.style.height = window_height +'px';
 
-        //resetPosition()
-        let dx=cont1.clientWidth;
-        splitter.style.marginLeft=dx+"px";
-        dx+=splitter.clientWidth;
-
-        dx = splitter.clientWidth + cont1.clientWidth;
-        cont2.style.marginLeft=dx+"px";
-        dx = window_width - (splitter.clientWidth + cont1.clientWidth);
-        cont2.style.width=dx+"px";
-        //console.log(cont2.style.width);
-        /*
         let dx=cont1.clientWidth;
         splitter.style.marginLeft=dx+"px";
         dx+=splitter.clientWidth;
         cont2.style.marginLeft=dx+"px";
         dx=window_width-dx;
         cont2.style.width=dx+"px";
-        */
-        
     }
 
     function handleMouseclick(event){
@@ -186,8 +176,7 @@
     height:100%;
     float:left;
     position:absolute;
-    z-index:1;
-
+    /*z-index:1;*/
 }
 </style>
 
