@@ -35,10 +35,10 @@ Links:
  * https://stackoverflow.com/questions/4909167/how-to-add-a-custom-right-click-menu-to-a-webpage
  * https://jsfiddle.net/softvar/6ny94/
  * 
- * 
- * 
- * 
- * 
+ * https://svelte.dev/docs#$on
+ * https://www.w3schools.com/cssref/pr_class_cursor.asp
+ * https://css-tricks.com/custom-scrollbars-in-webkit/
+ * https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp
  * 
  * 
  * 

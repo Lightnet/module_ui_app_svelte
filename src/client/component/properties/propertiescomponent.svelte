@@ -1,7 +1,7 @@
 <script>
     //https://www.w3schools.com/howto/howto_css_tooltip.asp
     //https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp
-    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
+    import { onMount, beforeUpdate, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
@@ -27,57 +27,65 @@
     let elementtab;
     let idcontent = generateId(20);
     let elementcontent;
-    let activeobject;
-
     let idcontext = generateId(20);
     let elementcontext;
+    let tabwidth = 32;
 
+    let activeobject;
     export let context = "OBJECT";
     let itemtabs = [];
 
     function handledivresize(event){
         //console.log("resize");
-        if(elementcontext){
-            let parent = elementcontext.parentNode;
-            elementcontext.style.height = parent.clientHeight + 'px';
-            elementcontext.style.width = parent.clientWidth + 'px';
-        }
         
-        parent = elementcontext;
-        elementcontent.style.height = parent.clientHeight + 'px';
-        console.log(elementtab.clientWidth);
-        //elementcontent.style.width = parent.clientWidth - elementtab.clientWidth + 'px';
-        elementcontent.style.width = parent.clientWidth - 32 + 'px';
-
+        let parent = elementcontext.parentNode;
+        elementcontext.style.height = parent.clientHeight + 'px';
+        elementcontext.style.width = parent.clientWidth + 'px';
+        
         elementtab.style.height = parent.clientHeight + 'px';
-        elementtab.style.width = 32 + 'px';
         
+        //console.log(elementcontext);
+        //console.log(elementtab);
+        //console.log(elementcontent);
+        console.log("elementtab.style.width:"+elementtab.style.width);
+        console.log("parent.clientWidth:"+parent.clientWidth);
+        console.log("elementtab.clientWidth:"+elementtab.clientWidth);
+
+        let pwidth = 0;
+        if(elementtab.clientWidth !=tabwidth){
+            elementtab.style.width = '32px';
+            console.log("default!")
+            pwidth = parent.clientWidth - tabwidth;
+        }else{
+            pwidth = parent.clientWidth - elementtab.clientWidth;
+        }
+        elementcontent.style.width = pwidth + 'px';
+        
+        elementcontent.style.height = parent.clientHeight + 'px';
+        
+        console.log(pwidth);
+        
+        
+
     }
     
     onMount(() => {
-        //console.log("mount")
+        console.log("mount")
         window.addEventListener('resize', handledivresize);
         activeobject = mjs.context.view_layer.objects.active;
-        //itemtabs[0].sm_label = "object";
-        //itemtabs[0].sm_icon = "fa fa-bars";
-        //itemtabs[1].sm_label = "object";
-        //itemtabs[1].sm_icon = "fa fa-bars";
+
+        elementcontext = document.getElementById(idcontext);
+        elementtab = document.getElementById(idtab);
+        elementcontent = document.getElementById(idcontent);
+    });
+
+    beforeUpdate(()=>{
+
     });
 
     afterUpdate(() => {
-        //console.log("afterUpdate")
-        elementtab = document.getElementById(idtab);
-        elementcontent = document.getElementById(idcontent);
+        //console.log("afterUpdate");
 
-        elementcontext = document.getElementById(idcontext);
-        activeobject = mjs.context.view_layer.objects.active;
-
-        handledivresize();
-
-        //itemtabs['object'] = {sm_label:"object",sm_icon:"fa fa-bars"};
-        //itemtabs.push({sm_label:"edit",sm_icon:"fa fa-bars"});
-        //itemtabs['object'] = {sm_label:"object",sm_icon:"fa fa-bars"};
-        //itemtabs['edit'] = {sm_label:"edit",sm_icon:"fa fa-bars"};
         itemtabs = [
             {sm_label:"activetoolandworkspacesetting",sm_context:"TOOLS",sm_icon:"fas fa-tools"},
             {sm_label:"render",sm_context:"RENDER",sm_icon:"fa fa-desktop"},
@@ -93,8 +101,7 @@
             {sm_label:"objectdata",sm_context:"OBJECTDATA",sm_icon:"fab fa-rev"},
             {sm_label:"material",sm_context:"MATERIAL",sm_icon:"fab fa-dribbble"},
             {sm_label:"texture",sm_context:"TEXTURE",sm_icon:"fas fa-chess-board"}
-            //{sm_label:"edit",sm_icon:"fab fa-dribbble"}
-        ]
+        ];
     });
 
     function tabselect(value){
@@ -116,6 +123,12 @@
 <style>
     ::-webkit-scrollbar {
         width: 5px;
+        height: 5px;
+        /*background-color: darkgrey;*/
+        /*background: #666; */
+    }
+    ::-webkit-scrollbar-thumb{
+        background-color: #333;
     }
 
     .contextprops{
@@ -123,26 +136,32 @@
         float:left;
         width:100%;
         height:100%;
+        overflow: hidden;
     }
 
     .tab{
         float:left;
+        /*min-width:32px;*/
         width:32px;
         height:100%;
         background-color: dimgrey;
         padding: 0px 0px 0px 0px;
-        overflow: visible;
+        overflow: scroll;
+        /*overflow: auto;*/
         /*overflow-y: hidden;*/
         /*overflow-x: hidden;*/
         /*z-index: 1;*/
-        overflow-x: hidden;
+        z-index: 1;
+        /*overflow-x: hidden;*/
     }
 
-    .panel{
+    .dataprops{
         float:left;
-        width:calc(100vh - 32);
-        height:100%;
+        /*width:45%;*/
+        /*height:50%;*/
         background-color: gray;
+        overflow: visible;
+        overflow-x: hidden;
     }
 
     button{
@@ -153,7 +172,7 @@
         padding: 0px 4px 10px 4px;
     }
 
-    button:hover{
+     button:hover{
         background-color: lightslategrey;
     }
 
@@ -164,12 +183,16 @@
         padding: 0px 0px 0px 0px;
     }
 
-    .tabbutton:hover{
+    .active, .tabbutton:hover{
         background-color: lightslategrey;
     }
 
     .tooltip {
-        position: relative;
+        /*position: relative;*/
+        /*position: fixed;
+        top:0px;
+        left:0px;
+        */
         display: inline-block;
         border-bottom: 1px dotted black;
     }
@@ -184,10 +207,16 @@
         /*border-radius: 6px;*/
         /*padding: 5px 0;*/
         padding: 5px 5px 5px 5px;
-        position: absolute;
-        z-index: 30;
+        /*position: absolute; #fail*/
+        /*position: sticky; #fail*/
+        position: fixed; /*#pass*/
+        /*position: relative; #fail*/
+        top:5px;
+        left:5px;
+        /*z-index: 1;*/
+        /*
         top: -5px;
-        left: 105%;
+        left: 105%;*/
         /*bottom: 125%;*/
         /*left: 50%;*/
         /*margin-left: -60px;*/
@@ -195,21 +224,10 @@
         transition: opacity 0.3s;
     }
 
-    /*
-    .tooltip .tooltiptext::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: #555 transparent transparent transparent;  
-    }
-    */
     .tooltip:hover .tooltiptext {
         visibility: visible;
         opacity: 1;
+        z-index: 3;
     }
 
 </style>
@@ -218,7 +236,7 @@
     <div id={idtab} class="tab">
         
         {#each itemtabs as tab }
-            <button class="tabbutton tooltip" on:click={()=>{tabselect(tab.sm_context)}}>
+            <button class="tabbutton tooltip {context === tab.sm_context ? 'active' : ''}" on:click={()=>{tabselect(tab.sm_context)}}>
                 <i class="{tab.sm_icon}"></i>
                 <span class="tooltiptext">{tab.sm_label}</span>
             </button>
@@ -226,7 +244,7 @@
         
     </div>
 
-    <div id="{idcontent}" class="panel">
+    <div id="{idcontent}" class="dataprops">
         
         {#if context == 'MATERIAL'}
             <MaterialComponent />
@@ -283,7 +301,7 @@
         {#if context == 'VIEWLAYER'}
             <ViewlayerComponent />
         {/if}
-        
+         
     </div>
     
 </div>

@@ -58,4 +58,5 @@
             <button on:click={()=>{activeobject.visible = !activeobject.visible}}> Visible: {activeobject.visible}  </button>
         {/if}
     {/if}
+
 </div>
