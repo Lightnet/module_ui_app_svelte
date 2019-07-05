@@ -24,6 +24,8 @@
 
     onMount(() => {
         //console.log("mount")
+        elementheader = document.getElementById(idheader);
+        elementcontent = document.getElementById(idcontent);
         window.addEventListener('resize', handledivresize);
     });
 
@@ -37,12 +39,7 @@
     }
 
     afterUpdate(() => {
-        //console.log("afterUpdate")
-        elementheader = document.getElementById(idheader);
-        elementcontent = document.getElementById(idcontent);
-        //console.log(elementheader);
-        //console.log(elementheader.clientHeight);
-        handledivresize();
+
     });
 
     onDestroy(() => {

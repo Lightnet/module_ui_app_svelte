@@ -20,43 +20,26 @@
         viewport = event.detail;
     }
 
-    function handledivresize(event){
+    function handle_resizeeditor(event){
         //console.log("resize");
-        //let editorheadercompoent = document.querySelector('EditorHeaderComponent');
-        //console.log(editorheadercompoent);
         let parent = elementcontent.parentNode;
         elementcontent.style.height = parent.clientHeight + 'px';
         elementcontent.style.width = parent.clientWidth + 'px';
     }
 
     onMount(() => {
-        //console.log("mount")
-        window.addEventListener('resize', handledivresize);
-        handledivresize();
+        elementcontent = document.getElementById(idcontent);
+        window.addEventListener('resize', handle_resizeeditor);
+        handle_resizeeditor();
     });
 
     afterUpdate(() => {
-        //console.log("afterUpdate")
-        //elementheader = document.getElementById(idheader);
-        elementcontent = document.getElementById(idcontent);
-        //let parent = elementcontent.parentNode;
-        //console.log("parent");
-        //console.log(parent);
-        //console.dir(parent);
-        //elementcontent.style.height = parent.clientHeight + 200 + 'px';
-        //console.log(parent.clientWidth)
-        //elementcontent.style.width = parent.clientWidth + 'px';
-        //console.log(elementcontent.style.width)
-        //console.log(elementcontent);
-        //console.log(elementheader);
-        //console.log(elementheader.clientHeight);
-        handledivresize();
-        window.dispatchEvent(new Event('resize'));
+        
     });
 
      onDestroy(() => {
         //console.log("onDestroy")
-        window.addEventListener('resize', handledivresize);
+        window.addEventListener('resize', handle_resizeeditor);
     });
 </script>
 

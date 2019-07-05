@@ -5,9 +5,6 @@
     import mjs from '../../mjs.js';
     const dispatch = createEventDispatcher();
 
-    //onMount(async () => {	
-    //});
-
     let idcontent = generateId(20);
     let elementcontent;
 
@@ -20,16 +17,14 @@
     
     onMount(() => {
         //console.log("mount");
+        elementcontent = document.getElementById(idcontent);
         window.addEventListener('resize', handledivresize);
         //activeobject = mjs.context.view_layer.objects.active;
         handledivresize();
     });
 
     afterUpdate(() => {
-        //console.log("afterUpdate");
-        elementcontent = document.getElementById(idcontent);
-        //activeobject = mjs.context.view_layer.objects.active;
-        handledivresize();
+        
     });
 
     onDestroy(() => {

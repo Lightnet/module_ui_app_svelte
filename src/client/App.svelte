@@ -17,7 +17,6 @@
 	//import mjs from './mjs.js';
 
 	export let name;
-
 	//let showModal = false;
 	//let msgmodal = "None";
 	let view;
@@ -56,6 +55,7 @@
 
 	onMount(async () => {
 		window.addEventListener('resize', resizediv);
+		//window.dispatchEvent(new Event('resize'));
 	});
 
 	afterUpdate(()=>{
@@ -95,9 +95,7 @@
 		on:navmenu={navheader_handle} >
 	</NavHeaderComponent>
 	<div id={idcontent} class="panelcontent contentarea">
-		
 		<DivDividerComponent></DivDividerComponent>
-		
 	</div>
 	<NavFooterComponent idassign={idfooter}></NavFooterComponent>
 </div>

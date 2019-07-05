@@ -31,46 +31,33 @@
     let elementcontext;
     let tabwidth = 32;
 
-    let activeobject;
+    let activeobject;//props
     export let context = "OBJECT";
     let itemtabs = [];
 
     function handledivresize(event){
         //console.log("resize");
-        
         let parent = elementcontext.parentNode;
-        elementcontext.style.height = parent.clientHeight + 'px';
-        elementcontext.style.width = parent.clientWidth + 'px';
-        
-        elementtab.style.height = parent.clientHeight + 'px';
-        
-        //console.log(elementcontext);
-        //console.log(elementtab);
-        //console.log(elementcontent);
-        console.log("elementtab.style.width:"+elementtab.style.width);
-        console.log("parent.clientWidth:"+parent.clientWidth);
-        console.log("elementtab.clientWidth:"+elementtab.clientWidth);
-
-        let pwidth = 0;
-        if(elementtab.clientWidth !=tabwidth){
-            elementtab.style.width = '32px';
-            console.log("default!")
-            pwidth = parent.clientWidth - tabwidth;
-        }else{
-            pwidth = parent.clientWidth - elementtab.clientWidth;
+        if(parent){
+            elementcontext.style.height = parent.clientHeight + 'px';
+            elementcontext.style.width = parent.clientWidth + 'px';
+            elementtab.style.height = parent.clientHeight + 'px';
+            let pwidth = 0;
+            if(elementtab.clientWidth !=tabwidth){
+                elementtab.style.width = '32px';
+                //console.log("default!")
+                pwidth = parent.clientWidth - tabwidth;
+            }else{
+                pwidth = parent.clientWidth - elementtab.clientWidth;
+            }
+            elementcontent.style.width = pwidth + 'px';
+            elementcontent.style.height = parent.clientHeight + 'px';
         }
-        elementcontent.style.width = pwidth + 'px';
-        
-        elementcontent.style.height = parent.clientHeight + 'px';
-        
-        console.log(pwidth);
-        
-        
-
+        //console.log(pwidth);
     }
     
     onMount(() => {
-        console.log("mount")
+        //console.log("mount");
         window.addEventListener('resize', handledivresize);
         activeobject = mjs.context.view_layer.objects.active;
 
@@ -105,8 +92,8 @@
     });
 
     function tabselect(value){
-        console.log(value)
-        context = value
+        //console.log(value);
+        context = value;
         dispatch('context',value);
     }
 
@@ -201,8 +188,10 @@
         visibility: hidden;
         /*width: 120px;*/
         /*background-color: #555;*/
-        background-color: black;
-        color: #fff;
+        /*background-color: black;*/
+        background-color: orange;
+        /*color: #fff;*/
+        color: black;
         text-align: center;
         /*border-radius: 6px;*/
         /*padding: 5px 0;*/

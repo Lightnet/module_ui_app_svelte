@@ -16,28 +16,31 @@
     let screen2 = "properties";
     //let screen2 = "outliner"
 
-    function handledivresize(event){
+    function handle_divresize(event){
         //console.log("resize");
         //let editorheadercompoent = document.querySelector('EditorHeaderComponent');
         //console.log(editorheadercompoent);
         let parent = elementcontent.parentNode;
-        elementcontent.style.height = parent.clientHeight + 'px';
-        elementcontent.style.width = parent.clientWidth + 'px';
+        if(parent){
+            elementcontent.style.height = parent.clientHeight + 'px';
+            elementcontent.style.width = parent.clientWidth + 'px';
+        }
     }
 
     onMount(() => {
         //console.log("mount");
-        window.addEventListener('resize', handledivresize);
+        window.addEventListener('resize', handle_divresize);
+        elementcontent = document.getElementById(idcontent);
+        handle_divresize()
     });
 
     afterUpdate(()=>{
-        elementcontent = document.getElementById(idcontent);
-        handledivresize();
+        //handledivresize();
     });
 
     onDestroy(() => {
         //console.log("onDestroy")
-        window.addEventListener('resize', handledivresize);
+        window.addEventListener('resize', handle_divresize);
     });
 </script>
 

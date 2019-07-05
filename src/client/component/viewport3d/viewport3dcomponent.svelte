@@ -38,8 +38,10 @@
         //console.log(editorheadercompoent);
         let parent = elementcontent.parentNode;
         //elementcontent.style.height = parent.clientHeight - elementheader.clientHeight + 'px';
-        elementcontent.style.height = parent.clientHeight + 'px';
-        elementcontent.style.width = parent.clientWidth + 'px';
+        if(parent){
+            elementcontent.style.height = parent.clientHeight + 'px';
+            elementcontent.style.width = parent.clientWidth + 'px';
+        }
     }
     
     onMount(() => {

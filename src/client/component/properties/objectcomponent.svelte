@@ -5,7 +5,7 @@
     import mjs from '../../mjs.js';
 
     const dispatch = createEventDispatcher();
-    let activeobject;
+    let activeobject;//objectc
 
     let idcontent = generateId(20);
     let elementcontent;
@@ -13,22 +13,24 @@
     function handledivresize(event){
         //console.log("resize");
         let parent = elementcontent.parentNode;
-        elementcontent.style.height = parent.clientHeight + 'px';
-        elementcontent.style.width = parent.clientWidth + 'px';
+        if(parent){
+            elementcontent.style.height = parent.clientHeight + 'px';
+            elementcontent.style.width = parent.clientWidth + 'px';
+            //console.log("hello");
+        }
     }
     
     onMount(() => {
         //console.log("mount");
         window.addEventListener('resize', handledivresize);
+        elementcontent = document.getElementById(idcontent);
         activeobject = mjs.context.view_layer.objects.active;
         handledivresize();
     });
 
     afterUpdate(() => {
         //console.log("afterUpdate");
-        elementcontent = document.getElementById(idcontent);
-        activeobject = mjs.context.view_layer.objects.active;
-        handledivresize();
+        //activeobject = mjs.context.view_layer.objects.active;
     });
 
     onDestroy(() => {

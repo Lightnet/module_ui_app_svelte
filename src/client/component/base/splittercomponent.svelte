@@ -51,7 +51,7 @@
     }
 
     function resetPosition(nowX){
-    //function resetPosition(){
+        //function resetPosition(){
         //let parent = splitter.parentNode;
         //window_width = parent.clientWidth;
         //window_height = parent.clientHeight;
@@ -130,7 +130,6 @@
         splitter = document.getElementById(idsplitter);
         cont1 = document.getElementById(iddiv1);
         cont2=document.getElementById(iddiv2);
-        handledivresize();
         /*
         if(bhorizontal){
             sheight = '10px';
@@ -140,25 +139,12 @@
             sheight = '100%';
             swidth = '10px';
             resizetag = 'w-resize';
-        }
-        splitter = document.getElementById(idsplitter);
-        splitter.style.height = sheight;
-        splitter.style.width = swidth;
-        splitter.style.cursor = resizetag;
-        */
-
-        //elementdiv1  = document.getElementById(iddiv1)
-        //elementdiv2  = document.getElementById(iddiv2)
+        }*/
         window.addEventListener('resize', handledivresize);
+        window.dispatchEvent(new Event('resize'));
     });
 
     afterUpdate(()=>{
-        window_width=window.innerWidth;
-        splitter = document.getElementById(idsplitter);
-        cont1 = document.getElementById(iddiv1);
-        cont2=document.getElementById(iddiv2);
-
-        handledivresize();
     });
 
     onDestroy(()=>{

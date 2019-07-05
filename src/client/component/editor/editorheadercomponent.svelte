@@ -193,9 +193,9 @@
     <a href="/#">Editor</a>
 
     <div class="dropdown">
-        <a href="/#" id="{name}{prefix}" on:click={togglecontent}>{screen}
+        <button href="/#" id="{name}{prefix}" class="dropbtn" on:click={togglecontent}>{screen}
             <i class="fa fa-caret-down"></i>
-        </a>
+        </button>
         <div class="dropdown-content {btoggle === true ? 'show' : ''}" id="{id}">
             {#each Object.keys(itemlist) as item}
                 <a href="/#" on:click={()=>{ selectitem(itemlist[item].sm_label) }}>  {itemlist[item].sm_label}</a>
