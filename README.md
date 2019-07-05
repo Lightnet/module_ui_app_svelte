@@ -13,6 +13,11 @@ Code languages:
  * nodejs
  * svelte 3
 
+# Browser test:
+ * chrome (pass) (main)
+ * firefox (fail)
+ * opera (pass)
+
 # Information:
  Prototype build to create module layout application to render svelte in the way emulation blender3D format and style that is base on the idea. The hard part will be how to handle div content. Just idea design.
 
@@ -39,7 +44,6 @@ Code languages:
  * To create operator, menu, and panel like other is tricky.
  * Work in progress test build.
  * Client browser build test.
- * 
 
 # Github:
  * https://github.com/Lightnet/module_ui_app_svelte

@@ -1,5 +1,6 @@
 <script>
     //https://www.w3schools.com/howto/howto_css_tooltip.asp
+    //https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
@@ -27,14 +28,30 @@
     let idcontent = generateId(20);
     let elementcontent;
     let activeobject;
+
+    let idcontext = generateId(20);
+    let elementcontext;
+
     export let context = "OBJECT";
     let itemtabs = [];
 
     function handledivresize(event){
         //console.log("resize");
-        let parent = elementcontent.parentNode;
+        if(elementcontext){
+            let parent = elementcontext.parentNode;
+            elementcontext.style.height = parent.clientHeight + 'px';
+            elementcontext.style.width = parent.clientWidth + 'px';
+        }
+        
+        parent = elementcontext;
         elementcontent.style.height = parent.clientHeight + 'px';
-        elementcontent.style.width = parent.clientWidth - elementtab.clientWidth + 'px';
+        console.log(elementtab.clientWidth);
+        //elementcontent.style.width = parent.clientWidth - elementtab.clientWidth + 'px';
+        elementcontent.style.width = parent.clientWidth - 32 + 'px';
+
+        elementtab.style.height = parent.clientHeight + 'px';
+        elementtab.style.width = 32 + 'px';
+        
     }
     
     onMount(() => {
@@ -51,7 +68,11 @@
         //console.log("afterUpdate")
         elementtab = document.getElementById(idtab);
         elementcontent = document.getElementById(idcontent);
+
+        elementcontext = document.getElementById(idcontext);
         activeobject = mjs.context.view_layer.objects.active;
+
+        handledivresize();
 
         //itemtabs['object'] = {sm_label:"object",sm_icon:"fa fa-bars"};
         //itemtabs.push({sm_label:"edit",sm_icon:"fa fa-bars"});
@@ -93,22 +114,33 @@
 </script>
 
 <style>
-    .context{
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .contextprops{
         position: absolute;
         float:left;
         width:100%;
         height:100%;
     }
+
     .tab{
         float:left;
         width:32px;
         height:100%;
         background-color: dimgrey;
         padding: 0px 0px 0px 0px;
+        overflow: visible;
+        /*overflow-y: hidden;*/
+        /*overflow-x: hidden;*/
+        /*z-index: 1;*/
+        overflow-x: hidden;
     }
+
     .panel{
         float:left;
-        width:90%;
+        width:calc(100vh - 32);
         height:100%;
         background-color: gray;
     }
@@ -153,7 +185,7 @@
         /*padding: 5px 0;*/
         padding: 5px 5px 5px 5px;
         position: absolute;
-        z-index: 1;
+        z-index: 30;
         top: -5px;
         left: 105%;
         /*bottom: 125%;*/
@@ -180,33 +212,22 @@
         opacity: 1;
     }
 
-
 </style>
-<div class="context">
+<div id="{idcontext}" class="contextprops">
     
     <div id={idtab} class="tab">
+        
         {#each itemtabs as tab }
             <button class="tabbutton tooltip" on:click={()=>{tabselect(tab.sm_context)}}>
                 <i class="{tab.sm_icon}"></i>
                 <span class="tooltiptext">{tab.sm_label}</span>
             </button>
         {/each}
-        <!--
-        <button class="tabbutton" on:click={()=>{}}>
-            <i class="fa fa-bars"></i>
-        </button>
-        -->
+        
     </div>
 
     <div id="{idcontent}" class="panel">
-        <!--
-        {#if activeobject != null}
-            {#if activeobject.el != null}
-                <label> Name: {activeobject.el.localName}  </label>
-                <button on:click={()=>{activeobject.visible = !activeobject.visible}}> Visible: {activeobject.visible}  </button>
-            {/if}
-        {/if}
-        -->
+        
         {#if context == 'MATERIAL'}
             <MaterialComponent />
         {/if}
@@ -262,7 +283,7 @@
         {#if context == 'VIEWLAYER'}
             <ViewlayerComponent />
         {/if}
-
-
+        
     </div>
+    
 </div>

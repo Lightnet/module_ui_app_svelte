@@ -31,7 +31,7 @@
         //console.log("resize");
         //let editorheadercompoent = document.querySelector('EditorHeaderComponent');
         //console.log(editorheadercompoent);
-        let parent = elementheader.parentNode;
+        let parent = elementcontent.parentNode;
         elementcontent.style.height = parent.clientHeight - elementheader.clientHeight + 'px';
         elementcontent.style.width = parent.clientWidth + 'px';
     }
@@ -52,12 +52,12 @@
     //height: calc(100% - 20px);
 </script>
 <style>
-    .screen{
+    .editorcontext{
         height:100% ;
         width:100%;
     }
 </style>
-<div id="{idcontent}" class="screen">
+<div id="{idcontent}" class="editorcontext">
     {#if viewport === '3dviewport'}
         <Viewport3DComponent />
     {/if}

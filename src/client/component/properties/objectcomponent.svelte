@@ -10,26 +10,25 @@
     let idcontent = generateId(20);
     let elementcontent;
 
-    //onMount(async () => {	
-    //});
-
     function handledivresize(event){
         //console.log("resize");
         let parent = elementcontent.parentNode;
         elementcontent.style.height = parent.clientHeight + 'px';
-        //elementcontent.style.width = parent.clientWidth - elementtab.clientWidth + 'px';
+        elementcontent.style.width = parent.clientWidth + 'px';
     }
     
     onMount(() => {
         //console.log("mount");
         window.addEventListener('resize', handledivresize);
         activeobject = mjs.context.view_layer.objects.active;
+        handledivresize();
     });
 
     afterUpdate(() => {
         //console.log("afterUpdate");
         elementcontent = document.getElementById(idcontent);
         activeobject = mjs.context.view_layer.objects.active;
+        handledivresize();
     });
 
     onDestroy(() => {
