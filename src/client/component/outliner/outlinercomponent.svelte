@@ -36,6 +36,7 @@
     .itempanel{
         height:100%;
         width:100%;
+        overflow: auto;
     }
     .objitem{
         width:100%;

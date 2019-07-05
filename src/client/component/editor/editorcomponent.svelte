@@ -20,7 +20,7 @@
         viewport = event.detail;
     }
 
-    function handle_resizeeditor(event){
+    function handle_editor_resize(event){
         //console.log("resize");
         let parent = elementcontent.parentNode;
         elementcontent.style.height = parent.clientHeight + 'px';
@@ -29,8 +29,8 @@
 
     onMount(() => {
         elementcontent = document.getElementById(idcontent);
-        window.addEventListener('resize', handle_resizeeditor);
-        handle_resizeeditor();
+        window.addEventListener('resize', handle_editor_resize);
+        handle_editor_resize();
     });
 
     afterUpdate(() => {
@@ -39,7 +39,7 @@
 
      onDestroy(() => {
         //console.log("onDestroy")
-        window.addEventListener('resize', handle_resizeeditor);
+        window.addEventListener('resize', handle_editor_resize);
     });
 </script>
 

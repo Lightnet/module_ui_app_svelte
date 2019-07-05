@@ -1,6 +1,9 @@
 <script>
     //https://www.w3schools.com/howto/howto_css_tooltip.asp
     //https://www.w3schools.com/howto/howto_css_custom_scrollbar.asp
+    /*
+    Information: odd bug when resizing with layout setup not setup correctly.
+    */
     import { onMount, beforeUpdate, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
@@ -30,19 +33,28 @@
     let idcontext = generateId(20);
     let elementcontext;
     let tabwidth = 32;
+    let m = {x:0, y:0};
 
     let activeobject;//props
     export let context = "OBJECT";
     let itemtabs = [];
 
-    function handledivresize(event){
+    function handle_props_resize(event){
         //console.log("resize");
+        if(elementcontext == null){
+            elementcontext = document.getElementById(idcontext);
+            elementtab = document.getElementById(idtab);
+            elementcontent = document.getElementById(idcontent);
+        }
         let parent = elementcontext.parentNode;
+        //console.log("propsparent");
+        //console.log(parent);
         if(parent){
             elementcontext.style.height = parent.clientHeight + 'px';
             elementcontext.style.width = parent.clientWidth + 'px';
             elementtab.style.height = parent.clientHeight + 'px';
             let pwidth = 0;
+            //console.log(elementtab.clientWidth)
             if(elementtab.clientWidth !=tabwidth){
                 elementtab.style.width = '32px';
                 //console.log("default!")
@@ -58,37 +70,43 @@
     
     onMount(() => {
         //console.log("mount");
-        window.addEventListener('resize', handledivresize);
+        window.addEventListener('resize', handle_props_resize);
         activeobject = mjs.context.view_layer.objects.active;
 
         elementcontext = document.getElementById(idcontext);
         elementtab = document.getElementById(idtab);
         elementcontent = document.getElementById(idcontent);
+
+        //console.log(elementtab.style.width);
+        //console.log(elementtab.clientWidth);
+        elementtab.style.width = '32px';
+
+        itemtabs = [
+            {sm_label:"Active Tool and Workspace Setting",sm_context:"TOOLS",sm_icon:"fas fa-tools"},
+            {sm_label:"Render",sm_context:"RENDER",sm_icon:"fa fa-desktop"},
+            {sm_label:"Output",sm_context:"OUTPUT",sm_icon:"fa fa-print"},
+            {sm_label:"Viewlayer",sm_context:"VIEWLAYER",sm_icon:"fas fa-images"},
+            {sm_label:"Scene",sm_context:"SCENE",sm_icon:"fas fa-file-image"},
+            {sm_label:"World",sm_context:"WORLD",sm_icon:"fa fa-globe"},
+            {sm_label:"Object",sm_context:"OBJECT",sm_icon:"fa fa-vector-square"},
+            {sm_label:"Modifiers",sm_context:"MODIFIERS",sm_icon:"fa fa-wrench"},
+            {sm_label:"Particles",sm_context:"PARTICLES",sm_icon:"fab fa-hubspot"},
+            {sm_label:"Physics",sm_context:"PHYSICS",sm_icon:"fab fa-digital-ocean"},
+            {sm_label:"Object Constraint",sm_context:"OBJECTCONSTRAINT",sm_icon:"fas fa-map-marker-alt"},
+            {sm_label:"Object Data",sm_context:"OBJECTDATA",sm_icon:"fab fa-rev"},
+            {sm_label:"Material",sm_context:"MATERIAL",sm_icon:"fab fa-dribbble"},
+            {sm_label:"Texture",sm_context:"TEXTURE",sm_icon:"fas fa-chess-board"}
+        ];
+        //fixed odd resize when swtiching views 
+        window.dispatchEvent(new Event('resize'));
     });
 
     beforeUpdate(()=>{
-
+        //console.log("beforeUpdate");
     });
 
     afterUpdate(() => {
         //console.log("afterUpdate");
-
-        itemtabs = [
-            {sm_label:"activetoolandworkspacesetting",sm_context:"TOOLS",sm_icon:"fas fa-tools"},
-            {sm_label:"render",sm_context:"RENDER",sm_icon:"fa fa-desktop"},
-            {sm_label:"output",sm_context:"OUTPUT",sm_icon:"fa fa-print"},
-            {sm_label:"viewlayer",sm_context:"VIEWLAYER",sm_icon:"fas fa-images"},
-            {sm_label:"scene",sm_context:"SCENE",sm_icon:"fas fa-file-image"},
-            {sm_label:"world",sm_context:"WORLD",sm_icon:"fa fa-globe"},
-            {sm_label:"object",sm_context:"OBJECT",sm_icon:"fa fa-vector-square"},
-            {sm_label:"modifiers",sm_context:"MODIFIERS",sm_icon:"fa fa-wrench"},
-            {sm_label:"particles",sm_context:"PARTICLES",sm_icon:"fab fa-hubspot"},
-            {sm_label:"physics",sm_context:"PHYSICS",sm_icon:"fab fa-digital-ocean"},
-            {sm_label:"objectconstraint",sm_context:"OBJECTCONSTRAINT",sm_icon:"fas fa-map-marker-alt"},
-            {sm_label:"objectdata",sm_context:"OBJECTDATA",sm_icon:"fab fa-rev"},
-            {sm_label:"material",sm_context:"MATERIAL",sm_icon:"fab fa-dribbble"},
-            {sm_label:"texture",sm_context:"TEXTURE",sm_icon:"fas fa-chess-board"}
-        ];
     });
 
     function tabselect(value){
@@ -97,24 +115,34 @@
         dispatch('context',value);
     }
 
+    function handle_mousemove(event){
+        //m.x = event.clientX;
+        //m.y = event.clientY;
+        m.x = event.pageX - event.offsetX;
+        m.y = event.pageY - event.offsetY - 32;
+        //console.log(event);
+    }
+
     //fa fa-bars
     onDestroy(() => {
-        //console.log("onDestroy")
-        window.addEventListener('resize', handledivresize);
+        console.log("onDestroy")
+        window.addEventListener('resize', handle_props_resize);
     });
     //tab
     //{console.log(itemtabs)}
     //{#each Object.keys(itemtabs) as tab }
+    //top:{m.y};left:{m.x};
 </script>
 
 <style>
-    ::-webkit-scrollbar {
+    .tab::-webkit-scrollbar {
         width: 5px;
         height: 5px;
         /*background-color: darkgrey;*/
         /*background: #666; */
     }
-    ::-webkit-scrollbar-thumb{
+
+    .tab::-webkit-scrollbar-thumb{
         background-color: #333;
     }
 
@@ -128,7 +156,7 @@
 
     .tab{
         float:left;
-        /*min-width:32px;*/
+        min-width:32px;
         width:32px;
         height:100%;
         background-color: dimgrey;
@@ -144,8 +172,8 @@
 
     .dataprops{
         float:left;
-        /*width:45%;*/
-        /*height:50%;*/
+        width:100%;
+        height:100%;
         background-color: gray;
         overflow: visible;
         overflow-x: hidden;
@@ -188,10 +216,10 @@
         visibility: hidden;
         /*width: 120px;*/
         /*background-color: #555;*/
-        /*background-color: black;*/
-        background-color: orange;
-        /*color: #fff;*/
-        color: black;
+        background-color: black;
+        /*background-color: orange;*/
+        color: #fff;
+        /*color: black;*/
         text-align: center;
         /*border-radius: 6px;*/
         /*padding: 5px 0;*/
@@ -200,8 +228,8 @@
         /*position: sticky; #fail*/
         position: fixed; /*#pass*/
         /*position: relative; #fail*/
-        top:5px;
-        left:5px;
+        /*top:5px;
+        left:5px;*/
         /*z-index: 1;*/
         /*
         top: -5px;
@@ -219,15 +247,21 @@
         z-index: 3;
     }
 
+    i{
+        height:32px;
+        width:32px;
+        padding: 0px 0px 0px 0px;
+    }
+
 </style>
 <div id="{idcontext}" class="contextprops">
     
     <div id={idtab} class="tab">
         
         {#each itemtabs as tab }
-            <button class="tabbutton tooltip {context === tab.sm_context ? 'active' : ''}" on:click={()=>{tabselect(tab.sm_context)}}>
+            <button class="tabbutton tooltip {context === tab.sm_context ? 'active' : ''}" on:mousemove={handle_mousemove} on:click={()=>{tabselect(tab.sm_context)}}>
                 <i class="{tab.sm_icon}"></i>
-                <span class="tooltiptext">{tab.sm_label}</span>
+                <span class="tooltiptext" style="top:{m.y}px;left:{m.x}px;">{tab.sm_label}</span>
             </button>
         {/each}
         
@@ -290,7 +324,7 @@
         {#if context == 'VIEWLAYER'}
             <ViewlayerComponent />
         {/if}
-         
+        
     </div>
     
 </div>

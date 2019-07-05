@@ -26,10 +26,10 @@
         //console.log("mount")
         elementheader = document.getElementById(idheader);
         elementcontent = document.getElementById(idcontent);
-        window.addEventListener('resize', handledivresize);
+        window.addEventListener('resize', handle_editorcontent_resize);
     });
 
-    function handledivresize(event){
+    function handle_editorcontent_resize(event){
         //console.log("resize");
         //let editorheadercompoent = document.querySelector('EditorHeaderComponent');
         //console.log(editorheadercompoent);
@@ -44,7 +44,7 @@
 
     onDestroy(() => {
         //console.log("onDestroy")
-        window.addEventListener('resize', handledivresize);
+        window.addEventListener('resize', handle_editorcontent_resize);
     });
     //height: calc(100% - 20px);
 </script>

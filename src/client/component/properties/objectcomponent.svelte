@@ -10,33 +10,38 @@
     let idcontent = generateId(20);
     let elementcontent;
 
-    function handledivresize(event){
+    function handle_object_resize(event){
         //console.log("resize");
-        let parent = elementcontent.parentNode;
-        if(parent){
-            elementcontent.style.height = parent.clientHeight + 'px';
-            elementcontent.style.width = parent.clientWidth + 'px';
-            //console.log("hello");
+        //console.log(elementcontent);
+        if(elementcontent == null){
+            elementcontent = document.getElementById(idcontent);
         }
+
+        let parent = elementcontent.parentNode;
+        elementcontent.style.height = parent.clientHeight + 'px';
+        elementcontent.style.width = parent.clientWidth + 'px';
     }
     
     onMount(() => {
         //console.log("mount");
-        window.addEventListener('resize', handledivresize);
+        handle_object_resize();
+        window.addEventListener('resize', handle_object_resize);
         elementcontent = document.getElementById(idcontent);
         activeobject = mjs.context.view_layer.objects.active;
-        handledivresize();
+        
     });
 
     afterUpdate(() => {
         //console.log("afterUpdate");
-        //activeobject = mjs.context.view_layer.objects.active;
+        activeobject = mjs.context.view_layer.objects.active;
+        //handle_object_resize();
     });
 
     onDestroy(() => {
         //console.log("onDestroy");
-        window.addEventListener('resize', handledivresize);
+        window.addEventListener('resize', handle_object_resize);
     });
+    //{console.log(activeobject)}
 </script>
 
 <style>
@@ -51,9 +56,15 @@
     button:hover{
         background-color: lightslategrey;
     }
+
+    .objectcomponent{
+        height: 100%;
+        width: 100%;
+    }
+
 </style>
-<div id="{idcontent}">
-    object
+<div id="{idcontent}" class="objectcomponent">
+    <label>Object</label>
     {#if activeobject != null}
         {#if activeobject.el != null}
             <label> Name: {activeobject.el.localName}  </label>
