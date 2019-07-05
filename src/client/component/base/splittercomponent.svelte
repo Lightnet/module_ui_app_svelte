@@ -92,33 +92,7 @@
         //window.dispatchEvent(new Event('resize')); //overload not used here
     }
 
-    function handledivresize(){
-        //console.log("resize");
-        //splitter = document.getElementById(idsplitter);
-        //cont1 = document.getElementById(iddiv1);
-        //cont1 = document.getElementById(iddiv1);
-        let parent = splitter.parentNode;
-        window_width = parent.clientWidth;
-        //console.log(window_width);
-        window_height = parent.clientHeight;
-
-        splitter.style.height = window_height +'px';
-        cont1.style.height = window_height +'px';
-        cont2.style.height = window_height +'px';
-
-        let dx=cont1.clientWidth;
-        splitter.style.marginLeft=dx+"px";
-        dx+=splitter.clientWidth;
-        cont2.style.marginLeft=dx+"px";
-        dx=window_width-dx;
-        cont2.style.width=dx+"px";
-    }
-
     function handleMouseclick(event){
-        //console.log(event);
-        //console.log(event.buttons)
-        //bpress = true;
-        //window.addEventListener('mouseup', stopResize)
         if(bresize){
             window.addEventListener('mouseup', stopResize);
             window.addEventListener('mousemove', handle_splitter_resize);
@@ -128,8 +102,6 @@
     function stopResize(e){
         window.removeEventListener('mouseup', stopResize);
         window.removeEventListener('mousemove', handle_splitter_resize);
-        //console.log("up");
-        //bpress = false;
     }
 
     onMount(async () => {
@@ -172,9 +144,11 @@
     });
 
     afterUpdate(()=>{
+        //console.log("afterUpdate");
     });
 
     onDestroy(()=>{
+        //console.log("onDestroy");
         window.removeEventListener('resize', resetPosition);
     });
 

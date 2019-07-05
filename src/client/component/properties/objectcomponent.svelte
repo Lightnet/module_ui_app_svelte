@@ -14,10 +14,15 @@
         //console.log("resize");
         //console.log(elementcontent);
         if(elementcontent == null){
-            elementcontent = document.getElementById(idcontent);
+            return;
         }
 
         let parent = elementcontent.parentNode;
+        //if(parent == null){
+            //console.log(idcontent)
+            //elementcontent = document.getElementById(idcontent);
+            //parent = elementcontent.parentNode;
+        //}
         elementcontent.style.height = parent.clientHeight + 'px';
         elementcontent.style.width = parent.clientWidth + 'px';
     }
@@ -39,7 +44,7 @@
 
     onDestroy(() => {
         //console.log("onDestroy");
-        window.addEventListener('resize', handle_object_resize);
+        window.removeEventListener('resize', handle_object_resize);
     });
     //{console.log(activeobject)}
 </script>

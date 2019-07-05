@@ -1,5 +1,5 @@
 <script>
-    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
+    import {onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     //import { Sl_Mouseregion } from '../../stores.js';
     import SplitterComponent from './splittercomponent.svelte';
     import EditorComponent from '../editor/editorcomponent.svelte'
@@ -16,7 +16,7 @@
     let screen2 = "properties";
     //let screen2 = "outliner"
 
-    function handle_divresize(event){
+    function handle_divider_resize(event){
         //console.log("resize");
         //let editorheadercompoent = document.querySelector('EditorHeaderComponent');
         //console.log(editorheadercompoent);
@@ -29,18 +29,18 @@
 
     onMount(() => {
         //console.log("mount");
-        window.addEventListener('resize', handle_divresize);
+        window.addEventListener('resize', handle_divider_resize);
         elementcontent = document.getElementById(idcontent);
-        handle_divresize()
+        handle_divider_resize()
     });
 
     afterUpdate(()=>{
-        //handledivresize();
+        //console.log("afterUpdate");
     });
 
     onDestroy(() => {
         //console.log("onDestroy")
-        window.addEventListener('resize', handle_divresize);
+        window.removeEventListener('resize', handle_divider_resize);
     });
 </script>
 
@@ -73,7 +73,7 @@
     <div id="{id1}" class="panel1">
         <EditorComponent viewport="3dviewport"></EditorComponent>
     </div>
-    <SplitterComponent bhorizontal={false} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
+    <SplitterComponent bhorizontal={true} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
     <div id="{id2}" class="panel2">
         <EditorComponent viewport="{screen2}"></EditorComponent>
     </div>

@@ -35,12 +35,12 @@
     });
 
     afterUpdate(()=>{
-        //handledivresize();
+        //console.log("afterUpdate");
     });
 
     onDestroy(() => {
         //console.log("onDestroy")
-        window.addEventListener('resize', handle_divresize);
+        window.removeEventListener('resize', handle_divresize);
     });
 </script>
 

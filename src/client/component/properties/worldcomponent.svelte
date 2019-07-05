@@ -8,8 +8,11 @@
     let idcontent = generateId(20);
     let elementcontent;
 
-    function handledivresize(event){
+    function handle_world_resize(event){
         //console.log("resize");
+        if(elementcontent == null){
+            return;
+        }
         let parent = elementcontent.parentNode;
         elementcontent.style.height = parent.clientHeight + 'px';
         elementcontent.style.width = parent.clientWidth + 'px';
@@ -18,9 +21,9 @@
     onMount(() => {
         //console.log("mount");
         elementcontent = document.getElementById(idcontent);
-        window.addEventListener('resize', handledivresize);
+        window.addEventListener('resize', handle_world_resize);
         //activeobject = mjs.context.view_layer.objects.active;
-        handledivresize();
+        handle_world_resize();
     });
 
     afterUpdate(() => {
@@ -29,16 +32,16 @@
 
     onDestroy(() => {
         //console.log("onDestroy");
-        window.addEventListener('resize', handledivresize);
+        window.removeEventListener('resize', handle_world_resize);
     });
 </script>
 
 <style>
-    .worldeditor{
+    .worldprops{
         height:100%;
         width:100%;
     }
 </style>
-<div id="{idcontent}" class="worldeditor">
-    worldcomponent
+<div id="{idcontent}" class="worldprops">
+    world
 </div>

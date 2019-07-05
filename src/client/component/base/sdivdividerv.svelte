@@ -1,8 +1,7 @@
 <script>
-    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    //import { Sl_Mouseregion } from '../../stores.js';
+    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     import SplitterComponent from './splittercomponent.svelte';
-    import EditorComponent from '../editor/editorcomponent.svelte'
+    import EditorComponent from '../editor/editorcomponent.svelte';
     import { generateId } from '../helper/generateid.js';
     //const dispatch = createEventDispatcher();
 
@@ -21,7 +20,7 @@
         //let editorheadercompoent = document.querySelector('EditorHeaderComponent');
         //console.log(editorheadercompoent);
         let parent = elementcontent.parentNode;
-        if(parent){
+        if(parent != null){
             elementcontent.style.height = parent.clientHeight + 'px';
             elementcontent.style.width = parent.clientWidth + 'px';
         }
@@ -35,12 +34,12 @@
     });
 
     afterUpdate(()=>{
-        //handledivresize();
+        //console.log("afterUpdate");
     });
 
     onDestroy(() => {
         //console.log("onDestroy")
-        window.addEventListener('resize', handle_layout_resize);
+        window.removeEventListener('resize', handle_layout_resize);
     });
 </script>
 

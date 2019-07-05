@@ -32,7 +32,7 @@
     //onMount(async () => {	
     //});
 
-    function handledivresize(event){
+    function handle_viewport3d_resize(event){
         //console.log("resize");
         //let editorheadercompoent = document.querySelector('EditorHeaderComponent');
         //console.log(editorheadercompoent);
@@ -47,7 +47,7 @@
     onMount(() => {
         //console.log("mount")
         elementcontent = document.getElementById(idcontent);
-        window.addEventListener('resize', handledivresize);
+        window.addEventListener('resize', handle_viewport3d_resize);
     });
     //do put it here
     //AFRAME.registerComponent('natural-size', {
@@ -73,10 +73,15 @@
 
     onDestroy(() => {
         //console.log("onDestroy")
-        let scene = document.querySelector('a-scene').object3D;
-        scene.dispose();
+        let ascene = document.querySelector('a-scene')
+        if(ascene){
+            let scene = ascene.object3D;
+            //console.log(scene);
+            scene.dispose();
+        }
+        
         //console.log(scene);
-        window.addEventListener('resize', handledivresize);
+        window.removeEventListener('resize', handle_viewport3d_resize);
     });
 
     /*
@@ -84,9 +89,6 @@
     wasd-controls-enabled="false"
     look-controls="pointerLockEnabled: false;"
     mouse-cursor
-
-
-
     */
 </script>
 
@@ -95,12 +97,6 @@
         height:100%;
         width:100%;
     }
-    /*
-    
-    .a-canvasReference{
-        cursor:none;
-    }
-    */
 </style>
 <div id="{idcontent}" class="viewport3dscreen">
     <a-scene 

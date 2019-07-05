@@ -2,8 +2,7 @@
 //https://svelte.dev/docs#setContext
 //https://svelte.dev/examples#reactive-statements
 
-	import { onMount, afterUpdate, onDestroy } from 'svelte'
-	//import { Sl_blogin } from './stores.js';
+	import { onMount, afterUpdate, onDestroy, createEventDispatcher} from 'svelte'
 	import { generateId } from './component/helper/generateid.js';
 
 	import Modal from './component/base/modalcomponent.svelte';
@@ -13,15 +12,19 @@
 	import SplitterComponent from './component/base/splittercomponent.svelte'
 	//import SContextmenu from './component/base/scontextmenu.svelte'
 	//import Scontext from './component/base/scontext.svelte'
-	//import DivDividerComponent from './component/base/divdividercomponent.svelte'
-	//import DivDividerComponent from './component/base/sdivdividerv.svelte'
-	import DivDividerComponent from './component/base/sdivdividerh.svelte'
+	import DivDividerComponent from './component/base/divdividercomponent.svelte'
+	import DivDividerVComponent from './component/base/sdivdividerv.svelte'
+	import DivDividerHComponent from './component/base/sdivdividerh.svelte'
 	//import mjs from './mjs.js';
+
+	const dispatch = createEventDispatcher();
 
 	export let name;
 	//let showModal = false;
 	//let msgmodal = "None";
 	let view;
+
+	let viewworkspace = "horizontal";
 
 	let elementheader;
 	let elementcontent;
@@ -41,12 +44,10 @@
 		//msgmodal = msg;
 	//}
 
-	function navheader_handle(event){
+	function handle_workspace(event){
 		//console.log(event);
-		if(event.detail){
-			view = event.detail;
-			//console.log(event.detail);
-		}
+		viewworkspace = event.detail;
+		dispatch("workspace",event.detail);
 	}
 
 	function resizediv(){
@@ -73,6 +74,7 @@
 	onDestroy(()=>{
 		window.removeEventListener('resize', resizediv);
 	});
+
 </script>
 
 <style>
@@ -94,10 +96,22 @@
 	<NavHeaderComponent
 		idassign={idheader}
 		name={name}
-		on:navmenu={navheader_handle} >
+		on:workspace={handle_workspace} >
 	</NavHeaderComponent>
 	<div id={idcontent} class="panelcontent contentarea">
-		<DivDividerComponent></DivDividerComponent>
+
+		{#if viewworkspace == 'layout'}
+			<DivDividerComponent></DivDividerComponent>
+		{/if}
+
+		{#if viewworkspace == "horizontal"}
+			<DivDividerHComponent></DivDividerHComponent>
+		{/if}
+
+		{#if viewworkspace == "vertical"}
+			<DivDividerVComponent></DivDividerVComponent>
+		{/if}
+
 	</div>
 	<NavFooterComponent idassign={idfooter}></NavFooterComponent>
 </div>

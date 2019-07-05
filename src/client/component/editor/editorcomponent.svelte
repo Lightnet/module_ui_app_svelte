@@ -40,7 +40,7 @@
 
      onDestroy(() => {
         //console.log("onDestroy")
-        window.addEventListener('resize', handle_editor_resize);
+        window.removeEventListener('resize', handle_editor_resize);
     });
 </script>
 

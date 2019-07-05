@@ -36,8 +36,15 @@ const app = new App({
 	}
 });
 
+app.$on("workspace",(event)=>{
+	//console.log('workspace');
+	//console.log(event);
+	//console.log("workspace: " + event.detail);
+})
+
+
 //let strtest = new mjs.props.StringProperty({name:"test",default:"beta"});
-console.log(mjs);
+//console.log(mjs);
 
 export default app;
 

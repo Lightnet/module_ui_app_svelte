@@ -8,7 +8,10 @@
     let idcontent = generateId(20);
     let elementcontent;
 
-    function handledivresize(event){
+    function handle_objectdata_resize(event){
+        if(elementcontent == null){
+            return;
+        }
         //console.log("resize");
         let parent = elementcontent.parentNode;
         elementcontent.style.height = parent.clientHeight + 'px';
@@ -18,9 +21,9 @@
     onMount(() => {
         //console.log("mount");
         elementcontent = document.getElementById(idcontent);
-        window.addEventListener('resize', handledivresize);
+        window.addEventListener('resize', handle_objectdata_resize);
         //activeobject = mjs.context.view_layer.objects.active;
-        handledivresize();
+        handle_objectdata_resize();
     });
 
     afterUpdate(() => {
@@ -29,16 +32,16 @@
 
     onDestroy(() => {
         //console.log("onDestroy");
-        window.addEventListener('resize', handledivresize);
+        window.removeEventListener('resize', handle_objectdata_resize);
     });
 </script>
 
 <style>
-    .objectdataeditor{
+    .objectdataprops{
         height:100%;
         width:100%;
     }
 </style>
-<div id="{idcontent}" class="objectdataeditor">
+<div id="{idcontent}" class="objectdataprops">
     objectdata
 </div>

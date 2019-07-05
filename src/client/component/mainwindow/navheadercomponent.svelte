@@ -13,7 +13,7 @@
 	export let idassign;
     const dispatch = createEventDispatcher();
 	let blogin = false;
-	let menus = [];
+	//let menus = [];
 	let templatepanel;
 
 	let filemenus = {};
@@ -24,10 +24,14 @@
 	let accessmenus = {};
 	let helpmenus = {};
 
-	const bloginunsub = Sl_blogin.subscribe(value => {
-		blogin = value;
+	let workspaces = [];
+
+	//const bloginunsub = Sl_blogin.subscribe(value => {
+		//blogin = value;
 		//console.log(value);
-	});
+	//});
+
+	//bloginunsub() //off
 
 	function checktemplatepanel(){
 		//console.log("Test");
@@ -49,13 +53,31 @@
 		//templatepanel.OBJECT_OT_Panel();
 	}
 
-	//===============================================
-	// onMount
-	//===============================================
+	function workspace_view(value){
+		//console.log(value);
+		//console.log("workspace_default");
+		dispatch('workspace',value);
+	}
 
 	onMount(async () => {
 		//console.log(mjs.ops)
 		//console.log(mjs);
+
+		workspaces = [
+			{sm_label:"layout", sm_context:"layout",ops:workspace_view },
+			{sm_label:"horizontal", sm_context:"horizontal",ops:workspace_view },
+			{sm_label:"vertical", sm_context:"vertical",ops:workspace_view },
+			//{sm_label:"Layout", sm_context:"Layout",ops:workspace_view },
+			//{sm_label:"Modeling", sm_context:"Modeling",ops:workspace_view },
+			//{sm_label:"Sculpting", sm_context:"Sculpting",ops:workspace_view },
+			//{sm_label:"UV Editing", sm_context:"UVEditing",ops:workspace_view },
+			//{sm_label:"Texture Paint", sm_context:"TexturePaint",ops:workspace_view },
+			//{sm_label:"Shading", sm_context:"Shading",ops:workspace_view },
+			//{sm_label:"Animation", sm_context:"Animation",ops:workspace_view },
+			//{sm_label:"Rendering", sm_context:"Rendering",ops:workspace_view },
+			//{sm_label:"Compositing", sm_context:"Compositing",ops:workspace_view  },
+			//{sm_label:"Scripting", sm_context:"Scripting",ops:workspace_view }
+		]
 
 		for(var obj in mjs.ops){
 			//console.log(obj);
@@ -66,7 +88,6 @@
 				filemenus[obj].sm_label = mjs.ops[obj].sm_label;
 				//filemenus[obj].sm_idname = mjs.ops[obj].sm_idname;
 				//mjs.ops[obj]
-				//filemenus[obj]
 			}
 		}
 		
@@ -143,6 +164,9 @@
     	background-color: #333;
     	font-family: Arial, Helvetica, sans-serif;
 		width:100%;
+		/*height:32px;*/
+		/*border-style: solid;*/
+		/*border-bottom-color: #666;*/
   	}
 
   	.navbar a {
@@ -152,11 +176,50 @@
     	text-align: center;
     	padding: 4px 4px;
     	text-decoration: none;
+		overflow: hidden;
   	}
 
   	.navbar a:hover {
     	background-color: lightslategrey;
   	}
+
+	.navbar a:active {
+  		background-color: #333;
+  		/*box-shadow: 0 1px #666;*/
+  		/*transform: translateY(1px);*/
+	}
+
+	.workspace{
+		/*width:100%;*/
+		position: relative;
+		overflow: hidden;
+		float: left;
+		height: 22px;
+		max-height: 22px;
+		padding: 0px 0px 0px 0px;
+	}
+
+	button{
+        background-color:#333;
+        font-size: 12px;
+        color:white;
+        height:22px;
+        padding: 0px 4px 0px 4px;
+		display: inline-block;
+		text-decoration: none;
+		/*border: none;*/
+		border-color: #666;
+    }
+
+	button:hover{
+        background-color: lightslategrey;
+    }
+
+	button:active {
+  		background-color: #333;
+  		/*box-shadow: 0 1px #666;*/
+  		/*transform: translateY(1px);*/
+	}
 
 </style>
 
@@ -181,4 +244,16 @@
 	</DropMenu>
 	<a href="/#" on:click={testcall}>Test Call</a>
 	<a href="/#" on:click={checktemplatepanel}>Test Panel</a>
+
+	<div class="workspace">
+
+		{#each workspaces as workspace}
+			<button on:click={()=>{workspace.ops(workspace.sm_context)}}>{workspace.sm_label}</button>	
+		{/each}
+		<button>+</button>
+		<!--
+		<button>Test</button>
+		<button>+</button>
+		-->
+	</div>
 </div>

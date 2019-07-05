@@ -8,8 +8,11 @@
     let idcontent = generateId(20);
     let elementcontent;
 
-    function handledivresize(event){
+    function handle_particles_resize(event){
         //console.log("resize");
+        if(elementcontent == null){
+            return;
+        }
         let parent = elementcontent.parentNode;
         elementcontent.style.height = parent.clientHeight + 'px';
         elementcontent.style.width = parent.clientWidth + 'px';
@@ -18,9 +21,9 @@
     onMount(() => {
         //console.log("mount");
         elementcontent = document.getElementById(idcontent);
-        window.addEventListener('resize', handledivresize);
+        window.addEventListener('resize', handle_particles_resize);
         //activeobject = mjs.context.view_layer.objects.active;
-        handledivresize();
+        handle_particles_resize();
     });
 
     afterUpdate(() => {
@@ -29,16 +32,16 @@
 
     onDestroy(() => {
         //console.log("onDestroy");
-        window.addEventListener('resize', handledivresize);
+        window.removeEventListener('resize', handle_particles_resize);
     });
 </script>
 
 <style>
-    .particleseditor{
+    .particlesprops{
         height:100%;
         width:100%;
     }
 </style>
-<div id="{idcontent}" class="particleseditor">
+<div id="{idcontent}" class="particlesprops">
     particles
 </div>

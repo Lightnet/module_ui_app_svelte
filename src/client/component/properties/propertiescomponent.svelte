@@ -125,8 +125,8 @@
 
     //fa fa-bars
     onDestroy(() => {
-        console.log("onDestroy")
-        window.addEventListener('resize', handle_props_resize);
+        //console.log("onDestroy");
+        window.removeEventListener('resize', handle_props_resize);
     });
     //tab
     //{console.log(itemtabs)}

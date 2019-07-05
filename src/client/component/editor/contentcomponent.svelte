@@ -44,7 +44,7 @@
 
     onDestroy(() => {
         //console.log("onDestroy")
-        window.addEventListener('resize', handle_editorcontent_resize);
+        window.removeEventListener('resize', handle_editorcontent_resize);
     });
     //height: calc(100% - 20px);
 </script>

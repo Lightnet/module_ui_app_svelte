@@ -31,10 +31,11 @@ Code languages:
  * gulp-nodemon 2.4.2
 
 # Features:
- * simple right menu (wip)
- * simple menu (wip)
+ * right click context menu (wip)
+ * menu (wip)
  * operator (wip)
- * Layout Management (wip)
+ * layout Management (wip)
+ * workspace (wip)
  * 3D (threejs) (not worked on)
  * Data Flow Node Editor (not worked on)
  * SVG (not worked on)
