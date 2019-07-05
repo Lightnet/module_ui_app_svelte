@@ -7,9 +7,9 @@
     import { generateId } from '../helper/generateid.js';
 
     export let iddiv1;
-    export let elementdiv1;
+    //export let elementdiv1;
     export let iddiv2;
-    export let elementdiv2;
+    //export let elementdiv2;
     let m = {x:0,y:0};
     export let bresize = false;
     export let bhorizontal = false;
@@ -19,69 +19,77 @@
     let splitter;
 
     var cont1,cont2;
-    var last_x;
+    var last_x = 0;
+    var last_y = 0;
 
-    let bpress = false;
+    //let bpress = false;
     let window_width,window_height;
 
     let idsplitter = generateId(20);
 
-    function handleMousemove(event){
+    function handle_screenarea(event){
         m.x = event.clientX;
         m.y = event.clientY;
         //console.log(m);
         Sl_Mouseregion.set("splitter");
     }
 
-    function handleMousedrag(event){
+    function handle_splitter_resize(event){
         m.x = event.clientX;
         m.y = event.clientY;
         //console.log(m);
-        if((bresize == true)&&(bhorizontal == false)){
-            //console.log("move resize");
-            //splitter.style.top = m.y + 'px';
-            //console.log(event);
-            //elementdiv1
-            //console.log(splitter);
-            //splitter.style.left = m.x + 'px';
-            //splitter.style.marginLeft = m.x + 'px';
-            resetPosition(event.clientX);
-            //resetPosition();
+        if((bresize == true)&&(bhorizontal == true)){
+            let parent = splitter.parentNode;
+            last_x = m.x - parent.offsetLeft;
+            if(last_x < 0){
+                return;
+            }
+            if(last_x > (parent.clientWidth - splitter.clientWidth)){
+                return;
+            }
+            splitter.style.marginLeft = m.x - parent.offsetLeft + 'px';
+            resetPosition();
         }
+        if((bresize == true)&&(bhorizontal == false)){
+            if(event.clientY){
+                let parent = splitter.parentNode;
+                last_y = m.y - parent.offsetTop;
+                //console.dir(parent);
+                if(last_y < 0){
+                    return;
+                }
+                if(last_y > (parent.clientHeight - splitter.clientHeight)){
+                    return;
+                }
+                splitter.style.marginTop = m.y - parent.offsetTop +  'px';
+                resetPosition();
+            }
+        }
+        window.dispatchEvent(new Event('resize'));
     }
 
-    function resetPosition(nowX){
+    function resetPosition(){
         //function resetPosition(){
-        //let parent = splitter.parentNode;
-        //window_width = parent.clientWidth;
-        //window_height = parent.clientHeight;
-        //splitter.style.height = window_height +'px';
-        //cont1.style.height = window_height +'px';
-        //cont2.style.height = window_height +'px';
-        //console.log(splitter.style.marginLeft)
-        
-        /*
-        let dxf = splitter.style.marginLeft;
-        var dx = parseFloat(dxf.replace('px', ''))
-        cont1.style.width=dx+"px";
-        dx+=splitter.clientWidth;
-        cont2.style.marginLeft=dx+"px";
-        dx=window_width-dx;
-        cont2.style.width=dx+"px";
-        */
+        let parent = splitter.parentNode;
+        window_width = parent.clientWidth;
+        window_height = parent.clientHeight;
 
-        
-        var dx=nowX-last_x;
-        dx+=cont1.clientWidth;
-        cont1.style.width=dx+"px";
-        splitter.style.marginLeft=dx+"px";
-        dx+=splitter.clientWidth;
-        cont2.style.marginLeft=dx+"px";
-        dx=window_width-dx;
-        cont2.style.width=dx+"px";
-        last_x=nowX;
-        window.dispatchEvent(new Event('resize'));
-        
+        if(bhorizontal == true){
+            let dx = last_x;
+            cont1.style.width=dx+"px";
+            dx += splitter.clientWidth;
+            cont2.style.marginLeft=dx+"px";
+            dx = window_width - dx;
+            cont2.style.width=dx+"px";
+        }else{
+            let dy = last_y;
+            cont1.style.height=dy+"px";
+            dy += splitter.clientHeight
+            cont2.style.marginTop=dy+"px";
+            dy = window_height - dy;
+            cont2.style.height=dy+"px";
+        }
+        //window.dispatchEvent(new Event('resize')); //overload not used here
     }
 
     function handledivresize(){
@@ -109,38 +117,57 @@
     function handleMouseclick(event){
         //console.log(event);
         //console.log(event.buttons)
-        bpress = true;
+        //bpress = true;
         //window.addEventListener('mouseup', stopResize)
         if(bresize){
             window.addEventListener('mouseup', stopResize);
-            window.addEventListener('mousemove', handleMousedrag);
+            window.addEventListener('mousemove', handle_splitter_resize);
         }
     }
 
     function stopResize(e){
         window.removeEventListener('mouseup', stopResize);
-        window.removeEventListener('mousemove', handleMousedrag);
+        window.removeEventListener('mousemove', handle_splitter_resize);
         //console.log("up");
-        bpress = false;
+        //bpress = false;
     }
 
     onMount(async () => {
         //console.log("onMount");
-        window_width=window.innerWidth;
+        //window_width=window.innerWidth;
         splitter = document.getElementById(idsplitter);
+        let parent = splitter.parentNode;
+        window_width = parent.clientWidth;
+        window_height = parent.clientHeight;
+
         cont1 = document.getElementById(iddiv1);
-        cont2=document.getElementById(iddiv2);
-        /*
+        cont2 = document.getElementById(iddiv2);
+        
         if(bhorizontal){
-            sheight = '10px';
-            swidth = '100%';
-            resizetag = 'n-resize';
-        }else{
             sheight = '100%';
             swidth = '10px';
             resizetag = 'w-resize';
-        }*/
-        window.addEventListener('resize', handledivresize);
+            splitter.style.marginLeft = (window_width / 2) + 'px';
+            last_x = window_width / 2;
+            last_y = 0;
+        }else{
+            sheight = '10px';
+            swidth = '100%';
+            resizetag = 'n-resize';
+            splitter.style.marginTop = (window_height / 2) + 'px';
+            last_x = 0;
+            last_y = window_height / 2;
+        }
+        //console.log(bhorizontal);
+        splitter.style.height = sheight;
+        splitter.style.width = swidth;
+        splitter.style.cursor = resizetag;
+        
+        //console.log(splitter.style.height)
+        //console.log(splitter.style.width)
+        resetPosition();
+
+        window.addEventListener('resize', resetPosition);
         window.dispatchEvent(new Event('resize'));
     });
 
@@ -148,10 +175,8 @@
     });
 
     onDestroy(()=>{
-        window.removeEventListener('resize', handledivresize);
+        window.removeEventListener('resize', resetPosition);
     });
-
-    
 
 </script>
 <style>
@@ -162,8 +187,8 @@
     height:100%;
     float:left;
     position:absolute;
-    /*z-index:1;*/
+    z-index:1;
 }
 </style>
 
-<div id="{idsplitter}" class="splitter" on:mousemove={handleMousemove} on:mousedown={handleMouseclick}></div>
+<div id="{idsplitter}" class="splitter" on:mousemove={handle_screenarea} on:mousedown={handleMouseclick}></div>

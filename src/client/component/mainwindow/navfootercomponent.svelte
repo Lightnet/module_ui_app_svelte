@@ -1,13 +1,13 @@
 <script>
     //https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp
     //https://www.w3schools.com/howto/howto_js_dropdown.asp
-    import { onMount, setContext, createEventDispatcher } from 'svelte'
-    //import { createEventDispatcher } from 'svelte';
-
+    import { onMount, onDestroy, createEventDispatcher } from 'svelte'
     import { count, UserName, SessionHash, Sl_blogin, Sl_Mouseregion } from '../../stores.js';
 
+    export let idassign;
     export let name ="0";
     let MouseRegion = "None";
+    let mouse = {x:0,y:0};
     
     const dispatch = createEventDispatcher();
 
@@ -23,21 +23,30 @@
         MouseRegion = value;
         //console.log(value);
     });
-//===============================================
-// onMount
-//===============================================
-
-    export let idassign;
-    onMount(async () => {
-        //console.log("onMount");
-        //const res = await fetch(`https://jsonplaceholder.typicode.com/photos?_limit=20`);
-        //photos = await res.json();
-    });
 
     function handleMousemove(event){
         //console.log(m);
         Sl_Mouseregion.set("footer");
     }
+
+    function handle_MousePostion(event){
+        //console.log(m);
+        mouse.x = event.clientX;
+        mouse.y = event.clientY;
+    }
+
+    onMount(() => {
+        //console.log("onMount");
+        //const res = await fetch(`https://jsonplaceholder.typicode.com/photos?_limit=20`);
+        //photos = await res.json();
+        window.addEventListener('mousemove', handle_MousePostion);
+    });
+
+    onDestroy(()=>{
+        window.removeEventListener('mousemove', handle_MousePostion);
+    });
+
+
 </script>
 
 <style>
@@ -77,4 +86,5 @@
     <a href="/#"> {name} </a>
     <label>Status:Normal</label>
     <label>Mouse Region:{MouseRegion}</label>
+    <label> | x:{mouse.x} y:{mouse.y} |</label>
 </div>

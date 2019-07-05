@@ -28,13 +28,14 @@
     }
 
     onMount(() => {
+        //console.log("onMount");
         elementcontent = document.getElementById(idcontent);
         window.addEventListener('resize', handle_editor_resize);
         handle_editor_resize();
     });
 
     afterUpdate(() => {
-        
+        //console.log("afterUpdate");
     });
 
      onDestroy(() => {

@@ -16,7 +16,7 @@
     let screen2 = "properties";
     //let screen2 = "outliner"
 
-    function handle_layout_resize(event){
+    function handle_divresize(event){
         //console.log("resize");
         //let editorheadercompoent = document.querySelector('EditorHeaderComponent');
         //console.log(editorheadercompoent);
@@ -29,9 +29,9 @@
 
     onMount(() => {
         //console.log("mount");
-        window.addEventListener('resize', handle_layout_resize);
+        window.addEventListener('resize', handle_divresize);
         elementcontent = document.getElementById(idcontent);
-        handle_layout_resize()
+        handle_divresize()
     });
 
     afterUpdate(()=>{
@@ -40,7 +40,7 @@
 
     onDestroy(() => {
         //console.log("onDestroy")
-        window.addEventListener('resize', handle_layout_resize);
+        window.addEventListener('resize', handle_divresize);
     });
 </script>
 
@@ -55,27 +55,25 @@
 
     .panel1 {
 		background-color: dimgrey;
-        height:40%;
-        width:100%;
+        height:100%;
+        width:45%;
         float:left;
         position:absolute;
-        overflow: hidden;
     }
 
     .panel2 {
 		background-color:grey;
-        height:45%;
-        width:100%;
+        height:100%;
+        width:45%;
         float:left;
         position:absolute;
-        overflow: hidden;
     }
 </style>
 <div id="{idcontent}" class="panel0">
     <div id="{id1}" class="panel1">
         <EditorComponent viewport="3dviewport"></EditorComponent>
     </div>
-    <SplitterComponent bhorizontal={false} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
+    <SplitterComponent bhorizontal={true} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
     <div id="{id2}" class="panel2">
         <EditorComponent viewport="{screen2}"></EditorComponent>
     </div>

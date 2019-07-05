@@ -13,7 +13,9 @@
 	import SplitterComponent from './component/base/splittercomponent.svelte'
 	//import SContextmenu from './component/base/scontextmenu.svelte'
 	//import Scontext from './component/base/scontext.svelte'
-	import DivDividerComponent from './component/base/divdividercomponent.svelte'
+	//import DivDividerComponent from './component/base/divdividercomponent.svelte'
+	//import DivDividerComponent from './component/base/sdivdividerv.svelte'
+	import DivDividerComponent from './component/base/sdivdividerh.svelte'
 	//import mjs from './mjs.js';
 
 	export let name;
