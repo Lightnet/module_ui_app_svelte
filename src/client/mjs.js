@@ -104,6 +104,7 @@ context.view_layer.objects = objects;
 
 export const active = writable({});
 context.view_layer.objects.active = active;
+context.scene = writable({});
 
 props.StringProperty = StringProperty
 

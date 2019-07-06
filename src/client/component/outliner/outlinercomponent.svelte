@@ -7,19 +7,23 @@
 
     let scene;
     let entities = [];
+
+    const sceneunsub = mjs.context.scene.subscribe(value => {
+        scene = value;
+        entities = scene.children;
+		//console.log(value);
+	});
     
     onMount(() => {
         //console.log("mount")
-        scene = document.querySelector('a-scene').object3D;
+        //scene = document.querySelector('a-scene').object3D;
+        console.log(scene);
         //entities = scene.children;
-        entities = document.querySelector('a-scene').object3D.children;
-
-        //for(var obj in entities){
-
+        //entities = document.querySelector('a-scene').object3D.children;
         //}
-        entities.forEach(function(item){
-            console.log(item);
-        });
+        //entities.forEach(function(item){
+            //console.log(item);
+        //});
     });
 
     afterUpdate(() => {
@@ -37,6 +41,7 @@
     }
 
     //{entities.length}
+    //{console.log(entity)}
 </script>
     
 <style>
@@ -61,10 +66,10 @@
         background-color: lightslategrey;
     }
 
-/**
- * Framework starts from here ...
- * ------------------------------
- */
+    /**
+    * Framework starts from here ...
+    * ------------------------------
+    */
 
     ul {
         padding: 0;
@@ -81,6 +86,15 @@
     li li {
         margin-left: 0;
     }
+
+    ul li:nth-child(even) {
+        background-color:darkolivegreen;
+    }
+
+    ul li:nth-child(odd) {
+        background-color:grey;
+    }
+
     li::before {
         content:'┗';
         color: #000;
@@ -95,42 +109,77 @@
 </style>
 <div class="itempanel">
     <p>Scene</p>
-    <ul class="tree">
-        {#each entities as entity}
-            {#if entity.el != null}
-                {#if entity.el.localName != null}
-                    <li>
-                    <button on:click={()=>{selectentity(entity)}}> {entity.el.localName}</button>
-                    <button on:click={()=>{entity.visible = !entity.visible}}>Visible:{entity.visible}</button>
+    {#if entities != null}
 
-                    <button>type: {entity.type} </button>
-                    
-                    {#if entity.children.length > 0}
-                        <ul>
-                        {#each entity.children as entitychild}
-                            <li> 
-                            <button> {entitychild.el.localName} </button>
-                            <button on:click={()=>{entitychild.visible = !entitychild.visible}}> visible | {entitychild.visible} </button>
-                            <button> type | {entitychild.type} </button>
-                            </li>
-                        {/each}
-                        </ul>
+        <ul class="tree">
+            {#each entities as entity}
+                
+                {#if entity != null}
+                    {#if entity.type != null}
+                        <li>
+                        <button on:click={()=>{selectentity(entity)}}> {entity.name == "" ? "Name:None" : entity.name}</button>
+                        <button on:click={()=>{entity.visible = !entity.visible}}>visible:{entity.visible}</button>
+                        <button>type: {entity.type} </button>
+                        <!--
+                        {#if entity.children.length > 0}
+                            <ul>
+                            {#each entity.children as entitychild}
+                                <li> 
+                                <button> {entitychild.el.localName} </button>
+                                <button on:click={()=>{entitychild.visible = !entitychild.visible}}> visible | {entitychild.visible} </button>
+                                <button> type | {entitychild.type} </button>
+                                </li>
+                            {/each}
+                            </ul>
+                        {/if}
+                        -->
+                        </li>
                     {/if}
-                    
-                    </li>
                 {/if}
-            {/if}
-        {/each}
-    </ul>
+            {/each}
+        </ul>
 
 
+        <!--
+            AFRAME
+        <ul class="tree">
+            {#each entities as entity}
+                {console.log(entity)}
+                {#if entity.el != null}
+                    {#if entity.el.localName != null}
+                        <li>
+                        <button on:click={()=>{selectentity(entity)}}> {entity.el.localName}</button>
+                        <button on:click={()=>{entity.visible = !entity.visible}}>visible:{entity.visible}</button>
+                        <button>type: {entity.type} </button>
+                        
+                        {#if entity.children.length > 0}
+                            <ul>
+                            {#each entity.children as entitychild}
+                                <li> 
+                                <button> {entitychild.el.localName} </button>
+                                <button on:click={()=>{entitychild.visible = !entitychild.visible}}> visible | {entitychild.visible} </button>
+                                <button> type | {entitychild.type} </button>
+                                </li>
+                            {/each}
+                            </ul>
+                        {/if}
+                        
+                        </li>
+                    {/if}
+                {/if}
+            {/each}
+        </ul>
+        -->
+    {/if}
+    
 
     <!--
     {#each entities as entity}
-        <div class="objitem">
+        <div class="">
             {#if entity.el != null}
                 {#if entity.el.localName != null}
-                    <button on:click={()=>{selectentity(entity)}}> {entity.el.localName} </button> <button on:click={()=>{entity.visible = !entity.visible}}> visible | {entity.visible} </button>
+                    <button on:click={()=>{selectentity(entity)}}> {entity.el.localName}</button>
+                    <button on:click={()=>{entity.visible = !entity.visible}}>visible: {entity.visible} </button>
                 {/if}
             {/if}
         </div>

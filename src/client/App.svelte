@@ -15,7 +15,7 @@
 	import DivDividerComponent from './component/base/divdividercomponent.svelte'
 	import DivDividerVComponent from './component/base/sdivdividerv.svelte'
 	import DivDividerHComponent from './component/base/sdivdividerh.svelte'
-	//import mjs from './mjs.js';
+	import mjs from './mjs.js';
 
 	const dispatch = createEventDispatcher();
 
@@ -60,6 +60,24 @@
 	onMount(async () => {
 		window.addEventListener('resize', resizediv);
 		//window.dispatchEvent(new Event('resize'));
+		//console.log(AFRAME);
+		//console.dir(AFRAME);
+		//let scene = new AFRAME.AScene();
+		let scene = new THREE.Scene();
+		var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+		var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+		var cube = new THREE.Mesh( geometry, material );
+		cube.position.x = -1;
+		cube.position.y = 0.5;
+		cube.position.z = -3;
+		scene.add( cube );
+		//let sky = new THREE.Sky();
+		//sky.scale.setScalar( 450000 );
+		//scene.add( sky );
+		//console.log(THREE);
+		//console.log(scene.object3D);
+		//console.dir(scene.object3D);
+		mjs.context.scene.set(scene);
 	});
 
 	afterUpdate(()=>{
