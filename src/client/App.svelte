@@ -1,6 +1,6 @@
 <script>
-//https://svelte.dev/docs#setContext
-//https://svelte.dev/examples#reactive-statements
+	//https://svelte.dev/docs#setContext
+	//https://svelte.dev/examples#reactive-statements
 
 	import { onMount, afterUpdate, onDestroy, createEventDispatcher} from 'svelte'
 	import { generateId } from './component/helper/generateid.js';
@@ -25,6 +25,7 @@
 	let view;
 
 	let viewworkspace = "horizontal";
+	viewworkspace = "layout";
 
 	let elementheader;
 	let elementcontent;

@@ -101,9 +101,9 @@ context.scene = {};
 context.view_layer = view_layer;
 
 context.view_layer.objects = objects;
-context.view_layer.objects.active = {};
 
-
+export const active = writable({});
+context.view_layer.objects.active = active;
 
 props.StringProperty = StringProperty
 

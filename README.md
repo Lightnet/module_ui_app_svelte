@@ -36,7 +36,7 @@ Code languages:
  * operator (wip)
  * layout Management (wip)
  * workspace (wip)
- * 3D (threejs) (not worked on)
+ * 3D (threejs / aframe) (wip)
  * Data Flow Node Editor (not worked on)
  * SVG (not worked on)
  * client / server rest API (wip)

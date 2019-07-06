@@ -9,6 +9,11 @@
 
     let idcontent = generateId(20);
     let elementcontent;
+    //activeobject = mjs.context.view_layer.objects.active;
+    const bloginunsub = mjs.context.view_layer.objects.active.subscribe(value => {
+		activeobject = value;
+    	//console.log(value);
+	});
 
     function handle_object_resize(event){
         //console.log("resize");
@@ -26,25 +31,26 @@
         elementcontent.style.height = parent.clientHeight + 'px';
         elementcontent.style.width = parent.clientWidth + 'px';
     }
-    
+
     onMount(() => {
         //console.log("mount");
         handle_object_resize();
         window.addEventListener('resize', handle_object_resize);
         elementcontent = document.getElementById(idcontent);
-        activeobject = mjs.context.view_layer.objects.active;
+        //activeobject = mjs.context.view_layer.objects.active;
         
     });
 
     afterUpdate(() => {
         //console.log("afterUpdate");
-        activeobject = mjs.context.view_layer.objects.active;
+        //activeobject = mjs.context.view_layer.objects.active;
         //handle_object_resize();
     });
 
     onDestroy(() => {
         //console.log("onDestroy");
         window.removeEventListener('resize', handle_object_resize);
+        bloginunsub();
     });
     //{console.log(activeobject)}
 </script>
