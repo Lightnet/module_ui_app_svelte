@@ -1,6 +1,6 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    import { Sl_Mouseregion } from '../../stores.js';
+    //import { Sl_Mouseregion } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
     import EditorHeaderComponent from './editorheadercomponent.svelte';
     import ContentComponent from './contentcomponent.svelte';

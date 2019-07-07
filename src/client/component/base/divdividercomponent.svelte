@@ -72,7 +72,6 @@
     </div>
     <SplitterComponent bhorizontal={true} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
     <div id="{id2}" class="screenregion">
-
         <DivDividerVComponent></DivDividerVComponent>
         <!--
         <EditorComponent viewport="{screen2}"></EditorComponent>

@@ -1,18 +1,18 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    import { Sl_Mouseregion } from '../../stores.js';
+    //import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
-    import mjs from '../../mjs.js';
-    //const dispatch = createEventDispatcher();
+    //import mjs from '../../mjs.js';
+    const dispatch = createEventDispatcher();
 
     let idcontent = generateId(20);
     let elementcontent;
 
-    function handle_tools_resize(event){
-        //console.log("resize");
+    function handle_autoresize_resize(event){
         if(elementcontent == null){
             return;
         }
+        //console.log("resize");
         let parent = elementcontent.parentNode;
         elementcontent.style.height = parent.clientHeight + 'px';
         elementcontent.style.width = parent.clientWidth + 'px';
@@ -21,9 +21,9 @@
     onMount(() => {
         //console.log("mount");
         elementcontent = document.getElementById(idcontent);
-        window.addEventListener('resize', handle_tools_resize);
+        window.addEventListener('resize', handle_autoresize_resize);
         //activeobject = mjs.context.view_layer.objects.active;
-        handle_tools_resize();
+        handle_objectdata_resize();
     });
 
     afterUpdate(() => {
@@ -32,16 +32,16 @@
 
     onDestroy(() => {
         //console.log("onDestroy");
-        window.removeEventListener('resize', handle_tools_resize);
+        window.removeEventListener('resize', handle_autoresize_resize);
     });
 </script>
 
 <style>
-    .toolsprops{
+    .autoresizediv{
         height:100%;
         width:100%;
     }
 </style>
-<div id="{idcontent}" class="toolsprops">
-    Tools
+<div id="{idcontent}" class="autoresizediv">
+
 </div>

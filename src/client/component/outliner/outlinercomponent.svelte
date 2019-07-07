@@ -50,6 +50,13 @@
         width:100%;
         overflow: auto;
     }
+    label{
+        font-size: 12px;
+        float:left;
+    }
+    input{
+        font-size: 12px;
+    }
 
     button{
         background-color:#333;
@@ -64,6 +71,32 @@
 
     button:hover{
         background-color: lightslategrey;
+    }
+
+    input{
+        background-color:grey;
+        font-size: 12px;
+        height:22px;
+    }
+    /*
+    .checkbox {
+	    padding: 15px;
+	    border-radius: 3px;
+	    display: inline-block;
+	    position: relative;
+    }
+    */
+    input[type="checkbox"],
+    input[type="radio"] {
+        /*  Reset to static positioning (ideally, remove the position: absolute; from Bootstrap) */
+        position: static;
+        /* Properly align using flex */
+        align-self: center;
+        /* Align in the case where flex doesn't apply (checkbox & radio addons, mostly) */
+        vertical-align: middle;
+        /* Setting width and height is optional; alignment works without. However, setting it allows for more predictable layouts. */
+        min-width: 16px;
+        min-height: 16px;
     }
 
     /**
@@ -118,8 +151,9 @@
                     {#if entity.type != null}
                         <li>
                         <button on:click={()=>{selectentity(entity)}}> {entity.name == "" ? "Name:None" : entity.name}</button>
-                        <button on:click={()=>{entity.visible = !entity.visible}}>visible:{entity.visible}</button>
-                        <button>type: {entity.type} </button>
+                        <!--<button on:click={()=>{entity.visible = !entity.visible}}>visible:{entity.visible}</button>-->
+                        visible:<input type=checkbox bind:checked={entity.visible}>
+                        <span>type: {entity.type} </span>
                         <!--
                         {#if entity.children.length > 0}
                             <ul>

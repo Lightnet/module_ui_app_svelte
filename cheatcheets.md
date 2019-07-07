@@ -1,5 +1,9 @@
 # cheatsheet:
 
+# test
+```
+//<script>let o ="test";</script>
+```
 
 # contextmenu
 

@@ -5,7 +5,7 @@
     Information: odd bug when resizing with layout setup not setup correctly.
     */
     import { onMount, beforeUpdate, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
+    import { Sl_Mouseregion } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
 

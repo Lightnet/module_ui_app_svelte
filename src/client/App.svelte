@@ -15,6 +15,8 @@
 	import DivDividerComponent from './component/base/divdividercomponent.svelte'
 	import DivDividerVComponent from './component/base/sdivdividerv.svelte'
 	import DivDividerHComponent from './component/base/sdivdividerh.svelte'
+
+	import TestDivideHComponent from './component/base/testdividecomponent.svelte'
 	import mjs from './mjs.js';
 
 	const dispatch = createEventDispatcher();
@@ -26,6 +28,7 @@
 
 	let viewworkspace = "horizontal";
 	viewworkspace = "layout";
+	viewworkspace = "testdivide";
 
 	let elementheader;
 	let elementcontent;
@@ -129,6 +132,10 @@
 
 		{#if viewworkspace == "vertical"}
 			<DivDividerVComponent></DivDividerVComponent>
+		{/if}
+
+		{#if viewworkspace == "testdivide"}
+			<TestDivideHComponent></TestDivideHComponent>
 		{/if}
 
 	</div>

@@ -17,7 +17,7 @@
     //cursor
 
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
+    //import { Sl_Mouseregion } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
 
@@ -29,9 +29,6 @@
     let idcontent = generateId(20);
     let elementcontent;
     let scene;
-
-    //onMount(async () => {	
-    //});
 
     const sceneunsub = mjs.context.scene.subscribe(value => {
 		scene = value;
@@ -59,13 +56,12 @@
         //console.log(scene);
         ascene.add(scene);
     });
-    //do put it here
+    //do not put it here it will over lap
     //AFRAME.registerComponent('natural-size', {
         //init(){
             //console.log(this.el);
         //},
         //update(){
-
         //},
         //remove() {
             //console.log(this.el);
@@ -88,14 +84,12 @@
         //console.dir(ascene.object3D);
         if(ascene){
             //let scene = ascene.object3D;
-            ascene.object3D.remove(scene)
+            ascene.object3D.remove(scene)//remove scene from renderer
             //console.log(scene);
             //console.log(ascene.object3D)
             //scene.dispose();
         }
-
         sceneunsub();
-        
         //console.log(scene);
         window.removeEventListener('resize', handle_viewport3d_resize);
     });

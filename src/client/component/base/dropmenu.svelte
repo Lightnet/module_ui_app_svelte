@@ -1,7 +1,7 @@
 <script>
     //https://stackoverflow.com/questions/42737693/is-it-possible-in-svelte-to-have-each-loops-with-two-way-binding-to-nested-obje
     import { onMount, onDestroy, createEventDispatcher } from 'svelte'
-    import { count, UserName, SessionHash, Sl_blogin } from '../../stores.js';
+    //import {  Sl_blogin } from '../../stores.js';
 
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';

@@ -1,6 +1,6 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
+    //import { Sl_Mouseregion } from '../../stores.js';
 
     import Viewport3DComponent from '../viewport3d/viewport3dcomponent.svelte';
     import FileBrowserComponent from '../filebrowser/filebrowsercomponent.svelte';

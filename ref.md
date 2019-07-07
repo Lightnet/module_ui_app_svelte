@@ -47,7 +47,7 @@ Links:
  * https://svelte.dev/examples#await-blocks
  * 
  * https://www.viget.com/articles/creating-your-first-webvr-app/
- * 
+ * https://github.com/patternfly/patternfly/issues/1122
  * 
  * 
  * 

@@ -1,8 +1,8 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
+    //import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
 
-    const dispatch = createEventDispatcher();
+    //const dispatch = createEventDispatcher();
 
     //onMount(async () => {	
     //});

@@ -111,36 +111,61 @@
         let parent = splitter.parentNode;
         window_width = parent.clientWidth;
         window_height = parent.clientHeight;
+        if(bresize){
+            if(iddiv1){
+                cont1 = document.getElementById(iddiv1);
+            }
+            if(iddiv2){
+                cont2 = document.getElementById(iddiv2);
+            }
+        }else{
+            cont1 = document.getElementById(iddiv1);
+        }
 
-        cont1 = document.getElementById(iddiv1);
-        cont2 = document.getElementById(iddiv2);
-        
         if(bhorizontal){
             sheight = '100%';
             swidth = '10px';
             resizetag = 'w-resize';
-            splitter.style.marginLeft = (window_width / 2) + 'px';
-            last_x = window_width / 2;
-            last_y = 0;
+            if(bresize){
+                splitter.style.marginLeft = (window_width / 2) + 'px';
+                last_x = window_width / 2;
+                last_y = 0;
+            }
         }else{
             sheight = '10px';
             swidth = '100%';
             resizetag = 'n-resize';
-            splitter.style.marginTop = (window_height / 2) + 'px';
-            last_x = 0;
-            last_y = window_height / 2;
+            if(bresize){
+                splitter.style.marginTop = (window_height / 2) + 'px';
+                last_x = 0;
+                last_y = window_height / 2;
+            }
         }
         //console.log(bhorizontal);
         splitter.style.height = sheight;
         splitter.style.width = swidth;
         splitter.style.cursor = resizetag;
+
+        if(bresize == false){
+            //console.log(splitter.clientHeight)
+            //console.log(splitter.offsetTop);
+            //console.dir(splitter);
+            //cont1.style.marginTop = splitter.offsetParent.offsetTop + splitter.offsetTop + 'px';
+            //cont1.style.marginTop = splitter.offsetParent.offsetTop + 'px';
+            cont1.style.marginTop = splitter.clientHeight + 'px';
+            //cont1.style.marginTop = splitter.clientHeight + 'px';
+            //console.log(splitter.offsetParent.offsetTop)
+            //console.log(cont1.style.marginTop;
+        }
+
         
         //console.log(splitter.style.height)
         //console.log(splitter.style.width)
-        resetPosition();
-
-        window.addEventListener('resize', resetPosition);
-        window.dispatchEvent(new Event('resize'));
+        if(bresize){
+            resetPosition();
+            window.addEventListener('resize', resetPosition);
+            window.dispatchEvent(new Event('resize'));
+        }
     });
 
     afterUpdate(()=>{
