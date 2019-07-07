@@ -17,7 +17,6 @@
     //cursor
 
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    //import { Sl_Mouseregion } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
 
@@ -94,6 +93,11 @@
         window.removeEventListener('resize', handle_viewport3d_resize);
     });
 
+    function handle_mouse_over(event){
+        //console.log(m);
+        mjs.context.contextmenu.set({sm_context:'VIEWPORT3D'});
+    }
+
     /*
     look-controls-enabled="false" 
     wasd-controls-enabled="false"
@@ -108,7 +112,7 @@
         width:100%;
     }
 </style>
-<div id="{idcontent}" class="viewport3dscreen">
+<div id="{idcontent}" class="viewport3dscreen" on:mousemove={handle_mouse_over}>
     <a-scene 
     natural-size
     embedded

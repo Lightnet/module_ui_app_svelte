@@ -1,7 +1,5 @@
 <script>
     import { onMount, setContext, createEventDispatcher } from 'svelte'
-    import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
-
     const dispatch = createEventDispatcher();
 
     //https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript

@@ -1,6 +1,5 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    import { Sl_Mouseregion } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
 
@@ -101,10 +100,10 @@
         btoggle = !btoggle;
     }
 
-    function handleMousemove(event){
+    //function handleMousemove(event){
 		//console.log("header");
-		Sl_Mouseregion.set("editorheader");
-    }
+    //}
+    //on:mousemove={handleMousemove}
     
     function testcall(){
         console.log("test")
@@ -189,7 +188,7 @@
 
 </style>
 
-<div id="{idheader}" on:mousemove={handleMousemove} class="navbar">
+<div id="{idheader}" class="navbar">
     <a href="/#">Editor</a>
 
     <div class="dropdown">

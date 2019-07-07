@@ -5,7 +5,6 @@
     Information: odd bug when resizing with layout setup not setup correctly.
     */
     import { onMount, beforeUpdate, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    import { Sl_Mouseregion } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
 
@@ -132,6 +131,11 @@
     //{console.log(itemtabs)}
     //{#each Object.keys(itemtabs) as tab }
     //top:{m.y};left:{m.x};
+
+    function handle_mouse_over(event){
+        //console.log(m);
+        mjs.context.contextmenu.set({sm_context:'PROPERTIES'});
+    }
 </script>
 
 <style>
@@ -254,7 +258,7 @@
     }
 
 </style>
-<div id="{idcontext}" class="contextprops">
+<div id="{idcontext}" class="contextprops" on:mousemove={handle_mouse_over}>
     
     <div id={idtab} class="tab">
         

@@ -16,7 +16,7 @@ export default class object_ot_headershowmenus extends Operator{
         super();
         this.sm_idname = "object_ot_headershowmenus";
         this.sm_label = "Show Menus";
-        this.sm_context = "header";
+        this.sm_context = "HEADER";
     }
 
     execute(context) {

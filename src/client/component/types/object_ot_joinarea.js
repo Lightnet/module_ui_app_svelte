@@ -16,7 +16,7 @@ export default class object_ot_joinarea extends Operator{
         super();
         this.sm_idname = "object_ot_joinarea";
         this.sm_label = "Join Area";
-        this.sm_context = "splitter";
+        this.sm_context = "SPLITTER";
     }
 
     execute(context) {

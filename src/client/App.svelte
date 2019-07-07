@@ -10,11 +10,13 @@
 	import NavHeaderComponent from './component/mainwindow/navheadercomponent.svelte'
 	import NavFooterComponent from './component/mainwindow/navfootercomponent.svelte'
 	import SplitterComponent from './component/base/splittercomponent.svelte'
-	//import SContextmenu from './component/base/scontextmenu.svelte'
+	import ContextMenuComponent from './component/base/contextmenucomponent.svelte'
 	//import Scontext from './component/base/scontext.svelte'
 	import DivDividerComponent from './component/base/divdividercomponent.svelte'
 	import DivDividerVComponent from './component/base/sdivdividerv.svelte'
 	import DivDividerHComponent from './component/base/sdivdividerh.svelte'
+
+	import DivDividerOffSetHComponent from './component/base/testoffsetdividercomponent.svelte'
 
 	import TestDivideHComponent from './component/base/testdividecomponent.svelte'
 	import mjs from './mjs.js';
@@ -29,6 +31,7 @@
 	let viewworkspace = "horizontal";
 	viewworkspace = "layout";
 	viewworkspace = "testdivide";
+	//viewworkspace = "testoffsetdivide";
 
 	let elementheader;
 	let elementcontent;
@@ -138,6 +141,11 @@
 			<TestDivideHComponent></TestDivideHComponent>
 		{/if}
 
+		{#if viewworkspace == "testoffsetdivide"}
+			<DivDividerOffSetHComponent></DivDividerOffSetHComponent>
+		{/if}
+
 	</div>
 	<NavFooterComponent idassign={idfooter}></NavFooterComponent>
 </div>
+<ContextMenuComponent></ContextMenuComponent>

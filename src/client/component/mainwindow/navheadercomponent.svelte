@@ -4,7 +4,6 @@
 	import { onMount, setContext, createEventDispatcher } from 'svelte'
 	import Panel from '../base/panel.svelte'
 	import DropMenu from '../base/dropmenu.svelte';
-	import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
 
 	import mjs from '../../mjs.js';
 	//import { generateId } from '../helper/generateid.js';
@@ -25,13 +24,6 @@
 	let helpmenus = {};
 
 	let workspaces = [];
-
-	//const bloginunsub = Sl_blogin.subscribe(value => {
-		//blogin = value;
-		//console.log(value);
-	//});
-
-	//bloginunsub() //off
 
 	function checktemplatepanel(){
 		//console.log("Test");
@@ -68,6 +60,7 @@
 			{sm_label:"horizontal", sm_context:"horizontal",ops:workspace_view },
 			{sm_label:"vertical", sm_context:"vertical",ops:workspace_view },
 			{sm_label:"test divide", sm_context:"testdivide",ops:workspace_view },
+			{sm_label:"test offset divide", sm_context:"testoffsetdivide",ops:workspace_view },
 			//{sm_label:"Layout", sm_context:"Layout",ops:workspace_view },
 			//{sm_label:"Modeling", sm_context:"Modeling",ops:workspace_view },
 			//{sm_label:"Sculpting", sm_context:"Sculpting",ops:workspace_view },
@@ -149,7 +142,7 @@
 
 	function handleMousemove(event){
 		//console.log("header");
-		Sl_Mouseregion.set("header");
+		mjs.context.contextmenu.set({sm_context:'HEADER'});
 	}
 
 	function testcall(event){

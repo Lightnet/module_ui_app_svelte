@@ -1,6 +1,5 @@
 <script>
-    import { onMount, setContext, createEventDispatcher } from 'svelte'
-    import { Sl_Mouseregion } from '../../stores.js';
+    import { onMount, createEventDispatcher } from 'svelte'
     import { generateId } from '../helper/generateid.js';
 
     const dispatch = createEventDispatcher();

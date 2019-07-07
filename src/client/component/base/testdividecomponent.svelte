@@ -30,15 +30,25 @@
         }
     }
 
+    let bmovedivide = false;
+
     function handle_divider(event){
         console.log("down");
         console.log(event);
         if(event.button == 0){
             createdivider(event);
+            if(bmovedivide == false){
+                bmovedivide = true;
+                window.addEventListener('mousemove',movedivide);
+            }
         }
 
         if(event.button == 2){
             removedivider(event);
+            if(bmovedivide == true){
+                bmovedivide = false;
+                window.removeEventListener('mousemove',movedivide);
+            }
         }
     }
 
@@ -64,6 +74,27 @@
         //console.log(elementscreen.clientHeight);
     }
 
+    function movedivide(event){
+        //let x = event.clientX;
+        let x = event.pageX;
+        //console.log(x);
+        //console.log(elementscreen)
+        //console.dir(elementscreen)
+        if((event.pageX - elementscreen.offsetWidth) < 0){
+
+            placeregion1.style.width = event.pageX + 'px';
+        }else{
+            if((event.pageX - elementscreen.offsetWidth) > elementscreen.offsetWidth){
+                return;
+            }
+            placeregion1.style.width = event.pageX - elementscreen.offsetWidth + 'px';
+        }
+        //console.log(elementscreen.offsetLeft - x);
+        //console.log(elementscreen.offsetWidth);
+        //console.log(event.pageX - elementscreen.offsetWidth);
+        //console.log(event.pageX);
+    }
+
     function removedivider(event){
         placeregion1.style.display = 'none';
     }
@@ -73,7 +104,7 @@
         window.addEventListener('resize', handle_divider_resize);
         elementcontent = document.getElementById(idcontent);
         handle_divider_resize();
-        window.addEventListener('mousedown',handle_divider);
+        //window.addEventListener('mousedown',handle_divider);
 
         placeregion1 = document.getElementById(idpr1);
         placeregion2 = document.getElementById(idpr2);

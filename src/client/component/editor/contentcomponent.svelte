@@ -1,15 +1,14 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    //import { Sl_Mouseregion } from '../../stores.js';
 
     import Viewport3DComponent from '../viewport3d/viewport3dcomponent.svelte';
     import FileBrowserComponent from '../filebrowser/filebrowsercomponent.svelte';
-    import InfoComponent from '../base/infocomponent.svelte';
+    import InfoComponent from '../info/infocomponent.svelte';
     import OutlinerComponent from '../outliner/outlinercomponent.svelte';
     import PreferencesComponent from '../preferences/preferencescomponent.svelte';
     import PropertiesComponent from '../properties/propertiescomponent.svelte';
     import TexteditorComponent from '../texteditor/texteditorcomponent.svelte';
-    import ScriptConsoleComponent from '../base/scriptconsolecomponent.svelte';
+    import ScriptConsoleComponent from '../scriptconsole/scriptconsolecomponent.svelte';
     
     import { generateId } from '../helper/generateid.js';
     //import mjs from '../../mjs.js';

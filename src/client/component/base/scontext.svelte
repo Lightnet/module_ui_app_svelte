@@ -1,6 +1,5 @@
 <script>
     import { onMount, setContext, createEventDispatcher } from 'svelte'
-    import { Sl_Mouseregion } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
 
     const dispatch = createEventDispatcher();
@@ -20,7 +19,6 @@
     
     function handleMousemove(event){
 		//console.log("header");
-		Sl_Mouseregion.set("context");
 	}
 </script>
 

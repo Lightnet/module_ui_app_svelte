@@ -2,31 +2,29 @@
     //https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp
     //https://www.w3schools.com/howto/howto_js_dropdown.asp
     import { onMount, onDestroy, createEventDispatcher } from 'svelte'
-    import { count, UserName, SessionHash, Sl_blogin, Sl_Mouseregion } from '../../stores.js';
+    import mjs from '../../mjs.js';
 
     export let idassign;
     export let name ="0";
     let MouseRegion = "None";
     let mouse = {x:0,y:0};
+    let contextmenu = "";
     
     const dispatch = createEventDispatcher();
 
     let blogin = false;
     let menus = [];
 
-    const bloginunsubscribe = Sl_blogin.subscribe(value => {
-        blogin = value;
-        //console.log(value);
-    });
-
-    const mouseregionunsub = Sl_Mouseregion.subscribe(value => {
-        MouseRegion = value;
-        //console.log(value);
+    const contextmenuunsubscribe = mjs.context.contextmenu.subscribe(event => {
+        //console.log(event);
+        if(event.sm_context != null){
+            contextmenu = event.sm_context;
+        }
     });
 
     function handleMousemove(event){
         //console.log(m);
-        Sl_Mouseregion.set("footer");
+        mjs.context.contextmenu.set({sm_context:'FOOTER'});
     }
 
     function handle_MousePostion(event){
@@ -44,9 +42,10 @@
 
     onDestroy(()=>{
         window.removeEventListener('mousemove', handle_MousePostion);
+        bloginunsubscribe();
+        mouseregionunsub();
+        contextmenuunsubscribe();
     });
-
-
 </script>
 
 <style>
@@ -85,6 +84,6 @@
 <div id="{idassign}" on:mousemove={handleMousemove} class="navbar">
     <a href="/#"> {name} </a>
     <label>Status:Normal</label>
-    <label>Mouse Region:{MouseRegion}</label>
+    <label> ContextMenu: {contextmenu} </label>
     <label> | x:{mouse.x} y:{mouse.y} |</label>
 </div>

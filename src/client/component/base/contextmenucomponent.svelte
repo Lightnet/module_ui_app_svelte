@@ -1,8 +1,8 @@
 <script>
     //https://dev.to/iamafro/how-to-create-a-custom-context-menu--5d7p
     //https://jsfiddle.net/softvar/6ny94/
-    import { onMount, setContext, createEventDispatcher } from 'svelte'
-    import { count, UserName, SessionHash, Sl_blogin, Sl_Mouseregion } from '../../stores.js';
+    import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+    //import { UserName } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
 
@@ -12,20 +12,18 @@
     let bresize = false;
 
     //let idmenu = generateId(20);
-    let idmenu = "scontextmenu"
+    let idmenu = "contextmenu"
     let menu;
 
     let itemlist = {}
     let MouseRegion = "";
+    let contextmenu;
 
-    onMount(async () => {
-        //console.log("onMount");
-        menu = document.getElementById(idmenu);
-    });
-
-    const mouseregionunsub = Sl_Mouseregion.subscribe(value => {
-        MouseRegion = value;
-        //console.log(value);
+    const contextmenuunsubscribe = mjs.context.contextmenu.subscribe(event => {
+        //console.log(event);
+        if(event.sm_context != null){
+            contextmenu = event.sm_context;
+        }
     });
 
     //console.log(menu);
@@ -42,9 +40,9 @@
         toggleMenu("show");
     };
 
-    window.addEventListener("click", e => {
+    function contextmenuclick(e){
         if(menuVisible)toggleMenu("hide");
-    });
+    } 
 
     function updatelist(){
         itemlist = {}
@@ -52,7 +50,8 @@
 
         for(var obj in mjs.ops){
 			//console.log(obj);
-			if(mjs.ops[obj].sm_context == MouseRegion){
+			//if(mjs.ops[obj].sm_context == MouseRegion){
+            if(mjs.ops[obj].sm_context == contextmenu){
                 count=count + 1
 				//accessmenus[obj] = mjs.ops[obj]
 				itemlist[obj] = {}
@@ -65,9 +64,9 @@
         }
     }
 
-    window.addEventListener("contextmenu", e => {
+    function handle_contextmenu(e){
         //console.log("contextmenu");
-        //e.preventDefault();
+        e.preventDefault();
         const origin = {
             left: e.pageX,
             top: e.pageY
@@ -75,6 +74,20 @@
         setPosition(origin);
         updatelist();
         return false;
+    }
+
+    onMount(async () => {
+        //console.log("onMount");
+        menu = document.getElementById(idmenu);
+        window.addEventListener("click",contextmenuclick);
+        window.addEventListener("contextmenu",handle_contextmenu);
+    });
+
+    onDestroy(() => {
+        //console.log("onDestroy");
+        contextmenuunsubscribe();
+        window.removeEventListener("click",contextmenuclick);
+        window.removeEventListener("click",handle_contextmenu);
     });
 </script>
 

@@ -18,13 +18,10 @@ export const sl_viewregion = writable('None');
 export const sl_category = writable('None');
 export const sl_context = writable('None');
 
-export const Sl_Mouseregion = writable('None');
-
 export default {
     currentregion,
     sl_viewregion,
     sl_category,
     sl_category,
-    sl_context,
-    Sl_Mouseregion
+    sl_context
 }

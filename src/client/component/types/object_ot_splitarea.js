@@ -16,7 +16,7 @@ export default class object_ot_splitarea extends Operator{
         super();
         this.sm_idname = "object_ot_splitarea";
         this.sm_label = "Split Area";
-        this.sm_context = "splitter";
+        this.sm_context = "SPLITTER";
     }
 
     execute(context) {

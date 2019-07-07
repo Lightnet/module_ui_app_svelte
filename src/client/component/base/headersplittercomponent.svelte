@@ -3,8 +3,8 @@
     //https://jsbin.com/qewecajiro/edit?css,js,output
 
     import { onMount, afterUpdate, onDestroy, setContext, createEventDispatcher } from 'svelte'
-    import { Sl_Mouseregion } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
+    import mjs from '../../mjs.js';
 
     export let iddiv1;
     //export let elementdiv1;
@@ -31,7 +31,7 @@
         m.x = event.clientX;
         m.y = event.clientY;
         //console.log(m);
-        Sl_Mouseregion.set("splitter");
+        mjs.context.contextmenu.set({sm_context:'SPLITTER'});
     }
 
     function handle_splitter_resize(event){
@@ -153,6 +153,11 @@
             //cont1.style.marginTop = splitter.offsetParent.offsetTop + splitter.offsetTop + 'px';
             //cont1.style.marginTop = splitter.offsetParent.offsetTop + 'px';
             cont1.style.marginTop = splitter.clientHeight + 'px';
+            cont1.style.height = splitter.parentNode.clientHeight - splitter.clientHeight + 'px';
+            //console.log(splitter.clientHeight );
+            //cont1.style.height = 'calc(100% -' + splitter.clientHeight  - 20 + 'px)';
+            //cont1.style.height = '10px';
+            //console.log(cont1.style.height);
             //cont1.style.marginTop = splitter.clientHeight + 'px';
             //console.log(splitter.offsetParent.offsetTop)
             //console.log(cont1.style.marginTop;

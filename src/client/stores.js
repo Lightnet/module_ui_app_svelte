@@ -38,5 +38,3 @@ export const sl_viewregion = writable('None');
 export const sl_category = writable('None');
 export const sl_context = writable('None');
 
-export const Sl_Mouseregion = writable('None');
-

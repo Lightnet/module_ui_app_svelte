@@ -67,7 +67,6 @@ export const currentregion = writable('None');
 export const sl_viewregion = writable('None');
 export const sl_category = writable('None');
 export const sl_context = writable('None');
-export const Sl_Mouseregion = writable('None');
 
 //static varaible
 export const scenes = [];
@@ -97,10 +96,14 @@ data.animations = animations;
 
 context.screens = screens;
 context.scene = {};
-
 context.view_layer = view_layer;
-
 context.view_layer.objects = objects;
+export const screenregion = writable(null);
+context.screenregion = screenregion;
+export const splitregion = writable(null);
+context.splitregion = splitregion;
+export const contextmenu = writable({sm_context:'none',ops:{}});
+context.contextmenu = contextmenu;
 
 export const active = writable({});
 context.view_layer.objects.active = active;

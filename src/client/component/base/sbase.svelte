@@ -1,6 +1,6 @@
 <script>
     //import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    //import { Sl_blogin, Sl_Mouseregion } from '../../stores.js';
+    //import { UserName } from '../../stores.js';
 
     //const dispatch = createEventDispatcher();
 
