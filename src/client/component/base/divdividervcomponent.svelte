@@ -57,7 +57,7 @@
         position:absolute;
         overflow: hidden;
     }
-
+    /*
     .screenregion2 {
 		background-color:grey;
         height:45%;
@@ -66,13 +66,14 @@
         position:absolute;
         overflow: hidden;
     }
+    */
 </style>
 <div id="{idcontent}" class="panelregion">
     <div id="{id1}" class="screenregion">
         <EditorComponent viewport="{screen1}"></EditorComponent>
     </div>
     <SplitterComponent bhorizontal={false} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
-    <div id="{id2}" class="screenregion2">
+    <div id="{id2}" class="screenregion">
         <EditorComponent viewport="{screen2}"></EditorComponent>
     </div>
 </div>

@@ -4,12 +4,15 @@
     import EditorComponent from '../editor/editorcomponent.svelte';
     import { generateId } from '../helper/generateid.js';
     //const dispatch = createEventDispatcher();
+    import mjs from '../../mjs.js';
 
     let idcontent = generateId(20);
     let elementcontent;
 
     let id1 = generateId(20);
+    let screenregion1;
     let id2 = generateId(20);
+    let screenregion2;
     let screen2 = "properties";
     //let screen2 = "outliner"
 
@@ -26,6 +29,8 @@
         //console.log("mount");
         window.addEventListener('resize', handle_layout_resize);
         elementcontent = document.getElementById(idcontent);
+        screenregion1 = document.getElementById(id1);
+        screenregion2 = document.getElementById(id2);
         handle_layout_resize()
     });
 
@@ -37,6 +42,14 @@
         //console.log("onDestroy")
         window.removeEventListener('resize', handle_layout_resize);
     });
+
+    function handle_screenregion1(event){
+        mjs.context.screenregion = screenregion1;
+    }
+
+    function handle_screenregion2(event){
+        mjs.context.screenregion = screenregion2;
+    }
 </script>
 
 <style>
@@ -56,7 +69,7 @@
         position:absolute;
         overflow: hidden;
     }
-
+    /*
     .screenregion2 {
 		background-color:grey;
         height:45%;
@@ -65,13 +78,14 @@
         position:absolute;
         overflow: hidden;
     }
+    */
 </style>
 <div id="{idcontent}" class="panelregion">
     <div id="{id1}" class="screenregion">
-        <EditorComponent viewport="3dviewport"></EditorComponent>
+        <EditorComponent viewport="3dviewport" on:mousemove={handle_screenregion1}></EditorComponent>
     </div>
     <SplitterComponent bhorizontal={false} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
-    <div id="{id2}" class="screenregion2">
-        <EditorComponent viewport="{screen2}"></EditorComponent>
+    <div id="{id2}" class="screenregion">
+        <EditorComponent viewport="{screen2}" on:mousemove={handle_screenregion2}></EditorComponent>
     </div>
 </div>

@@ -2,9 +2,10 @@
     //https://codepen.io/cnupm99/pen/pvNyYX
     //https://jsbin.com/qewecajiro/edit?css,js,output
 
-    import { onMount, afterUpdate, onDestroy, setContext, createEventDispatcher } from 'svelte'
+    import { onMount, beforeUpdate, afterUpdate, onDestroy, setContext, createEventDispatcher } from 'svelte'
     import { generateId } from '../helper/generateid.js';
-    import mjs from '../../mjs.js';
+    //import mjs from '../../mjs.js';
+    import { context } from '../../mjs.js';
 
     export let iddiv1;
     //export let elementdiv1;
@@ -13,6 +14,8 @@
     let m = {x:0,y:0};
     export let bresize = false;
     export let bhorizontal = false;
+    export let px;
+    export let py;
     let sheight = '100%';
     let swidth = '10px';
     let resizetag = 'n-resize';
@@ -31,7 +34,8 @@
         m.x = event.clientX;
         m.y = event.clientY;
         //console.log(m);
-        mjs.context.contextmenu.set({sm_context:'SPLITTER'});
+        context.contextmenu.set({sm_context:'SPLITTER'});
+        context.splitregion = splitter;
     }
 
     function handle_splitter_resize(event){
@@ -76,18 +80,26 @@
 
         if(bhorizontal == true){
             let dx = last_x;
-            cont1.style.width=dx+"px";
+            if(cont1){
+                cont1.style.width=dx+"px";
+            }
             dx += splitter.clientWidth;
-            cont2.style.marginLeft=dx+"px";
-            dx = window_width - dx;
-            cont2.style.width=dx+"px";
+            if(cont2){
+                cont2.style.marginLeft=dx+"px";
+                dx = window_width - dx;
+                cont2.style.width=dx+"px";
+            }
         }else{
             let dy = last_y;
-            cont1.style.height=dy+"px";
+            if(cont1){
+                cont1.style.height=dy+"px";
+            }
             dy += splitter.clientHeight
-            cont2.style.marginTop=dy+"px";
-            dy = window_height - dy;
-            cont2.style.height=dy+"px";
+            if(cont2){
+                cont2.style.marginTop=dy+"px";
+                dy = window_height - dy;
+                cont2.style.height=dy+"px";
+            }
         }
         //window.dispatchEvent(new Event('resize')); //overload not used here
     }
@@ -119,14 +131,24 @@
             sheight = '100%';
             swidth = '10px';
             resizetag = 'w-resize';
-            splitter.style.marginLeft = (window_width / 2) + 'px';
+            if(px == null){
+                splitter.style.marginLeft = (window_width / 2) + 'px';
+            }else{
+                splitter.style.marginLeft = px + 'px';
+                //console.log(px);
+            }
+            
             last_x = window_width / 2;
             last_y = 0;
         }else{
             sheight = '10px';
             swidth = '100%';
             resizetag = 'n-resize';
-            splitter.style.marginTop = (window_height / 2) + 'px';
+            if(py == null){
+                splitter.style.marginTop = (window_height / 2) + 'px';
+            }else{
+                //splitter.style.marginTop = py + 'px';
+            }
             last_x = 0;
             last_y = window_height / 2;
         }
@@ -143,8 +165,33 @@
         window.dispatchEvent(new Event('resize'));
     });
 
+    beforeUpdate(()=>{
+        //console.log("afterUpdate");
+        
+    });
+
     afterUpdate(()=>{
         //console.log("afterUpdate");
+        /*
+        console.log(px);
+        console.log(px);
+        splitter = document.getElementById(idsplitter);
+        if(bhorizontal){
+            sheight = '100%';
+            swidth = '10px';
+            resizetag = 'w-resize';
+            if(px == null){
+                splitter.style.marginLeft = (window_width / 2) + 'px';
+            }else{
+                splitter.style.marginLeft = px + 'px';
+                console.log(px);
+            }
+            
+            //last_x = window_width / 2;
+            //last_y = 0;
+        }
+        console.log(splitter);
+        */
     });
 
     onDestroy(()=>{
@@ -154,15 +201,15 @@
 
 </script>
 <style>
-.splitter{
-    background-color:#002200;
-    cursor:w-resize;
-    width:10px;
-    height:100%;
-    float:left;
-    position:absolute;
-    /*z-index:1;*/
-}
+    .splitter{
+        background-color:#002200;
+        cursor:w-resize;
+        width:10px;
+        height:100%;
+        float:left;
+        position:absolute;
+        z-index:1;
+    }
 </style>
 
 <div id="{idsplitter}" class="splitter" on:mousemove={handle_screenarea} on:mousedown={handleMouseclick}></div>

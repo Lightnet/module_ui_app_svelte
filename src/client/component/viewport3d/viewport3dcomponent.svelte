@@ -103,6 +103,7 @@
     wasd-controls-enabled="false"
     look-controls="pointerLockEnabled: false;"
     mouse-cursor
+    natural-size
     */
 </script>
 
@@ -114,7 +115,6 @@
 </style>
 <div id="{idcontent}" class="viewport3dscreen" on:mousemove={handle_mouse_over}>
     <a-scene 
-    natural-size
     embedded
     vr-mode-ui="enabled:false"
     >

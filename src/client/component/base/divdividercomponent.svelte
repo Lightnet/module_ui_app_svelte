@@ -57,14 +57,15 @@
         float:left;
         position:absolute;
     }
-
-    .screenregion2 {
+    
+    /*.screenregion2 {
 		background-color:grey;
         height:100%;
         width:45%;
         float:left;
         position:absolute;
     }
+    */
 </style>
 <div id="{idcontent}" class="panelregion">
     <div id="{id1}" class="screenregion">

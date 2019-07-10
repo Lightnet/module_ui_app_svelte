@@ -3,6 +3,7 @@
     import SplitterComponent from './headersplittercomponent.svelte';
     import EditorComponent from '../editor/editorcomponent.svelte'
     import { generateId } from '../helper/generateid.js';
+    import mjs from '../../mjs.js';
 
     import DivDividerVComponent from './divdividervcomponent.svelte';
     //const dispatch = createEventDispatcher();
@@ -121,7 +122,9 @@
         window.removeEventListener('mousedown',handle_divider)
     });
 
-
+    function handle_screenregion(event){
+        mjs.context.screenregion = elementscreen;
+    }
 </script>
 
 <style>
@@ -148,7 +151,6 @@
         filter: alpha(opacity=50); /* For IE8 and earlier */
         position:absolute;
     }
-
 </style>
 <div id="{idcontent}" class="panelregion">
     <!--
@@ -157,13 +159,12 @@
     </div>
     -->
     <SplitterComponent bhorizontal={false} bresize={false} iddiv1={id2}></SplitterComponent>
-    <div id="{id2}" class="screenregion">
+    <div id="{id2}" class="screenregion" on:mousemove={handle_screenregion}>
         <EditorComponent viewport="{screen2}"></EditorComponent>
         <!--
         <DivDividerVComponent></DivDividerVComponent>
         -->
     </div>
 </div>
-
 <div id={idpr1} class="placeregion"></div>
 <div id={idpr2} class="placeregion"></div>

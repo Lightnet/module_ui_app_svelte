@@ -24,42 +24,6 @@ import {StringProperty} from './component/props/StringProperty'
 import {Operator} from './component/types/operator'
 import {Menu} from './component/types/menu'
 
-// test ops
-import object_ot_test from './component/types/object_ot_test'
-import object_ot_calltest from './component/types/object_ot_calltest'
-import object_mt_test from './component/types/object_mt_test'
-//file menu header
-import object_ot_filenew from './component/types/object_ot_filenew'
-import object_ot_filesave from './component/types/object_ot_filesave'
-import object_ot_filesaveas from './component/types/object_ot_filesaveas'
-import object_ot_fileopen from './component/types/object_ot_fileopen'
-//edit menu header
-import object_ot_editundo from './component/types/object_ot_editundo'
-import object_ot_editredo from './component/types/object_ot_editredo'
-import object_ot_editoperatorsearch from './component/types/object_ot_editoperatorsearch'
-import object_ot_editpreferences from './component/types/object_ot_editpreferences'
-//window menu header
-import object_ot_newwindow from './component/types/object_ot_newwindow'
-import object_ot_newmainwindow from './component/types/object_ot_newmainwindow'
-import object_ot_togglewindowfullscreen from './component/types/object_ot_togglewindowfullscreen'
-import object_ot_windownextworkspace from './component/types/object_ot_windownextworkspace'
-import object_ot_windowpreviousworkspace from './component/types/object_ot_windowpreviousworkspace'
-import object_ot_windowshowstatusbar from './component/types/object_ot_windowshowstatusbar'
-import object_ot_togglesystemconsole from './component/types/object_ot_togglesystemconsole'
-//access menu header
-import object_ot_accesslogin from './component/types/object_ot_accesslogin'
-import object_ot_accessadmin from './component/types/object_ot_accessadmin'
-//help menu header
-import object_ot_helpabout from './component/types/object_ot_helpabout'
-import object_ot_helpmanual from './component/types/object_ot_helpmanual'
-import object_ot_helpreportabug from './component/types/object_ot_helpreportabug'
-
-//area right click menu
-import object_ot_joinarea from './component/types/object_ot_joinarea'
-import object_ot_splitarea from './component/types/object_ot_splitarea'
-import object_ot_headershowmenus from './component/types/object_ot_headershowmenus'
-
-
 //===============================================
 // access view area
 //===============================================
@@ -98,10 +62,14 @@ context.screens = screens;
 context.scene = {};
 context.view_layer = view_layer;
 context.view_layer.objects = objects;
-export const screenregion = writable(null);
+
+
+export const screenregion = null;//= writable(null);
 context.screenregion = screenregion;
-export const splitregion = writable(null);
+
+export const splitregion = null;//writable(null);
 context.splitregion = splitregion;
+
 export const contextmenu = writable({sm_context:'none',ops:{}});
 context.contextmenu = contextmenu;
 
@@ -111,54 +79,11 @@ context.scene = writable({});
 
 props.StringProperty = StringProperty
 
-//ops.object_ot_test = new object_ot_test();
-//var menutest = new object_mt_test();
-
-//register_class(ops.object_ot_test);
-//register_class(menutest);
-
-register_class(object_ot_filenew);
-register_class(object_ot_filesave);
-register_class(object_ot_filesaveas);
-register_class(object_ot_fileopen);
-register_class(object_ot_test);
-//register_class(Operator);
-register_class(object_ot_calltest);
-
-register_class(object_ot_editundo);
-register_class(object_ot_editredo);
-register_class(object_ot_editoperatorsearch);
-register_class(object_ot_editpreferences);
-
-register_class(object_ot_newwindow);
-register_class(object_ot_newmainwindow);
-register_class(object_ot_togglewindowfullscreen);
-register_class(object_ot_windownextworkspace);
-register_class(object_ot_windowpreviousworkspace);
-register_class(object_ot_windowshowstatusbar);
-register_class(object_ot_editpreferences);
-register_class(object_ot_togglesystemconsole);
-
-register_class(object_ot_accesslogin);
-register_class(object_ot_accessadmin);
-
-register_class(object_ot_helpabout);
-register_class(object_ot_helpmanual);
-register_class(object_ot_helpreportabug);
-
-register_class(object_ot_joinarea);
-register_class(object_ot_splitarea);
-
-register_class(object_ot_headershowmenus);
-
-
-//register_class(new object_ot_test());
-
 export const utils = {}
 // https://docs.blender.org/api/blender2.8/bpy.types.Operator.html
 // https://stackoverflow.com/questions/1249531/how-to-get-a-javascript-objects-class
 // need to check function or class
-function register_class(obj){
+export function register_class(obj){
     //console.log(typeof(obj))
     //console.log(obj)
     if (typeof(obj) == 'function'){
@@ -189,24 +114,19 @@ function register_class(obj){
             //console.log("obj Operator class")
         }
     }
-
+    
     //if(obj instanceof Menu){
         //console.log("found Menu class")
     //}
-
 }
 
 utils.register_class = register_class;
 
 function unregister_class(obj){
     console.log(typeof(obj))
-
 }
 
 utils.unregister_class = unregister_class;
-
-
-
 
 export default {
     data,
@@ -217,3 +137,60 @@ export default {
     context,
     utils,
 }
+
+//var test = new object_ot_splitarea();
+//test.execute({});
+/*
+class object_ot_listener{  
+    constructor(){
+        this.handleclick = (e)=> this.handle_press(e);//this deal with id handler removeEventListener
+
+        this.init();
+    }
+    init(){
+        window.addEventListener('mousedown', this.handleclick);
+    }
+    handle_press(event){
+        //console.log(event.button);
+        if(event.button == 0){//left
+            console.log("0");
+        }
+        if(event.button == 1){//middle
+            console.log("1");
+        }
+        if(event.button == 2){//right
+            console.log("2");
+            this.remove_handle();
+        }
+    }
+    remove_handle(){
+        window.removeEventListener('mousedown', this.handleclick);
+    }
+}
+
+var test = new object_ot_listener();
+*/
+
+/*
+function handle_remove(event){
+    window.removeEventListener('mousedown', handle_pressdown);
+}
+function handle_pressdown(event){
+    if(event.button == 0){//left
+        console.log("0");
+    }
+    if(event.button == 1){//middle
+        console.log("1");
+    }
+    if(event.button == 2){//right
+        console.log("2");
+        //console.log(this);
+        //this.window.removeEventListener('mousedown', this.handle_press,true);
+        //this.window.removeEventListener('mousedown', this.handle_press.bind(this),true);
+        //this.remove_handle();
+        handle_remove(event)
+        //window.removeEventListener('mousedown',(e)=>{self.handle_press(self,e)});
+    }
+}
+window.addEventListener('mousedown', handle_pressdown);
+*/

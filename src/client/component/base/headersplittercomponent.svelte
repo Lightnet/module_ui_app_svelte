@@ -22,6 +22,16 @@
     var last_x = 0;
     var last_y = 0;
 
+    /*
+    export function getaxis(){
+        if(bhorizontal){
+            return 'h';
+        }else{
+            return 'v';
+        }
+    }
+    */
+
     //let bpress = false;
     let window_width,window_height;
 
@@ -32,6 +42,9 @@
         m.y = event.clientY;
         //console.log(m);
         mjs.context.contextmenu.set({sm_context:'SPLITTER'});
+        //mjs.context.splitregion.set(splitter)
+        mjs.context.splitregion = splitter;
+        //console.log(mjs.context.contextmenu.splitregion);
     }
 
     function handle_splitter_resize(event){
@@ -184,15 +197,15 @@
 
 </script>
 <style>
-.splitter{
-    background-color:#002200;
-    cursor:w-resize;
-    width:10px;
-    height:100%;
-    float:left;
-    position:absolute;
-    /*z-index:1;*/
-}
+    .splitter{
+        background-color:#002200;
+        cursor:w-resize;
+        width:10px;
+        height:100%;
+        float:left;
+        position:absolute;
+        /*z-index:1;*/
+    }
 </style>
 
 <div id="{idsplitter}" class="splitter" on:mousemove={handle_screenarea} on:mousedown={handleMouseclick}></div>

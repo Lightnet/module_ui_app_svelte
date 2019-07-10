@@ -50,7 +50,7 @@ Links:
  * https://github.com/patternfly/patternfly/issues/1122
  * 
  * https://stackoverflow.com/questions/3234256/find-mouse-position-relative-to-element/45270249
- * 
+ * https://stackoverflow.com/questions/38023688/how-do-you-remove-an-event-listener-that-uses-this-in-typescript
  * 
  * 
  * 
