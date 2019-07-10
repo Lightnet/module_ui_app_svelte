@@ -42,14 +42,37 @@
                     //}
                     //console.log("hello?")
                     elementcontent.style.marginLeft = event.pageX - screenregion.offsetWidth + 'px';
-                    console.log(screenregion);
-                    console.dir(screenregion);
+                    //console.log(screenregion);
+                    //console.dir(screenregion);
                     elementcontent.style.height = screenregion.offsetHeight + 'px';
                     elementcontent.style.width = 10 + 'px';
                 }
                 
                 //elementcontent.style.top = event.clientY + 'px';
                 //elementcontent.style.left = event.clientX + 'px';
+            }
+
+            if(align == 'h'){
+                let py = event.pageY - screenregion.offsetHeight;
+                if(py < 0){
+                    elementcontent.style.marginTop = event.pageY + 'px';
+                    //let screenh = event.pageY - screenregion.offsetHeight - screenregion.offsetParent.offsetTop;
+                    let screenh = event.pageY - screenregion.offsetParent.offsetTop;
+                    //console.log(screenh);
+                    //console.log(screenregion.offsetHeight );
+                    console.dir(screenregion)
+                    elementcontent.style.marginLeft = screenregion.offsetLeft + 'px';
+                    py = event.pageY;
+                    //elementcontent.style.height = screenregion.offsetHeight + 'px';
+                    //elementcontent.style.width = 10 + 'px';
+                    elementcontent.style.height = 10 + 'px';
+                    //elementcontent.style.width = screenregion.offsetWidth + 'px';
+                    elementcontent.style.width = screenregion.clientWidth + 'px';
+                    //console.log(screenregion.clientWidth);
+
+                }
+                //console.log(py);
+
             }
         }
     }

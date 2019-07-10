@@ -2,15 +2,13 @@
     //https://codepen.io/cnupm99/pen/pvNyYX
     //https://jsbin.com/qewecajiro/edit?css,js,output
 
-    import { onMount, beforeUpdate, afterUpdate, onDestroy, setContext, createEventDispatcher } from 'svelte'
+    import { onMount, onDestroy, setContext, createEventDispatcher } from 'svelte'
     import { generateId } from '../helper/generateid.js';
     //import mjs from '../../mjs.js';
     import { context } from '../../mjs.js';
 
     export let iddiv1;
-    //export let elementdiv1;
     export let iddiv2;
-    //export let elementdiv2;
     let m = {x:0,y:0};
     export let bresize = false;
     export let bhorizontal = false;
@@ -80,10 +78,14 @@
 
         if(bhorizontal == true){
             let dx = last_x;
-            if(cont1){
+            //if(cont1){
                 cont1.style.width=dx+"px";
-            }
+            //}
             dx += splitter.clientWidth;
+            if(cont2 == null){
+                cont2 = document.getElementById(iddiv2);
+            }
+            
             if(cont2){
                 cont2.style.marginLeft=dx+"px";
                 dx = window_width - dx;
@@ -91,15 +93,15 @@
             }
         }else{
             let dy = last_y;
-            if(cont1){
+            //if(cont1){
                 cont1.style.height=dy+"px";
-            }
+            //}
             dy += splitter.clientHeight
-            if(cont2){
+            //if(cont2){
                 cont2.style.marginTop=dy+"px";
                 dy = window_height - dy;
                 cont2.style.height=dy+"px";
-            }
+            //}
         }
         //window.dispatchEvent(new Event('resize')); //overload not used here
     }
@@ -123,6 +125,8 @@
         let parent = splitter.parentNode;
         window_width = parent.clientWidth;
         window_height = parent.clientHeight;
+        console.log("iddiv1:"+ iddiv1);
+        console.log("iddiv2:"+ iddiv2);
 
         cont1 = document.getElementById(iddiv1);
         cont2 = document.getElementById(iddiv2);
@@ -147,7 +151,7 @@
             if(py == null){
                 splitter.style.marginTop = (window_height / 2) + 'px';
             }else{
-                //splitter.style.marginTop = py + 'px';
+                splitter.style.marginTop = py + 'px';
             }
             last_x = 0;
             last_y = window_height / 2;
@@ -163,35 +167,6 @@
 
         window.addEventListener('resize', resetPosition);
         window.dispatchEvent(new Event('resize'));
-    });
-
-    beforeUpdate(()=>{
-        //console.log("afterUpdate");
-        
-    });
-
-    afterUpdate(()=>{
-        //console.log("afterUpdate");
-        /*
-        console.log(px);
-        console.log(px);
-        splitter = document.getElementById(idsplitter);
-        if(bhorizontal){
-            sheight = '100%';
-            swidth = '10px';
-            resizetag = 'w-resize';
-            if(px == null){
-                splitter.style.marginLeft = (window_width / 2) + 'px';
-            }else{
-                splitter.style.marginLeft = px + 'px';
-                console.log(px);
-            }
-            
-            //last_x = window_width / 2;
-            //last_y = 0;
-        }
-        console.log(splitter);
-        */
     });
 
     onDestroy(()=>{

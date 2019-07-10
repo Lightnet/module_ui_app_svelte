@@ -45,6 +45,7 @@ export default class object_ot_splitarea extends Operator{
         //console.log(event.button);
         if(event.button == 0){//left
             console.log("0");
+
             if(this.splitalign == 'v'){
                 //console.log(this.pointer);
                 let screenregion = context.screenregion;
@@ -56,22 +57,23 @@ export default class object_ot_splitarea extends Operator{
                 }
                 //console.log(px);
                 //let screenregion = context.screenregion;
-                console.log(screenregion);
-                console.dir(screenregion);
-                
-                let idran = generateId(20);
-
-                
-                console.log(screenregion.parentNode);
+                //console.log(screenregion);
+                //console.dir(screenregion);
+                //let idran = generateId(20);
+                //console.log(idran);
+                //console.log(screenregion.parentNode);
                 let newscreenregion = new ScreenRegionComponent({
                     target:screenregion.parentNode,
                     props: {
-                        assignid: idran
+                        //assignid: idran
                         //bhorizontal:true,
                         //bresize:false
                     }
                 })
-
+                //console.log(newscreenregion);
+                //console.dir(newscreenregion);
+                let idran = newscreenregion.getID();
+                console.log(idran);
                 let split = new Splitter({
                     target:screenregion.parentNode,
                     props: {
@@ -80,13 +82,10 @@ export default class object_ot_splitarea extends Operator{
                         px:px,
                         iddiv1:screenregion.id,
                         iddiv2:idran
-                        //
                     }
                 });
             }
             
-            
-
             this.remove_handle();
         }
         if(event.button == 1){//middle
@@ -116,15 +115,18 @@ export default class object_ot_splitarea extends Operator{
         console.log("Split Area");
         let splitregion = context.splitregion;
         //console.log(splitregion);
-        //console.log(splitregion.clientHeight)
-        //console.log(splitregion.clientWidth)
+        console.log(splitregion.clientHeight);
+        console.log(splitregion.clientWidth);
         
-        if(splitregion.clientHeight < splitregion.clientWidth){
+        if( splitregion.clientHeight < 20){
             console.log("v");
             this.splitalign = 'v';
-        }else{
-            this.splitalign = 'h';
         }
+        if ( splitregion.clientWidth < 20){
+            this.splitalign = 'h';
+            console.log("h");
+        }
+
         this.pointer.display(true);
         
         window.addEventListener('mousemove',this.handlemove);
