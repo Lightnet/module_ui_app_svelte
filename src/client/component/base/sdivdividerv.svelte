@@ -4,7 +4,8 @@
     import EditorComponent from '../editor/editorcomponent.svelte';
     import { generateId } from '../helper/generateid.js';
     //const dispatch = createEventDispatcher();
-    import mjs from '../../mjs.js';
+    //import mjs from '../../mjs.js';
+    import { context } from '../../mjs.js';
 
     let idcontent = generateId(20);
     let elementcontent;
@@ -44,11 +45,13 @@
     });
 
     function handle_screenregion1(event){
-        mjs.context.screenregion = screenregion1;
+        //console.log("screen1");
+        context.screenregion = screenregion1;
     }
 
     function handle_screenregion2(event){
-        mjs.context.screenregion = screenregion2;
+        //console.log("screen2");
+        context.screenregion = screenregion2;
     }
 </script>
 
@@ -69,23 +72,13 @@
         position:absolute;
         overflow: hidden;
     }
-    /*
-    .screenregion2 {
-		background-color:grey;
-        height:45%;
-        width:100%;
-        float:left;
-        position:absolute;
-        overflow: hidden;
-    }
-    */
 </style>
 <div id="{idcontent}" class="panelregion">
-    <div id="{id1}" class="screenregion">
-        <EditorComponent viewport="3dviewport" on:mousemove={handle_screenregion1}></EditorComponent>
+    <div id="{id1}" class="screenregion" on:mousemove={handle_screenregion1}>
+        <EditorComponent viewport="3dviewport" ></EditorComponent>
     </div>
     <SplitterComponent bhorizontal={false} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
-    <div id="{id2}" class="screenregion">
-        <EditorComponent viewport="{screen2}" on:mousemove={handle_screenregion2}></EditorComponent>
+    <div id="{id2}" class="screenregion" on:mousemove={handle_screenregion2}>
+        <EditorComponent viewport="{screen2}" ></EditorComponent>
     </div>
 </div>

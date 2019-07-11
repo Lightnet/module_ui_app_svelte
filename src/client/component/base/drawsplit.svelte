@@ -60,7 +60,7 @@
                     let screenh = event.pageY - screenregion.offsetParent.offsetTop;
                     //console.log(screenh);
                     //console.log(screenregion.offsetHeight );
-                    console.dir(screenregion)
+                    //console.dir(screenregion);
                     elementcontent.style.marginLeft = screenregion.offsetLeft + 'px';
                     py = event.pageY;
                     //elementcontent.style.height = screenregion.offsetHeight + 'px';

@@ -51,7 +51,7 @@
         elementcontent = document.getElementById(idcontent);
         window.addEventListener('resize', handle_viewport3d_resize);
         let ascene = document.querySelector('a-scene').object3D;
-        //console.dir(scene.object3D);
+        console.dir(ascene);
         //console.log(scene);
         ascene.add(scene);
     });
@@ -97,13 +97,15 @@
         //console.log(m);
         mjs.context.contextmenu.set({sm_context:'VIEWPORT3D'});
     }
-
+    //https://github.com/aframevr/aframe/issues/3211
     /*
     look-controls-enabled="false" 
     wasd-controls-enabled="false"
     look-controls="pointerLockEnabled: false;"
     mouse-cursor
     natural-size
+    light="defaultLightsEnabled:false"
+
     */
 </script>
 
@@ -117,6 +119,7 @@
     <a-scene 
     embedded
     vr-mode-ui="enabled:false"
+    light="defaultLightsEnabled: false"
     >
         <a-camera look-controls-enabled="true">
             <a-entity mouse-cursor></a-entity>

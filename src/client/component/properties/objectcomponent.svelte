@@ -1,18 +1,31 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     import { generateId } from '../helper/generateid.js';
+    import ObjectTransformComponent from './object/objecttransformcomponent.svelte'
     import mjs from '../../mjs.js';
 
     const dispatch = createEventDispatcher();
     let activeobject;//objectc
+    let scene;
+    let entities = [];
+    let bobjselecttoggle = false;
+    let prefix = "_objselect";
+
+    let idobjectselect = generateId(20);
 
     let idcontent = generateId(20);
     let elementcontent;
     //activeobject = mjs.context.view_layer.objects.active;
-    const bloginunsub = mjs.context.view_layer.objects.active.subscribe(value => {
+    const activeobjunsub = mjs.context.view_layer.objects.active.subscribe(value => {
 		activeobject = value;
     	//console.log(value);
-	});
+    });
+    
+    const sceneunsub = mjs.context.scene.subscribe(value => {
+        scene = value;
+        entities = scene.children;
+		//console.log(value);
+    });
 
     function handle_object_resize(event){
         //console.log("resize");
@@ -26,13 +39,44 @@
         elementcontent.style.width = parent.clientWidth + 'px';
     }
 
+    function onclick(e) {
+        //console.log("click");
+        //console.log(e.target);
+		//if (!e.target.matches('.dropbtn')){
+        let idsel = "#"+idobjectselect+prefix;
+        if (!e.target.id != null){
+            if (e.target.id == idsel){
+                if (bobjselecttoggle == true) {
+      			    //myDropdown.classList.remove('show');
+      			    bobjselecttoggle = false
+			    }
+            }
+        }
+        /*
+        if (!e.target.matches(idsel)){
+			//var myDropdown = document.getElementById(iddropmenu);
+			//if (myDropdown.classList.contains('show')) {
+            if (bobjselecttoggle == true) {
+      			//myDropdown.classList.remove('show');
+      			bobjselecttoggle = false
+			}
+        }
+        */
+    }
+
     onMount(() => {
         //console.log("mount");
         handle_object_resize();
         window.addEventListener('resize', handle_object_resize);
         elementcontent = document.getElementById(idcontent);
         //activeobject = mjs.context.view_layer.objects.active;
-        
+
+        if(activeobject == null){
+           activeobject = entities[0];
+           //console.log(activeobject);
+        }
+
+        window.addEventListener("click",onclick);
     });
 
     afterUpdate(() => {
@@ -44,8 +88,24 @@
     onDestroy(() => {
         //console.log("onDestroy");
         window.removeEventListener('resize', handle_object_resize);
-        bloginunsub();
+        activeobjunsub();
+        sceneunsub();
+
+        window.removeEventListener("click",onclick);
     });
+
+    function handle_objselect(obj){
+        //console.log(obj);
+        activeobject = obj;
+    }
+
+    /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function toggle_objselect() {
+		//console.log("toggle");
+        bobjselecttoggle = !bobjselecttoggle;
+    }
+
     //{console.log(activeobject)}
 </script>
 
@@ -94,10 +154,109 @@
         min-height: 16px;
     }
 
+    .objelect{
+        width:100%;
+        float:left;
+    }
+
+    .objbutton{
+        float:left;
+    }
+
+    .objinput{
+        float:left;
+        /*width:100%;*/
+    }
+
+    .dropdown {
+        float: left;
+        overflow: hidden;
+    }
+
+    .dropdown .dropbtn {
+        cursor: pointer;
+        font-size: 12px;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 4px 4px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+    }
+
+    .dropdown button:active {
+  		background-color: #333;
+  		box-shadow: 0 1px #666;
+  		transform: translateY(1px);
+	}
+
+    .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+        background-color: lightslategrey;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #333;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        float: none;
+        font-size: 12px;
+        padding: 4px 4px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        color: white;
+    }
+
+    .dropdown-content a:active {
+  		background-color: #333;
+  		box-shadow: 0 1px #666;
+  		transform: translateY(1px);
+	}
+
+    .dropdown-content a:hover {
+        background-color: lightslategrey;
+    }
+
+    .show {
+        display: block;
+    }
+
 </style>
 <div id="{idcontent}" class="objectcomponent">
+    <!--
     <label>Object</label>
+    -->
     {#if activeobject != null}
+        <div class="objelect">
+            {#if activeobject != null}
+                <div class="dropdown" on:click={()=>{toggle_objselect()}}>
+                    <button id="{idobjectselect}{prefix}" class="dropbtn">
+                        <i class="fas fa-vector-square"></i>
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content {bobjselecttoggle === true ? 'show' : ''}" id="{idobjectselect}">
+                        {#each entities as entity}
+                            <a href="/#" on:click={()=>{handle_objselect(entity)}}>  {entity.name}</a>
+                        {/each}
+                    </div>
+                </div>
+
+                <input bind:value={activeobject.name} placeholder="None" class="objinput">
+            {/if}
+        </div>
+
+        <ObjectTransformComponent obj={activeobject}></ObjectTransformComponent>
+
+        
+        <!--
+        
         {#if activeobject.name != null}
             <label>ID: {activeobject.id}</label>
             <label>Name: <input bind:value={activeobject.name} placeholder="None"> 
@@ -124,6 +283,7 @@
 
             {console.log(activeobject)}
         {/if}
+        -->
     {/if}
     <!--
     AFRAME

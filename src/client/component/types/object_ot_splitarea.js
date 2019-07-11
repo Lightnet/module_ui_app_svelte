@@ -12,10 +12,10 @@ import { Operator } from './operator';
 
 import Pointer from '../base/drawsplit.svelte';
 import Splitter from '../base/splittercomponent.svelte';
-import EditorComponent from '../editor/editorcomponent.svelte';
+//import EditorComponent from '../editor/editorcomponent.svelte';
 
 import ScreenRegionComponent from '../base/screenregioncomponent.svelte';
-import { generateId } from '../helper/generateid.js';
+//import { generateId } from '../helper/generateid.js';
 import { context } from '../../mjs.js';
 
 
@@ -84,6 +84,27 @@ export default class object_ot_splitarea extends Operator{
                         iddiv2:idran
                     }
                 });
+            }
+
+            if(this.splitalign == 'h'){
+
+
+                /*
+                let splith = new Splitter({
+                    target:screenregion.parentNode,
+                    props: {
+                        bhorizontal:false,
+                        bresize:true,
+                        px:px,
+                        iddiv1:screenregion.id,
+                        iddiv2:idran
+                    }
+                });
+                */
+
+
+
+
             }
             
             this.remove_handle();

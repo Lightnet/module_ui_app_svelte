@@ -43,10 +43,12 @@
     });
 
     function handle_screenregion1(event){
+        //console.log("screen1");
         mjs.context.screenregion = screenregion1;
     }
 
     function handle_screenregion2(event){
+        //console.log("screen2");
         mjs.context.screenregion = screenregion2;
     }
 </script>
@@ -67,15 +69,6 @@
         float:left;
         position:absolute;
     }
-    /*
-    .screenregion2 {
-		background-color:grey;
-        height:100%;
-        width:45%;
-        float:left;
-        position:absolute;
-    }
-    */
 </style>
 <div id="{idcontent}" class="panelregion">
     <div id="{id1}" class="screenregion" on:mousemove={handle_screenregion1}>

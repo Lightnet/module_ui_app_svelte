@@ -30,7 +30,7 @@
 
 	let viewworkspace = "horizontal";
 	viewworkspace = "layout";
-	viewworkspace = "testdivide";
+	//viewworkspace = "testdivide";
 	//viewworkspace = "testoffsetdivide";
 
 	let elementheader;
@@ -70,13 +70,27 @@
 		//console.dir(AFRAME);
 		//let scene = new AFRAME.AScene();
 		let scene = new THREE.Scene();
-		var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-		var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-		var cube = new THREE.Mesh( geometry, material );
+		let geometry = new THREE.BoxGeometry( 1, 1, 1 );
+		let material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+		let cube = new THREE.Mesh( geometry, material );
 		cube.position.x = -1;
 		cube.position.y = 0.5;
 		cube.position.z = -3;
+		cube.name = "Cube";
 		scene.add( cube );
+
+		let camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+		camera.name = "PerspectiveCamera";
+		scene.add( camera );
+
+		// Create a light, set its position, and add it to the scene.
+    	let light = new THREE.PointLight(0xffffff);
+		light.position.set(-100,200,100);
+		light.name = "PointLight";
+		scene.add(light);
+		console.log(THREE);
+
+
 		//let sky = new THREE.Sky();
 		//sky.scale.setScalar( 450000 );
 		//scene.add( sky );

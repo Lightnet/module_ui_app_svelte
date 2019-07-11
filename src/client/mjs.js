@@ -73,7 +73,7 @@ context.splitregion = splitregion;
 export const contextmenu = writable({sm_context:'none',ops:{}});
 context.contextmenu = contextmenu;
 
-export const active = writable({});
+export const active = writable(null);
 context.view_layer.objects.active = active;
 context.scene = writable({});
 

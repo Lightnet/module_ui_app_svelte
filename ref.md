@@ -53,4 +53,4 @@ Links:
  * https://stackoverflow.com/questions/38023688/how-do-you-remove-an-event-listener-that-uses-this-in-typescript
  * 
  * 
- * 
+ * https://svelte.dev/examples#svelte-component

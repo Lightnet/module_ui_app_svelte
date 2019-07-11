@@ -50,6 +50,9 @@
                 return;
             }
             splitter.style.marginLeft = m.x - parent.offsetLeft + 'px';
+            //splitter.style.height;
+            //console.log(parent.clientHeight);
+            //console.dir(splitter);
             resetPosition();
         }
         if((bresize == true)&&(bhorizontal == false)){
@@ -82,10 +85,9 @@
                 cont1.style.width=dx+"px";
             //}
             dx += splitter.clientWidth;
-            if(cont2 == null){
-                cont2 = document.getElementById(iddiv2);
-            }
-            
+            //splitter.style.height = "100px";
+            //splitter.style.height = window_height + 'px';
+            //console.log(window_height);
             if(cont2){
                 cont2.style.marginLeft=dx+"px";
                 dx = window_width - dx;
@@ -125,8 +127,8 @@
         let parent = splitter.parentNode;
         window_width = parent.clientWidth;
         window_height = parent.clientHeight;
-        console.log("iddiv1:"+ iddiv1);
-        console.log("iddiv2:"+ iddiv2);
+        //console.log("iddiv1:"+ iddiv1);
+        //console.log("iddiv2:"+ iddiv2);
 
         cont1 = document.getElementById(iddiv1);
         cont2 = document.getElementById(iddiv2);
