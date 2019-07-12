@@ -26,30 +26,11 @@
         btogglepanel = !btogglepanel;
         //console.log(btogglepanel);
     }
-
 </script>
 
 <style>
-    button{
-        background-color:grey;
-        font-size: 12px;
-        color:white;
-        height:22px;
-        padding: 0px 4px 10px 4px;
-    }
-
-    button:hover{
-        background-color: lightslategrey;
-    }
-
     .panel{
         width: 100%;
-    }
-
-    input{
-        /*background-color:grey;*/
-        font-size: 12px;
-        height:22px;
     }
 
     .header{
@@ -64,13 +45,12 @@
 </style>
 <div class="panel">
     <div class="header" on:click={togglepanal}>
-        <i class="fa {btogglepanel == true ? "fa-caret-down" : "fa-caret-right"}"></i> Collections
+        <i class="fa {btogglepanel == true ? "fa-caret-down" : "fa-caret-right"}"></i>
+        <slot name='header'></slot>
     </div>
     {#if btogglepanel}
     <div class="context">
-        {#if obj != null}
-            <button> Add to Collection</button>
-        {/if}
+        <slot name='content'></slot>
     </div>
     {/if}
 </div>

@@ -2,6 +2,8 @@
     //import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     //import { UserName } from '../../stores.js';
 
+    import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte'
+
     export let obj;
     export let btogglepanel = true;
 
@@ -49,6 +51,15 @@
         width:100%;
     }
 </style>
+<CollapsePanelComponent>
+    <span slot="header"> Relations </span>
+
+    <div slot="content"> Test 
+    
+    </div>
+</CollapsePanelComponent>
+
+<!--
 <div class="panel">
     <div class="header" on:click={togglepanal}>
         Relations
@@ -62,3 +73,4 @@
     </div>
     {/if}
 </div>
+-->

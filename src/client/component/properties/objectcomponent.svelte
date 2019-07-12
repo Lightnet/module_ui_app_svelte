@@ -156,13 +156,6 @@
         width: 100%;
     }
 
-    /*input{
-        background-color:grey;
-        font-size: 12px;
-        height:22px;
-    }
-    */
-
     .checkbox {
 	    /*padding: 0px 0px 0px 0px;*/
         padding-left: 0.4em;
@@ -186,7 +179,8 @@
 
     .objelect{
         width:100%;
-        float:left;
+        height:32px;
+        /*float:left;*/
     }
 
     .objinput{
@@ -293,42 +287,10 @@
         </div>
 
         <ObjectTransformComponent obj={activeobject}></ObjectTransformComponent>
-
         <ObjectRelationsComponent obj={activeobject}></ObjectRelationsComponent>
         <ObjectCollectionsComponent obj={activeobject}></ObjectCollectionsComponent>
         <ObjectVisibilityComponent obj={activeobject}></ObjectVisibilityComponent>
         
-
-        
-        <!--
-        
-        {#if activeobject.name != null}
-            <label>ID: {activeobject.id}</label>
-            <label>Name: <input bind:value={activeobject.name} placeholder="None"> 
-            visible:<input class="checkbox" type=checkbox bind:checked={activeobject.visible}>
-            </label>
-
-            <label> Position:
-            x:<input bind:value={activeobject.position.x}>
-            y:<input bind:value={activeobject.position.y}>
-            z:<input bind:value={activeobject.position.z}>
-            </label>
-
-            <label> Rotation:
-            x:<input bind:value={activeobject.rotation.x}>
-            y:<input bind:value={activeobject.rotation.y}>
-            z:<input bind:value={activeobject.rotation.z}>
-            </label>
-
-            <label> Scale:
-            x:<input bind:value={activeobject.scale.x}>
-            y:<input bind:value={activeobject.scale.y}>
-            z:<input bind:value={activeobject.scale.z}>
-            </label>
-
-            {console.log(activeobject)}
-        {/if}
-        -->
     {/if}
     <!--
     AFRAME
