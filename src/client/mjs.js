@@ -77,6 +77,10 @@ export const active = writable(null);
 context.view_layer.objects.active = active;
 context.scene = writable({});
 
+export const updatetoggle = writable(false);
+
+context.updatetoggle = updatetoggle;
+
 props.StringProperty = StringProperty
 
 export const utils = {}

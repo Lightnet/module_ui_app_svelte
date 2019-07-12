@@ -2,6 +2,10 @@
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     import { generateId } from '../helper/generateid.js';
     import ObjectTransformComponent from './object/objecttransformcomponent.svelte'
+    import ObjectRelationsComponent from './object/objectrelationscomponent.svelte'
+    import ObjectCollectionsComponent from './object/objectcollectionscomponent.svelte'
+    import ObjectVisibilityComponent from './object/objectvisibilitycomponent.svelte'
+
     import mjs from '../../mjs.js';
 
     const dispatch = createEventDispatcher();
@@ -11,7 +15,11 @@
     let bobjselecttoggle = false;
     let prefix = "_objselect";
 
+    let idinputobj = generateId(20);
+    let inputel;
+
     let idobjectselect = generateId(20);
+    let objselectel;
 
     let idcontent = generateId(20);
     let elementcontent;
@@ -33,10 +41,25 @@
         if(elementcontent == null){
             return;
         }
+        
 
         let parent = elementcontent.parentNode;
         elementcontent.style.height = parent.clientHeight + 'px';
         elementcontent.style.width = parent.clientWidth + 'px';
+        if(inputel == null){
+            inputel = document.getElementById(idinputobj);
+            objselectel = document.getElementById(idobjectselect);
+        }
+        
+        //console.log(inputel);
+        if(inputel){
+            let iwidth = (parent.clientWidth - objselectel.clientWidth - 40)
+            if(iwidth < 0){
+                iwidth  = 128;
+            }
+            inputel.style.width = iwidth + 'px';
+        }
+        //
     }
 
     function onclick(e) {
@@ -66,16 +89,21 @@
 
     onMount(() => {
         //console.log("mount");
-        handle_object_resize();
-        window.addEventListener('resize', handle_object_resize);
         elementcontent = document.getElementById(idcontent);
+        console.log(elementcontent)
+        //console.log(idinputobj);
+        inputel = document.getElementById(idinputobj);
+        //console.log(inputel);
+        objselectel = document.getElementById(idobjectselect);
+        console.log(objselectel);
         //activeobject = mjs.context.view_layer.objects.active;
 
         if(activeobject == null){
            activeobject = entities[0];
            //console.log(activeobject);
         }
-
+        handle_object_resize();
+        window.addEventListener('resize', handle_object_resize);
         window.addEventListener("click",onclick);
     });
 
@@ -107,6 +135,7 @@
     }
 
     //{console.log(activeobject)}
+    // 
 </script>
 
 <style>
@@ -127,11 +156,12 @@
         width: 100%;
     }
 
-    input{
+    /*input{
         background-color:grey;
         font-size: 12px;
         height:22px;
     }
+    */
 
     .checkbox {
 	    /*padding: 0px 0px 0px 0px;*/
@@ -159,13 +189,25 @@
         float:left;
     }
 
-    .objbutton{
-        float:left;
-    }
-
     .objinput{
         float:left;
         /*width:100%;*/
+    }
+
+    input {
+        /*background-color:grey;*/
+        font-size: 12px;
+        height:22px;
+        resize: horizontal;
+        width: 200px;
+    }
+
+    input:active {
+        width: auto;   
+    }
+
+    input:focus {
+        min-width: 200px;
     }
 
     .dropdown {
@@ -235,7 +277,6 @@
     -->
     {#if activeobject != null}
         <div class="objelect">
-            {#if activeobject != null}
                 <div class="dropdown" on:click={()=>{toggle_objselect()}}>
                     <button id="{idobjectselect}{prefix}" class="dropbtn">
                         <i class="fas fa-vector-square"></i>
@@ -248,11 +289,15 @@
                     </div>
                 </div>
 
-                <input bind:value={activeobject.name} placeholder="None" class="objinput">
-            {/if}
+                <input id="{idinputobj}" bind:value={activeobject.name} placeholder="None" class="objinput">
         </div>
 
         <ObjectTransformComponent obj={activeobject}></ObjectTransformComponent>
+
+        <ObjectRelationsComponent obj={activeobject}></ObjectRelationsComponent>
+        <ObjectCollectionsComponent obj={activeobject}></ObjectCollectionsComponent>
+        <ObjectVisibilityComponent obj={activeobject}></ObjectVisibilityComponent>
+        
 
         
         <!--

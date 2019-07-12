@@ -1,18 +1,24 @@
 <script>
-    //import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
+    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     //import { UserName } from '../../stores.js';
+    import { get } from 'svelte/store';
+    import mjs from '../../../mjs.js';
 
     export let obj;
     export let btogglepanel = true;
+    let bvisible = "true";
+    //let count = 0;
 
     //const dispatch = createEventDispatcher();
 
     //onMount(async () => {	
     //});
     
-    //onMount(() => {
+    onMount(() => {
         //console.log("mount")
-    //});
+        console.log(obj);
+        //bvisible =  obj.visible == true ? "false" : "false";
+    });
 
     //afterUpdate(() => {
         //console.log("afterUpdate")
@@ -27,10 +33,19 @@
         //console.log(btogglepanel);
     }
 
+    function togglevisible(){
+        obj.visible = !obj.visible;
+        //count += 1;
+        //mjs.context.updateui.set(count);
+        let va = get(mjs.context.updatetoggle);
+        console.log(va);
+        va = !va;
+        mjs.context.updatetoggle.set(va)
+    }
+
 </script>
 
 <style>
-
     .panel{
         width: 100%;
     }
@@ -51,28 +66,14 @@
 </style>
 <div class="panel">
     <div class="header" on:click={togglepanal}>
-        Transform
+        Visibility
     </div>
     {#if btogglepanel}
     <div class="context">
-        {#if obj.name != null}
-            <label> Location:
-            x:<input bind:value={obj.position.x}>
-            y:<input bind:value={obj.position.y}>
-            z:<input bind:value={obj.position.z}>
-            </label>
-
-            <label> Rotation:
-            x:<input bind:value={obj.rotation.x}>
-            y:<input bind:value={obj.rotation.y}>
-            z:<input bind:value={obj.rotation.z}>
-            </label>
-
-            <label> Scale:
-            x:<input bind:value={obj.scale.x}>
-            y:<input bind:value={obj.scale.y}>
-            z:<input bind:value={obj.scale.z}>
-            </label>
+        {#if obj != null}
+            Show in Viewport:<input type="checkbox" on:click={togglevisible} bind:checked={obj.visible}>
+            Show in Render:<input type="checkbox">
+            Selectable:<input type="checkbox">
         {/if}
     </div>
     {/if}

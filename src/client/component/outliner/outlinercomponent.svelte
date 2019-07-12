@@ -10,11 +10,19 @@
 
     let scene;
     let entities = [];
+    let bupdatetoggle = false;
 
     const sceneunsub = mjs.context.scene.subscribe(value => {
         scene = value;
         entities = scene.children;
 		//console.log(value);
+    });
+
+    const updatetoggleunsub = mjs.context.updatetoggle.subscribe(value => {
+        //console.log(value);
+        bupdatetoggle = value;
+        entities = scene.children;
+        console.log("update?");
     });
     
     function handle_outliner_resize(event){
@@ -50,6 +58,8 @@
     onDestroy(() => {
         //console.log("onDestroy");
         window.removeEventListener('resize', handle_outliner_resize);
+        sceneunsub();
+        updateuiunsub();
     });
 
     function selectentity(obj){
@@ -175,7 +185,7 @@
                         <li>
                         <button on:click={()=>{selectentity(entity)}}> {entity.name == "" ? "Name:None" : entity.name}</button>
                         <!--<button on:click={()=>{entity.visible = !entity.visible}}>visible:{entity.visible}</button>-->
-                        visible:<input type=checkbox bind:checked={entity.visible}>
+                        visible:<input type="checkbox" bind:checked={entity.visible}>
                         <span>type: {entity.type} </span>
                         <!--
                         {#if entity.children.length > 0}

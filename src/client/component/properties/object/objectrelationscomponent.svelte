@@ -51,28 +51,13 @@
 </style>
 <div class="panel">
     <div class="header" on:click={togglepanal}>
-        Transform
+        Relations
     </div>
     {#if btogglepanel}
     <div class="context">
-        {#if obj.name != null}
-            <label> Location:
-            x:<input bind:value={obj.position.x}>
-            y:<input bind:value={obj.position.y}>
-            z:<input bind:value={obj.position.z}>
-            </label>
-
-            <label> Rotation:
-            x:<input bind:value={obj.rotation.x}>
-            y:<input bind:value={obj.rotation.y}>
-            z:<input bind:value={obj.rotation.z}>
-            </label>
-
-            <label> Scale:
-            x:<input bind:value={obj.scale.x}>
-            y:<input bind:value={obj.scale.y}>
-            z:<input bind:value={obj.scale.z}>
-            </label>
+        {#if obj != null}
+            Parent:
+            <br>Parent Type:
         {/if}
     </div>
     {/if}
