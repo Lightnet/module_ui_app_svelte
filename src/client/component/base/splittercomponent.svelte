@@ -179,7 +179,7 @@
 </script>
 <style>
     .splitter{
-        background-color:#002200;
+        background-color:#1f1f1f;
         cursor:w-resize;
         width:10px;
         height:100%;

@@ -155,7 +155,7 @@
 <style>
   	.navbar {
     	overflow: hidden;
-    	background-color: #333;
+    	background-color: #212121;
     	font-family: Arial, Helvetica, sans-serif;
 		width:100%;
 		/*height:32px;*/
@@ -174,7 +174,7 @@
   	}
 
   	.navbar a:hover {
-    	background-color: lightslategrey;
+    	background-color: #424242;
   	}
 
 	.navbar a:active {
@@ -194,6 +194,9 @@
 	}
 
 	button{
+		border:none;
+        outline: none;
+
         background-color:#333;
         font-size: 12px;
         color:white;
@@ -202,11 +205,11 @@
 		display: inline-block;
 		text-decoration: none;
 		/*border: none;*/
-		border-color: #666;
+		/*border-color: #666;*/
     }
 
 	button:hover{
-        background-color: lightslategrey;
+        background-color: #424242;
     }
 
 	button:active {

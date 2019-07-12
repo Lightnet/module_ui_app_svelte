@@ -50,6 +50,11 @@
     .panel{
         width: 100%;
     }
+
+    div{
+        color:white;
+    }
+    
     input{
         /*background-color:grey;*/
         font-size: 12px;

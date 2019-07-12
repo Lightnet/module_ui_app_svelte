@@ -163,27 +163,24 @@
         min-width:32px;
         width:32px;
         height:100%;
-        background-color: dimgrey;
+        background-color: #232323;
         padding: 0px 0px 0px 0px;
         overflow: scroll;
-        /*overflow: auto;*/
-        /*overflow-y: hidden;*/
-        /*overflow-x: hidden;*/
         /*z-index: 1;*/
-        z-index: 1;
-        /*overflow-x: hidden;*/
     }
 
     .dataprops{
         float:left;
         width:100%;
         height:100%;
-        background-color: gray;
+        background-color: #383838;
         overflow: visible;
         overflow-x: hidden;
     }
 
     button{
+        border:none;
+        outline: none;
         background-color:grey;
         font-size: 12px;
         color:white;
@@ -191,19 +188,21 @@
         padding: 0px 4px 10px 4px;
     }
 
-     button:hover{
+    button:hover{
         background-color: lightslategrey;
     }
 
     .tabbutton{
+        border:none;
+        outline: none;
         height:28px;
         width:28px;
-        background-color:#333;
+        background-color:#2b2b2b;
         padding: 0px 0px 0px 0px;
     }
 
     .active, .tabbutton:hover{
-        background-color: lightslategrey;
+        background-color: #3a3a3a;
     }
 
     .tooltip {
@@ -232,15 +231,6 @@
         /*position: sticky; #fail*/
         position: fixed; /*#pass*/
         /*position: relative; #fail*/
-        /*top:5px;
-        left:5px;*/
-        /*z-index: 1;*/
-        /*
-        top: -5px;
-        left: 105%;*/
-        /*bottom: 125%;*/
-        /*left: 50%;*/
-        /*margin-left: -60px;*/
         opacity: 0;
         transition: opacity 0.3s;
     }

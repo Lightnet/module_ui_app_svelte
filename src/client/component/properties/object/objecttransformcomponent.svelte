@@ -32,9 +32,14 @@
 
 <style>
     input{
-        /*background-color:grey;*/
+        background-color:#595959;
+        color:white;
         font-size: 12px;
         height:22px;
+    }
+    
+    div{
+        color:white;
     }
 </style>
 <CollapsePanelComponent>

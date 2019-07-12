@@ -5,7 +5,7 @@
 
     const dispatch = createEventDispatcher();
 
-    export let screen = "3dviewport";
+    export let screen = "Viewport 3D";
 
     //let viewport = "3dviewport";
     export let idheader;
@@ -41,7 +41,8 @@
         //console.log("afterUpdate")
         itemlist = {};
         itemlist['3dviewport'] = {};
-        itemlist['3dviewport'].sm_label = '3dviewport';
+        itemlist['3dviewport'].sm_label = 'Viewport 3D';
+        itemlist['3dviewport'].sm_context = '3dviewport';
 
         //itemlist['imageeditor'] = {};
         //itemlist['imageeditor'].sm_label = 'imageeditor';
@@ -65,27 +66,44 @@
         //itemlist['grapheditor'].sm_label = 'grapheditor';
 
         itemlist['texteditor'] = {};
-        itemlist['texteditor'].sm_label = 'texteditor';
+        itemlist['texteditor'].sm_label = 'Text Editor';
+        itemlist['texteditor'].sm_context = 'texteditor';
 
         itemlist['scriptconsole'] = {};
-        itemlist['scriptconsole'].sm_label = 'scriptconsole';
+        itemlist['scriptconsole'].sm_label = 'Script Console';
+        itemlist['scriptconsole'].sm_context = 'scriptconsole';
 
         itemlist['info'] = {};
-        itemlist['info'].sm_label = 'info';
+        itemlist['info'].sm_label = 'Info';
+        itemlist['info'].sm_context = 'info';
 
         itemlist['outliner'] = {};
-        itemlist['outliner'].sm_label = 'outliner';
+        itemlist['outliner'].sm_label = 'Outliner';
+        itemlist['outliner'].sm_context = 'outliner';
 
         itemlist['properties'] = {};
-        itemlist['properties'].sm_label = 'properties';
+        itemlist['properties'].sm_label = 'Properties';
+        itemlist['properties'].sm_context = 'properties';
 
         itemlist['filebrowser'] = {};
-        itemlist['filebrowser'].sm_label = 'filebrowser';
+        itemlist['filebrowser'].sm_label = 'File Browser';
+        itemlist['filebrowser'].sm_context = 'filebrowser';
 
         itemlist['preferences'] = {};
-        itemlist['preferences'].sm_label = 'preferences';
+        itemlist['preferences'].sm_label = 'Preferences';
+        itemlist['preferences'].sm_context = 'preferences';
 
-        screen = viewport;
+        //screen = viewport;
+        //console.log(viewport);
+
+        for (var k in itemlist) {
+            if(itemlist[k].sm_context == viewport ){
+                //console.log("found!");
+                screen = itemlist[k].sm_label;
+                break;
+            }
+        }
+        
     });
 
     onDestroy(() => {
@@ -111,7 +129,15 @@
 
     function selectitem(value){
         //console.log(value);
-        screen = value;
+        //screen = value;
+        for (var k in itemlist) {
+            if(itemlist[k].sm_context == value ){
+                //console.log("found!");
+                screen = itemlist[k].sm_label;
+                break;
+            }
+        }
+        
         dispatch('viewport', value);
     }
 
@@ -120,7 +146,7 @@
 <style>
     .navbar {
         overflow: hidden;
-        background-color: #333;
+        background-color: #3b3b3b;
         font-family: Arial, Helvetica, sans-serif;
         width:100%;
     }
@@ -135,7 +161,7 @@
     }
 
     .navbar a:hover {
-        background-color: lightslategrey;
+        background-color: #424242;
     }
 
     .dropdown {
@@ -156,7 +182,7 @@
     }
 
     .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
-        background-color: lightslategrey;
+        background-color: #424242;
     }
 
     .dropdown-content {
@@ -179,7 +205,7 @@
     }
 
     .dropdown-content a:hover {
-        background-color: lightslategrey;
+        background-color: #424242;
     }
 
     .show {
@@ -197,7 +223,7 @@
         </button>
         <div class="dropdown-content {btoggle === true ? 'show' : ''}" id="{id}">
             {#each Object.keys(itemlist) as item}
-                <a href="/#" on:click={()=>{ selectitem(itemlist[item].sm_label) }}>  {itemlist[item].sm_label}</a>
+                <a href="/#" on:click={()=>{ selectitem(itemlist[item].sm_context) }}>  {itemlist[item].sm_label}</a>
                 <!--<a href="/#" on:click={()=>{mjs.ops[item]()}}>  {itemlist[item].sm_label}</a>-->
             {/each}
         </div>

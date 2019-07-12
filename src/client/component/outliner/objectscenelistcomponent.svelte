@@ -80,6 +80,7 @@
         margin: 0;
         list-style-type: none;
         position: relative;
+        color:#ededed;
     }
     li {
         border-left: 2px solid #000;
@@ -92,11 +93,11 @@
     }
 
     ul li:nth-child(even) {
-        background-color:darkolivegreen;
+        background-color:#282828;
     }
 
     ul li:nth-child(odd) {
-        background-color:grey;
+        background-color:#2d2d2d;
     }
 
     li::before {

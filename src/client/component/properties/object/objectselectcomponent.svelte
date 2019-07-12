@@ -93,13 +93,14 @@
 
 <style>
     input{
-        /*background-color:grey;*/
+        background-color:#595959;
+        color:white;
         font-size: 12px;
         height:22px;
     }
 
     button{
-        background-color:grey;
+        background-color:#2c2c2c;
         font-size: 12px;
         color:white;
         height:22px;
@@ -107,7 +108,7 @@
     }
 
     button:hover{
-        background-color: lightslategrey;
+        background-color: #3b3b3b;
     }
 
     .dropdown {
@@ -122,19 +123,20 @@
         outline: none;
         color: white;
         padding: 4px 4px;
-        background-color: inherit;
+        /*background-color: inherit;*/
+        background-color: #2c2c2c;
         font-family: inherit;
         margin: 0;
     }
 
     .dropdown button:active {
-  		background-color: #333;
-  		box-shadow: 0 1px #666;
-  		transform: translateY(1px);
+  		background-color: #2c2c2c;
+  		/*box-shadow: 0 1px #666;*/
+  		/*transform: translateY(1px);*/
 	}
 
     .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
-        background-color: lightslategrey;
+        background-color: #3b3b3b;
     }
 
     .dropdown-content {
@@ -158,16 +160,20 @@
 
     .dropdown-content a:active {
   		background-color: #333;
-  		box-shadow: 0 1px #666;
-  		transform: translateY(1px);
+  		/*box-shadow: 0 1px #666;*/
+  		/*transform: translateY(1px);*/
 	}
 
     .dropdown-content a:hover {
-        background-color: lightslategrey;
+        background-color: #3b3b3b;
     }
 
     .show {
         display: block;
+    }
+
+    div{
+        color:white;
     }
 </style>
 <div id="{idcontent}" class="objelect">

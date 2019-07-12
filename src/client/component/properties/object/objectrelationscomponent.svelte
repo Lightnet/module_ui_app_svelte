@@ -37,6 +37,10 @@
         font-size: 12px;
         height:22px;
     }
+
+    div{
+        color:white;
+    }
 </style>
 <CollapsePanelComponent>
     <span slot="header"> Relations </span>

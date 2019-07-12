@@ -75,13 +75,13 @@
     }
 
     .dropdown button:active {
-  		background-color: #333;
-  		box-shadow: 0 1px #666;
-  		transform: translateY(1px);
+  		background-color: #424242;
+  		/*box-shadow: 0 1px #666;*/
+  		/*transform: translateY(1px);*/
 	}
 
     .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
-        background-color: lightslategrey;
+        background-color: #424242;
     }
 
     .dropdown-content {
@@ -105,12 +105,12 @@
 
     .dropdown-content a:active {
   		background-color: #333;
-  		box-shadow: 0 1px #666;
-  		transform: translateY(1px);
+  		/*box-shadow: 0 1px #666;*/
+  		/*transform: translateY(1px);*/
 	}
 
     .dropdown-content a:hover {
-        background-color: lightslategrey;
+        background-color: #424242;
     }
 
     .show {

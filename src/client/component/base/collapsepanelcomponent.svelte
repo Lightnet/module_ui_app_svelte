@@ -34,7 +34,9 @@
     }
 
     .header{
-        background-color: lightblue;
+        /*background-color: lightblue;*/
+        background-color: #424242;
+        color: white;
         width:100%;
         height:10px;
         cursor: pointer;
@@ -43,7 +45,7 @@
     }
     
     .context{
-        background-color:lightslategray;
+        background-color:#383838;
         width:100%;
     }
 </style>
