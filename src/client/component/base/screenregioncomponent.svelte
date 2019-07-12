@@ -6,23 +6,16 @@
     let id1 = generateId(20);
     let assignid;
     let screenregion1;
+    export let align = "h";
 
     export function getID(){
         return id1;
     }
     
     onMount(() => {
-        //console.log("mount")
-        /*
-        console.log(id1);
-        if(assignid !=null){
-            id1 = assignid;
-        }else{
-            id1 = generateId(20);
-        }
-        */
         console.log(id1);
         screenregion1 = document.getElementById(id1);
+        screenregion1.setAttribute('align',align);
     });
 
     onDestroy(() => {
@@ -42,11 +35,6 @@
 		background-color: brown;
         height:100%;
         width:100%;
-
-        /*
-        height:100vh;
-        width:100vh;
-        */
         float:left;
         /*position:absolute;*/
         overflow: hidden;

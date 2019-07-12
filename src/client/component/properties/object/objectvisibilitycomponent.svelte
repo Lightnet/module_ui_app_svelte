@@ -1,6 +1,7 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     //import { UserName } from '../../stores.js';
+    import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
     import { get } from 'svelte/store';
     import mjs from '../../../mjs.js';
 
@@ -16,7 +17,7 @@
     
     onMount(() => {
         //console.log("mount")
-        console.log(obj);
+        //console.log(obj);
         //bvisible =  obj.visible == true ? "false" : "false";
     });
 
@@ -64,17 +65,19 @@
         width:100%;
     }
 </style>
-<div class="panel">
-    <div class="header" on:click={togglepanal}>
-        Visibility
-    </div>
-    {#if btogglepanel}
-    <div class="context">
+<CollapsePanelComponent>
+    <span slot="header"> Visibility </span>
+
+    <div slot="content"> 
         {#if obj != null}
             Show in Viewport:<input type="checkbox" on:click={togglevisible} bind:checked={obj.visible}>
             Show in Render:<input type="checkbox">
             Selectable:<input type="checkbox">
         {/if}
     </div>
-    {/if}
-</div>
+</CollapsePanelComponent>
+
+
+
+        
+

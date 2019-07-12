@@ -1,13 +1,11 @@
 <script>
-    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
+    import { onMount, onDestroy } from 'svelte'
     import { generateId } from '../helper/generateid.js';
-    //import mjs from '../../mjs.js';
-    const dispatch = createEventDispatcher();
 
     let idcontent = generateId(20);
     let elementcontent;
 
-    function handle_autoresize_resize(event){
+    function handle_auto_resize(event){
         if(elementcontent == null){
             return;
         }
@@ -20,18 +18,13 @@
     onMount(() => {
         //console.log("mount");
         elementcontent = document.getElementById(idcontent);
-        window.addEventListener('resize', handle_autoresize_resize);
-        //activeobject = mjs.context.view_layer.objects.active;
-        handle_objectdata_resize();
-    });
-
-    afterUpdate(() => {
-        //console.log("afterUpdate");
+        handle_auto_resize();
+        window.addEventListener('resize', handle_auto_resize);
     });
 
     onDestroy(() => {
         //console.log("onDestroy");
-        window.removeEventListener('resize', handle_autoresize_resize);
+        window.removeEventListener('resize', handle_auto_resize);
     });
 </script>
 
@@ -42,5 +35,5 @@
     }
 </style>
 <div id="{idcontent}" class="autoresizediv">
-
+    <slot></slot>
 </div>

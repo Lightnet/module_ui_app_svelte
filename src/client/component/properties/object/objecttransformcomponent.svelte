@@ -1,5 +1,6 @@
 <script>
     //import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
+    import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
     //import { UserName } from '../../stores.js';
 
     export let obj;
@@ -30,31 +31,16 @@
 </script>
 
 <style>
-
-    .panel{
-        width: 100%;
-    }
     input{
         /*background-color:grey;*/
         font-size: 12px;
         height:22px;
     }
-
-    .header{
-        background-color: lightblue;
-        width:100%;
-    }
-    .context{
-        background-color:lightslategray;
-        width:100%;
-    }
 </style>
-<div class="panel">
-    <div class="header" on:click={togglepanal}>
-        Transform
-    </div>
-    {#if btogglepanel}
-    <div class="context">
+<CollapsePanelComponent>
+    <span slot="header"> Transform </span>
+
+    <div slot="content"> 
         {#if obj.name != null}
             <label> Location:
             x:<input bind:value={obj.position.x}>
@@ -75,5 +61,7 @@
             </label>
         {/if}
     </div>
-    {/if}
-</div>
+</CollapsePanelComponent>
+
+
+

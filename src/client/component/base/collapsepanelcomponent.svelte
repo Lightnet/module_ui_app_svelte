@@ -36,8 +36,12 @@
     .header{
         background-color: lightblue;
         width:100%;
+        height:10px;
         cursor: pointer;
+        padding: 0px 0px 10px 4px;
+        font-size: 12px;
     }
+    
     .context{
         background-color:lightslategray;
         width:100%;

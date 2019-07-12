@@ -1,6 +1,7 @@
 <script>
     //import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     //import { UserName } from '../../stores.js';
+    import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
 
     export let obj;
     export let btogglepanel = true;
@@ -42,35 +43,23 @@
         background-color: lightslategrey;
     }
 
-    .panel{
-        width: 100%;
-    }
-
     input{
         /*background-color:grey;*/
         font-size: 12px;
         height:22px;
     }
 
-    .header{
-        background-color: lightblue;
-        width:100%;
-        cursor: pointer;
-    }
-    .context{
-        background-color:lightslategray;
-        width:100%;
-    }
 </style>
-<div class="panel">
-    <div class="header" on:click={togglepanal}>
-        <i class="fa {btogglepanel == true ? "fa-caret-down" : "fa-caret-right"}"></i> Collections
-    </div>
-    {#if btogglepanel}
-    <div class="context">
+<CollapsePanelComponent>
+    <span slot="header"> Collections </span>
+
+    <div slot="content"> 
         {#if obj != null}
             <button> Add to Collection</button>
         {/if}
     </div>
-    {/if}
-</div>
+</CollapsePanelComponent>
+
+
+
+

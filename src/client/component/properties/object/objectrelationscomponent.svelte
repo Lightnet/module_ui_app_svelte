@@ -2,7 +2,7 @@
     //import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     //import { UserName } from '../../stores.js';
 
-    import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte'
+    import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
 
     export let obj;
     export let btogglepanel = true;
@@ -32,45 +32,19 @@
 </script>
 
 <style>
-
-    .panel{
-        width: 100%;
-    }
     input{
         /*background-color:grey;*/
         font-size: 12px;
         height:22px;
     }
-
-    .header{
-        background-color: lightblue;
-        width:100%;
-    }
-    .context{
-        background-color:lightslategray;
-        width:100%;
-    }
 </style>
 <CollapsePanelComponent>
     <span slot="header"> Relations </span>
 
-    <div slot="content"> Test 
-    
-    </div>
-</CollapsePanelComponent>
-
-<!--
-<div class="panel">
-    <div class="header" on:click={togglepanal}>
-        Relations
-    </div>
-    {#if btogglepanel}
-    <div class="context">
+    <div slot="content"> 
         {#if obj != null}
             Parent:
             <br>Parent Type:
         {/if}
     </div>
-    {/if}
-</div>
--->
+</CollapsePanelComponent>

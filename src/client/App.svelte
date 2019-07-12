@@ -11,7 +11,6 @@
 	import NavFooterComponent from './component/mainwindow/navfootercomponent.svelte'
 	import SplitterComponent from './component/base/splittercomponent.svelte'
 	import ContextMenuComponent from './component/base/contextmenucomponent.svelte'
-	//import Scontext from './component/base/scontext.svelte'
 	import DivDividerComponent from './component/base/divdividercomponent.svelte'
 	import DivDividerVComponent from './component/base/sdivdividerv.svelte'
 	import DivDividerHComponent from './component/base/sdivdividerh.svelte'
@@ -79,6 +78,10 @@
 		cube.name = "Cube";
 		scene.add( cube );
 
+		//let cube2 = new THREE.Mesh( geometry, material );
+		//cube2.name = "Cube"
+		//cube.add(cube2)
+
 		let camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 		camera.name = "PerspectiveCamera";
 		scene.add( camera );
@@ -88,7 +91,7 @@
 		light.position.set(-100,200,100);
 		light.name = "PointLight";
 		scene.add(light);
-		console.log(THREE);
+		//console.log(THREE);
 
 
 		//let sky = new THREE.Sky();

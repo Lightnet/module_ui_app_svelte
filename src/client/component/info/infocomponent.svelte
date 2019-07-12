@@ -1,8 +1,8 @@
 <script>
-    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
+    import { onMount, onDestroy, createEventDispatcher } from 'svelte'
     import { generateId } from '../helper/generateid.js';
+    //import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
     import mjs from '../../mjs.js';
-
     //const dispatch = createEventDispatcher();
 
     let idcontent = generateId(20);
@@ -26,10 +26,6 @@
         //activeobject = mjs.context.view_layer.objects.active;
     });
 
-    //afterUpdate(() => {
-        //console.log("afterUpdate");
-    //});
-
     onDestroy(() => {
         //console.log("onDestroy");
         window.removeEventListener('resize', handle_info_resize);
@@ -44,6 +40,7 @@
 <style>
 
 </style>
-<div  id="{idcontent}" on:mousemove={handle_mousemove}>
+
+<div id="{idcontent}" on:mousemove={handle_mousemove}>
     Info
 </div>

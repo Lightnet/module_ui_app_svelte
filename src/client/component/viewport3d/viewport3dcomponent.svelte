@@ -51,7 +51,7 @@
         elementcontent = document.getElementById(idcontent);
         window.addEventListener('resize', handle_viewport3d_resize);
         let ascene = document.querySelector('a-scene').object3D;
-        console.dir(ascene);
+        //console.dir(ascene);
         //console.log(scene);
         ascene.add(scene);
     });
