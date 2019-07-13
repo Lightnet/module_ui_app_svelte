@@ -3,7 +3,8 @@
 // server.js
 // where your node app starts
 //===============================================
-//const path = require('path');
+const fs = require('fs');
+var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
@@ -34,6 +35,38 @@ app.use(function(req, res, next) {
 app.use(Gun.serve);
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
+
+var dir = path.join(__dirname, 'public');
+var mime = {
+  html: 'text/html',
+  txt: 'text/plain',
+  css: 'text/css',
+  gif: 'image/gif',
+  jpg: 'image/jpeg',
+  png: 'image/png',
+  svg: 'image/svg+xml',
+  js: 'application/javascript'
+};
+
+app.get('*', function (req, res) {
+  var file = path.join(dir, req.path.replace(/\/$/, '/index.html'));
+  console.log(file);
+  if (file.indexOf(dir + path.sep) !== 0) {
+      return res.status(403).end('Forbidden');
+  }
+  var type = mime[path.extname(file).slice(1)] || 'text/plain';
+  console.log(type);
+  var s = fs.createReadStream(file);
+  s.on('open', function () {
+      res.set('Content-Type', type);
+      s.pipe(res);
+  });
+  s.on('error', function () {
+      res.set('Content-Type', 'text/plain');
+      res.status(404).end('Not found');
+  });
+});
+
 
 // http://expressjs.com/en/starter/basic-routing.html
 //app.get("/", function (request, response) {

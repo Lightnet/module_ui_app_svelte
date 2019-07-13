@@ -16,6 +16,7 @@
     let screenregion2;
     let screen2 = "properties";
     //let screen2 = "outliner"
+    //screen2 = "tools"
 
     function handle_layout_resize(event){
         //console.log("resize");

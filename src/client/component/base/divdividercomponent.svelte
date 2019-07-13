@@ -14,6 +14,7 @@
     let id2 = generateId(20);
     let screen2 = "properties";
     //let screen2 = "outliner"
+    //screen2 = "tools"
 
     function handle_divider_resize(event){
         //console.log("resize");

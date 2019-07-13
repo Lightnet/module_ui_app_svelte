@@ -144,8 +144,14 @@ function copy_css(){
         .pipe(gulp.dest('public/'));
 }
 
+function copy_svg(){
+    return gulp.src('src/client/icons/*.svg')
+        .pipe(gulp.dest('public/'));
+}
+
 exports.copy_html = copy_html;
 exports.copy_css = copy_css;
+exports.copy_svg = copy_svg;
 
 exports.cleanbundle = cleanbundle;
 exports.frontrollup_build = frontrollup_build;
@@ -156,9 +162,9 @@ exports.refreshbrowser = refreshbrowser;
 exports.watch = watch;
 exports.browser_sync = browser_sync;
 
-const build = gulp.series(frontrollup_build, backend_build, copy_css, copy_html, watch, serve, browser_sync);
+const build = gulp.series(frontrollup_build, backend_build, copy_css, copy_html, copy_svg, watch, serve, browser_sync);
 
-const buildscript = gulp.series( frontrollup_build, backend_build, copy_css, copy_html);
+const buildscript = gulp.series( frontrollup_build, backend_build, copy_css, copy_svg, copy_html);
 exports.buildscript = buildscript;
 
 /*

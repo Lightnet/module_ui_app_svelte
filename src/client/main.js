@@ -9,7 +9,8 @@
  */
 
 import App from './App.svelte';
-import svelte from 'svelte/compiler';
+//import App from './Test.svelte';
+//import svelte from 'svelte/compiler';
 //console.log(`running svelte version ${svelte.VERSION}`);
 
 //import {StringProperty} from './component/props/StringProperty'

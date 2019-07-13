@@ -23,6 +23,22 @@
     import WorldComponent from './worldcomponent.svelte';
     import ViewlayerComponent from './viewlayercomponent.svelte';
 
+    import B280X1 from '../icon/b280X1.svelte';
+    import B280X2 from '../icon/b280X2.svelte';
+    import B280X3 from '../icon/b280X3.svelte';
+    import B280X4 from '../icon/b280X4.svelte';
+    import B280X5 from '../icon/b280X5.svelte';
+    import B280X20 from '../icon/b280X20.svelte';
+
+    import B280AA2 from '../icon/b280AA2.svelte';
+    import B280AA3 from '../icon/b280AA3.svelte';
+    import B280AA6 from '../icon/b280AA6.svelte';
+    import B280AA7 from '../icon/b280AA7.svelte';
+    import B280AA11 from '../icon/b280AA11.svelte';
+    import B280AA12 from '../icon/b280AA12.svelte';
+    import B280AA15 from '../icon/b280AA15.svelte';
+    import B280AA17 from '../icon/b280AA17.svelte';
+
     const dispatch = createEventDispatcher();
 
     let idtab = generateId(20);
@@ -79,7 +95,7 @@
         //console.log(elementtab.style.width);
         //console.log(elementtab.clientWidth);
         elementtab.style.width = '32px';
-
+        /*
         itemtabs = [
             {sm_label:"Active Tool and Workspace Setting",sm_context:"TOOLS",sm_icon:"fas fa-tools"},
             {sm_label:"Render",sm_context:"RENDER",sm_icon:"fa fa-desktop"},
@@ -95,6 +111,26 @@
             {sm_label:"Object Data",sm_context:"OBJECTDATA",sm_icon:"fab fa-rev"},
             {sm_label:"Material",sm_context:"MATERIAL",sm_icon:"fab fa-dribbble"},
             {sm_label:"Texture",sm_context:"TEXTURE",sm_icon:"fas fa-chess-board"}
+        ];
+        */
+
+        itemtabs = [
+            
+            {sm_label:"Active Tool and Workspace Setting",sm_context:"TOOLS",sm_icon:B280AA15},
+            {sm_label:"Render",sm_context:"RENDER",sm_icon:B280AA6},
+            {sm_label:"Output",sm_context:"OUTPUT",sm_icon:B280AA7},
+            {sm_label:"Viewlayer",sm_context:"VIEWLAYER",sm_icon:B280X2},
+            {sm_label:"Scene",sm_context:"SCENE",sm_icon:B280X1},
+            {sm_label:"World",sm_context:"WORLD",sm_icon:B280X3},
+            {sm_label:"Object",sm_context:"OBJECT",sm_icon:B280X4},
+            {sm_label:"Modifiers",sm_context:"MODIFIERS",sm_icon:B280AA17},
+            {sm_label:"Particles",sm_context:"PARTICLES",sm_icon:B280AA11},
+            {sm_label:"Physics",sm_context:"PHYSICS",sm_icon:B280AA12},
+            {sm_label:"Object Constraint",sm_context:"OBJECTCONSTRAINT",sm_icon:B280X20},
+            {sm_label:"Object Data",sm_context:"OBJECTDATA",sm_icon:B280X5},
+            {sm_label:"Material",sm_context:"MATERIAL",sm_icon:B280AA2},
+            {sm_label:"Texture",sm_context:"TEXTURE",sm_icon:B280AA3}
+            
         ];
         //fixed odd resize when swtiching views 
         window.dispatchEvent(new Event('resize'));
@@ -199,6 +235,7 @@
         width:28px;
         background-color:#2b2b2b;
         padding: 0px 0px 0px 0px;
+        display:block;
     }
 
     .active, .tabbutton:hover{
@@ -254,7 +291,11 @@
         
         {#each itemtabs as tab }
             <button class="tabbutton tooltip {context === tab.sm_context ? 'active' : ''}" on:mousemove={handle_mousemove} on:click={()=>{tabselect(tab.sm_context)}}>
+                <!--
                 <i class="{tab.sm_icon}"></i>
+                -->
+                <svelte:component this={tab.sm_icon} on:click={()=>{tabselect(tab.sm_context)}} />
+
                 <span class="tooltiptext" style="top:{m.y}px;left:{m.x}px;">{tab.sm_label}</span>
             </button>
         {/each}

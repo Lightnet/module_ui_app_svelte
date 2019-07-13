@@ -33,6 +33,9 @@
         height:100%;
         width:100%;
     }
+    div{
+        color: azure;
+    }
 </style>
 <div id="{idcontent}" class="autoresizediv">
     <slot></slot>

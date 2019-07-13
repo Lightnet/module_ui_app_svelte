@@ -54,3 +54,4 @@ Links:
  * 
  * 
  * https://svelte.dev/examples#svelte-component
+ * https://css-tricks.com/using-svg/

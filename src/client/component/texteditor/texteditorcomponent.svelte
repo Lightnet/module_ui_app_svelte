@@ -41,10 +41,6 @@
         outputscript = result.js.code;
     }
 
-    //afterUpdate(() => {
-        //console.log("afterUpdate")
-    //});
-
     onDestroy(() => {
         //console.log("onDestroy");
         window.removeEventListener('resize', handle_texteditor_resize);
