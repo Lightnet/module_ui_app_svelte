@@ -57,16 +57,7 @@
         position:absolute;
         overflow: hidden;
     }
-    /*
-    .screenregion2 {
-		background-color:grey;
-        height:45%;
-        width:100%;
-        float:left;
-        position:absolute;
-        overflow: hidden;
-    }
-    */
+    
 </style>
 <div id="{idcontent}" class="panelregion">
     <div id="{id1}" class="screenregion">

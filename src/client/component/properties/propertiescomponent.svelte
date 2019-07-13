@@ -115,7 +115,6 @@
         */
 
         itemtabs = [
-            
             {sm_label:"Active Tool and Workspace Setting",sm_context:"TOOLS",sm_icon:B280AA15},
             {sm_label:"Render",sm_context:"RENDER",sm_icon:B280AA6},
             {sm_label:"Output",sm_context:"OUTPUT",sm_icon:B280AA7},

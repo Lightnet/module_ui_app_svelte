@@ -51,7 +51,8 @@
         m.x = event.clientX;
         m.y = event.clientY;
         //console.log(m);
-        if((bresize == true)&&(bhorizontal == true)){
+        //if((bresize == true)&&(bhorizontal == true)){
+        if(bhorizontal == true){
             let parent = splitter.parentNode;
             last_x = m.x - parent.offsetLeft;
             if(last_x < 0){
@@ -63,7 +64,8 @@
             splitter.style.marginLeft = m.x - parent.offsetLeft + 'px';
             resetPosition();
         }
-        if((bresize == true)&&(bhorizontal == false)){
+        //if((bresize == true)&&(bhorizontal == false)){
+        if(bhorizontal == false){
             if(event.clientY){
                 let parent = splitter.parentNode;
                 last_y = m.y - parent.offsetTop;
@@ -86,21 +88,41 @@
         let parent = splitter.parentNode;
         window_width = parent.clientWidth;
         window_height = parent.clientHeight;
-
-        if(bhorizontal == true){
-            let dx = last_x;
-            cont1.style.width=dx+"px";
-            dx += splitter.clientWidth;
-            cont2.style.marginLeft=dx+"px";
-            dx = window_width - dx;
-            cont2.style.width=dx+"px";
+        if(bresize == true){
+            if(bhorizontal == true){
+                let dx = last_x;
+                cont1.style.width=dx+"px";
+                dx += splitter.clientWidth;
+                cont2.style.marginLeft=dx+"px";
+                dx = window_width - dx;
+                cont2.style.width=dx+"px";
+            }else{
+                let dy = last_y;
+                cont1.style.height=dy+"px";
+                dy += splitter.clientHeight
+                cont2.style.marginTop=dy+"px";
+                dy = window_height - dy;
+                cont2.style.height=dy+"px";
+            }
         }else{
-            let dy = last_y;
-            cont1.style.height=dy+"px";
-            dy += splitter.clientHeight
-            cont2.style.marginTop=dy+"px";
-            dy = window_height - dy;
-            cont2.style.height=dy+"px";
+            if(cont1 == null){
+                return;
+            }
+            if(bhorizontal == true){
+                let dx = last_x;
+                //cont1.style.width=dx+"px";
+                dx += splitter.clientWidth;
+                cont1.style.marginLeft=dx+"px";
+                dx = window_width - dx;
+                cont1.style.width=dx-splitter.clientWidth+"px";
+            }else{
+                let dy = last_y;
+                //cont1.style.height=dy+"px";
+                dy += splitter.clientHeight
+                cont1.style.marginTop=dy+"px";
+                dy = window_height - dy;
+                cont1.style.height=dy-splitter.clientHeight+"px";
+            }
         }
         //window.dispatchEvent(new Event('resize')); //overload not used here
     }
@@ -179,11 +201,11 @@
         
         //console.log(splitter.style.height)
         //console.log(splitter.style.width)
-        if(bresize){
+        //if(bresize){
             resetPosition();
             window.addEventListener('resize', resetPosition);
             window.dispatchEvent(new Event('resize'));
-        }
+        //}
     });
 
     afterUpdate(()=>{

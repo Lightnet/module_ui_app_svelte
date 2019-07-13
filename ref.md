@@ -55,3 +55,16 @@ Links:
  * 
  * https://svelte.dev/examples#svelte-component
  * https://css-tricks.com/using-svg/
+ * 
+ * https://enlight.nyc/projects/code-editor/
+ * 
+ * 
+ * https://codepen.io/xgundam05/pen/KjqJn node editor simple svg
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 

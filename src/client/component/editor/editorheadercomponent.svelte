@@ -46,24 +46,35 @@
 
         //itemlist['imageeditor'] = {};
         //itemlist['imageeditor'].sm_label = 'imageeditor';
+        //itemlist['imageeditor'].sm_context = 'imageeditor';
 
         //itemlist['uveditor'] = {};
         //itemlist['uveditor'].sm_label = 'uveditor';
+        //itemlist['uveditor'].sm_context = 'uveditor';
 
         //itemlist['shadereditor'] = {};
         //itemlist['shadereditor'].sm_label = 'shadereditor';
+        //itemlist['shadereditor'].sm_context = 'shadereditor';
 
         //itemlist['compositor'] = {};
         //itemlist['compositor'].sm_label = 'compositor';
+        //itemlist['compositor'].sm_context = 'compositor';
+
+        itemlist['logicnodeeditor'] = {};
+        itemlist['logicnodeeditor'].sm_label = 'Logic Node Editor';
+        itemlist['logicnodeeditor'].sm_context = 'logicnodeeditor';
 
         //itemlist['texturenodeeditor'] = {};
         //itemlist['texturenodeeditor'].sm_label = 'texturenodeeditor';
+        //itemlist['texturenodeeditor'].sm_context = 'texturenodeeditor';
 
         //itemlist['timeline'] = {};
         //itemlist['timeline'].sm_label = 'timeline';
+        //itemlist['timeline'].sm_context = 'timeline';
 
         //itemlist['grapheditor'] = {};
         //itemlist['grapheditor'].sm_label = 'grapheditor';
+        //itemlist['grapheditor'].sm_context = 'grapheditor';
 
         itemlist['texteditor'] = {};
         itemlist['texteditor'].sm_label = 'Text Editor';

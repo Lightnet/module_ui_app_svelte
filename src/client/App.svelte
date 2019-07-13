@@ -15,6 +15,8 @@
 	import DivDividerVComponent from './component/base/sdivdividerv.svelte'
 	import DivDividerHComponent from './component/base/sdivdividerh.svelte'
 
+	import LayoutLogicNodeEditorComponent from './component/base/layoutlogicnodeeditorcomponent.svelte'
+
 	import DivDividerOffSetHComponent from './component/base/testoffsetdividercomponent.svelte'
 
 	import TestDivideHComponent from './component/base/testdividecomponent.svelte'
@@ -31,6 +33,7 @@
 	viewworkspace = "layout";
 	//viewworkspace = "testdivide";
 	//viewworkspace = "testoffsetdivide";
+	viewworkspace = "logicnodeeditor";
 
 	let elementheader;
 	let elementcontent;
@@ -160,6 +163,10 @@
 
 		{#if viewworkspace == "testoffsetdivide"}
 			<DivDividerOffSetHComponent></DivDividerOffSetHComponent>
+		{/if}
+
+		{#if viewworkspace == "logicnodeeditor"}
+			<LayoutLogicNodeEditorComponent></LayoutLogicNodeEditorComponent>
 		{/if}
 
 	</div>

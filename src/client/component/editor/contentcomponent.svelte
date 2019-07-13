@@ -1,15 +1,16 @@
 <script>
-    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
+    import { onMount, onDestroy, createEventDispatcher } from 'svelte'
 
     import Viewport3DComponent from '../viewport3d/viewport3dcomponent.svelte';
-    import FileBrowserComponent from '../filebrowser/filebrowsercomponent.svelte';
-    import InfoComponent from '../info/infocomponent.svelte';
-    import OutlinerComponent from '../outliner/outlinercomponent.svelte';
-    import PreferencesComponent from '../preferences/preferencescomponent.svelte';
-    import PropertiesComponent from '../properties/propertiescomponent.svelte';
+    import LogicNodeEditorComponent from '../logicnodeeditor/logicnodeeditorcomponent.svelte';
     import TexteditorComponent from '../texteditor/texteditorcomponent.svelte';
     import ScriptConsoleComponent from '../scriptconsole/scriptconsolecomponent.svelte';
-    
+    import InfoComponent from '../info/infocomponent.svelte';
+    import OutlinerComponent from '../outliner/outlinercomponent.svelte';
+    import PropertiesComponent from '../properties/propertiescomponent.svelte';
+    import FileBrowserComponent from '../filebrowser/filebrowsercomponent.svelte';
+    import PreferencesComponent from '../preferences/preferencescomponent.svelte';
+        
     import { generateId } from '../helper/generateid.js';
     //import mjs from '../../mjs.js';
 
@@ -37,10 +38,6 @@
         elementcontent.style.width = parent.clientWidth + 'px';
     }
 
-    afterUpdate(() => {
-
-    });
-
     onDestroy(() => {
         //console.log("onDestroy")
         window.removeEventListener('resize', handle_editorcontent_resize);
@@ -56,6 +53,10 @@
 <div id="{idcontent}" class="editorcontext">
     {#if viewport === '3dviewport'}
         <Viewport3DComponent />
+    {/if}
+
+    {#if viewport === 'logicnodeeditor'}
+        <LogicNodeEditorComponent />
     {/if}
 
     {#if viewport === 'texteditor'}

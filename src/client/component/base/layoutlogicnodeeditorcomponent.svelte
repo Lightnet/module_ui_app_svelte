@@ -1,20 +1,21 @@
 <script>
-    import {onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    import SplitterComponent from './splittercomponent.svelte';
+    import {onMount, onDestroy, createEventDispatcher } from 'svelte'
+    import SplitterComponent from './headersplittercomponent.svelte';
     import EditorComponent from '../editor/editorcomponent.svelte'
     import { generateId } from '../helper/generateid.js';
+    import mjs from '../../mjs.js';
 
     import DivDividerVComponent from './divdividervcomponent.svelte';
-    //const dispatch = createEventDispatcher();
 
     let idcontent = generateId(20);
     let elementcontent;
 
-    let id1 = generateId(20);
     let id2 = generateId(20);
-    let screen2 = "properties";
-    //let screen2 = "outliner"
-    //screen2 = "tools"
+    let screen = "properties";
+    //screen = "outliner"
+    screen = "logicnodeeditor"
+    let elementscreen;
+    
 
     function handle_divider_resize(event){
         //console.log("resize");
@@ -27,19 +28,22 @@
 
     onMount(() => {
         //console.log("mount");
-        window.addEventListener('resize', handle_divider_resize);
+        
         elementcontent = document.getElementById(idcontent);
-        handle_divider_resize()
-    });
+        handle_divider_resize();
+        elementscreen = document.getElementById(id2);
 
-    afterUpdate(()=>{
-        //console.log("afterUpdate");
+        window.addEventListener('resize', handle_divider_resize);
     });
 
     onDestroy(() => {
         //console.log("onDestroy")
         window.removeEventListener('resize', handle_divider_resize);
     });
+
+    function handle_screenregion(event){
+        mjs.context.screenregion = elementscreen;
+    }
 </script>
 
 <style>
@@ -53,22 +57,23 @@
 
     .screenregion {
 		background-color: dimgrey;
+        /*margin-top: +10px;*/
         height:100%;
-        width:45%;
+        width:100%;
         float:left;
         position:absolute;
     }
-    
+
+    .placeregion{
+        opacity: 0.5;
+        background-color: red;
+        filter: alpha(opacity=50); /* For IE8 and earlier */
+        position:absolute;
+    }
 </style>
 <div id="{idcontent}" class="panelregion">
-    <div id="{id1}" class="screenregion">
-        <EditorComponent viewport="3dviewport"></EditorComponent>
-    </div>
-    <SplitterComponent bhorizontal={true} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
-    <div id="{id2}" class="screenregion">
-        <DivDividerVComponent></DivDividerVComponent>
-        <!--
-        <EditorComponent viewport="{screen2}"></EditorComponent>
-        -->
+    <SplitterComponent bhorizontal={false} bresize={false} iddiv1={id2}></SplitterComponent>
+    <div id="{id2}" class="screenregion" on:mousemove={handle_screenregion}>
+        <EditorComponent viewport="{screen}"></EditorComponent>
     </div>
 </div>

@@ -61,6 +61,7 @@
 			{sm_label:"vertical", sm_context:"vertical",ops:workspace_view },
 			{sm_label:"test divide", sm_context:"testdivide",ops:workspace_view },
 			{sm_label:"test offset divide", sm_context:"testoffsetdivide",ops:workspace_view },
+			{sm_label:"logic node editor", sm_context:"logicnodeeditor",ops:workspace_view },
 			//{sm_label:"Layout", sm_context:"Layout",ops:workspace_view },
 			//{sm_label:"Modeling", sm_context:"Modeling",ops:workspace_view },
 			//{sm_label:"Sculpting", sm_context:"Sculpting",ops:workspace_view },
