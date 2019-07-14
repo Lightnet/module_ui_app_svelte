@@ -3,7 +3,7 @@
     //https://codepen.io/xgundam05/pen/KjqJn
     //https://jsbin.com/doyewususu/1/edit?html,css,js,output
 
-    import { onMount, onDestroy, createEventDispatcher } from 'svelte'
+    import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
     //import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
     import NodeComponent from './Node.svelte';
@@ -40,22 +40,37 @@
         //return svg;
     }
 
+    let mouse = {
+        x:0,
+        y:0
+    }
+
+    function svgmousemove(e){
+        //console.log(e);
+        //console.log(e.offsetX + ":" + e.offsetY);
+        mouse.x = e.offsetX;
+        mouse.y = e.offsetY;
+    }
+
     function setupsvg(){
         // SVG SETUP
         // ===========
         //svg = document.getElementById('drawing');
         //console.log(svg.namespaceURI);
         //svg.ns = svg.namespaceURI;
-        console.log(SVG)
+        //console.log(SVG)
         
         if (SVG.supported) {
-            var draw = SVG('drawing').size('100%', '100%').viewbox(0,0,800,1000)
-            var rect = draw.rect(100, 100)
-            console.log(draw);
+            //var draw = SVG('drawing').size('100%', '100%').viewbox(0,0,800,1000)
+            var draw = SVG('drawing').size('100%', '100%')
+            //var rect = draw.rect(100, 100);
+            //console.log(draw);
+            /*
             draw.click(function() {
                 console.log("click");
                 this.fill({ color: '#f06' });
             });
+            */
         } else {
             //alert('SVG not supported');
             console.log("error")
@@ -80,11 +95,11 @@
     //https://svgjs.com/docs/2.7/referencing/
     onMount(() => {
         //console.log("mount")
-        //setupsvg();
+        setupsvg();
         //SVG.on(document, 'DOMContentLoaded', function() {
             //let draw = SVG('drawing').size('100%', '100%').viewbox(0,0,800,1000)
             //let draw = SVG.get('#drawing').size('100%', '100%').viewbox(0,0,800,1000)
-            let draw = SVG.get('#drawing').size('100%', '100%');//.viewbox(0,0,800,1000)
+            //let draw = SVG.get('#drawing').size('100%', '100%');//.viewbox(0,0,800,1000)
             //let rect = draw.rect(100, 100);
             //rect.attr({ fill: '#f06' });
             //rect.click(function() {
@@ -126,7 +141,7 @@
 </style>
 
 <div id="{idcontent}" on:mousemove={handle_mousemove}>
-    <svg id="drawing">
+    <svg id="drawing" on:mousemove={svgmousemove}>
         <NodeComponent></NodeComponent>
     
     </svg>

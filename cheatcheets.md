@@ -56,3 +56,12 @@ var test = new object_ot_listener();
 ```
 
 
+# SVG
+```javascript
+rect {
+  /* doesn't work in IE/ early Edge */
+  transform: translate(140px, 105px)
+             scale(2 1.5)
+             translate(-140px, -105px);
+}
+```
