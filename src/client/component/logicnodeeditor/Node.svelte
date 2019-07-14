@@ -1,39 +1,49 @@
 <script>
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
-    let id = "ran";
+    import { generateId } from '../helper/generateid.js';
+    import SVG from 'svg.js';
+    import 'svg.panzoom.js';
+    const dispatch = createEventDispatcher();
+
+    let idcomponent = "node" + generateId(20);
     let elcontent;
     let bmove = false;
-    let mx;
-    let my;
+    //let mx;
+    //let my;
     let px= 0;
     let py=0;
-    let el;
+    //let el;
     let tx = 0;
     let ty = 0;
+    export let draw;
+    export let svg;
+
+    let height;
+    let width;
 
     function handle_mouseclick(e){
         //console.log(e);
         //console.log("test");
     }
 
-    function translate( _element , _x , _y )
-    {
-    var transform = _element.transform.baseVal.getItem(0);   
-    var mat = transform.matrix;   
-
-    mat = mat.translate( _x, _y );  
-    transform.setMatrix( mat );
-
+    // translate page to SVG co-ordinate
+    function svgPoint(element, x, y) {
+        var pt = svg.createSVGPoint();
+        pt.x = x + svg.getScreenCTM().e;//clientX + offset svg element position
+        pt.y = y + svg.getScreenCTM().f;
+        //console.log(pt);
+        //console.log(svg.getScreenCTM())
+        return pt.matrixTransform(element.getScreenCTM().inverse());
+        //return pt.matrixTransform(element.getScreenCTM());
     }
 
     function handle_mousedown(e){
         if(e.button == 0){
-            //el = e.target;
             bmove = true;
-            px = e.clientX - elcontent.getAttribute('x');
-            py = e.clientY - elcontent.getAttribute('y');
-            tx = elcontent.getAttribute('x');
-            ty = elcontent.getAttribute('y');
+            let svgP = svgPoint(elcontent, e.clientX, e.clientY);
+            //console.log(svgP);
+            px = svgP.x;
+            py = svgP.y;
         }
         window.addEventListener('mouseup',handle_mouseup);
         window.addEventListener('mousemove',handle_mousemove);
@@ -49,40 +59,71 @@
         window.removeEventListener('mousemove',handle_mousemove);
     }
 
+    function handle_mouseover(e){
+        //console.log("over");
+        dispatch("node","over");
+    }
+
+    function handle_mouseout(e){
+        //console.log("out");
+        dispatch("node","out");
+    }
+
     function handle_mousemove(e){
         //let x = e.clientX - e.pageX;
         //console.log(x)
         if(bmove){
-            elcontent.setAttribute ('x', e.clientX - px);
-            elcontent.setAttribute ('y', e.clientY - py);
-            tx = e.clientX - px;
-            ty = e.clientY - py;
-            //console.log(elcontent);
-            //translate(elcontent,e.clientX,e.clientY);
-        }
-    }
+            //let scale = draw.zoom();
+            let scale = 1;
+            //tx =  (e.clientX - px) ;
+            //ty =  (e.clientY - py) ;
+            //tx =  (e.clientX - px) * (scale);
+            //ty =  (e.clientY - py) * (scale);
 
-    function handle_loaded(e){
-        console.log("loaded");
+            //let newCoords = svg.viewbox().transform(new SVG.Matrix().translate(e.clientX, e.clientY))
+            //console.log(newCoords)
+            let offsetx = 0;//svg.getScreenCTM().e;
+            let offsety = 0;//svg.getScreenCTM().f;
+
+            //let svgP = svgPoint(svg, (e.clientX - px - offsetx ) * scale, (e.clientY - py - offsety) * scale);
+            let svgP = svgPoint(svg, (e.clientX - px - offsetx ) * scale, (e.clientY - py - offsety) * scale);
+            console.log(svgP);
+            tx = svgP.x;
+            ty = svgP.y;
+
+
+            //console.log(draw);
+            //console.log(svg.getScreenCTM())
+        }
+        //console.dir(svg);
+        //console.dir(draw);
     }
-    /*
-    on:mouseup={handle_mouseup}
-    on:mousemove={handle_mousemove}
-    */
 
    onMount(() => {
-       elcontent = document.getElementById(id);
-       console.log(elcontent);
+       elcontent = document.getElementById(idcomponent);
+       //draw = SVG(svg);
+       //console.log(draw);
+       //console.log(elcontent);
+
+       console.dir(svg);
+
+       //svg
    });
+
+   onDestroy(()=>{
+
+   });
+
 </script>
 <style>
 
 </style>
-<g id="ran" x="100" y="0" 
+<g id="{idcomponent}" x="0" y="0" 
     transform="translate({tx} {ty})"
     >
-
+    <!--
     <polygon id="target1" points="83.97 253.74 87.35 260.6 94.91 261.69 89.44 267.03 90.73 274.56 83.97 271.01 77.2 274.56 78.49 267.03 73.02 261.69 80.58 260.6 83.97 253.74" style="fill: gray"/>
+    -->
     <rect 
         id="Sqaure"
         x="0"
@@ -92,6 +133,8 @@
         fill="#333" 
         on:click={handle_mouseclick} 
         on:mousedown={handle_mousedown}
+        on:mouseover={handle_mouseover}
+        on:mouseout={handle_mouseout}
         >
     </rect>
 
@@ -106,6 +149,6 @@
         on:mousedown={handle_mousedown}
         >
     </rect>
-    <text x="10" y="10" style="stroke: #660000; fill: #660000">
-        Text grouped with shapes</text>
+    <text x="4" y="12" style="stroke: #660000; fill: #660000">
+        Node</text>
 </g>

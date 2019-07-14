@@ -49,6 +49,7 @@
     "style-loader": "0.23.1",
     "svelte-loader": "2.13.4",
     "svg.js": "^2.7.1",
+    "svg.panzoom.js": "^1.2.3",
     "webpack": "4.32.2",
     "webpack-cli": "3.3.2",
     "webpack-node-externals": "1.7.2",
