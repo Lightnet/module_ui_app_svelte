@@ -62,9 +62,7 @@ gulp default
 ```
 
 # Guide & Design:
-(need to fixed this later)
-
- It base on Blender3D python design. The root or static file from application to get context information from package file for javascript. It will be reworked once prototype built and tested function where code works in similar to python call. There no root access when creating Svelte 3 html with javascript setup to instance the object or html.
+ It base on Blender3D python design and as well layout UI but coded part in layout is not the same as used Svelte to instance the object or html render UI.
 
 ```javascript
 //svelte 3
@@ -76,11 +74,8 @@ mjs short is module javascript
 import bpy
 ```
 
- It will base on Blender3D python import bpy. But the javascript language is base on Svelte 3 and Babeljs. But the layout design have not worked on to create similar structure design yet. Although it will be hard to get access to parent to nodes linking to each other. That will take a while to figure how to clean way to access.
+ It will base on Blender3D python import bpy. The reason to have module design and layout is to keep things clean like Blender3D to sort out the best ways to access. The scene and object scene can be remade as long as the objects are saved in object data format like json.
 
- The reason to have module design and layout is to keep things clean like Blender3D to sort best to access. The scene and object scene can be remade as long as the objects are saved in object data format like json.
+ The static functions and variables will hold into one file to management objects, events, and instances as well holding data types. For current viewport screen when dealing with workspace area.
 
- The static function and variable is used for object management as well holding data. For current viewport screen when dealing with workspace area.
-
-# layout design
- It will be reworked using div attributes to tag check when split into div groups.
+ SVG html is being used for node editor current in prototype build to deal with vector grahpics. To develop logic, material, shader, and other things to save and load node editor blocks or visual programing.
