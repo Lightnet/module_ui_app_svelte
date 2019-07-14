@@ -16,6 +16,8 @@
 	import DivDividerHComponent from './component/base/sdivdividerh.svelte'
 
 	import LayoutLogicNodeEditorComponent from './component/base/layoutlogicnodeeditorcomponent.svelte'
+	import LayoutPreferencesComponent from './component/base/layoutpreferencescomponent.svelte'
+
 
 	import DivDividerOffSetHComponent from './component/base/testoffsetdividercomponent.svelte'
 
@@ -33,7 +35,8 @@
 	viewworkspace = "layout";
 	//viewworkspace = "testdivide";
 	//viewworkspace = "testoffsetdivide";
-	viewworkspace = "logicnodeeditor";
+	//viewworkspace = "logicnodeeditor";
+	viewworkspace = "preferences";
 
 	let elementheader;
 	let elementcontent;
@@ -168,6 +171,11 @@
 		{#if viewworkspace == "logicnodeeditor"}
 			<LayoutLogicNodeEditorComponent></LayoutLogicNodeEditorComponent>
 		{/if}
+
+		{#if viewworkspace == "preferences"}
+			<LayoutPreferencesComponent />
+		{/if}
+		
 
 	</div>
 	<NavFooterComponent idassign={idfooter}></NavFooterComponent>

@@ -3,7 +3,8 @@
 	//https://www.w3schools.com/howto/howto_js_dropdown.asp
 	import { onMount, setContext, createEventDispatcher } from 'svelte'
 	import Panel from '../base/panel.svelte'
-	import DropMenu from '../base/dropmenu.svelte';
+	//import DropMenu from '../base/dropmenu.svelte';
+	import DropMenuComponent from '../base/dropmenucomponent.svelte';
 
 	import mjs from '../../mjs.js';
 	//import { generateId } from '../helper/generateid.js';
@@ -62,6 +63,8 @@
 			{sm_label:"test divide", sm_context:"testdivide",ops:workspace_view },
 			{sm_label:"test offset divide", sm_context:"testoffsetdivide",ops:workspace_view },
 			{sm_label:"logic node editor", sm_context:"logicnodeeditor",ops:workspace_view },
+			{sm_label:"Preferences", sm_context:"preferences",ops:workspace_view },
+			
 			//{sm_label:"Layout", sm_context:"Layout",ops:workspace_view },
 			//{sm_label:"Modeling", sm_context:"Modeling",ops:workspace_view },
 			//{sm_label:"Sculpting", sm_context:"Sculpting",ops:workspace_view },
@@ -159,9 +162,6 @@
     	background-color: #212121;
     	font-family: Arial, Helvetica, sans-serif;
 		width:100%;
-		/*height:32px;*/
-		/*border-style: solid;*/
-		/*border-bottom-color: #666;*/
   	}
 
   	.navbar a {
@@ -180,8 +180,6 @@
 
 	.navbar a:active {
   		background-color: #333;
-  		/*box-shadow: 0 1px #666;*/
-  		/*transform: translateY(1px);*/
 	}
 
 	.workspace{
@@ -197,7 +195,6 @@
 	button{
 		border:none;
         outline: none;
-
         background-color:#333;
         font-size: 12px;
         color:white;
@@ -205,8 +202,6 @@
         padding: 0px 4px 0px 4px;
 		display: inline-block;
 		text-decoration: none;
-		/*border: none;*/
-		/*border-color: #666;*/
     }
 
 	button:hover{
@@ -215,8 +210,6 @@
 
 	button:active {
   		background-color: #333;
-  		/*box-shadow: 0 1px #666;*/
-  		/*transform: translateY(1px);*/
 	}
 
 </style>
@@ -224,34 +217,22 @@
 <div id="{idassign}" on:mousemove={handleMousemove} class="navbar">
 	<a href="/#"> {name} </a>
 
-	<DropMenu name="File" prefix="_menuheader" itemlist={filemenus}>
-	</DropMenu>
-	<DropMenu name="Edit" prefix="_menuheader" itemlist={editmenus}>
-	</DropMenu>
-	<DropMenu name="View" prefix="_menuheader" itemlist={viewmenus}>
-	</DropMenu>
+	<DropMenuComponent name="File" prefix="_menuheader" itemlist={filemenus} />
+	<DropMenuComponent name="Edit" prefix="_menuheader" itemlist={editmenus} />
+	<DropMenuComponent name="View" prefix="_menuheader" itemlist={viewmenus} />
 	<!--
-	<DropMenu name="Render" prefix="_menuheader" itemlist={rendermenus}>
-	</DropMenu>
+	<DropMenuComponent name="Render" prefix="_menuheader" itemlist={rendermenus} />
 	-->
-	<DropMenu name="Window" prefix="_menuheader" itemlist={windowmenus}>
-	</DropMenu>
-	<DropMenu name="Access" prefix="_menuheader" itemlist={accessmenus}>
-	</DropMenu>
-	<DropMenu name="Help" prefix="_menuheader" itemlist={helpmenus}>
-	</DropMenu>
+	<DropMenuComponent name="Window" prefix="_menuheader" itemlist={windowmenus} />
+	<DropMenuComponent name="Access" prefix="_menuheader" itemlist={accessmenus} />
+	<DropMenuComponent name="Help" prefix="_menuheader" itemlist={helpmenus} />
 	<a href="/#" on:click={testcall}>Test Call</a>
 	<a href="/#" on:click={checktemplatepanel}>Test Panel</a>
 
 	<div class="workspace">
-
 		{#each workspaces as workspace}
 			<button on:click={()=>{workspace.ops(workspace.sm_context)}}>{workspace.sm_label}</button>	
 		{/each}
 		<button>+</button>
-		<!--
-		<button>Test</button>
-		<button>+</button>
-		-->
 	</div>
 </div>

@@ -30,3 +30,13 @@ input text #595959
 header tab
  d #2b2b2b
  a #424242
+
+ perferences
+  bg #424242
+  
+tab bg #4b4b4b
+  tab button:
+   d #595959
+   h #686868
+   a #557bb6
+  

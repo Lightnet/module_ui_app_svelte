@@ -4,7 +4,7 @@
     /*
     Information: odd bug when resizing with layout setup not setup correctly.
     */
-    import { onMount, beforeUpdate, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
+    import { onMount, onDestroy, createEventDispatcher } from 'svelte'
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
 
@@ -95,24 +95,6 @@
         //console.log(elementtab.style.width);
         //console.log(elementtab.clientWidth);
         elementtab.style.width = '32px';
-        /*
-        itemtabs = [
-            {sm_label:"Active Tool and Workspace Setting",sm_context:"TOOLS",sm_icon:"fas fa-tools"},
-            {sm_label:"Render",sm_context:"RENDER",sm_icon:"fa fa-desktop"},
-            {sm_label:"Output",sm_context:"OUTPUT",sm_icon:"fa fa-print"},
-            {sm_label:"Viewlayer",sm_context:"VIEWLAYER",sm_icon:"fas fa-images"},
-            {sm_label:"Scene",sm_context:"SCENE",sm_icon:"fas fa-file-image"},
-            {sm_label:"World",sm_context:"WORLD",sm_icon:"fa fa-globe"},
-            {sm_label:"Object",sm_context:"OBJECT",sm_icon:"fa fa-vector-square"},
-            {sm_label:"Modifiers",sm_context:"MODIFIERS",sm_icon:"fa fa-wrench"},
-            {sm_label:"Particles",sm_context:"PARTICLES",sm_icon:"fab fa-hubspot"},
-            {sm_label:"Physics",sm_context:"PHYSICS",sm_icon:"fab fa-digital-ocean"},
-            {sm_label:"Object Constraint",sm_context:"OBJECTCONSTRAINT",sm_icon:"fas fa-map-marker-alt"},
-            {sm_label:"Object Data",sm_context:"OBJECTDATA",sm_icon:"fab fa-rev"},
-            {sm_label:"Material",sm_context:"MATERIAL",sm_icon:"fab fa-dribbble"},
-            {sm_label:"Texture",sm_context:"TEXTURE",sm_icon:"fas fa-chess-board"}
-        ];
-        */
 
         itemtabs = [
             {sm_label:"Active Tool and Workspace Setting",sm_context:"TOOLS",sm_icon:B280AA15},
@@ -133,14 +115,6 @@
         ];
         //fixed odd resize when swtiching views 
         window.dispatchEvent(new Event('resize'));
-    });
-
-    beforeUpdate(()=>{
-        //console.log("beforeUpdate");
-    });
-
-    afterUpdate(() => {
-        //console.log("afterUpdate");
     });
 
     function tabselect(value){
