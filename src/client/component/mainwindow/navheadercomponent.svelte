@@ -1,10 +1,11 @@
 <script>
 	//https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp
 	//https://www.w3schools.com/howto/howto_js_dropdown.asp
-	import { onMount, setContext, createEventDispatcher } from 'svelte'
+	import { onMount, onDestroy, createEventDispatcher } from 'svelte'
 	import Panel from '../base/panel.svelte'
 	//import DropMenu from '../base/dropmenu.svelte';
 	import DropMenuComponent from '../base/dropmenucomponent.svelte';
+	import DropMenuListComponent from '../base/dropmenulistcomponent.svelte';
 
 	import mjs from '../../mjs.js';
 	//import { generateId } from '../helper/generateid.js';
@@ -12,19 +13,27 @@
 	export let name;
 	export let idassign;
     const dispatch = createEventDispatcher();
-	let blogin = false;
 	//let menus = [];
 	let templatepanel;
 
-	let filemenus = {};
-	let editmenus = {};
-	let viewmenus = {};
-	let rendermenus = {};
-	let windowmenus = {};
-	let accessmenus = {};
-	let helpmenus = {};
+	let mainmenus = [];
+
+	let filemenus = [];
+	let editmenus = [];
+	let viewmenus = [];
+	let rendermenus = [];
+	let windowmenus = [];
+	let accessmenus = [];
+	let helpmenus = [];
 
 	let workspaces = [];
+	let CollapseFileMenu = false;
+
+	const CollapseFileMenuUnsubscribe = mjs.data.CollapseFileMenuMainHeader.subscribe(value => {
+        //console.log(event);
+        CollapseFileMenu = value;
+    });
+
 
 	function checktemplatepanel(){
 		//console.log("Test");
@@ -52,7 +61,7 @@
 		dispatch('workspace',value);
 	}
 
-	onMount(async () => {
+	onMount(() => {
 		//console.log(mjs.ops)
 		//console.log(mjs);
 
@@ -77,72 +86,53 @@
 			//{sm_label:"Scripting", sm_context:"Scripting",ops:workspace_view }
 		]
 
+		workspaces = workspaces;
+
 		for(var obj in mjs.ops){
 			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "FILE_MENU"){
-				//console.log(mjs.ops[obj].sm_label)
-				//filemenus.push(mjs.ops[obj])
-				filemenus[obj] = {}
-				filemenus[obj].sm_label = mjs.ops[obj].sm_label;
-				//filemenus[obj].sm_idname = mjs.ops[obj].sm_idname;
-				//mjs.ops[obj]
+				filemenus.push({sm_label:mjs.ops[obj].sm_label})
 			}
-		}
-		
-		for(var obj in mjs.ops){
-			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "EDIT_MENU"){
-				//editmenus[obj] = mjs.ops[obj]
-				editmenus[obj] = {}
-				editmenus[obj].sm_label = mjs.ops[obj].sm_label;
+				editmenus.push({sm_label:mjs.ops[obj].sm_label})
 			}
-		}
-
-		for(var obj in mjs.ops){
-			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "VIEW_MENU"){
-				//viewmenus[obj] = mjs.ops[obj]
-				viewmenus[obj] = {}
-				viewmenus[obj].sm_label = mjs.ops[obj].sm_label;
+				viewmenus.push({sm_label:mjs.ops[obj].sm_label})
 			}
-		}
-
-		for(var obj in mjs.ops){
-			//console.log(obj);
-			if(mjs.ops[obj].sm_context == "REDNER_MENU"){
-				//rendermenus[obj] = mjs.ops[obj]
-				rendermenus[obj] = {}
-				rendermenus[obj].sm_label = mjs.ops[obj].sm_label;
+			if(mjs.ops[obj].sm_context == "RENDER_MENU"){
+				rendermenus.push({sm_label:mjs.ops[obj].sm_label})
 			}
-		}
-
-		for(var obj in mjs.ops){
-			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "WINDOW_MENU"){
-				//windowmenus[obj] = mjs.ops[obj]
-				windowmenus[obj] = {}
-				windowmenus[obj].sm_label = mjs.ops[obj].sm_label;
+				windowmenus.push({sm_label:mjs.ops[obj].sm_label})
 			}
-		}
-
-		for(var obj in mjs.ops){
-			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "ACCESS_MENU"){
-				//accessmenus[obj] = mjs.ops[obj]
-				accessmenus[obj] = {}
-				accessmenus[obj].sm_label = mjs.ops[obj].sm_label;
+				accessmenus.push({sm_label:mjs.ops[obj].sm_label})
 			}
-		}
-
-		for(var obj in mjs.ops){
-			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "HELP_MENU"){
-				//helpmenus[obj] = mjs.ops[obj]
-				helpmenus[obj] = {}
-				helpmenus[obj].sm_label = mjs.ops[obj].sm_label;
+				helpmenus.push({sm_label:mjs.ops[obj].sm_label})
 			}
 		}
+		filemenus = filemenus;
+		editmenus = editmenus;
+		viewmenus = viewmenus;
+		rendermenus = rendermenus;
+		windowmenus = windowmenus;
+		helpmenus = helpmenus;
+
+		mainmenus.push({sm_label:"File",children:filemenus});
+		mainmenus.push({sm_label:"Edit",children:editmenus});
+		mainmenus.push({sm_label:"View",children:viewmenus});
+		mainmenus.push({sm_label:"Render",children:rendermenus});
+		mainmenus.push({sm_label:"Window",children:windowmenus});
+		mainmenus.push({sm_label:"Access",children:accessmenus});
+		mainmenus.push({sm_label:"Help",children:helpmenus});
+		mainmenus = mainmenus;
 	});
+
+	onDestroy(()=>{
+
+		CollapseFileMenuUnsubscribe();
+	})
 
 	function handleMousemove(event){
 		//console.log("header");
@@ -215,19 +205,29 @@
 </style>
 
 <div id="{idassign}" on:mousemove={handleMousemove} class="navbar">
-	<a href="/#"> {name} </a>
 
-	<DropMenuComponent name="File" prefix="_menuheader" itemlist={filemenus} />
-	<DropMenuComponent name="Edit" prefix="_menuheader" itemlist={editmenus} />
-	<DropMenuComponent name="View" prefix="_menuheader" itemlist={viewmenus} />
-	<!--
-	<DropMenuComponent name="Render" prefix="_menuheader" itemlist={rendermenus} />
-	-->
-	<DropMenuComponent name="Window" prefix="_menuheader" itemlist={windowmenus} />
-	<DropMenuComponent name="Access" prefix="_menuheader" itemlist={accessmenus} />
-	<DropMenuComponent name="Help" prefix="_menuheader" itemlist={helpmenus} />
-	<a href="/#" on:click={testcall}>Test Call</a>
-	<a href="/#" on:click={checktemplatepanel}>Test Panel</a>
+	{#if CollapseFileMenu == true}
+		<DropMenuListComponent name="Menu" prefix="_menuheader" itemlist={mainmenus} />
+		<!--
+		{#each Object.keys(mainmenus) as menu}
+			<a href="/#"> {mainmenus[menu].sm_label} </a>
+		{/each}
+		-->
+	
+	{:else}
+		<a href="/#"> {name} </a>
+		<DropMenuComponent name="File" prefix="_menuheader" itemlist={filemenus} />
+		<DropMenuComponent name="Edit" prefix="_menuheader" itemlist={editmenus} />
+		<DropMenuComponent name="View" prefix="_menuheader" itemlist={viewmenus} />
+		<!--
+		<DropMenuComponent name="Render" prefix="_menuheader" itemlist={rendermenus} />
+		-->
+		<DropMenuComponent name="Window" prefix="_menuheader" itemlist={windowmenus} />
+		<DropMenuComponent name="Access" prefix="_menuheader" itemlist={accessmenus} />
+		<DropMenuComponent name="Help" prefix="_menuheader" itemlist={helpmenus} />
+		<a href="/#" on:click={testcall}>Test Call</a>
+		<a href="/#" on:click={checktemplatepanel}>Test Panel</a>
+	{/if}
 
 	<div class="workspace">
 		{#each workspaces as workspace}
@@ -235,4 +235,6 @@
 		{/each}
 		<button>+</button>
 	</div>
+
+
 </div>

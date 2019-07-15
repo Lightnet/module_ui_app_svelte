@@ -9,6 +9,8 @@
  */
 
 import { Operator } from './operator';
+import { get } from 'svelte/store';
+import mjs from '../../mjs.js';
 
 export default class object_ot_headershowmenus extends Operator{
     
@@ -21,7 +23,10 @@ export default class object_ot_headershowmenus extends Operator{
 
     execute(context) {
         super.execute(context);
-        console.log("show menus")
+        console.log("show menus");
+        let btoogle = !get(mjs.data.CollapseFileMenuMainHeader);
+        //console.log(btoogle);
+        mjs.data.CollapseFileMenuMainHeader.set(btoogle);
     }
 
 }

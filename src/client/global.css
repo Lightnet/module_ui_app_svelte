@@ -5,7 +5,7 @@ html, body {
 }
 
 body {
-	color: #333;
+	color: #4b4b4b;
 	margin: 0;
 	padding: 0px;
 	box-sizing: border-box;
@@ -13,11 +13,13 @@ body {
 }
 
 a {
-	color: rgb(0,100,200);
+	color: white;
+	background: #3a3a3a;
 	text-decoration: none;
 }
 
 a:hover {
+	background: #3a3a3a;
 	text-decoration: underline;
 }
 
@@ -30,13 +32,15 @@ label {
 }
 
 input, button, select, textarea {
+	color: white;
 	font-family: inherit;
 	font-size: inherit;
 	padding: 0.4em;
 	margin: 0 0 0.5em 0;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
+	border:none;
+	/*box-sizing: border-box;*/
+	/*border: 1px solid #ccc;*/
+	/*border-radius: 2px;*/
 }
 
 input:disabled {
@@ -48,12 +52,12 @@ input[type="range"] {
 }
 
 button {
-	background-color: #f4f4f4;
+	background-color: #595959;
 	outline: none;
 }
 
 button:active {
-	background-color: #ddd;
+	background-color: #424242;
 }
 
 button:focus {
@@ -83,31 +87,3 @@ button:focus {
   position:absolute;
   cursor:n-resize;
 }
-/*
-.menu {
-	width: 120px;
-	z-index: 1;
-	box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
-	position: fixed;
-	display: none;
-	transition: 0.2s display ease-in;
-  
-	.menu-options {
-	  list-style: none;
-	  padding: 10px 0;
-	  z-index: 1;
-	  
-	  .menu-option {
-		font-weight: 500;
-		z-index: 1;
-		font-size: 14px;
-		padding: 10px 40px 10px 20px;
-		cursor: pointer;
-  
-		&:hover {
-		  background: rgba(0, 0, 0, 0.2);
-		}
-	  }
-	}
-  }
-*/

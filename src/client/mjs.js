@@ -58,6 +58,9 @@ data.nodes = nodes;
 data.actions = actions;
 data.animations = animations;
 
+export const CollapseFileMenuMainHeader = writable(true);
+data.CollapseFileMenuMainHeader = CollapseFileMenuMainHeader;
+
 context.screens = screens;
 context.scene = {};
 context.view_layer = view_layer;
