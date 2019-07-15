@@ -91,25 +91,25 @@
 		for(var obj in mjs.ops){
 			//console.log(obj);
 			if(mjs.ops[obj].sm_context == "FILE_MENU"){
-				filemenus.push({sm_label:mjs.ops[obj].sm_label})
+				filemenus.push(mjs.ops[obj]);
 			}
 			if(mjs.ops[obj].sm_context == "EDIT_MENU"){
-				editmenus.push({sm_label:mjs.ops[obj].sm_label})
+				editmenus.push(mjs.ops[obj]);
 			}
 			if(mjs.ops[obj].sm_context == "VIEW_MENU"){
-				viewmenus.push({sm_label:mjs.ops[obj].sm_label})
+				viewmenus.push(mjs.ops[obj]);
 			}
 			if(mjs.ops[obj].sm_context == "RENDER_MENU"){
-				rendermenus.push({sm_label:mjs.ops[obj].sm_label})
+				rendermenus.push(mjs.ops[obj]);
 			}
 			if(mjs.ops[obj].sm_context == "WINDOW_MENU"){
-				windowmenus.push({sm_label:mjs.ops[obj].sm_label})
+				windowmenus.push(mjs.ops[obj]);
 			}
 			if(mjs.ops[obj].sm_context == "ACCESS_MENU"){
-				accessmenus.push({sm_label:mjs.ops[obj].sm_label})
+				accessmenus.push(mjs.ops[obj]);
 			}
 			if(mjs.ops[obj].sm_context == "HELP_MENU"){
-				helpmenus.push({sm_label:mjs.ops[obj].sm_label})
+				helpmenus.push(mjs.ops[obj]);
 			}
 		}
 		filemenus = filemenus;

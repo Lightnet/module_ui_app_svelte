@@ -43,11 +43,15 @@
 
     let idtab = generateId(20);
     let elementtab;
+    let tabwidth = 32;
+    let viewcomponent;
+
     let idcontent = generateId(20);
     let elementcontent;
+
     let idcontext = generateId(20);
     let elementcontext;
-    let tabwidth = 32;
+    
     let m = {x:0, y:0};
 
     let activeobject;//props
@@ -97,21 +101,20 @@
         elementtab.style.width = '32px';
 
         itemtabs = [
-            {sm_label:"Active Tool and Workspace Setting",sm_context:"TOOLS",sm_icon:B280AA15},
-            {sm_label:"Render",sm_context:"RENDER",sm_icon:B280AA6},
-            {sm_label:"Output",sm_context:"OUTPUT",sm_icon:B280AA7},
-            {sm_label:"Viewlayer",sm_context:"VIEWLAYER",sm_icon:B280X2},
-            {sm_label:"Scene",sm_context:"SCENE",sm_icon:B280X1},
-            {sm_label:"World",sm_context:"WORLD",sm_icon:B280X3},
-            {sm_label:"Object",sm_context:"OBJECT",sm_icon:B280X4},
-            {sm_label:"Modifiers",sm_context:"MODIFIERS",sm_icon:B280AA17},
-            {sm_label:"Particles",sm_context:"PARTICLES",sm_icon:B280AA11},
-            {sm_label:"Physics",sm_context:"PHYSICS",sm_icon:B280AA12},
-            {sm_label:"Object Constraint",sm_context:"OBJECTCONSTRAINT",sm_icon:B280X20},
-            {sm_label:"Object Data",sm_context:"OBJECTDATA",sm_icon:B280X5},
-            {sm_label:"Material",sm_context:"MATERIAL",sm_icon:B280AA2},
-            {sm_label:"Texture",sm_context:"TEXTURE",sm_icon:B280AA3}
-            
+            {sm_label:"Active Tool and Workspace Setting",sm_context:"TOOLS",sm_component:ToolComponent,sm_icon:B280AA15},
+            {sm_label:"Render",sm_context:"RENDER",sm_component:RenderComponent,sm_icon:B280AA6},
+            {sm_label:"Output",sm_context:"OUTPUT",sm_component:OutputComponent,sm_icon:B280AA7},
+            {sm_label:"Viewlayer",sm_context:"VIEWLAYER",sm_component:ViewlayerComponent,sm_icon:B280X2},
+            {sm_label:"Scene",sm_context:"SCENE",sm_component:SceneComponent,sm_icon:B280X1},
+            {sm_label:"World",sm_context:"WORLD",sm_component:WorldComponent,sm_icon:B280X3},
+            {sm_label:"Object",sm_context:"OBJECT",sm_component:ObjectComponent,sm_icon:B280X4},
+            {sm_label:"Modifiers",sm_context:"MODIFIERS",sm_component:ModifiersComponent,sm_icon:B280AA17},
+            {sm_label:"Particles",sm_context:"PARTICLES",sm_component:ParticlesComponent,sm_icon:B280AA11},
+            {sm_label:"Physics",sm_context:"PHYSICS",sm_component:PhysicsComponent,sm_icon:B280AA12},
+            {sm_label:"Object Constraint",sm_context:"OBJECTCONSTRAINT",sm_component:ObjectconstraintComponent,sm_icon:B280X20},
+            {sm_label:"Object Data",sm_context:"OBJECTDATA",sm_component:ObjectdataComponent,sm_icon:B280X5},
+            {sm_label:"Material",sm_context:"MATERIAL",sm_component:MaterialComponent,sm_icon:B280AA2},
+            {sm_label:"Texture",sm_context:"TEXTURE",sm_component:TextureComponent,sm_icon:B280AA3}
         ];
         //fixed odd resize when swtiching views 
         window.dispatchEvent(new Event('resize'));
@@ -121,6 +124,13 @@
         //console.log(value);
         context = value;
         dispatch('context',value);
+
+        for(let i = 0; i < itemtabs.length; i++){
+            if(itemtabs[i].sm_context == context){
+                viewcomponent = itemtabs[i].sm_component;
+                break;
+            }
+        }
     }
 
     function handle_mousemove(event){
@@ -128,18 +138,11 @@
         //m.y = event.clientY;
         m.x = event.pageX - event.offsetX;
         m.y = event.pageY - event.offsetY - 32;
-        //console.log(event);
     }
 
-    //fa fa-bars
     onDestroy(() => {
-        //console.log("onDestroy");
         window.removeEventListener('resize', handle_props_resize);
     });
-    //tab
-    //{console.log(itemtabs)}
-    //{#each Object.keys(itemtabs) as tab }
-    //top:{m.y};left:{m.x};
 
     function handle_mouse_over(event){
         //console.log(m);
@@ -276,61 +279,9 @@
     </div>
 
     <div id="{idcontent}" class="dataprops">
-        
-        {#if context == 'MATERIAL'}
-            <MaterialComponent />
-        {/if}
 
-        {#if context == 'MODIFIERS'}
-            <ModifiersComponent />
-        {/if}
-
-        {#if context == 'OBJECT'}
-            <ObjectComponent />
-        {/if}
-
-        {#if context == 'OBJECTCONSTRAINT'}
-            <ObjectconstraintComponent />
-        {/if}
-
-        {#if context == 'OBJECTDATA'}
-            <ObjectdataComponent />
-        {/if}
-
-        {#if context == 'OUTPUT'}
-            <OutputComponent />
-        {/if}
-
-        {#if context == 'PARTICLES'}
-            <ParticlesComponent />
-        {/if}
-
-        {#if context == 'PHYSICS'}
-            <PhysicsComponent />
-        {/if}
-
-        {#if context == 'RENDER'}
-            <RenderComponent />
-        {/if}
-
-        {#if context == 'SCENE'}
-            <SceneComponent />
-        {/if}
-
-        {#if context == 'TEXTURE'}
-            <TextureComponent />
-        {/if}
-
-        {#if context == 'TOOLS'}
-            <ToolComponent />
-        {/if}
-
-        {#if context == 'WORLD'}
-            <WorldComponent />
-        {/if}
-
-        {#if context == 'VIEWLAYER'}
-            <ViewlayerComponent />
+        {#if viewcomponent !=null}
+            <svelte:component this={viewcomponent}/>
         {/if}
         
     </div>

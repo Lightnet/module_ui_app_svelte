@@ -18,6 +18,7 @@ export class Menu{
         this.sm_context = "";//not part of this just testing...
         this.sm_options = [];
         this.sm_translation_context = "Menu";
+        this.children = [];
     }
 
     __init__(){

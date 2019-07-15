@@ -27,6 +27,11 @@ import object_ot_filenew from './component/types/object_ot_filenew'
 import object_ot_filesave from './component/types/object_ot_filesave'
 import object_ot_filesaveas from './component/types/object_ot_filesaveas'
 import object_ot_fileopen from './component/types/object_ot_fileopen'
+import object_mt_fileexport from './component/types/object_mt_fileexport'
+import object_mt_fileimport from './component/types/object_mt_fileimport'
+
+import object_ot_exportobj from './component/types/object_ot_exportobj';
+
 //edit menu header
 import object_ot_editundo from './component/types/object_ot_editundo'
 import object_ot_editredo from './component/types/object_ot_editredo'
@@ -53,7 +58,6 @@ import object_ot_joinarea from './component/types/object_ot_joinarea'
 import object_ot_splitarea from './component/types/object_ot_splitarea'
 import object_ot_headershowmenus from './component/types/object_ot_headershowmenus'
 
-
 //ops.object_ot_test = new object_ot_test();
 //var menutest = new object_mt_test();
 
@@ -62,10 +66,15 @@ import object_ot_headershowmenus from './component/types/object_ot_headershowmen
 
 let register_class = utils.register_class;
 
+
+register_class(object_ot_exportobj);
+
 register_class(object_ot_filenew);
 register_class(object_ot_filesave);
 register_class(object_ot_filesaveas);
 register_class(object_ot_fileopen);
+register_class(object_mt_fileimport);
+register_class(object_mt_fileexport);
 register_class(object_ot_test);
 //register_class(Operator);
 register_class(object_ot_calltest);

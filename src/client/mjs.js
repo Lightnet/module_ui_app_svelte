@@ -113,6 +113,26 @@ export function register_class(obj){
             ops[tmp.sm_idname].sm_translation_context = tmp.sm_translation_context;
             //console.log("fun Operator found");
         }
+
+        if(tmp instanceof Menu){
+            //ops[tmp.sm_idname] = tmp;
+            ops[tmp.sm_idname] = function(args){
+                if(args == null){
+                    tmp.execute(context);
+                }
+                //this.obj = tmp;
+                return tmp;
+                //return this.obj;
+            }
+            ops[tmp.sm_idname].sm_label = tmp.sm_label;
+            ops[tmp.sm_idname].sm_context = tmp.sm_context;
+            ops[tmp.sm_idname].sm_options = tmp.sm_options;
+            ops[tmp.sm_idname].children = tmp.children;
+            ops[tmp.sm_idname].sm_translation_context = tmp.sm_translation_context;
+            //console.log("fun Operator found");
+        }
+
+
     }
 
     if (typeof(obj) == 'object'){

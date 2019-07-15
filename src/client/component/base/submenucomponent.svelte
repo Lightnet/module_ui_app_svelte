@@ -8,6 +8,7 @@
     export let name = "menu";
     export let children;
     export let active;
+    export let activeitem;
     //export let id = generateId(20);
     //export let prefix = generateId(20);
 
@@ -44,18 +45,15 @@
 		//console.log("toggle");
         btoggle = !btoggle;
     }
-    
+
+    function activemenu(obj){
+        activeitem = obj;
+    }
+
+    //{console.log(children[index].children)}
 </script>
 
 <style>
-    ul{
-        list-style: none;
-        display:none;/*hide*/
-        background-color: #333;
-        padding: 0;
-        list-style-type: none;
-    }
-
     a{
         float: none;
         font-size: 12px;
@@ -74,29 +72,46 @@
         background-color: #424242;
     }
 
+    ul{
+        background-color: #333;
+        padding: 0px 0px 0px 0px;
+        display:none;/*hide*/
+        list-style: none;
+        list-style-type: none;
+    }
+
     ul li{
+        width:128px;
+        height:22px;/* fixed height else auto when another ul */
+        margin: 0 0;
+        padding: 0px 0px 0px 0px;
+        list-style: none;
         display:block;
-        width:200px;
     }
 
     .dropdown-submenu {
         position: relative;
         /*position: inherit;*/
-        top:-30px;
+        top:-20px;
         left:128px;
         /*float: left;*/
     }
 </style>
 <ul class="dropdown-submenu" style="{active == true ? 'display:block;' : 'display:none;'}">
     {#each Object.keys(children) as index}
-        <li><a href="/#" >  {children[index].sm_label}</a>
-            <!--
+        <li><a href="/#" on:mouseover={()=>{activemenu(children[index])}}>  {children[index].sm_label}</a>
+            <!--{console.log(children[index].sm_label)}-->
             {#if children[index].children != null}
+                <!--{console.log(children[index].children)}-->
                 {#if children[index].children.length > 0}
-                    <SubmMenuComponent children={children[index].children}/>
+                    {#if children[index] == activeitem}
+                        <SubmMenuComponent children={children[index].children} active={true}/>
+                    {:else}
+                        <SubmMenuComponent children={children[index].children} active={false}/>
+                    {/if}    
                 {/if}
             {/if}
-            -->
+            
         </li>
     {/each}
 </ul>

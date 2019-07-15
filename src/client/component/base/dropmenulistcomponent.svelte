@@ -87,7 +87,7 @@
         display: none;
         position: absolute;
         background-color: #333;
-        min-width: 160px;
+        min-width: 128px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
     }
@@ -120,29 +120,18 @@
     }
 
     ul{
-        padding: 0;
+        padding: 0 0 0 0;
         list-style: none;
         list-style-type: none;
     }
 
     ul li {
-        height:32px;
+        height:22px;
         width:128px;
         margin: 0 0;
-        padding: 0 0;
+        padding: 0px 0px 0px 0px;
         list-style: none;
     }
-    /*
-    ul li ul li {
-        position: relative;
-        left:200px;
-    }
-
-    ul li ul li {
-        display:none;
-    }
-    */
-
 </style>
 
 <div class="dropdown">
