@@ -116,6 +116,8 @@
             {sm_label:"Material",sm_context:"MATERIAL",sm_component:MaterialComponent,sm_icon:B280AA2},
             {sm_label:"Texture",sm_context:"TEXTURE",sm_component:TextureComponent,sm_icon:B280AA3}
         ];
+
+        tabselect(context);
         //fixed odd resize when swtiching views 
         window.dispatchEvent(new Event('resize'));
     });

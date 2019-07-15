@@ -40,3 +40,7 @@ tab bg #4b4b4b
    h #686868
    a #557bb6
   
+Editor Type:
+ d # 212121
+ h # 5076b2
+ a # 5076b2

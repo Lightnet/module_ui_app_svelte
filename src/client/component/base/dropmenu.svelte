@@ -1,19 +1,14 @@
 <script>
     //https://stackoverflow.com/questions/42737693/is-it-possible-in-svelte-to-have-each-loops-with-two-way-binding-to-nested-obje
     import { onMount, onDestroy, createEventDispatcher } from 'svelte'
-    //import {  Sl_blogin } from '../../stores.js';
-
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
-
-    const dispatch = createEventDispatcher();
+    //const dispatch = createEventDispatcher();
 
     export let name = "menu";
     export let id = generateId(20);
     export let prefix = generateId(20);
-
-    export let itemlist = {};
-    //let items = {};
+    export let items = {};
 
     let btoggle = false;
 
@@ -30,21 +25,12 @@
 			}
 		}
     }
-
-    //window.onclick = onclick;
     
     onMount(()=>{
-        //console.log("mount");
         window.addEventListener("click",onclick);
-        //console.log(itemlist);
-        //items = itemlist;
-        //for(var item in itemlist){
-            //console.log(itemlist[item])
-        //}
     });
 
     onDestroy(()=>{
-        //console.log("destroy");
         window.removeEventListener("click",onclick);
     });
 
@@ -123,16 +109,11 @@
         <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content {btoggle === true ? 'show' : ''}" id="{id}">
-        {#each Object.keys(itemlist) as item}
-            <a href="/#" on:click={()=>{mjs.ops[item]()}}>  {itemlist[item].sm_label}</a>
+        {#each Object.keys(items) as item}
+            <a href="/#" on:click={()=>{mjs.ops[item]()}}>  {items[item].sm_label}</a>
             <!--
             <a href="/#" on:click={ itemlist[item] } > {itemlist[item]}  {itemlist[item].sm_label}</a>
             -->
         {/each}
-        <!--
-        <a href="/#">Link 1</a>
-        <a href="/#">Link 2</a>
-        <a href="/#">Link 3</a>
-        -->
     </div>
 </div>

@@ -58,7 +58,7 @@ data.nodes = nodes;
 data.actions = actions;
 data.animations = animations;
 
-export const CollapseFileMenuMainHeader = writable(true);
+export const CollapseFileMenuMainHeader = writable(false);
 data.CollapseFileMenuMainHeader = CollapseFileMenuMainHeader;
 
 context.screens = screens;

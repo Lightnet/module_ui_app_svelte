@@ -1,5 +1,5 @@
 <script>
-    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
+    import { onMount, onDestroy, createEventDispatcher } from 'svelte'
     import { generateId } from '../helper/generateid.js';
     import EditorHeaderComponent from './editorheadercomponent.svelte';
     import ContentComponent from './contentcomponent.svelte';
@@ -31,10 +31,6 @@
         elementcontent = document.getElementById(idcontent);
         window.addEventListener('resize', handle_editor_resize);
         handle_editor_resize();
-    });
-
-    afterUpdate(() => {
-        //console.log("afterUpdate");
     });
 
      onDestroy(() => {

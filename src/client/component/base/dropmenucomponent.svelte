@@ -8,8 +8,7 @@
     export let name = "menu";
     export let id = generateId(20);
     export let prefix = generateId(20);
-
-    export let itemlist = {};
+    export let items = {};
 
     let btoggle = false;
 
@@ -106,8 +105,8 @@
     <button id="{name}{prefix}" class="dropbtn" on:click={()=>{togglecontent()}}>{name}
     </button>
     <div class="dropdown-content {btoggle === true ? 'show' : ''}" id="{id}">
-        {#each Object.keys(itemlist) as item}
-            <a href="/#" on:click={()=>{mjs.ops[item]()}}>  {itemlist[item].sm_label}</a>
+        {#each Object.keys(items) as item}
+            <a href="/#" on:click={()=>{items[item]()}}>  {items[item].sm_label}</a>
         {/each}
     </div>
 </div>

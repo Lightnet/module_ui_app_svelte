@@ -7,6 +7,10 @@
     /*object{
         pointer-events: none;
     }*/
+    svg{
+        pointer-events: none;
+        float:left;
+    }
 </style>
 
 <svg height="20" with="20" viewBox="0 0 20 20">

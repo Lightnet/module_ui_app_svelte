@@ -17,7 +17,6 @@
 	let templatepanel;
 
 	let mainmenus = [];
-
 	let filemenus = [];
 	let editmenus = [];
 	let viewmenus = [];
@@ -66,12 +65,12 @@
 		//console.log(mjs);
 
 		workspaces = [
-			{sm_label:"layout", sm_context:"layout",ops:workspace_view },
-			{sm_label:"horizontal", sm_context:"horizontal",ops:workspace_view },
-			{sm_label:"vertical", sm_context:"vertical",ops:workspace_view },
-			{sm_label:"test divide", sm_context:"testdivide",ops:workspace_view },
-			{sm_label:"test offset divide", sm_context:"testoffsetdivide",ops:workspace_view },
-			{sm_label:"logic node editor", sm_context:"logicnodeeditor",ops:workspace_view },
+			{sm_label:"Layout", sm_context:"layout",ops:workspace_view },
+			{sm_label:"Horizontal", sm_context:"horizontal",ops:workspace_view },
+			{sm_label:"Vertical", sm_context:"vertical",ops:workspace_view },
+			{sm_label:"Test Divide", sm_context:"testdivide",ops:workspace_view },
+			{sm_label:"Test Offset divide", sm_context:"testoffsetdivide",ops:workspace_view },
+			{sm_label:"Logic Node Editor", sm_context:"logicnodeeditor",ops:workspace_view },
 			{sm_label:"Preferences", sm_context:"preferences",ops:workspace_view },
 			
 			//{sm_label:"Layout", sm_context:"Layout",ops:workspace_view },
@@ -207,26 +206,24 @@
 <div id="{idassign}" on:mousemove={handleMousemove} class="navbar">
 
 	{#if CollapseFileMenu == true}
-		<DropMenuListComponent name="Menu" prefix="_menuheader" itemlist={mainmenus} />
-		<!--
-		{#each Object.keys(mainmenus) as menu}
-			<a href="/#"> {mainmenus[menu].sm_label} </a>
-		{/each}
-		-->
-	
+
+		<DropMenuListComponent name="Menu" prefix="_menuheader" items={mainmenus} />	
+
 	{:else}
+
 		<a href="/#"> {name} </a>
-		<DropMenuComponent name="File" prefix="_menuheader" itemlist={filemenus} />
-		<DropMenuComponent name="Edit" prefix="_menuheader" itemlist={editmenus} />
-		<DropMenuComponent name="View" prefix="_menuheader" itemlist={viewmenus} />
+		<DropMenuComponent name="File" prefix="_menuheader" items={filemenus} />
+		<DropMenuComponent name="Edit" prefix="_menuheader" items={editmenus} />
+		<DropMenuComponent name="View" prefix="_menuheader" items={viewmenus} />
 		<!--
-		<DropMenuComponent name="Render" prefix="_menuheader" itemlist={rendermenus} />
+		<DropMenuComponent name="Render" prefix="_menuheader" items={rendermenus} />
 		-->
-		<DropMenuComponent name="Window" prefix="_menuheader" itemlist={windowmenus} />
-		<DropMenuComponent name="Access" prefix="_menuheader" itemlist={accessmenus} />
-		<DropMenuComponent name="Help" prefix="_menuheader" itemlist={helpmenus} />
+		<DropMenuComponent name="Window" prefix="_menuheader" items={windowmenus} />
+		<DropMenuComponent name="Access" prefix="_menuheader" items={accessmenus} />
+		<DropMenuComponent name="Help" prefix="_menuheader" items={helpmenus} />
 		<a href="/#" on:click={testcall}>Test Call</a>
 		<a href="/#" on:click={checktemplatepanel}>Test Panel</a>
+
 	{/if}
 
 	<div class="workspace">

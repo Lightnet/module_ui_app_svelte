@@ -9,11 +9,8 @@
     export let name = "menu";
     export let id = generateId(20);
     export let prefix = generateId(20);
-
-    export let itemlist = [];
-
+    export let items = [];
     let activeitem;
-
     let btoggle = false;
     //https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_js_dropdown_multilevel_css&stacked=h
 
@@ -33,10 +30,10 @@
     }
     
     onMount(()=>{
-        for(let i = 0; i < itemlist.length; i++){
-            itemlist[i].active = false;
+        for(let i = 0; i < items.length; i++){
+            items[i].active = false;
         }
-        itemlist = itemlist;
+        items = items;
 
         window.addEventListener("click",onclick);
     });
@@ -137,22 +134,22 @@
 <div class="dropdown">
     <button id="{name}{prefix}" class="dropbtn" on:click={()=>{togglecontent()}}> {name} </button>
     <ul class="dropdown-content {btoggle === true ? 'show' : ''}" id="{id}">
-        {#each Object.keys(itemlist) as item}
-            {#if itemlist[item].children.length > 0}
+        {#each Object.keys(items) as item}
+            {#if items[item].children.length > 0}
                 <li class="">
-                    <a class="" href="/#" on:mouseover={()=>{activemenu(itemlist[item])}}> {itemlist[item].sm_label}</a>
+                    <a class="" href="/#" on:mouseover={()=>{activemenu(items[item])}}> {items[item].sm_label}</a>
                     
-                    {#if itemlist[item].children.length > 0}
-                        {#if itemlist[item] == activeitem}
-                            <SubmMenuComponent children={itemlist[item].children} active={true}/>
+                    {#if items[item].children.length > 0}
+                        {#if items[item] == activeitem}
+                            <SubmMenuComponent items={items[item].children} active={true}/>
                         {:else}
-                            <SubmMenuComponent children={itemlist[item].children} active={false} />
+                            <SubmMenuComponent items={items[item].children} active={false} />
                         {/if}
                     {/if}
                     
                 </li>
             {:else}
-                <li><a href="/#" on:mouseover={()=>{activemenu(itemlist[item])}}> {itemlist[item].sm_label}</a></li>
+                <li><a href="/#" on:mouseover={()=>{activemenu(items[item])}}> {items[item].sm_label}</a></li>
             {/if}
 
         {/each}

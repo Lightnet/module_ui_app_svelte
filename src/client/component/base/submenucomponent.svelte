@@ -6,7 +6,7 @@
     import mjs from '../../mjs.js';
 
     export let name = "menu";
-    export let children;
+    export let items;
     export let active;
     export let activeitem;
     //export let id = generateId(20);
@@ -98,16 +98,16 @@
     }
 </style>
 <ul class="dropdown-submenu" style="{active == true ? 'display:block;' : 'display:none;'}">
-    {#each Object.keys(children) as index}
-        <li><a href="/#" on:mouseover={()=>{activemenu(children[index])}}>  {children[index].sm_label}</a>
+    {#each Object.keys(items) as index}
+        <li><a href="/#" on:mouseover={()=>{activemenu(items[index])}}>  {items[index].sm_label}</a>
             <!--{console.log(children[index].sm_label)}-->
-            {#if children[index].children != null}
+            {#if items[index].children != null}
                 <!--{console.log(children[index].children)}-->
-                {#if children[index].children.length > 0}
-                    {#if children[index] == activeitem}
-                        <SubmMenuComponent children={children[index].children} active={true}/>
+                {#if items[index].children.length > 0}
+                    {#if items[index] == activeitem}
+                        <SubmMenuComponent items={items[index].children} active={true}/>
                     {:else}
-                        <SubmMenuComponent children={children[index].children} active={false}/>
+                        <SubmMenuComponent items={items[index].children} active={false}/>
                     {/if}    
                 {/if}
             {/if}
