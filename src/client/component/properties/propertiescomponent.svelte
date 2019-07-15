@@ -269,11 +269,7 @@
         
         {#each itemtabs as tab }
             <button class="tabbutton tooltip {context === tab.sm_context ? 'active' : ''}" on:mousemove={handle_mousemove} on:click={()=>{tabselect(tab.sm_context)}}>
-                <!--
-                <i class="{tab.sm_icon}"></i>
-                -->
                 <svelte:component this={tab.sm_icon} on:click={()=>{tabselect(tab.sm_context)}} />
-
                 <span class="tooltiptext" style="top:{m.y}px;left:{m.x}px;">{tab.sm_label}</span>
             </button>
         {/each}

@@ -35,8 +35,8 @@
 	viewworkspace = "layout";
 	//viewworkspace = "testdivide";
 	//viewworkspace = "testoffsetdivide";
-	//viewworkspace = "logicnodeeditor";
-	viewworkspace = "preferences";
+	viewworkspace = "logicnodeeditor";
+	//viewworkspace = "preferences";
 
 	let elementheader;
 	let elementcontent;

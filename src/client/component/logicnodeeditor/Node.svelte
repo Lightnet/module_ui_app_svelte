@@ -1,6 +1,7 @@
 <script>
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
+    import NodeConnectorComponent from "./NodeConnectorComponent.svelte"
     import SVG from 'svg.js';
     import 'svg.panzoom.js';
     const dispatch = createEventDispatcher();
@@ -10,8 +11,8 @@
     let bmove = false;
     //let mx;
     //let my;
-    let px= 0;
-    let py=0;
+    export let px = 0;
+    export let py = 0;
     //let el;
     let tx = 0;
     let ty = 0;
@@ -61,12 +62,12 @@
 
     function handle_mouseover(e){
         //console.log("over");
-        dispatch("node","over");
+        dispatch("node",{id:idcomponent,type:"node",mouse:"over"});
     }
 
     function handle_mouseout(e){
         //console.log("out");
-        dispatch("node","out");
+        dispatch("node",{id:idcomponent,type:"node",mouse:"out"});
     }
 
     function handle_mousemove(e){
@@ -87,7 +88,7 @@
 
             //let svgP = svgPoint(svg, (e.clientX - px - offsetx ) * scale, (e.clientY - py - offsety) * scale);
             let svgP = svgPoint(svg, (e.clientX - px - offsetx ) * scale, (e.clientY - py - offsety) * scale);
-            console.log(svgP);
+            //console.log(svgP);
             tx = svgP.x;
             ty = svgP.y;
 
@@ -99,27 +100,29 @@
         //console.dir(draw);
     }
 
-   onMount(() => {
-       elcontent = document.getElementById(idcomponent);
-       //draw = SVG(svg);
-       //console.log(draw);
-       //console.log(elcontent);
+    onMount(() => {
+        elcontent = document.getElementById(idcomponent);
+        tx = px;
+        ty = py;
+        //draw = SVG(svg);
+        //console.log(draw);
+        //console.log(elcontent);
+        //console.dir(svg);
+    });
 
-       console.dir(svg);
+    onDestroy(()=>{
 
-       //svg
-   });
+    });
 
-   onDestroy(()=>{
-
-   });
+    function handle_nodeconnecter(e){
+        dispatch('node',e.detail);
+    }
 
 </script>
 <style>
 
 </style>
-<g id="{idcomponent}" x="0" y="0" 
-    transform="translate({tx} {ty})"
+<g id="{idcomponent}" transform="translate({tx} {ty})"
     >
     <!--
     <polygon id="target1" points="83.97 253.74 87.35 260.6 94.91 261.69 89.44 267.03 90.73 274.56 83.97 271.01 77.2 274.56 78.49 267.03 73.02 261.69 80.58 260.6 83.97 253.74" style="fill: gray"/>
@@ -138,17 +141,7 @@
         >
     </rect>
 
-    <rect 
-        id="test"
-        x="10"
-        y="10"
-        width="10" 
-        height="10" 
-        fill="#FFA07A" 
-        on:click={handle_mouseclick} 
-        on:mousedown={handle_mousedown}
-        >
-    </rect>
-    <text x="4" y="12" style="stroke: #660000; fill: #660000">
-        Node</text>
+    <NodeConnectorComponent px="100" py="20" on:node={handle_nodeconnecter} />
+
+    <text x="4" y="20" style="stroke: white; fill:white;"> Node </text>
 </g>
