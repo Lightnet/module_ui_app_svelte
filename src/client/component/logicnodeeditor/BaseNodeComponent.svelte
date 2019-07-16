@@ -73,10 +73,16 @@
         window.removeEventListener('mousemove',handle_mousemove);
     }
 
+    function setuppin(){
+        pinouts.push({px:90,py:20,assignid:"",boutput:true});
+        pinouts = pinouts;
+    }
+
     onMount(() => {
         elcomponent = document.getElementById(idcomponent);
         tx = px;
         ty = py;
+        setuppin();
     });
 
     onDestroy(()=>{
@@ -89,12 +95,22 @@
 
 </script>
 <style>
-
+/* https://stackoverflow.com/questions/34445147/make-svg-text-unselectable */
+/* https://gist.github.com/23maverick23/64b3b587c88697558fac */
+text {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
 </style>
 <NodeComponent px={px} py={py} svg={svg} on:node={handle_node}>
 
     <text x="4" y="20" style="stroke: white; fill:white;"> {nodename} </text>
-
-    <NodeConnectorComponent px="100" py="20" on:node={handle_node}/>
-
+    {#each pinouts as pinout}
+        {console.log(pinout)}
+        <NodeConnectorComponent {...pinout} on:node={handle_node}/>
+        <!--<NodeConnectorComponent px="100" py="20" on:node={handle_node}/>-->
+    {/each}
 </NodeComponent>

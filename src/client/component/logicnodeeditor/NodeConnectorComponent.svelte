@@ -11,6 +11,9 @@
     //let height;
     //let width;
     let color = "#FFA07A";
+    let defaultcolor = "#FFA07A";
+    let overcolor = "#B9785C";
+    let outcolor = "#FFA07A";
     export let draw;
     export let svg;
     export let boutput = true;
@@ -28,6 +31,7 @@
         //e.preventDefault();
         //e.stopImmediatePropagation();
         //console.log("over");
+        color = overcolor;
         dispatch("node",{id:idcomponent,type:"connector",mouse:"over",pinout:boutput});
     }
 
@@ -35,6 +39,7 @@
         //e.preventDefault();
         //e.stopImmediatePropagation();
         //console.log("out");
+        color = outcolor;
         dispatch("node",{id:idcomponent,type:"connector",mouse:"out",pinout:boutput});
     }
 

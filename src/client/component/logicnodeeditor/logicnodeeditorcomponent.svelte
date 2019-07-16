@@ -28,16 +28,22 @@
     let idconnector1;
     let idconnector2;
 
-    let point1 = [0,0];
-    let point2 = [0,0];
+    let point1 = {x:0,y:0};
+    let point2 = {x:0,y:0};
     let bline = false;
-    let line;
 
     let svg;
     let draw;
     let height;
     let width;
     let idsvg = "draw";
+
+    let drawpoint;
+
+    function resetpoint(){
+        point1 = {x:0,y:0};
+        point2 = {x:0,y:0};
+    }
 
     function handle_logicnodeeditor_resize(event){
         //console.log("resize");
@@ -52,23 +58,11 @@
     function handle_mousemove(e){
         if(bline){
             let svgP = svgPoint(svg, e.clientX, e.clientY);
-            point2 = [svgP.x,svgP.y];
-            count++;
-            if(count > 4){//add delay else over and out doesn't get 2nd point check get mouse over overlap
-                count= 0;
-                line.plot([point1, point2]);
-            }
+            point2.x = svgP.x;
+            point2.y = svgP.y;
         }
         //console.log(m);
         mjs.context.contextmenu.set({sm_context:'LOGICNODE'});
-    }
-
-    function handle_nmousemove(e){
-
-    };
-
-    function getsvg(){
-        //return svg;
     }
 
     let mouse = {
@@ -88,35 +82,32 @@
     }
 
     function handle_svgmousemove(e){
-        //e.preventDefault();
-        //e.stopImmediatePropagation();
-        //console.log(e);
-        //console.log(e.offsetX + ":" + e.offsetY);
-        //mouse.x = e.offsetX;
-        //mouse.y = e.offsetY;
-        if(bline){
-            let svgP = svgPoint(svg, e.clientX, e.clientY);
-            point2 = [svgP.x,svgP.y];
-            line.plot([point1, point2])
-        }
-        return false;
+        //if(bline){
+            //let svgP = svgPoint(svg, e.clientX, e.clientY);
+            //point2.x = svgP.x;
+            //point2.y = svgP.y;
+        //}
+        //return false;
     }
 
     function handle_svgmousedown(e){
-        //e.preventDefault();
-        //e.stopImmediatePropagation();
         //console.log(e);
         if(e.button == 0){
             //console.log(e)
-            //SVG('drawing').viewbox(0,0,500,500)
-            idconnector1 = idconnector;
-            let svgP = svgPoint(svg, e.clientX, e.clientY);
-            point1 = [svgP.x,svgP.y];
-            console.log(idconnector1);
+            //console.log(idconnector1);
             if(nodetype == "connector"){
+                idconnector1 = idconnector;
+                let svgP = svgPoint(svg, e.clientX, e.clientY);
+                //set draw line to dot from mouse down.
+                point1.x = svgP.x;
+                point1.y = svgP.y;
+                point2.x = svgP.x;
+                point2.y = svgP.y;
                 bline = true;
+            }else{
+                console.log("clear?");
+                resetpoint();
             }
-            //console.log(line);
         }
         //window.addEventListener('mousemove',handle_svgmousemove); //odd bug over and out
         window.addEventListener('mouseup',handle_svgmouseup);
@@ -125,12 +116,17 @@
     function checknodepoints(){
         //if(idconnector2.length)
         if((idconnector1 !=null)&&(idconnector2 !=null)){
-            console.log(idconnector1.length);
-            console.log(idconnector2.length);
-            console.log("pass");
-
-            idconnector1 =null;
-            idconnector2 =null;
+            //console.log(idconnector1.length);
+            //console.log(idconnector2.length);
+            //console.log("pass");
+            idconnector1 = null;
+            idconnector2 = null;
+        }else{
+            //console.log("fail");
+            //console.log(idconnector1);
+            //console.log(idconnector2);
+            idconnector1 = null;
+            idconnector2 = null;
         }
     }
 
@@ -138,14 +134,16 @@
         //e.preventDefault();
         if(e.button == 0){
             //console.log(e)
-            idconnector2 = idconnector;
-            console.log(idconnector2);
-            //console.log(idconnector);
-            let svgP = svgPoint(svg, e.clientX, e.clientY);
-            point2 = [svgP.x,svgP.y];
-            line.plot([point1, point2]);
-            bline = false;
-            checknodepoints();
+            if(nodetype == "connector"){
+                idconnector2 = idconnector;
+                //console.log(idconnector2);
+                //console.log(idconnector);
+                let svgP = svgPoint(svg, e.clientX, e.clientY);
+                point2.x = svgP.x;
+                point2.y = svgP.y;
+                bline = false;
+                checknodepoints();
+            }
         }
         //window.removeEventListener('mousemove',handle_svgmousemove);
         window.removeEventListener('mouseup',handle_svgmouseup);
@@ -180,7 +178,7 @@
                 //.viewbox(0,0,elementcontent.clientWidth,elementcontent.clientHeight);
             draw.panZoom({zoomMin: 0.5, zoomMax: 20});
             //https://svgjs.com/docs/2.7/elements/
-            line = draw.line(0, 0, 0, 0).stroke({ width: 1 });
+            //line = draw.line(0, 0, 0, 0).stroke({ width: 1 });
             //console.log(line);
 
             //draw.panZoom(false)
@@ -216,14 +214,15 @@
         }
         
         window.addEventListener('resize', handle_logicnodeeditor_resize);
-        //window.addEventListener('mousemove', handle_nmousemove);
         //window.addEventListener('click', handle_nonclick);
+        //drawpoint = setInterval(drawconntector, 400);
+
     });
 
     onDestroy(() => {
+        //clearInterval(drawpoint);
         //console.log("onDestroy");
         window.removeEventListener('resize', handle_logicnodeeditor_resize);
-        //window.removeEventListener('mousemove', handle_nmousemove);
         //window.removeEventListener('click', handle_nonclick);
     });
 
@@ -282,6 +281,10 @@
         width:100%;
         height:100%;
     }
+
+    .nonselect{
+        pointer-events: none;
+    }
 </style>
 
 <div id="{idcontent}" on:mousemove={handle_mousemove} on:mousedown={handle_svgmousedown}>
@@ -302,6 +305,8 @@
         <NodeComponent svg={svg} on:node={handle_node} ></NodeComponent>
 
         <NodeComponent svg={svg} px="150" on:node={handle_node} ></NodeComponent>
+
+        <line class="nonselect" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:rgb(255,0,0);stroke-width:2" />
     
     </svg>
 

@@ -25,11 +25,11 @@
 
     //handle connector event tag check when connect
     function handle_mouseover(e){
-        dispatch("node",{id:idcomponent,type:"node",mouse:"over"});
+        dispatch("node",{id:idcomponent,type:"nodeblock",mouse:"over"});
     }
 
     function handle_mouseout(e){
-        dispatch("node",{id:null,type:"node",mouse:"out"});
+        dispatch("node",{id:idcomponent,type:"nodeblock",mouse:"out"});
     }
 
     // translate page to SVG co-ordinate
