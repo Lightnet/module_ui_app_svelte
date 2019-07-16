@@ -14,13 +14,9 @@
 	import DivDividerComponent from './component/base/divdividercomponent.svelte'
 	import DivDividerVComponent from './component/base/sdivdividerv.svelte'
 	import DivDividerHComponent from './component/base/sdivdividerh.svelte'
-
 	import LayoutLogicNodeEditorComponent from './component/base/layoutlogicnodeeditorcomponent.svelte'
 	import LayoutPreferencesComponent from './component/base/layoutpreferencescomponent.svelte'
-
-
 	import DivDividerOffSetHComponent from './component/base/testoffsetdividercomponent.svelte'
-
 	import TestDivideHComponent from './component/base/testdividecomponent.svelte'
 	//import Gun from 'gun/gun';
 	import mjs from './mjs.js';
@@ -30,15 +26,12 @@
 	const dispatch = createEventDispatcher();
 	let config;
 	let gun;
-
 	//console.log(store);
-
 	const unsubscribe = appconfig.subscribe(value => {
 		console.log(value);
 		config = value;
 	});
 
-	
 	appconfig.set({
 		name: 'mjs',
 		usegunlocal:false,
@@ -52,11 +45,11 @@
 	let view;
 
 	let viewworkspace = "horizontal";
-	viewworkspace = "layout";
+	//viewworkspace = "layout";
 	//viewworkspace = "testdivide";
 	//viewworkspace = "testoffsetdivide";
-	viewworkspace = "logicnodeeditor";
 	//viewworkspace = "preferences";
+	viewworkspace = "logicnodeeditor";
 
 	let elementheader;
 	let elementcontent;

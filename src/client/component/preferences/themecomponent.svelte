@@ -2,6 +2,7 @@
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
     import mjs from '../../mjs.js';
+    import UserInterfaceComponent from "./themes/userinterfacecomponent.svelte";
     //const dispatch = createEventDispatcher();
     
     //onMount(() => {
@@ -22,5 +23,5 @@
 </style>
 
 <AutosizeDivComponent>
-    Theme Component
+    <UserInterfaceComponent />
 </AutosizeDivComponent>

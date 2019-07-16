@@ -2,6 +2,7 @@
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
     import mjs from '../../mjs.js';
+    import DisplayComponent from "./viewport/displaycomponent.svelte";
     //const dispatch = createEventDispatcher();
     
     //onMount(() => {
@@ -22,5 +23,5 @@
 </style>
 
 <AutosizeDivComponent>
-    Viewport Component
+    <DisplayComponent />
 </AutosizeDivComponent>

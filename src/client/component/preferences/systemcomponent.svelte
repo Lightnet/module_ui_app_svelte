@@ -1,7 +1,9 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
+    import CyclesRenderDevicesComponent from "./system/cyclesrenderdevicescomponent.svelte";
     import mjs from '../../mjs.js';
+    
     //const dispatch = createEventDispatcher();
     
     //onMount(() => {
@@ -22,5 +24,5 @@
 </style>
 
 <AutosizeDivComponent>
-    System Component
+    <CyclesRenderDevicesComponent />
 </AutosizeDivComponent>

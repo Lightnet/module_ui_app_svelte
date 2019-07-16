@@ -70,6 +70,7 @@
         tabitem.push({sm_label:"Viewport",sm_context:"viewport",sm_component:ViewportComponent});
         tabitem.push({sm_label:"Lights",sm_context:"lights",sm_component:LightsComponent});
         tabitem.push({sm_label:"Editing",sm_context:"editing",sm_component:EditingComponent});
+        tabitem.push({sm_label:"Animation",sm_context:"animation",sm_component:AnimationComponent});
         tabitem.push({sm_label:"Add-ons",sm_context:"addons",sm_component:AddonsComponent});
         tabitem.push({sm_label:"Input",sm_context:"input",sm_component:InputComponent});
         tabitem.push({sm_label:"Navigation",sm_context:"navigation",sm_component:NavigationComponent});

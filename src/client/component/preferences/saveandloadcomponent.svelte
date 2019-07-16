@@ -1,6 +1,7 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
+    import AppFilesComponent from "./saveandload/appfilescomponent.svelte";
     import mjs from '../../mjs.js';
     //const dispatch = createEventDispatcher();
     
@@ -22,5 +23,5 @@
 </style>
 
 <AutosizeDivComponent>
-    Save & Load Component
+    <AppFilesComponent />
 </AutosizeDivComponent>
