@@ -2,7 +2,7 @@
     //https://stackoverflow.com/questions/42737693/is-it-possible-in-svelte-to-have-each-loops-with-two-way-binding-to-nested-obje
     import { onMount, onDestroy, createEventDispatcher } from 'svelte'
     //import { generateId } from '../helper/generateid.js';
-    import SubmMenuComponent from './submenucomponent.svelte'
+    //import SubmMenuComponent from './submenucomponent.svelte'
     import mjs from '../../mjs.js';
 
     export let name = "menu";
@@ -105,9 +105,9 @@
                 <!--{console.log(children[index].children)}-->
                 {#if items[index].children.length > 0}
                     {#if items[index] == activeitem}
-                        <SubmMenuComponent items={items[index].children} active={true}/>
+                        <svelte:self items={items[index].children} active={true}/>
                     {:else}
-                        <SubmMenuComponent items={items[index].children} active={false}/>
+                        <svelte:self items={items[index].children} active={false}/>
                     {/if}    
                 {/if}
             {/if}

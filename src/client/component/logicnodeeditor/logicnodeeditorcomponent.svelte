@@ -7,12 +7,15 @@
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
     //import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
-    import NodeComponent from './Node.svelte';
-
+    //import NodeComponent from './Node.svelte';
+    //import NodeComponent from './NodeComponent.svelte';
+    import NodeComponent from './BaseNodeComponent.svelte';
 
     import mjs from '../../mjs.js';
     import SVG from 'svg.js';
     import 'svg.panzoom.js';
+
+    let count = 0;
     
     //const dispatch = createEventDispatcher();
     
@@ -34,6 +37,7 @@
     let draw;
     let height;
     let width;
+    let idsvg = "draw";
 
     function handle_logicnodeeditor_resize(event){
         //console.log("resize");
@@ -45,7 +49,16 @@
         elementcontent.style.width = parent.clientWidth + 'px';
     }
 
-    function handle_mousemove(event){
+    function handle_mousemove(e){
+        if(bline){
+            let svgP = svgPoint(svg, e.clientX, e.clientY);
+            point2 = [svgP.x,svgP.y];
+            count++;
+            if(count > 4){//add delay else over and out doesn't get 2nd point check get mouse over overlap
+                count= 0;
+                line.plot([point1, point2]);
+            }
+        }
         //console.log(m);
         mjs.context.contextmenu.set({sm_context:'LOGICNODE'});
     }
@@ -75,18 +88,23 @@
     }
 
     function handle_svgmousemove(e){
+        //e.preventDefault();
+        //e.stopImmediatePropagation();
         //console.log(e);
         //console.log(e.offsetX + ":" + e.offsetY);
-        mouse.x = e.offsetX;
-        mouse.y = e.offsetY;
+        //mouse.x = e.offsetX;
+        //mouse.y = e.offsetY;
         if(bline){
             let svgP = svgPoint(svg, e.clientX, e.clientY);
             point2 = [svgP.x,svgP.y];
             line.plot([point1, point2])
         }
+        return false;
     }
 
     function handle_svgmousedown(e){
+        //e.preventDefault();
+        //e.stopImmediatePropagation();
         //console.log(e);
         if(e.button == 0){
             //console.log(e)
@@ -94,24 +112,42 @@
             idconnector1 = idconnector;
             let svgP = svgPoint(svg, e.clientX, e.clientY);
             point1 = [svgP.x,svgP.y];
-            //console.log(idconnector1);
+            console.log(idconnector1);
             if(nodetype == "connector"){
                 bline = true;
             }
             //console.log(line);
         }
-        window.addEventListener('mousemove',handle_svgmousemove);
+        //window.addEventListener('mousemove',handle_svgmousemove); //odd bug over and out
         window.addEventListener('mouseup',handle_svgmouseup);
     }
 
+    function checknodepoints(){
+        //if(idconnector2.length)
+        if((idconnector1 !=null)&&(idconnector2 !=null)){
+            console.log(idconnector1.length);
+            console.log(idconnector2.length);
+            console.log("pass");
+
+            idconnector1 =null;
+            idconnector2 =null;
+        }
+    }
+
     function handle_svgmouseup(e){
+        //e.preventDefault();
         if(e.button == 0){
             //console.log(e)
             idconnector2 = idconnector;
-            //console.log(idconnector2);
+            console.log(idconnector2);
+            //console.log(idconnector);
+            let svgP = svgPoint(svg, e.clientX, e.clientY);
+            point2 = [svgP.x,svgP.y];
+            line.plot([point1, point2]);
             bline = false;
+            checknodepoints();
         }
-        window.removeEventListener('mousemove',handle_svgmousemove);
+        //window.removeEventListener('mousemove',handle_svgmousemove);
         window.removeEventListener('mouseup',handle_svgmouseup);
     }
 
@@ -158,13 +194,15 @@
                 //console.log(ev);
             //});
             
-            draw.on('zoom', function(ev) {
-                ev.preventDefault();
+            //draw.on('zoom', function(ev) {
+                //ev.preventDefault();
                 //console.log(draw.zoom())
                 //console.log(ev.detail.focus);
-            });
+            //});
 
             svg = document.getElementById('drawing');
+            //console.log(svg);
+            //console.log(draw);
             //https://stackoverflow.com/questions/7676006/obtaining-an-original-svg-viewbox-via-javascript
             //console.log(svg);
             //let box = draw.getAttribute('viewBox');
@@ -173,8 +211,8 @@
             //console.log(box);
 
         } else {
-            //alert('SVG not supported');
-            console.log("SVG not supported");
+            alert('SVG not supported');
+            //console.log("SVG not supported");
         }
         
         window.addEventListener('resize', handle_logicnodeeditor_resize);
@@ -193,21 +231,31 @@
     function handle_node(e){
         //console.log(e)
         //console.log(e.detail)
+        //console.log(e.detail.mouse);
         if(e.detail == "over"){
             bnode = true;
         }
         if(e.detail == "out"){
             bnode = false;
         }
-        if(e.detail.id != null){
+        if(e.detail.mouse != null){
             if(e.detail.mouse == "out"){
                 bnode = false;
             }
             if(e.detail.mouse == "over"){
                 bnode = true;
             }
-            nodetype = e.detail.type;
-            idconnector =  e.detail.id;        
+        }
+        if(e.detail.id != null){
+            //console.log(e.detail.id);
+            //console.log(e.detail.mouse);
+            if(e.detail.mouse == "over"){
+                nodetype = e.detail.type;
+                idconnector =  e.detail.id;
+            }else{
+                idconnector = null;
+            }
+            
         }
         checkpanmove();
     }
@@ -251,9 +299,9 @@
         </defs>
         <rect width="100%" height="100%" fill="url(#grid)" />
 
-        <NodeComponent on:node={handle_node} svg={svg} draw={draw}></NodeComponent>
+        <NodeComponent svg={svg} on:node={handle_node} ></NodeComponent>
 
-        <NodeComponent px="150" on:node={handle_node} svg={svg} draw={draw}></NodeComponent>
+        <NodeComponent svg={svg} px="150" on:node={handle_node} ></NodeComponent>
     
     </svg>
 

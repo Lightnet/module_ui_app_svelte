@@ -1,7 +1,8 @@
 <script>
+    //https://svelte.dev/docs#svelte_self
     //import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     //import { UserName } from '../../stores.js';
-    import ObjectSceneListComponent from './objectscenelistcomponent.svelte'
+    //import ObjectSceneListComponent from './objectscenelistcomponent.svelte';
     import mjs from '../../mjs.js';
     
     export let entities;
@@ -122,7 +123,7 @@
                         <span>type: {entity.type} </span>
                         
                         {#if entity.children.length > 0}
-                            <ObjectSceneListComponent entities={entity.children}></ObjectSceneListComponent>
+                            <svelte:self entities={entity.children} />
                         {/if}
                     
                     </li>

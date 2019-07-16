@@ -62,7 +62,7 @@ gulp default
 ```
 
 # Guide & Design:
- It base on Blender3D python design and as well layout UI but coded part in layout is not the same as used Svelte to instance the object or html render UI.
+ It base on Blender3D python design and as well layout UI but coded part in layout is not the same as used Svelte 3 to instance the object or html render UI that depend on code and setup.
 
 ```javascript
 //svelte 3
@@ -74,8 +74,8 @@ mjs short is module javascript
 import bpy
 ```
 
- It will base on Blender3D python import bpy. The reason to have module design and layout is to keep things clean like Blender3D to sort out the best ways to access. The scene and object scene can be remade as long as the objects are saved in object data format like json.
+ It is base on Blender3D python import bpy. The reason to have module design and layout is to keep things clean like Blender3D to sort out the best ways to access. The scene and object scene can be remade as long as the objects are saved in object data format like json.
 
  The static functions and variables will hold into one file to management objects, events, and instances as well holding data types. For current viewport screen when dealing with workspace area.
 
- SVG html is being used for node editor current in prototype build to deal with vector grahpics. To develop logic, material, shader, and other things to save and load node editor blocks or visual programing.
+ SVG html is being used for node editor current in prototype build to deal with vector grahpics. To develop logic, material, shader, and other things to save and load node editor visual programing.

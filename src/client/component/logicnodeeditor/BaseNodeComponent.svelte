@@ -2,10 +2,12 @@
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
     import NodeConnectorComponent from "./NodeConnectorComponent.svelte"
+    import NodeComponent from "./NodeComponent.svelte";
     import SVG from 'svg.js';
     //import 'svg.panzoom.js';
     const dispatch = createEventDispatcher();
 
+    let nodename = "Node";
     let idcomponent = "node" + generateId(20);
     let elcomponent;
     export let px = 0;
@@ -20,8 +22,8 @@
     let bmove = false;
     
     //out and in pin connector
-    //let pinins = [];
-    //let pinouts = [];
+    let pinins = []; 
+    let pinouts = [];
 
     //handle connector event tag check when connect
     function handle_mouseover(e){
@@ -81,7 +83,7 @@
 
     });
 
-    function handle_nodeconnecter(e){
+    function handle_node(e){
         dispatch("node",e.detail);
     }
 
@@ -89,21 +91,10 @@
 <style>
 
 </style>
-<g id="{idcomponent}" transform="translate({tx} {ty})">
-    <rect 
-        x="0"
-        y="0"
-        width="{nwidth}" 
-        height="{nheight}" 
-        fill="{color}"
-        on:mousedown={handle_mousedown}
-        on:mouseover={handle_mouseover}
-        on:mouseout={handle_mouseout}
-        >
-    </rect>
-    <!--<text x="4" y="20" style="stroke: white; fill:white;"> Node </text>-->
-    <slot>
-    <text x="4" y="20" style="stroke: white; fill:white;"> Node Name </text>
-    </slot>
-    <!--<NodeConnectorComponent px="100" py="20" on:node={handle_nodeconnecter}/>-->
-</g>
+<NodeComponent px={px} py={py} svg={svg} on:node={handle_node}>
+
+    <text x="4" y="20" style="stroke: white; fill:white;"> {nodename} </text>
+
+    <NodeConnectorComponent px="100" py="20" on:node={handle_node}/>
+
+</NodeComponent>

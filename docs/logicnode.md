@@ -1,0 +1,2 @@
+# logic node
+ Logic node is used for graphics, events and game logic build. It required some save, load, run time and other things to run logic blocks. Using the svg to develop html to render as xml with javascript and svelte.
