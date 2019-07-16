@@ -109,7 +109,7 @@ text {
 
     <text x="4" y="20" style="stroke: white; fill:white;"> {nodename} </text>
     {#each pinouts as pinout}
-        {console.log(pinout)}
+        <!--{console.log(pinout)}-->
         <NodeConnectorComponent {...pinout} on:node={handle_node}/>
         <!--<NodeConnectorComponent px="100" py="20" on:node={handle_node}/>-->
     {/each}

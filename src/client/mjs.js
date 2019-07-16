@@ -7,22 +7,53 @@
 
  */
 
-import { writable } from 'svelte/store';
+import { writable, get } from 'svelte/store';
+import useLocalStorage from './useLocalStorage.js';
+//import Gun from 'gun/gun';
 //https://medium.com/@etherealm/named-export-vs-default-export-in-es6-affb483a0910
 //https://developer.mozilla.org/en-US/docs/web/javascript/reference/statements/export
 //https://stackoverflow.com/questions/47383375/how-can-i-export-static-function-in-es6
-
 //===============================================
 // setup props
 //===============================================
-
 import {StringProperty} from './component/props/StringProperty'
-
 //===============================================
 // setup
 //===============================================
 import {Operator} from './component/types/operator'
 import {Menu} from './component/types/menu'
+
+export const appconfig = new writable({
+    name: 'mjs',
+    usegunlocal:true,
+    usecustomtheme:false,
+    username:"Guest"
+});
+
+useLocalStorage(appconfig, 'appconfigmjs');
+/*
+appconfig.set({
+    name: 'mjs',
+    usegunlocal:false,
+    usecustomtheme:false,
+    username:"Guest"
+});
+*/
+//var config = get(appconfig);
+//console.log(config);
+export var gun = null;
+/*
+if(config.usegunlocal == true){
+    gun = Gun();
+    console.log("client storage");
+}else{
+    console.log("client network");
+}
+*/
+
+
+
+
 
 //===============================================
 // access view area
@@ -49,6 +80,8 @@ export const props = {};
 export const context = {};
 
 export const view_layer = {};
+
+console.log("init ?");
 
 data.objects = objects;
 data.scenes = scenes;
@@ -163,6 +196,7 @@ export default {
     wins,
     context,
     utils,
+    gun,
 }
 
 //var test = new object_ot_splitarea();

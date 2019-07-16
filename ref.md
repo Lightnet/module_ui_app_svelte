@@ -5,7 +5,7 @@ Links:
  * https://www.npmjs.com/package/gulp-better-rollup
  * https://svelte.dev/examples#actions
  * https://svelte.dev/docs#Component_props
-
+ * 
  * https://github.com/hasura/graphql-engine/tree/master/community/sample-apps/svelte-apollo
  * https://graphql.org/
  * https://www.w3schools.com/howto/howto_js_dropdown.asp
@@ -52,16 +52,30 @@ Links:
  * https://stackoverflow.com/questions/3234256/find-mouse-position-relative-to-element/45270249
  * https://stackoverflow.com/questions/38023688/how-do-you-remove-an-event-listener-that-uses-this-in-typescript
  * 
- * 
  * https://svelte.dev/examples#svelte-component
  * https://css-tricks.com/using-svg/
  * 
  * https://enlight.nyc/projects/code-editor/
  * 
- * 
  * https://codepen.io/xgundam05/pen/KjqJn node editor simple svg
  * 
  * https://rete.js.org/#/docs
+ * 
+ * https://jsbin.com/rupurogawo/edit?html,css,js,output
+ * https://codepen.io/xgundam05/pen/KjqJn
+ * https://jsbin.com/doyewususu/1/edit?html,css,js,output
+ * https://www.sitepoint.com/how-to-translate-from-dom-to-svg-coordinates-and-back-again/
+ * https://svgjs.com/docs/2.7/events/
+ * https://svgjs.com/docs/2.7/referencing/
+ * https://github.com/svgdotjs/svg.panzoom.js
+ * https://stackoverflow.com/questions/7676006/obtaining-an-original-svg-viewbox-via-javascript
+ * https://stackoverflow.com/questions/14208673/how-to-draw-grid-using-html5-and-canvas-or-svg
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  * 
  * 
  * 

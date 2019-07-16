@@ -8,9 +8,9 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
-var Gun = require('gun');
-require('gun/lib/then.js');
-require('gun/lib/not.js');
+const Gun = require('gun');
+//require('gun/lib/then.js');
+//require('gun/lib/not.js');
 var helmet = require('helmet');
 //===============================================
 
@@ -32,10 +32,12 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-app.use(Gun.serve);
+//app.use(Gun.serve);
+app.use(Gun.serve).use(express.static(__dirname));
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
+/*
 var dir = path.join(__dirname, 'public');
 var mime = {
   html: 'text/html',
@@ -66,7 +68,7 @@ app.get('*', function (req, res) {
       res.status(404).end('Not found');
   });
 });
-
+*/
 
 // http://expressjs.com/en/starter/basic-routing.html
 //app.get("/", function (request, response) {
@@ -79,8 +81,8 @@ app.get('*', function (req, res) {
 //=========================================================
 
 // listen for requests :)
-var listener = app.listen(PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+var server = app.listen(PORT, function () {
+  console.log('Your app is listening on port ' + server.address().port);
   //http://localhost:3000/
   //console.log(listener.address());
 });
@@ -88,13 +90,14 @@ var listener = app.listen(PORT, function () {
 //=========================================================
 // Socket.IO
 //=========================================================
-var io = require('socket.io')(listener);
+//var io = require('socket.io')(listener);
 //=========================================================
 // GunDB
 //=========================================================
 var bdatabase = process.env.BDatabase || false;
+/*
 var gunconfig = {
-  web:listener//server express
+  web:server//server express
 }
 var dbFile = './data.json';
 gunconfig.file=process.env.DatabaseFile || './data.json';
@@ -123,11 +126,11 @@ if(bdatabase =='true'){
   }
   console.log("init database setup???");
 }
-
-var gun = Gun({
-  file: dbFile,
-  web:listener//server express
-});
+*/
+var gunconfig = {
+  file: 'data',
+  web:server//server express
+};
 
 var gun = Gun(gunconfig);
 //console.log(gun);
@@ -145,12 +148,14 @@ gun.on('bye', (peer)=>{// peer disconnect
 gun.get('random/8t5Uu3qy6').put({hello: "world"});
 
 //assign locals variable for gun
+/*
 app.use(function (req, res, next) {
   res.locals.gun = gun;
   //res.locals.user = req.user
   //res.locals.authenticated = !req.user.anonymous
   next()
 })
+*/
 //=========================================================
 // UE4 get and post
 //=========================================================
@@ -161,6 +166,7 @@ app.use('/ue4', ue4);
 //=========================================================
 // Socket IO set up
 //=========================================================
+/*
 io.on('connection', function(socket){
 	console.log('a user connected socket.io');
   	socket.on('chat message', (data) => {
@@ -174,3 +180,4 @@ io.on('connection', function(socket){
     	console.log('user disconnected')
   	})
 });
+*/

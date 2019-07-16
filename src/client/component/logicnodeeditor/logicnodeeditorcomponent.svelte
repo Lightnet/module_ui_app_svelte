@@ -1,9 +1,4 @@
 <script>
-    //https://jsbin.com/rupurogawo/edit?html,css,js,output
-    //https://codepen.io/xgundam05/pen/KjqJn
-    //https://jsbin.com/doyewususu/1/edit?html,css,js,output
-    //https://www.sitepoint.com/how-to-translate-from-dom-to-svg-coordinates-and-back-again/
-
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
     //import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
@@ -36,9 +31,11 @@
     let draw;
     let height;
     let width;
-    let idsvg = "draw";
+    let idsvg = "draw" + generateId(20);
 
     let drawpoint;
+
+    let connectors = [];//links to connector point list here for update position?
 
     function resetpoint(){
         point1 = {x:0,y:0};
@@ -73,12 +70,9 @@
     // translate page to SVG co-ordinate
     function svgPoint(element, x, y) {
         var pt = svg.createSVGPoint();
-        pt.x = x ;//+ svg.getScreenCTM().e;//clientX + offset svg element position
-        pt.y = y ;//+ svg.getScreenCTM().f;
-        //console.log(pt);
-        //console.log(svg.getScreenCTM())
+        pt.x = x ;
+        pt.y = y ;
         return pt.matrixTransform(element.getScreenCTM().inverse());
-        //return pt.matrixTransform(element.getScreenCTM());
     }
 
     function handle_svgmousemove(e){
@@ -105,7 +99,7 @@
                 point2.y = svgP.y;
                 bline = true;
             }else{
-                console.log("clear?");
+                //console.log("clear?");
                 resetpoint();
             }
         }
@@ -166,15 +160,12 @@
         //SVG('drawing').panZoom(false);
     }
 
-    //https://svgjs.com/docs/2.7/events/
-    //https://svgjs.com/docs/2.7/referencing/
     onMount(() => {
         elementcontent = document.getElementById(idcontent);
         handle_logicnodeeditor_resize();
         if (SVG.supported) {
-            //https://github.com/svgdotjs/svg.panzoom.js
             //var draw = SVG('drawing').size('100%', '100%').viewbox(0,0,800,1000)
-            draw = SVG('drawing').size('100%', '100%');
+            draw = SVG(idsvg).size('100%', '100%');
                 //.viewbox(0,0,elementcontent.clientWidth,elementcontent.clientHeight);
             draw.panZoom({zoomMin: 0.5, zoomMax: 20});
             //https://svgjs.com/docs/2.7/elements/
@@ -198,16 +189,7 @@
                 //console.log(ev.detail.focus);
             //});
 
-            svg = document.getElementById('drawing');
-            //console.log(svg);
-            //console.log(draw);
-            //https://stackoverflow.com/questions/7676006/obtaining-an-original-svg-viewbox-via-javascript
-            //console.log(svg);
-            //let box = draw.getAttribute('viewBox');
-            //console.log(box)
-            //box.split(/\s+|,/);
-            //console.log(box);
-
+            svg = document.getElementById(idsvg);
         } else {
             alert('SVG not supported');
             //console.log("SVG not supported");
@@ -216,7 +198,6 @@
         window.addEventListener('resize', handle_logicnodeeditor_resize);
         //window.addEventListener('click', handle_nonclick);
         //drawpoint = setInterval(drawconntector, 400);
-
     });
 
     onDestroy(() => {
@@ -254,25 +235,18 @@
             }else{
                 idconnector = null;
             }
-            
         }
         checkpanmove();
     }
 
     //Logic Node Editor
-    //https://stackoverflow.com/questions/14208673/how-to-draw-grid-using-html5-and-canvas-or-svg
-    //on:mousemove={handle_svgmousemove}
     /*
-    on:mousedown={handle_svgmousedown}
-    on:mousewheel={handle_svgmousewheel}
+
+
     */
 </script>
 
 <style>
-    div{
-        color:white;
-    }
-
     svg{
         /*position:absolute;*/
         top:0px;
@@ -289,7 +263,7 @@
 
 <div id="{idcontent}" on:mousemove={handle_mousemove} on:mousedown={handle_svgmousedown}>
 
-    <svg id="drawing">
+    <svg id="{idsvg}">
 
         <defs>
             <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
@@ -302,9 +276,9 @@
         </defs>
         <rect width="100%" height="100%" fill="url(#grid)" />
 
-        <NodeComponent svg={svg} on:node={handle_node} ></NodeComponent>
+        <NodeComponent svg={svg} px="20" py="20" on:node={handle_node} ></NodeComponent>
 
-        <NodeComponent svg={svg} px="150" on:node={handle_node} ></NodeComponent>
+        <NodeComponent svg={svg} px="150" py="20" on:node={handle_node} ></NodeComponent>
 
         <line class="nonselect" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:rgb(255,0,0);stroke-width:2" />
     

@@ -22,10 +22,30 @@
 	import DivDividerOffSetHComponent from './component/base/testoffsetdividercomponent.svelte'
 
 	import TestDivideHComponent from './component/base/testdividecomponent.svelte'
+	//import Gun from 'gun/gun';
 	import mjs from './mjs.js';
 
-	const dispatch = createEventDispatcher();
+	import { appconfig } from './mjs.js';
 
+	const dispatch = createEventDispatcher();
+	let config;
+	let gun;
+
+	//console.log(store);
+
+	const unsubscribe = appconfig.subscribe(value => {
+		console.log(value);
+		config = value;
+	});
+
+	
+	appconfig.set({
+		name: 'mjs',
+		usegunlocal:false,
+		usecustomtheme:false,
+		username:"Guest"
+	});
+	
 	export let name;
 	//let showModal = false;
 	//let msgmodal = "None";
@@ -70,6 +90,25 @@
 
 	onMount(async () => {
 		window.addEventListener('resize', resizediv);
+
+		if(config.usegunlocal == true){
+			mjs.gun = Gun();
+			console.log("gun client storage");
+		}else{
+			console.log("guin client network");
+			//gun = mjs.gun = Gun(['http://localhost:8080/gun']);
+			//gun = mjs.gun = Gun(location.origin + '/gun');
+			gun = mjs.gun = Gun(['http://localhost:8080' + '/gun']);
+			gun.get('mark').put({
+				name: "Mark",
+				email: "mark@gunDB.io",
+			});
+
+			gun.get('mark').on(function(data, key){
+				console.log("update:", data);
+			});
+			console.log(gun)
+		}
 		//window.dispatchEvent(new Event('resize'));
 		//console.log(AFRAME);
 		//console.dir(AFRAME);

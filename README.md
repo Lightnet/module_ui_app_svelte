@@ -29,6 +29,7 @@ Code languages:
  * gulp 4.0.2
  * webpack 4.32.2
  * gulp-nodemon 2.4.2
+ * gun 0.2019.627
 
 # Features:
  * right click context menu (wip)
@@ -37,7 +38,7 @@ Code languages:
  * layout Management (wip)
  * workspace (wip)
  * 3D (threejs / aframe) (wip)
- * Data Flow Node Editor (not worked on)
+ * Data Flow Visual Program Node Editor (wip)
  * SVG (wip)
  * client / server rest API (wip)
 
