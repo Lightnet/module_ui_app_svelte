@@ -4,7 +4,8 @@
     //import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
     //import NodeComponent from './Node.svelte';
     //import NodeComponent from './NodeComponent.svelte';
-    import NodeComponent from './BaseNodeComponent.svelte';
+    import BaseNodeComponent from './BaseNodeComponent.svelte';
+    import NodeVariableComponent from './NodeVariableComponent.svelte';
 
     import mjs from '../../mjs.js';
     import SVG from 'svg.js';
@@ -89,7 +90,7 @@
         if(e.button == 0){
             //console.log(e)
             //console.log(idconnector1);
-            if(nodetype == "connector"){
+            if(nodetype == "pin"){
                 idconnector1 = idconnector;
                 let svgP = svgPoint(svg, e.clientX, e.clientY);
                 //set draw line to dot from mouse down.
@@ -128,7 +129,7 @@
         //e.preventDefault();
         if(e.button == 0){
             //console.log(e)
-            if(nodetype == "connector"){
+            if(nodetype == "pin"){
                 idconnector2 = idconnector;
                 //console.log(idconnector2);
                 //console.log(idconnector);
@@ -276,9 +277,11 @@
         </defs>
         <rect width="100%" height="100%" fill="url(#grid)" />
 
-        <NodeComponent svg={svg} px="20" py="20" on:node={handle_node} ></NodeComponent>
+        <BaseNodeComponent svg={svg} px="20" py="20" on:node={handle_node} />
 
-        <NodeComponent svg={svg} px="150" py="20" on:node={handle_node} ></NodeComponent>
+        <BaseNodeComponent svg={svg} px="150" py="20" on:node={handle_node} />
+
+        <NodeVariableComponent svg={svg} px="200" py="150" on:node={handle_node} />
 
         <line class="nonselect" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:rgb(255,0,0);stroke-width:2" />
     

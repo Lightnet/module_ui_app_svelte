@@ -1,7 +1,7 @@
 <script>
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
-    import NodeConnectorComponent from "./NodeConnectorComponent.svelte"
+    //import NodePinComponent from "./NodePinComponent.svelte";
     import SVG from 'svg.js';
     //import 'svg.panzoom.js';
     const dispatch = createEventDispatcher();
@@ -12,9 +12,9 @@
     export let py = 0;
     let tx = 0;
     let ty = 0;
-    let nheight = 100;
-    let nwidth = 100;
-    let color ="#333";
+    export let nheight = 100;
+    export let nwidth = 100;
+    export let ncolor ="#333";
     export let draw;
     export let svg;
     let bmove = false;
@@ -95,7 +95,7 @@
         y="0"
         width="{nwidth}" 
         height="{nheight}" 
-        fill="{color}"
+        fill="{ncolor}"
         on:mousedown={handle_mousedown}
         on:mouseover={handle_mouseover}
         on:mouseout={handle_mouseout}
@@ -105,5 +105,5 @@
     <slot>
     <text x="4" y="20" style="stroke: white; fill:white;"> Node Name </text>
     </slot>
-    <!--<NodeConnectorComponent px="100" py="20" on:node={handle_nodeconnecter}/>-->
+    <!--<NodePinComponent px="100" py="20" on:node={handle_nodeconnecter}/>-->
 </g>

@@ -1,10 +1,10 @@
 <script>
-    import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
-    //import SVG from 'svg.js';
+    import SVG from 'svg.js';
     const dispatch = createEventDispatcher();
 
-    let idcomponent;// = "node" + generateId(20);
+    export let idcomponent;// = "node" + generateId(20);
     let elcomponent;
     export let px;
     export let py;
@@ -14,18 +14,21 @@
     let defaultcolor = "#FFA07A";
     let overcolor = "#B9785C";
     let outcolor = "#FFA07A";
-    export let draw;
+    //export let draw;
     export let svg;
-    export let bselect = false;
+    export let boutput = true;
+    export let pins = [];
+    export let connectors = [];
+    export let bpinout = true;
 
-    let point1 = {x:0,y:0};
-    let point2 = {x:0,y:0};
-    let idpinin;
-    let idpinout;
 
     onMount(() => {
         elcomponent = document.getElementById(idcomponent);
-        //assignid = idcomponent;
+    });
+
+    afterUpdate(() => {
+        //elcomponent = document.getElementById(idcomponent);
+        //console.log("pin update???");
     });
 
     onDestroy(()=>{
@@ -36,28 +39,23 @@
         //e.preventDefault();
         //e.stopImmediatePropagation();
         //console.log("over");
-        //color = overcolor;
-        //dispatch("node",{id:idcomponent,type:"connector",mouse:"over",pinout:boutput});
+        color = overcolor;
+        dispatch("node",{id:idcomponent,type:"pin",mouse:"over",pinout:boutput});
     }
 
     function handle_mouseout(e){
         //e.preventDefault();
         //e.stopImmediatePropagation();
         //console.log("out");
-        //color = outcolor;
-        //dispatch("node",{id:idcomponent,type:"connector",mouse:"out",pinout:boutput});
+        color = outcolor;
+        dispatch("node",{id:idcomponent,type:"pin",mouse:"out",pinout:boutput});
     }
 
 </script>
 <style>
-    .nonselect{
-        pointer-events: none;
-    }
+
 </style>
 
-<line id="{idcomponent}" class="{ bselect == false ? "nonselect" : "" }" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:rgb(255,0,0);stroke-width:2" />
-
-<!--
 <rect 
     id="{idcomponent}"
     x="{px}"
@@ -69,4 +67,3 @@
     on:mouseout={handle_mouseout}
     >
 </rect>
--->

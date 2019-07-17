@@ -1,7 +1,7 @@
 <script>
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
-    import NodeConnectorComponent from "./NodeConnectorComponent.svelte"
+    import NodePinComponent from "./NodePinComponent.svelte";
     import NodeComponent from "./NodeComponent.svelte";
     import SVG from 'svg.js';
     //import 'svg.panzoom.js';
@@ -17,7 +17,7 @@
     let nheight = 100;
     let nwidth = 100;
     let color ="#333";
-    export let draw;
+    //export let draw;
     export let svg;
     let bmove = false;
     
@@ -74,7 +74,7 @@
     }
 
     function setuppin(){
-        pinouts.push({px:90,py:20,assignid:"",boutput:true});
+        pinouts.push({px:90,py:20,idcomponent:generateId(20),boutput:true});
         pinouts = pinouts;
     }
 
@@ -91,26 +91,30 @@
 
     function handle_node(e){
         dispatch("node",e.detail);
+        //console.log("node event...")
+        //for(let i=0; i<pinouts.length;i++){
+            //console.log(pinouts[i]);
+        //}
     }
 
 </script>
 <style>
-/* https://stackoverflow.com/questions/34445147/make-svg-text-unselectable */
-/* https://gist.github.com/23maverick23/64b3b587c88697558fac */
-text {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    pointer-events: none;
-}
+    /* https://stackoverflow.com/questions/34445147/make-svg-text-unselectable */
+    /* https://gist.github.com/23maverick23/64b3b587c88697558fac */
+    text {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        pointer-events: none;
+    }
 </style>
 <NodeComponent px={px} py={py} svg={svg} on:node={handle_node}>
 
     <text x="4" y="20" style="stroke: white; fill:white;"> {nodename} </text>
     {#each pinouts as pinout}
         <!--{console.log(pinout)}-->
-        <NodeConnectorComponent {...pinout} on:node={handle_node}/>
-        <!--<NodeConnectorComponent px="100" py="20" on:node={handle_node}/>-->
+        <NodePinComponent {...pinout} on:node={handle_node}/>
+        <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
     {/each}
 </NodeComponent>

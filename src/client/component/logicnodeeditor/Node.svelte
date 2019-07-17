@@ -1,7 +1,7 @@
 <script>
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
-    import NodeConnectorComponent from "./NodeConnectorComponent.svelte"
+    import NodePinComponent from "./NodePinComponent.svelte"
     //import SVG from 'svg.js';
     //import 'svg.panzoom.js';
     const dispatch = createEventDispatcher();
@@ -163,7 +163,7 @@
         >
     </rect>
 
-    <NodeConnectorComponent px="100" py="20" on:node={handle_node} />
+    <NodePinComponent px="100" py="20" on:node={handle_node} />
 
     <text x="4" y="20" style="stroke: white; fill:white;"> Node </text>
 </g>
