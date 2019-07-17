@@ -13,7 +13,7 @@
     import  NavigationComponent from './navigationcomponent.svelte';
     import  SaveAndLoadComponent from './saveandloadcomponent.svelte';
     import  SystemComponent from './systemcomponent.svelte';
-    import  ThemeComponent from './themecomponent.svelte';
+    import  ThemesComponent from './themescomponent.svelte';
     import  ViewportComponent from './viewportcomponent.svelte';
 
     import mjs from '../../mjs.js';
@@ -66,7 +66,7 @@
         eltab = document.getElementById(idtab);
 
         tabitem.push({sm_label:"Interface",sm_context:"interface",sm_component:InterfaceComponent});
-        tabitem.push({sm_label:"Themes",sm_context:"themes",sm_component:ThemeComponent});
+        tabitem.push({sm_label:"Themes",sm_context:"themes",sm_component:ThemesComponent});
         tabitem.push({sm_label:"Viewport",sm_context:"viewport",sm_component:ViewportComponent});
         tabitem.push({sm_label:"Lights",sm_context:"lights",sm_component:LightsComponent});
         tabitem.push({sm_label:"Editing",sm_context:"editing",sm_component:EditingComponent});
