@@ -65,7 +65,7 @@ export const MainHeaderConfig = new writable({
 });
 useLocalStorage(MainHeaderConfig, appid + themeid + "mainheader");
 
-
+export const LogicNodeID = writable('');
 
 export var gun = null;
 

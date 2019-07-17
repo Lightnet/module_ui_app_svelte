@@ -52,8 +52,15 @@ input[type="range"] {
 }
 
 button {
+	font-size: 12px;
 	background-color: #595959;
 	outline: none;
+	text-decoration: none;
+	height:28px;
+}
+
+button:hover {
+	background-color: #5076b2;
 }
 
 button:active {

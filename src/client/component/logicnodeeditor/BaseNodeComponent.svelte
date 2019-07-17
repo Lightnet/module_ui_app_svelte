@@ -95,7 +95,17 @@
         //for(let i=0; i<pinouts.length;i++){
             //console.log(pinouts[i]);
         //}
+
+        //console.log(e.detail);
+        if(e.detail.mouse !=null){
+            if(e.detail.mouse == "move"){
+                window.dispatchEvent(new Event('updateconnectors'));
+            }
+            //console.log("update move???")
+        }
     }
+
+    //window.dispatchEvent(new Event('resize'));
 
 </script>
 <style>

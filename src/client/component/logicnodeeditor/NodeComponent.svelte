@@ -47,6 +47,7 @@
             let svgP = svgPoint(svg, e.clientX - px,e.clientY - py);
             tx = svgP.x;
             ty = svgP.y;
+            dispatch("node",{id:idcomponent,type:"nodeblock",mouse:"move"})
         }
     }
 

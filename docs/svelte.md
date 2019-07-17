@@ -80,3 +80,11 @@ function createstyle(element){
 }
 </script>
 ```
+
+# get component id(not working...)
+```html javascript svelte
+<script>
+	//let component = new Component(id);
+	//let app = new App(id);
+</script>
+```

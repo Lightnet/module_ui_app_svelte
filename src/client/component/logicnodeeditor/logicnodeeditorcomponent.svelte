@@ -1,3 +1,4 @@
+<svelte:options accessors={true}/>
 <script>
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
@@ -6,16 +7,15 @@
     //import NodeComponent from './NodeComponent.svelte';
     import BaseNodeComponent from './BaseNodeComponent.svelte';
     import NodeVariableComponent from './NodeVariableComponent.svelte';
-
+    import NodeConnectorComponent from './NodeConnectorComponent.svelte';
     import mjs from '../../mjs.js';
+    import {LogicNodeID} from '../../mjs.js';
     import SVG from 'svg.js';
     import 'svg.panzoom.js';
-
-    let count = 0;
-    
+    //let count = 0;
     //const dispatch = createEventDispatcher();
     
-    let idcontent = generateId(20);
+    export let id = generateId(20);
     let elementcontent;
     let bnode = false;
 
@@ -36,7 +36,7 @@
 
     let drawpoint;
 
-    let connectors = [];//links to connector point list here for update position?
+    export let connectors = [];//links to connector point list here for update position?
 
     function resetpoint(){
         point1 = {x:0,y:0};
@@ -63,10 +63,12 @@
         mjs.context.contextmenu.set({sm_context:'LOGICNODE'});
     }
 
+    /*
     let mouse = {
         x:0,
         y:0
     }
+    */
 
     // translate page to SVG co-ordinate
     function svgPoint(element, x, y) {
@@ -114,6 +116,7 @@
             //console.log(idconnector1.length);
             //console.log(idconnector2.length);
             //console.log("pass");
+            getconnectors();
             idconnector1 = null;
             idconnector2 = null;
         }else{
@@ -124,6 +127,31 @@
             idconnector2 = null;
         }
     }
+
+    function getconnectors(){
+        let elcon1 = document.getElementById(idconnector1);
+        let elcon2 = document.getElementById(idconnector2);
+        //console.log(elcon1);
+        //console.dir(elcon1);
+        //console.log(elcon2);
+        let connector ={
+            idcomponent: generateId(20),
+            idpinin:idconnector1,
+            idpinout:idconnector2,
+        };
+        /*
+        let cconnector = new NodeConnectorComponent({
+            target:svg,
+            props:connector
+        });*/
+
+        //console.log(cconnector);
+        connectors.push(connector);
+        connectors = connectors;
+        console.log(connectors);
+    }
+
+
 
     function handle_svgmouseup(e){
         //e.preventDefault();
@@ -162,7 +190,9 @@
     }
 
     onMount(() => {
-        elementcontent = document.getElementById(idcontent);
+        elementcontent = document.getElementById(id);
+        LogicNodeID.set(id);
+        //console.log(id);
         handle_logicnodeeditor_resize();
         if (SVG.supported) {
             //var draw = SVG('drawing').size('100%', '100%').viewbox(0,0,800,1000)
@@ -188,6 +218,19 @@
                 //ev.preventDefault();
                 //console.log(draw.zoom())
                 //console.log(ev.detail.focus);
+            //});
+
+            //console.log($this);
+            //console.log(window);
+            //console.dir(elementcontent);
+
+            //document.querySelectorAll(".svelte-container").forEach(element => {
+                //if (!element.hasChildNodes()) {
+                    //console.log(element);
+                    //new App({
+                    //target: element
+                    //});
+                //}
             //});
 
             svg = document.getElementById(idsvg);
@@ -262,7 +305,7 @@
     }
 </style>
 
-<div id="{idcontent}" on:mousemove={handle_mousemove} on:mousedown={handle_svgmousedown}>
+<div id="{id}" on:mousemove={handle_mousemove} on:mousedown={handle_svgmousedown}>
 
     <svg id="{idsvg}">
 
@@ -283,7 +326,13 @@
 
         <NodeVariableComponent svg={svg} px="200" py="150" on:node={handle_node} />
 
-        <line class="nonselect" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:rgb(255,0,0);stroke-width:2" />
+        
+        {#each Object.keys(connectors) as index}
+            <NodeConnectorComponent svg={svg} {...connectors[index]} />
+        {/each}
+        
+
+        <line class="nonselect" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:rgb(100,100,100);stroke-width:2" />
     
     </svg>
 

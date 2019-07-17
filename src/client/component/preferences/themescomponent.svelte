@@ -17,7 +17,7 @@
     import PropertiesComponent from "./themes/propertiescomponent.svelte";
     import OutlinerComponent from "./themes/outlinercomponent.svelte";
     import PreferencesComponent from "./themes/preferencescomponent.svelte";
-    import InfoComponent from "./themes/InfoComponent.svelte";
+    import InfoComponent from "./themes/infocomponent.svelte";
     import FileBrowserComponent from "./themes/filebrowsercomponent.svelte";
     import JavascriptConolesComponent from "./themes/javascriptconolescomponent.svelte";
     import MovieClipEditorComponent from "./themes/movieclipeditorcomponent.svelte";

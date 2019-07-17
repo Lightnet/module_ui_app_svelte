@@ -160,15 +160,10 @@
 
 <div id="{idcomponent}" class="dropdown">
     <button href="/#" id="{name}{prefix}" class="dropbtn" on:click={togglecontent}>
-        
         {#if selecticon !=null}
-            
             <svelte:component this={selecticon}/>
-            
         {/if}
         <i class="fa fa-caret-down"></i>
-        <!--{selecttext}-->
-        
     </button>
     <div class="dropdown-content {btoggle === true ? 'show' : ''}" id="{id}">
         {#each Object.keys(items) as item}
