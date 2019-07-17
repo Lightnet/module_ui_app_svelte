@@ -6,7 +6,7 @@
  License: MIT
 
  */
-
+//console.log("init ?");
 import { writable, get } from 'svelte/store';
 import useLocalStorage from './useLocalStorage.js';
 //import Gun from 'gun/gun';
@@ -16,12 +16,15 @@ import useLocalStorage from './useLocalStorage.js';
 //===============================================
 // setup props
 //===============================================
-import {StringProperty} from './component/props/StringProperty'
+import {StringProperty} from './component/props/StringProperty';
 //===============================================
 // setup
 //===============================================
-import {Operator} from './component/types/operator'
-import {Menu} from './component/types/menu'
+import {Operator} from './component/types/operator';
+import {Menu} from './component/types/menu';
+
+const appid = "mjs";
+var themeid = "default";
 
 export const appconfig = new writable({
     name: 'mjs',
@@ -30,7 +33,7 @@ export const appconfig = new writable({
     username:"Guest"
 });
 
-useLocalStorage(appconfig, 'appconfigmjs');
+useLocalStorage(appconfig, appid + "config");
 /*
 appconfig.set({
     name: 'mjs',
@@ -41,19 +44,30 @@ appconfig.set({
 */
 //var config = get(appconfig);
 //console.log(config);
+
+export const themeconfig = new writable("default");
+themeconfig.subscribe(value=>{
+    themeid = value;
+});
+useLocalStorage(themeconfig, appid + "theme");
+
+export const MainHeaderConfig = new writable({
+    menubtn:{
+        d:"#424242",
+        h:"#2c2c2c",
+        a:"#3b3b3b"
+    },
+    workspacebtn:{
+        d:"#2b2b2b",
+        h:"#3a3a3a",
+        a:"#424242"
+    }
+});
+useLocalStorage(MainHeaderConfig, appid + themeid + "mainheader");
+
+
+
 export var gun = null;
-/*
-if(config.usegunlocal == true){
-    gun = Gun();
-    console.log("client storage");
-}else{
-    console.log("client network");
-}
-*/
-
-
-
-
 
 //===============================================
 // access view area
@@ -80,8 +94,6 @@ export const props = {};
 export const context = {};
 
 export const view_layer = {};
-
-console.log("init ?");
 
 data.objects = objects;
 data.scenes = scenes;
@@ -164,7 +176,6 @@ export function register_class(obj){
             ops[tmp.sm_idname].sm_translation_context = tmp.sm_translation_context;
             //console.log("fun Operator found");
         }
-
 
     }
 

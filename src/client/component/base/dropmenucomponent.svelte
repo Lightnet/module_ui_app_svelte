@@ -7,8 +7,12 @@
 
     export let name = "menu";
     export let id = generateId(20);
+    let idcomponent = generateId(20);
+    let elcomponent;
     export let prefix = generateId(20);
     export let items = {};
+    export let cstyle = {};
+    export let btntag = "menubtn";
 
     let btoggle = false;
 
@@ -28,7 +32,50 @@
     
     onMount(()=>{
         window.addEventListener("click",onclick);
+        //console.log("========================================");
+        //console.log(cstyle);
+        elcomponent = document.getElementById(idcomponent);
+        //console.log(elcomponent);
+        loopnodes(elcomponent);
+
     });
+
+    function loopnodes(node){
+
+        for (var i = 0; i < node.childNodes.length; i++) {
+            //console.log(node.childNodes[i].className);
+            if(node.childNodes[i].className !=null){
+                //console.log(node.childNodes[i].className)
+                if(node.childNodes[i].className.match("menubtn")){
+                    //console.log(node.childNodes[i]);
+                    //console.log(node.childNodes[i].style);
+                    createstyle(node.childNodes[i]);
+                    //var css = 'button:hover{ background-color: white;color:black; }';
+                    //console.log(node.childNodes[i].style.cssText );
+                    //node.childNodes[i].style.cssText = css;
+                }
+            }
+
+            //if (nodes.childNodes[i].className == "4") {
+                //notes = nodes.childNodes[i];
+                //break;
+            //}        
+        }
+    }
+
+    function createstyle(element){
+        var css = '.menubtn:hover{ background-color: white !important; }';
+        var style = document.createElement('style');
+
+        if (element.style.styleSheet) {
+            //console.log("found! sheet");
+            style.styleSheet.cssText = css;
+        } else {
+            //console.log("create style");
+            style.appendChild(document.createTextNode(css));
+        }
+        element.appendChild(style);
+    }
 
     onDestroy(()=>{
 
@@ -101,8 +148,8 @@
     }
 </style>
 
-<div class="dropdown">
-    <button id="{name}{prefix}" class="dropbtn" on:click={()=>{togglecontent()}}>{name}
+<div id={idcomponent} class="dropdown">
+    <button id="{name}{prefix}" class="dropbtn menubtn" on:click={()=>{togglecontent()}}>{name}
     </button>
     <div class="dropdown-content {btoggle === true ? 'show' : ''}" id="{id}">
         {#each Object.keys(items) as item}

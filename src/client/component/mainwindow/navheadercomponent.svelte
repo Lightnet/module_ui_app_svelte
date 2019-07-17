@@ -8,7 +8,13 @@
 	import DropMenuListComponent from '../base/dropmenulistcomponent.svelte';
 
 	import mjs from '../../mjs.js';
+	import {MainHeaderConfig} from '../../mjs.js';
 	//import { generateId } from '../helper/generateid.js';
+
+	let MainHeaderStyle = {};
+	const MainHeaderConfigUnsub = MainHeaderConfig.subscribe(value=>{
+    	MainHeaderStyle = value;
+	});
 
 	export let name;
 	export let idassign;
@@ -32,7 +38,6 @@
         //console.log(event);
         CollapseFileMenu = value;
     });
-
 
 	function checktemplatepanel(){
 		//console.log("Test");
@@ -63,6 +68,7 @@
 	onMount(() => {
 		//console.log(mjs.ops)
 		//console.log(mjs);
+		//console.log(MainHeaderStyle);
 
 		workspaces = [
 			{sm_label:"Layout", sm_context:"layout",ops:workspace_view },
@@ -129,7 +135,7 @@
 	});
 
 	onDestroy(()=>{
-
+		MainHeaderConfigUnsub();
 		CollapseFileMenuUnsubscribe();
 	})
 
@@ -139,7 +145,7 @@
 	}
 
 	function testcall(event){
-		console.log(mjs.ops.object_ot_calltest.sm_label);
+		//console.log(mjs.ops.object_ot_calltest.sm_label);
 		mjs.ops.object_ot_calltest()
 	}
 
@@ -212,9 +218,9 @@
 	{:else}
 
 		<a href="/#"> {name} </a>
-		<DropMenuComponent name="File" prefix="_menuheader" items={filemenus} />
-		<DropMenuComponent name="Edit" prefix="_menuheader" items={editmenus} />
-		<DropMenuComponent name="View" prefix="_menuheader" items={viewmenus} />
+		<DropMenuComponent cstyle={MainHeaderStyle} name="File" prefix="_menuheader" items={filemenus} />
+		<DropMenuComponent  name="Edit" prefix="_menuheader" items={editmenus} />
+		<DropMenuComponent  name="View" prefix="_menuheader" items={viewmenus} />
 		<!--
 		<DropMenuComponent name="Render" prefix="_menuheader" items={rendermenus} />
 		-->

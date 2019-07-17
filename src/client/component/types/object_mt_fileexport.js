@@ -24,7 +24,7 @@ export default class object_mt_fileexport extends Menu{
         for(var obj in mjs.ops){
             if(mjs.ops[obj].sm_context == "EXPORT_MENU"){
                 this.children.push(mjs.ops[obj]);
-                console.log("found export!");
+                //console.log("found export!");
             }
         }
     }

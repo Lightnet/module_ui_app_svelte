@@ -45,3 +45,38 @@ const unsubscribe = store.subscribe(value => {
 //store.set({name:"world2"});
 
 ```
+
+# Stylesheet:
+ To override the theme setting is to used append and rather used svelte <style> that will not work.
+
+## theme.svelte
+```html javascript svelte
+<script>
+	let text="test";
+</script>
+
+<style>
+ .menubtn{
+	 {text} /* will not work */
+ }
+</style>
+```
+
+```html javascript svelte
+<script>
+//...
+function createstyle(element){
+	var css = '.menubtn:hover{ background-color: white !important; }';//note used !important to init change style theme.
+	var style = document.createElement('style');
+
+	if (element.style.styleSheet) {
+		//console.log("found! sheet");
+		style.styleSheet.cssText = css;
+	} else {
+		//console.log("create style");
+		style.appendChild(document.createTextNode(css));
+	}
+	element.appendChild(style);
+}
+</script>
+```

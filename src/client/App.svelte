@@ -28,7 +28,7 @@
 	let gun;
 	//console.log(store);
 	const unsubscribe = appconfig.subscribe(value => {
-		console.log(value);
+		//console.log(value);
 		config = value;
 	});
 
@@ -86,9 +86,9 @@
 
 		if(config.usegunlocal == true){
 			mjs.gun = Gun();
-			console.log("gun client storage");
+			//console.log("gun client storage");
 		}else{
-			console.log("guin client network");
+			//console.log("guin client network");
 			//gun = mjs.gun = Gun(['http://localhost:8080/gun']);
 			//gun = mjs.gun = Gun(location.origin + '/gun');
 			gun = mjs.gun = Gun(['http://localhost:8080' + '/gun']);
@@ -98,9 +98,9 @@
 			});
 
 			gun.get('mark').on(function(data, key){
-				console.log("update:", data);
+				//console.log("update:", data);
 			});
-			console.log(gun)
+			//console.log(gun);
 		}
 		//window.dispatchEvent(new Event('resize'));
 		//console.log(AFRAME);
