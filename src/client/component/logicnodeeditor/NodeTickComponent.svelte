@@ -6,8 +6,9 @@
     //import SVG from 'svg.js';
     const dispatch = createEventDispatcher();
 
-    let nodename = "Variable";
+    let nodename = "Tick";
     let idcomponent = "node" + generateId(20);
+    let nodeid;
     let elcomponent;
     export let px;
     export let py;
@@ -20,14 +21,24 @@
     let pinins = []; 
     let pinouts = [];
 
+    function tick(){
+        console.log("tick");
+    }
+
+    function handle_tick(){
+        tick();
+    }
+
     onMount(() => {
         elcomponent = document.getElementById(idcomponent);
         pinouts.push({px:90,py:4,idcomponent:generateId(20),nodeid:idcomponent,boutput:true});
         pinouts = pinouts;
+
+        window.addEventListener("tick",handle_tick);
     });
 
     onDestroy(()=>{
-
+        window.removeEventListener("tick",handle_tick);
     });
 
     function handle_node(e){

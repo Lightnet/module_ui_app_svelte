@@ -10,7 +10,9 @@
     const LogicNodeIDunsubscribe = LogicNodeID.subscribe(value => {
 		//console.log(value);
 		idlogicnode = value;
-	});
+    });
+    
+    let timerid;
 
     //onMount(async () => {	
     //});
@@ -34,6 +36,9 @@
         //get id for component
         //console.log(idlogicnode);
         let el = document.getElementById(idlogicnode);
+        console.log(el);
+        console.dir(el);
+
         //console.log(el);
         //console.dir(el);
         //working...
@@ -53,6 +58,30 @@
         //console.log(logicnodeapp);
     }
 
+    function tickevent(){
+        //console.log("time tick");
+        window.dispatchEvent(new Event("tick"));
+    }
+
+    function logicnoderun(){
+        console.log("logicnoderun");
+        if(timerid == null){
+            timerid = setInterval(tickevent, 1000);
+        }
+    }
+
+    function logicnodepause(){
+        console.log("logicnodepause");
+    }
+
+    function logicnodestop(){
+        console.log("logicnodestop");
+        clearInterval(timerid);
+    }
+    
+    function logicnodereset(){
+        console.log("logicnodereset");
+    }
 </script>
 
 <style>
@@ -62,4 +91,9 @@
 </style>
 <div>
     <button on:click={test}>Check Editor</button>
+    <button on:click={logicnoderun}>Run</button>
+    <!--<button on:click={logicnodepause}>Pause</button>-->
+    <button on:click={logicnodestop}>Stop</button>
+    <button on:click={logicnodereset}>Reset</button>
+
 </div>

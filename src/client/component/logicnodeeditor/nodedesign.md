@@ -15,8 +15,16 @@
  * event start / end
  * 
 
+# Variable:
+ * class?
+ * string
+ * float
+ * array?
+ * 
+
 # Connector type:
  * variable
  * flow
  * reroute node
- * 
+ * event
+ * function

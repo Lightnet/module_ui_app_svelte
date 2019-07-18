@@ -6,7 +6,7 @@
     //import 'svg.panzoom.js';
     const dispatch = createEventDispatcher();
 
-    let idcomponent = "node" + generateId(20);
+    export let idcomponent;// = "node" + generateId(20);
     let elcomponent;
     export let px = 0;
     export let py = 0;
@@ -82,7 +82,7 @@
 
     });
 
-    function handle_nodeconnecter(e){
+    function handle_node(e){
         dispatch("node",e.detail);
     }
 
@@ -106,5 +106,5 @@
     <slot>
     <text x="4" y="20" style="stroke: white; fill:white;"> Node Name </text>
     </slot>
-    <!--<NodePinComponent px="100" py="20" on:node={handle_nodeconnecter}/>-->
+    <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
 </g>

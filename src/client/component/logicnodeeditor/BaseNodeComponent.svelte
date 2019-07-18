@@ -74,10 +74,45 @@
     }
 
     function setuppin(){
-        pinins.push({px:-10,py:20,idcomponent:generateId(20),boutput:false});
-        pinins = pinins;
+        //pinins.push({px:-10,py:20,idcomponent:generateId(20),nodeid:idcomponent,boutput:false});
+        //pinins = pinins;
+        addpinin()
 
-        pinouts.push({px:90,py:20,idcomponent:generateId(20),boutput:true});
+        addpinout()
+
+        //pinouts.push({px:90,py:20,idcomponent:generateId(20),nodeid:idcomponent,boutput:true});
+        //pinouts = pinouts;
+    }
+
+    function addpinin(args){
+        if(args==null){
+            args={};
+        }
+        let index = pinins.length;
+        pinins.push({
+            px:-10,
+            py:(index*20+30 + index * 4),
+            idcomponent:generateId(20),
+            nodeid:idcomponent,
+            pintype:args.pintype || "flow",
+            boutput:false
+        });
+        pinins = pinins;
+    }
+
+    function addpinout(args){
+        if(args==null){
+            args={};
+        }
+        let index = pinouts.length;
+        pinouts.push({
+            px:nwidth - 10,
+            py:(index*20+30),
+            idcomponent:generateId(20),
+            nodeid:idcomponent,
+            pintype:args.pintype || "flow",
+            boutput:true
+        });
         pinouts = pinouts;
     }
 
@@ -121,16 +156,13 @@
         pointer-events: none;
     }
 </style>
-<NodeComponent px={px} py={py} svg={svg} on:node={handle_node}>
-
+<NodeComponent idcomponent={idcomponent} px={px} py={py} svg={svg} on:node={handle_node}>
     <text x="4" y="20" style="stroke: white; fill:white;"> {nodename} </text>
-
     {#each pinins as pinin}
         <!--{console.log(pinout)}-->
         <NodePinComponent {...pinin} on:node={handle_node}/>
         <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
     {/each}
-
     {#each pinouts as pinout}
         <!--{console.log(pinout)}-->
         <NodePinComponent {...pinout} on:node={handle_node}/>

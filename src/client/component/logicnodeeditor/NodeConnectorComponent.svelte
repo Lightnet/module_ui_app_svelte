@@ -123,7 +123,6 @@
         //color = outcolor;
         //dispatch("node",{id:idcomponent,type:"connector",mouse:"out",pinout:boutput});
         //updateline();
-        
     }
 
 </script>

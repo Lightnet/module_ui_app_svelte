@@ -8,6 +8,9 @@
     import BaseNodeComponent from './BaseNodeComponent.svelte';
     import NodeVariableComponent from './NodeVariableComponent.svelte';
     import NodeConnectorComponent from './NodeConnectorComponent.svelte';
+    import NodeTickComponent from './NodeTickComponent.svelte';
+    import NodeConsolelogComponent from './NodeConsolelogComponent.svelte';
+    import DrawGridComponent from "./DrawGridComponent.svelte"
     import mjs from '../../mjs.js';
     import {LogicNodeID} from '../../mjs.js';
     import SVG from 'svg.js';
@@ -35,9 +38,11 @@
     let width;
     let idsvg = "draw" + generateId(20);
 
-    let drawpoint;
+    //let drawpoint;
 
     export let connectors = [];//links to connector point list here for update position?
+    export let nodes = []; //node blocks types
+    export let propnodes = []; //node variables
 
     function resetpoint(){
         point1 = {x:0,y:0};
@@ -72,15 +77,6 @@
         return pt.matrixTransform(element.getScreenCTM().inverse());
     }
 
-    function handle_svgmousemove(e){
-        //if(bline){
-            //let svgP = svgPoint(svg, e.clientX, e.clientY);
-            //point2.x = svgP.x;
-            //point2.y = svgP.y;
-        //}
-        //return false;
-    }
-
     function handle_svgmousedown(e){
         //console.log(e);
         if(e.button == 0){
@@ -104,7 +100,6 @@
                 resetpoint();
             }
         }
-        //window.addEventListener('mousemove',handle_svgmousemove); //odd bug over and out
         window.addEventListener('mouseup',handle_svgmouseup);
     }
 
@@ -172,7 +167,6 @@
             bline = false;
             resetpoint();
         }
-        //window.removeEventListener('mousemove',handle_svgmousemove);
         window.removeEventListener('mouseup',handle_svgmouseup);
     }
 
@@ -191,6 +185,22 @@
             //console.log("true");
         }
         //SVG('drawing').panZoom(false);
+    }
+
+    function setupnodes(){
+        //nodes
+
+        propnodes.push({name:"text",type:"string",default:"test1",id:"100001"});
+        propnodes = propnodes;
+
+        nodes.push({nodetype:"BaseNode",px:20,py:20});
+        nodes.push({nodetype:"BaseNode",px:150,py:20});
+        nodes.push({nodetype:"NodeVariable",px:150,py:150});
+        nodes.push({nodetype:"NodeTick",px:150,py:200});
+
+        nodes.push({nodetype:"NodeConsolelog",px:300,py:200});
+
+        nodes = nodes;
     }
 
     onMount(() => {
@@ -242,6 +252,8 @@
             alert('SVG not supported');
             //console.log("SVG not supported");
         }
+
+        setupnodes();
         
         window.addEventListener('resize', handle_logicnodeeditor_resize);
         //window.addEventListener('click', handle_nonclick);
@@ -268,7 +280,7 @@
             }
         }
         if(e.detail.id != null){
-            //console.log(e.detail);
+            console.log(e.detail);
             //console.log(e.detail.mouse);
             if(e.detail.mouse == "over"){
                 if(e.detail.type == "pin"){
@@ -307,31 +319,33 @@
 
     <svg id="{idsvg}">
 
-        <defs>
-            <pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
-                <path d="M 8 0 L 0 0 0 8" fill="none" stroke="gray" stroke-width="0.5"/>
-            </pattern>
-            <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
-                <rect width="80" height="80" fill="url(#smallGrid)"/>
-                <path d="M 80 0 L 0 0 0 80" fill="none" stroke="gray" stroke-width="1"/>
-            </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#grid)" />
-
+        <DrawGridComponent />
+        <!--
         <BaseNodeComponent svg={svg} px="20" py="20" on:node={handle_node} />
-
         <BaseNodeComponent svg={svg} px="150" py="20" on:node={handle_node} />
-
         <NodeVariableComponent svg={svg} px="200" py="150" on:node={handle_node} />
+        -->
+        {#each Object.keys(nodes) as index}
+            {#if nodes[index].nodetype == "BaseNode"}
+                <BaseNodeComponent svg={svg} {...nodes[index]} on:node={handle_node} />
+            {/if}
+            {#if nodes[index].nodetype == "NodeVariable"}
+                <NodeVariableComponent svg={svg} {...nodes[index]} on:node={handle_node} />
+            {/if}
+            {#if nodes[index].nodetype == "NodeTick"}
+                <NodeTickComponent svg={svg} {...nodes[index]} on:node={handle_node} />
+            {/if}
+            {#if nodes[index].nodetype == "NodeConsolelog"}
+                <NodeConsolelogComponent svg={svg} {...nodes[index]} on:node={handle_node} />
+            {/if}
 
-        
+
+
+        {/each}
         {#each Object.keys(connectors) as index}
             <NodeConnectorComponent svg={svg} {...connectors[index]} />
         {/each}
-        
-
         <line class="nonselect" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:rgb(100,100,100);stroke-width:2" />
-    
-    </svg>
 
+    </svg>
 </div>

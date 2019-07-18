@@ -18,8 +18,10 @@
     export let svg;
     export let boutput = true;
     export let pins = [];
-    export let connectors = [];
+    //export let connectors = [];
     export let bpinout = true;
+    export let nodeid;
+    export let pintype = "flow";
 
     onMount(() => {
         elcomponent = document.getElementById(idcomponent);
@@ -39,7 +41,7 @@
         //e.stopImmediatePropagation();
         //console.log("over");
         color = overcolor;
-        dispatch("node",{id:idcomponent,type:"pin",mouse:"over",pinout:boutput});
+        dispatch("node",{nodeid:nodeid, id:idcomponent, type:"pin" ,pintype:pintype ,pinout:boutput, mouse:"over"});
     }
 
     function handle_mouseout(e){
@@ -47,7 +49,7 @@
         //e.stopImmediatePropagation();
         //console.log("out");
         color = outcolor;
-        dispatch("node",{id:idcomponent,type:"pin",mouse:"out",pinout:boutput});
+        dispatch("node",{nodeid:nodeid, id:idcomponent, type:"pin" ,pintype:pintype ,pinout:boutput, mouse:"out"});
     }
 
 </script>
