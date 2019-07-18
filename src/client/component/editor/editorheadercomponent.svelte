@@ -2,7 +2,7 @@
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
-    import LogicNodeEditorNavComponent from "../logicnodeeditor/logicnodeeditornavcomponent.svelte";
+    import LogicNodeNavigationComponent from "../logicnodeeditor/LogicNodeNavigationComponent.svelte";
 
     import EditorNavmenuComponent from './editornavmenucomponent.svelte';
     import b280K26 from '../icon/b280K26.svelte';
@@ -29,7 +29,7 @@
         //items.push({sm_label:"uveditor",sm_context:"uveditor",sm_category:"general",icon:null,sm_navmenu:null});
         //items.push({sm_label:"shadereditor",sm_context:"shadereditor",sm_category:"general",icon:null,sm_navmenu:null});
         //items.push({sm_label:"compositor",sm_context:"compositor",sm_category:"general",icon:null,sm_navmenu:null});
-        items.push({sm_label:"Logic Node Editor",sm_context:"logicnodeeditor",sm_category:"general",icon:b280Z16,sm_navmenu:LogicNodeEditorNavComponent});
+        items.push({sm_label:"Logic Node Editor",sm_context:"logicnodeeditor",sm_category:"general",icon:b280Z16,sm_navmenu:LogicNodeNavigationComponent});
         //items.push({sm_label:"Texture Node Editor",sm_context:"texturenodeeditor",sm_category:"general,icon:null",sm_navmenu:null});
         //items.push({sm_label:"Video Sequencer",sm_context:"videosequencer",sm_category:"general",icon:null,sm_navmenu:null});
         //items.push({sm_label:"Movie Clip Editor",sm_context:"movieclipeditor",sm_category:"general",icon:null,sm_navmenu:null});

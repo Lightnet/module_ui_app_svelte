@@ -3,14 +3,16 @@
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
     //import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
-    //import NodeComponent from './Node.svelte';
-    //import NodeComponent from './NodeComponent.svelte';
     import BaseNodeComponent from './BaseNodeComponent.svelte';
     import NodeVariableComponent from './NodeVariableComponent.svelte';
     import NodeConnectorComponent from './NodeConnectorComponent.svelte';
     import NodeTickComponent from './NodeTickComponent.svelte';
     import NodeConsolelogComponent from './NodeConsolelogComponent.svelte';
-    import DrawGridComponent from "./DrawGridComponent.svelte"
+    import DrawGridComponent from "./DrawGridComponent.svelte";
+
+    import {NodeTick} from "./nodescripts/NodeTick.js";
+    import {NodeConsolelog} from "./nodescripts/NodeConsolelog.js";
+
     import mjs from '../../mjs.js';
     import {LogicNodeID} from '../../mjs.js';
     import SVG from 'svg.js';
@@ -37,8 +39,6 @@
     let height;
     let width;
     let idsvg = "draw" + generateId(20);
-
-    //let drawpoint;
 
     export let connectors = [];//links to connector point list here for update position?
     export let nodes = []; //node blocks types
@@ -133,6 +133,15 @@
             idpinin:pinindata.id,
             idpinout:pinoutdata.id,
         };
+        //console.log(pinindata);
+        let data ={
+            action:"add",
+            pinin:pinindata,
+            pinout:pinoutdata
+        }
+        //send nodeid block to update pin connectors
+        window.dispatchEvent(new CustomEvent('updatepin',{detail:data}));
+
         /*let cconnector = new NodeConnectorComponent({target:svg,props:connector});*/
         //check connectors
         for(let i=0;i<connectors.length;i++){
@@ -145,7 +154,7 @@
         if(bfound == false){
             connectors.push(connector);
             connectors = connectors;
-            console.log(connectors);
+            //console.log(connectors);
         }
     }
 
@@ -190,12 +199,15 @@
     function setupnodes(){
         //nodes
 
+        //let ntick = new NodeTick();
+        //console.log(ntick)
+
         propnodes.push({name:"text",type:"string",default:"test1",id:"100001"});
         propnodes = propnodes;
 
-        nodes.push({nodetype:"BaseNode",px:20,py:20});
-        nodes.push({nodetype:"BaseNode",px:150,py:20});
-        nodes.push({nodetype:"NodeVariable",px:150,py:150});
+        //nodes.push({nodetype:"BaseNode",px:20,py:20});
+        //nodes.push({nodetype:"BaseNode",px:150,py:20});
+        //nodes.push({nodetype:"NodeVariable",px:150,py:150});
         nodes.push({nodetype:"NodeTick",px:150,py:200});
 
         nodes.push({nodetype:"NodeConsolelog",px:300,py:200});
@@ -280,7 +292,7 @@
             }
         }
         if(e.detail.id != null){
-            console.log(e.detail);
+            //console.log(e.detail);
             //console.log(e.detail.mouse);
             if(e.detail.mouse == "over"){
                 if(e.detail.type == "pin"){

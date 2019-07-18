@@ -64,9 +64,10 @@
     }
 
     function logicnoderun(){
-        console.log("logicnoderun");
+        //console.log("logicnoderun");
         if(timerid == null){
             timerid = setInterval(tickevent, 1000);
+            //console.log(timerid);
         }
     }
 
@@ -75,8 +76,10 @@
     }
 
     function logicnodestop(){
-        console.log("logicnodestop");
+        //console.log("logicnodestop");
         clearInterval(timerid);
+        //console.log(timerid);
+        timerid=null;
     }
     
     function logicnodereset(){
@@ -88,12 +91,27 @@
     button{
         height:22px;
     }
+
+    input{
+        background-color:#595959;
+        color:white;
+        font-size: 12px;
+        height:22px;
+    }
 </style>
 <div>
     <button on:click={test}>Check Editor</button>
+    <button on:click={test}>View</button>
+    <button on:click={test}>Select</button>
+    <button on:click={test}>Add</button>
+    <button on:click={test}>Node</button>
     <button on:click={logicnoderun}>Run</button>
     <!--<button on:click={logicnodepause}>Pause</button>-->
     <button on:click={logicnodestop}>Stop</button>
     <button on:click={logicnodereset}>Reset</button>
+
+    <input value={"filename.node"} />
+    <button on:click={logicnodereset}>New</button>
+    <button on:click={logicnodereset}>Delete</button>
 
 </div>

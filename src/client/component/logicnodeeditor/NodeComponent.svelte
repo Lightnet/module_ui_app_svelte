@@ -86,6 +86,10 @@
         dispatch("node",e.detail);
     }
 
+    function handle_click(e){
+        dispatch("click");
+    }
+
 </script>
 <style>
 
@@ -97,6 +101,7 @@
         width="{nwidth}" 
         height="{nheight}" 
         fill="{ncolor}"
+        on:click={handle_click}
         on:mousedown={handle_mousedown}
         on:mouseover={handle_mouseover}
         on:mouseout={handle_mouseout}
