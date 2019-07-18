@@ -9,6 +9,8 @@
     export let name = "menu";
     export let id = generateId(20);
     export let prefix = generateId(20);
+    export let clmenu = "";
+
     export let items = [];
     let activeitem;
     let btoggle = false;
@@ -67,23 +69,24 @@
         outline: none;
         color: white;
         padding: 4px 4px;
-        background-color: inherit;
         font-family: inherit;
         margin: 0;
+        background-color: #232323;
     }
 
     .dropdown button:active {
-  		background-color: #424242;
+  		background-color: #5177b2;
 	}
 
     .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
-        background-color: #424242;
+        background-color: #5177b2;
     }
 
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #333;
+        top:4px;
+        background-color: #232323;
         min-width: 128px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
@@ -94,17 +97,18 @@
         font-size: 12px;
         padding: 4px 4px;
         text-decoration: none;
+        background-color: #232323;
         display: block;
         text-align: left;
         color: white;
     }
 
     .dropdown-content a:active {
-  		background-color: #333;
+  		background-color: #5177b2;
 	}
 
     .dropdown-content a:hover {
-        background-color: #424242;
+        background-color: #5177b2;
     }
 
     .show {
@@ -124,20 +128,24 @@
 
     ul li {
         height:22px;
-        width:128px;
+        width:160px;
         margin: 0 0;
         padding: 0px 0px 0px 0px;
         list-style: none;
     }
+
+    button{
+        height:22px;
+    }
 </style>
 
 <div class="dropdown">
-    <button id="{name}{prefix}" class="dropbtn" on:click={()=>{togglecontent()}}> {name} </button>
+    <button id="{name}{prefix}" class="dropbtn {clmenu}" on:click={()=>{togglecontent()}}> {name} </button>
     <ul class="dropdown-content {btoggle === true ? 'show' : ''}" id="{id}">
         {#each Object.keys(items) as item}
             {#if items[item].children.length > 0}
-                <li class="">
-                    <a class="" href="/#" on:mouseover={()=>{activemenu(items[item])}}> {items[item].sm_label}</a>
+                <li>
+                    <a class="{clmenu}" href="/#" on:mouseover={()=>{activemenu(items[item])}}> {items[item].sm_label}</a>
                     
                     {#if items[item].children.length > 0}
                         {#if items[item] == activeitem}

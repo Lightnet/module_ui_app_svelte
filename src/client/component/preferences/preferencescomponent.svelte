@@ -28,6 +28,7 @@
     let eltab;
     let tabwidth = 128;
     let tabview = "addons";
+    tabview = "themes";
     let viewcomponent;
 
     let idcontent = generateId(20);

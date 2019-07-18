@@ -1,9 +1,18 @@
 <script>
-    import { onMount, onDestroy, createEventDispatcher } from 'svelte'
+    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     //import { UserName } from '../../stores.js';
     import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
-    import mjs from '../../../mjs.js';
+    //import mjs from '../../../mjs.js';
+    import {MainHeaderConfig} from '../../../mjs.js';
     //const dispatch = createEventDispatcher();
+    export let bCollapse = false;
+    let config;
+
+    const TopBarUnsubscribe = MainHeaderConfig.subscribe(value => {
+		//console.log(value);
+		config = value;
+	});
+
 
     onMount(() => {
         //console.log("mount");
@@ -11,7 +20,17 @@
 
     onDestroy(() => {
         //console.log("onDestroy");
+        TopBarUnsubscribe();
     });
+
+    afterUpdate(()=>{
+        console.log("changes...???");
+        MainHeaderConfig.set(config);
+    })
+
+    function handle_change(e){
+        console.log("input???");
+    }
 
 </script>
 
@@ -28,24 +47,34 @@
         background-color: lightslategrey;
     }
 
-    input{
-        /*background-color:grey;*/
-        font-size: 12px;
-        height:22px;
-    }
+    /*input{font-size: 12px;height:22px;}*/
 
     div{
         color:white;
     }
 
+    .colorpanel{
+        float:left;
+        height:32px;
+        width:32px;
+    }
+
 </style>
-<CollapsePanelComponent>
+<CollapsePanelComponent  btogglepanel={bCollapse}>
     <span slot="header"> Top Bar </span>
 
     <div slot="content"> 
-        <button>Test</button>
+        Menu
+        <br> Button Default: <div class="colorpanel" style="background-color:{config.menubtn.d};"></div><input bind:value={config.menubtn.d}>
+        <br> Button Hover:<div class="colorpanel" style="background-color:{config.menubtn.h};"></div><input bind:value={config.menubtn.h}>
+        <br> Workspace
+        <br> Button Default: <div class="colorpanel" style="background-color:{config.workspacebtn.d};"></div><input bind:value={config.workspacebtn.d}>
+        <br> Button Hover:<div class="colorpanel" style="background-color:{config.workspacebtn.h};"></div><input bind:value={config.workspacebtn.h}>
+        <br> Button Active:<div class="colorpanel" style="background-color:{config.workspacebtn.a};"></div><input bind:value={config.workspacebtn.a}>
+
     </div>
 </CollapsePanelComponent>
+
 
 
 

@@ -53,9 +53,8 @@ useLocalStorage(themeconfig, appid + "theme");
 
 export const MainHeaderConfig = new writable({
     menubtn:{
-        d:"#424242",
-        h:"#2c2c2c",
-        a:"#3b3b3b"
+        d:"#232323",
+        h:"#5177b2"
     },
     workspacebtn:{
         d:"#2b2b2b",

@@ -1,7 +1,7 @@
 <script>
 	//https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp
 	//https://www.w3schools.com/howto/howto_js_dropdown.asp
-	import { onMount, onDestroy, createEventDispatcher } from 'svelte'
+	import { onMount, beforeUpdate, onDestroy, createEventDispatcher } from 'svelte'
 	import Panel from '../base/panel.svelte'
 	//import DropMenu from '../base/dropmenu.svelte';
 	import DropMenuComponent from '../base/dropmenucomponent.svelte';
@@ -9,18 +9,17 @@
 
 	import mjs from '../../mjs.js';
 	import {MainHeaderConfig} from '../../mjs.js';
-	//import { generateId } from '../helper/generateid.js';
-
-	let MainHeaderStyle = {};
-	const MainHeaderConfigUnsub = MainHeaderConfig.subscribe(value=>{
-    	MainHeaderStyle = value;
-	});
+	import { generateId } from '../helper/generateid.js';
 
 	export let name;
 	export let idassign;
+	let elcomponent;
+	let idstyle = generateId(20)
     const dispatch = createEventDispatcher();
 	//let menus = [];
 	let templatepanel;
+	//let contexttab = "";
+	
 
 	let mainmenus = [];
 	let filemenus = [];
@@ -34,11 +33,20 @@
 	let workspaces = [];
 	let CollapseFileMenu = false;
 
+	let MainHeaderStyle = {};
+
+	const MainHeaderConfigUnsub = MainHeaderConfig.subscribe(value=>{
+		MainHeaderStyle = value;
+		//console.log("vaule theme change?");
+		checktheme();
+	});
+
 	const CollapseFileMenuUnsubscribe = mjs.data.CollapseFileMenuMainHeader.subscribe(value => {
         //console.log(event);
         CollapseFileMenu = value;
-    });
-
+	});
+	
+	/*
 	function checktemplatepanel(){
 		//console.log("Test");
 		if(templatepanel){
@@ -58,6 +66,48 @@
 		//console.log(templatepanel)
 		//templatepanel.OBJECT_OT_Panel();
 	}
+	*/
+	beforeUpdate(()=>{
+		//checktheme();
+		//console.log("update???")
+	})
+
+	function checktheme(){
+		if(elcomponent ==null){
+			return;
+		}
+		//console.log(MainHeaderStyle);
+		//https://stackoverflow.com/questions/3304014/how-to-interpolate-variables-in-strings-in-javascript-without-concatenation
+		let css = `
+		.headerubtn{ background-color: ${MainHeaderStyle.menubtn.d} !important; }
+		.headerubtn:hover{ background-color: ${MainHeaderStyle.menubtn.h} !important; } 
+		.headerubtn:active{ background-color: ${MainHeaderStyle.menubtn.a} !important; }
+		.workspacebtn{ background-color: ${MainHeaderStyle.workspacebtn.d} !important; }
+		.workspacebtn:hover{ background-color: ${MainHeaderStyle.workspacebtn.h} !important; } 
+		.workspacebtn:active{ background-color: ${MainHeaderStyle.workspacebtn.a} !important; }
+		`;
+		//console.log(css);
+		createstyle(elcomponent,css);
+	}
+
+	function createstyle(element,_css){
+		//let css = '.menubtn:hover{ background-color: white !important; }';
+		//remove element to update style
+		let css = _css;
+		let elsytle = document.getElementById(idstyle);
+		if(elsytle){
+			elsytle.remove();
+			elsytle =null;
+		}
+		if(elsytle == null){
+			console.log("create style");
+			elsytle = document.createElement('style');
+			elsytle.setAttribute("id",idstyle);
+			elsytle.appendChild(document.createTextNode(css));
+			//console.log(elsytle);
+			element.appendChild(elsytle);
+		}
+    }
 
 	function workspace_view(value){
 		//console.log(value);
@@ -69,6 +119,9 @@
 		//console.log(mjs.ops)
 		//console.log(mjs);
 		//console.log(MainHeaderStyle);
+		elcomponent = document.getElementById(idassign);
+
+		checktheme();
 
 		workspaces = [
 			{sm_label:"Layout", sm_context:"layout",ops:workspace_view },
@@ -144,24 +197,25 @@
 		mjs.context.contextmenu.set({sm_context:'HEADER'});
 	}
 
-	function testcall(event){
+	//function testcall(event){
 		//console.log(mjs.ops.object_ot_calltest.sm_label);
-		mjs.ops.object_ot_calltest()
-	}
+		//mjs.ops.object_ot_calltest()
+	//}
 
 </script>
 
 <style>
   	.navbar {
     	overflow: hidden;
-    	background-color: #212121;
+    	background-color: #232323;
     	font-family: Arial, Helvetica, sans-serif;
 		width:100%;
   	}
 
   	.navbar a {
     	float: left;
-    	font-size: 12px;
+		font-size: 12px;
+		background-color: #232323;
     	color: white;
     	text-align: center;
     	padding: 4px 4px;
@@ -170,11 +224,11 @@
   	}
 
   	.navbar a:hover {
-    	background-color: #424242;
+    	background-color: #5177b2;
   	}
 
 	.navbar a:active {
-  		background-color: #333;
+  		background-color: #5177b2;
 	}
 
 	.workspace{
@@ -190,7 +244,7 @@
 	button{
 		border:none;
         outline: none;
-        background-color:#333;
+        background-color:#232323;
         font-size: 12px;
         color:white;
         height:22px;
@@ -200,11 +254,23 @@
     }
 
 	button:hover{
-        background-color: #424242;
+        background-color: #5177b2;
     }
 
 	button:active {
-  		background-color: #333;
+  		background-color: #5177b2;
+	}
+
+	.workspacebtn{
+		background-color: #2b2b2b ;
+	}
+
+	.workspacebtn:hover{
+		background-color: #3a3a3a ;
+	}
+
+	.workspacebtn:active{
+		background-color: #424242 ;
 	}
 
 </style>
@@ -212,31 +278,29 @@
 <div id="{idassign}" on:mousemove={handleMousemove} class="navbar">
 
 	{#if CollapseFileMenu == true}
-
 		<DropMenuListComponent name="Menu" prefix="_menuheader" items={mainmenus} />	
-
 	{:else}
 
 		<a href="/#"> {name} </a>
-		<DropMenuComponent cstyle={MainHeaderStyle} name="File" prefix="_menuheader" items={filemenus} />
-		<DropMenuComponent  name="Edit" prefix="_menuheader" items={editmenus} />
-		<DropMenuComponent  name="View" prefix="_menuheader" items={viewmenus} />
+		<DropMenuComponent name="File" prefix="_menuheader" items={filemenus} clmenu="headerubtn"/>
+		<DropMenuComponent name="Edit" prefix="_menuheader" items={editmenus} clmenu="headerubtn"/>
+		<DropMenuComponent name="View" prefix="_menuheader" items={viewmenus} clmenu="headerubtn"/>
 		<!--
-		<DropMenuComponent name="Render" prefix="_menuheader" items={rendermenus} />
+		<DropMenuComponent name="Render" prefix="_menuheader" items={rendermenus}  clmenu="headerubtn"/>
 		-->
-		<DropMenuComponent name="Window" prefix="_menuheader" items={windowmenus} />
-		<DropMenuComponent name="Access" prefix="_menuheader" items={accessmenus} />
-		<DropMenuComponent name="Help" prefix="_menuheader" items={helpmenus} />
-		<a href="/#" on:click={testcall}>Test Call</a>
-		<a href="/#" on:click={checktemplatepanel}>Test Panel</a>
+		<DropMenuComponent name="Window" prefix="_menuheader" items={windowmenus} clmenu="headerubtn"/>
+		<DropMenuComponent name="Access" prefix="_menuheader" items={accessmenus} clmenu="headerubtn"/>
+		<DropMenuComponent name="Help" prefix="_menuheader" items={helpmenus} clmenu="headerubtn"/>
+		<!--<a href="/#" on:click={testcall}>Test Call</a>
+		<a href="/#" on:click={checktemplatepanel}>Test Panel</a>-->
 
 	{/if}
 
 	<div class="workspace">
 		{#each workspaces as workspace}
-			<button on:click={()=>{workspace.ops(workspace.sm_context)}}>{workspace.sm_label}</button>	
+			<button class="workspacebtn" on:click={()=>{workspace.ops(workspace.sm_context)}}>{workspace.sm_label}</button>	
 		{/each}
-		<button>+</button>
+		<button class="workspacebtn">+</button>
 	</div>
 
 

@@ -62,18 +62,19 @@
         display: block;
         text-align: left;
         color: white;
+        background-color: #232323;
     }
 
     a:active {
-  		background-color: #333;
+  		background-color: #5177b2;
     }
     
     a:hover {
-        background-color: #424242;
+        background-color: #5177b2;
     }
 
     ul{
-        background-color: #333;
+        background-color: #232323;
         padding: 0px 0px 0px 0px;
         display:none;/*hide*/
         list-style: none;
@@ -81,7 +82,7 @@
     }
 
     ul li{
-        width:128px;
+        width:160px;
         height:22px;/* fixed height else auto when another ul */
         margin: 0 0;
         padding: 0px 0px 0px 0px;
@@ -91,10 +92,8 @@
 
     .dropdown-submenu {
         position: relative;
-        /*position: inherit;*/
         top:-20px;
-        left:128px;
-        /*float: left;*/
+        left:160px;
     }
 </style>
 <ul class="dropdown-submenu" style="{active == true ? 'display:block;' : 'display:none;'}">

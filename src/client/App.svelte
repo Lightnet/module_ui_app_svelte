@@ -48,8 +48,8 @@
 	//viewworkspace = "layout";
 	//viewworkspace = "testdivide";
 	//viewworkspace = "testoffsetdivide";
-	//viewworkspace = "preferences";
-	viewworkspace = "logicnodeeditor";
+	viewworkspace = "preferences";
+	//viewworkspace = "logicnodeeditor";
 
 	let elementheader;
 	let elementcontent;
@@ -59,15 +59,14 @@
 	let idcontent = generateId(20);
 	let idfooter = generateId(20);
 
-	//const bloginunsubscribe = Sl_blogin.subscribe(value => {
-		//blogin = value;
-		//console.log(value);
-	//});
-
 	//function showmodal(msg){
 		//showModal = true;
 		//msgmodal = msg;
 	//}
+
+	function checktheme(){
+
+	}
 
 	function handle_workspace(event){
 		//console.log(event);
@@ -82,7 +81,9 @@
 	}
 
 	onMount(async () => {
-		window.addEventListener('resize', resizediv);
+		elementheader = document.getElementById(idheader);
+		elementcontent = document.getElementById(idcontent);
+		elementfooter = document.getElementById(idfooter);
 
 		if(config.usegunlocal == true){
 			mjs.gun = Gun();
@@ -139,16 +140,13 @@
 		//console.log(scene.object3D);
 		//console.dir(scene.object3D);
 		mjs.context.scene.set(scene);
+		resizediv();
+
+		window.addEventListener('resize', resizediv);
 	});
 
 	afterUpdate(()=>{
-		elementheader = document.getElementById(idheader);
-		elementcontent = document.getElementById(idcontent);
-		elementfooter = document.getElementById(idfooter);
-		//console.log(elementheader)
-		//console.log(elementcontent)
-		//console.log(elementfooter)
-		resizediv();
+		
 	});
 
 	onDestroy(()=>{

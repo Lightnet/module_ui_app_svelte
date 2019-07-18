@@ -1,10 +1,10 @@
 <script>
-    import { onMount, onDestroy, createEventDispatcher } from 'svelte'
+    import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     //import { UserName } from '../../stores.js';
     import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
     import mjs from '../../../mjs.js';
     //const dispatch = createEventDispatcher();
-
+    export let bCollapse = true;
     onMount(() => {
         //console.log("mount");
     });
@@ -39,7 +39,7 @@
     }
 
 </style>
-<CollapsePanelComponent>
+<CollapsePanelComponent  btogglepanel={bCollapse}>
     <span slot="header"> Text Style </span>
 
     <div slot="content"> 

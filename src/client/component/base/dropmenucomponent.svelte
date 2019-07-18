@@ -11,8 +11,9 @@
     let elcomponent;
     export let prefix = generateId(20);
     export let items = {};
-    export let cstyle = {};
-    export let btntag = "menubtn";
+    //export let cstyle = {};
+    //export let btntag = "menubtn";
+    export let clmenu = "menubtn";
 
     let btoggle = false;
 
@@ -36,12 +37,11 @@
         //console.log(cstyle);
         elcomponent = document.getElementById(idcomponent);
         //console.log(elcomponent);
-        loopnodes(elcomponent);
+        //loopnodes(elcomponent);
 
     });
 
     function loopnodes(node){
-
         for (var i = 0; i < node.childNodes.length; i++) {
             //console.log(node.childNodes[i].className);
             if(node.childNodes[i].className !=null){
@@ -49,13 +49,12 @@
                 if(node.childNodes[i].className.match("menubtn")){
                     //console.log(node.childNodes[i]);
                     //console.log(node.childNodes[i].style);
-                    createstyle(node.childNodes[i]);
+                    //createstyle(node.childNodes[i]);
                     //var css = 'button:hover{ background-color: white;color:black; }';
                     //console.log(node.childNodes[i].style.cssText );
                     //node.childNodes[i].style.cssText = css;
                 }
             }
-
             //if (nodes.childNodes[i].className == "4") {
                 //notes = nodes.childNodes[i];
                 //break;
@@ -109,17 +108,17 @@
     }
 
     .dropdown button:active {
-  		background-color: #424242;
+  		background-color: #5177b2;
 	}
 
     .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
-        background-color: #424242;
+        background-color: #5177b2;
     }
 
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #333;
+        background-color: #232323;
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
@@ -132,28 +131,32 @@
         text-decoration: none;
         display: block;
         text-align: left;
+        background-color: #232323;
         color: white;
     }
 
     .dropdown-content a:active {
-  		background-color: #333;
+  		background-color: #5177b2;
 	}
 
     .dropdown-content a:hover {
-        background-color: #424242;
+        background-color: #5177b2;
     }
 
     .show {
         display: block;
     }
+    button{
+        height:22px;
+    }
 </style>
 
 <div id={idcomponent} class="dropdown">
-    <button id="{name}{prefix}" class="dropbtn menubtn" on:click={()=>{togglecontent()}}>{name}
+    <button id="{name}{prefix}" class="dropbtn {clmenu}" on:click={()=>{togglecontent()}}>{name}
     </button>
     <div class="dropdown-content {btoggle === true ? 'show' : ''}" id="{id}">
         {#each Object.keys(items) as item}
-            <a href="/#" on:click={()=>{items[item]()}}>  {items[item].sm_label}</a>
+            <a class="{clmenu}" href="/#" on:click={()=>{items[item]()}}>  {items[item].sm_label}</a>
         {/each}
     </div>
 </div>

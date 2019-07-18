@@ -55,6 +55,7 @@ input[type="range"] {
 }
 
 button {
+	color:white;
 	font-size: 12px;
 	background-color: #595959;
 	outline: none;

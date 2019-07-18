@@ -4,6 +4,7 @@
     import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
     import mjs from '../../../mjs.js';
     //const dispatch = createEventDispatcher();
+    export let bCollapse = true;
 
     onMount(() => {
         //console.log("mount");
@@ -39,7 +40,7 @@
     }
 
 </style>
-<CollapsePanelComponent>
+<CollapsePanelComponent btogglepanel={bCollapse}>
     <span slot="header"> Bone Color Sets</span>
 
     <div slot="content"> 

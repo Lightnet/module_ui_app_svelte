@@ -54,7 +54,7 @@
         <i class="fa {btogglepanel == true ? "fa-caret-down" : "fa-caret-right"}"></i>
         <slot name='header'></slot>
     </div>
-    {#if btogglepanel}
+    {#if !btogglepanel}
     <div class="context">
         <slot name='content'></slot>
     </div>

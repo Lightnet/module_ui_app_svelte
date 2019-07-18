@@ -1,4 +1,13 @@
-
+Main Header: #232323
+ Menu Button:
+  d#232323
+  h#5177b2
+ Workspace Button:
+  d#2b2b2b
+  h#3a3a3a
+  a#424242
+ 
+ 
  * panel header #424242
   * content background #383838
 
