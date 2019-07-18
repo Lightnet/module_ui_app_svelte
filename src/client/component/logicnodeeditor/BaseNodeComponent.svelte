@@ -74,6 +74,9 @@
     }
 
     function setuppin(){
+        pinins.push({px:-10,py:20,idcomponent:generateId(20),boutput:false});
+        pinins = pinins;
+
         pinouts.push({px:90,py:20,idcomponent:generateId(20),boutput:true});
         pinouts = pinouts;
     }
@@ -106,7 +109,6 @@
     }
 
     //window.dispatchEvent(new Event('resize'));
-
 </script>
 <style>
     /* https://stackoverflow.com/questions/34445147/make-svg-text-unselectable */
@@ -122,6 +124,13 @@
 <NodeComponent px={px} py={py} svg={svg} on:node={handle_node}>
 
     <text x="4" y="20" style="stroke: white; fill:white;"> {nodename} </text>
+
+    {#each pinins as pinin}
+        <!--{console.log(pinout)}-->
+        <NodePinComponent {...pinin} on:node={handle_node}/>
+        <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
+    {/each}
+
     {#each pinouts as pinout}
         <!--{console.log(pinout)}-->
         <NodePinComponent {...pinout} on:node={handle_node}/>

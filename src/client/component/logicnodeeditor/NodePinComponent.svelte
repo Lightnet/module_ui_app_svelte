@@ -21,7 +21,6 @@
     export let connectors = [];
     export let bpinout = true;
 
-
     onMount(() => {
         elcomponent = document.getElementById(idcomponent);
     });

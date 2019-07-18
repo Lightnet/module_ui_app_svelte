@@ -19,10 +19,11 @@
     let elementcontent;
     let bnode = false;
 
-    let nodetype = "";
-    let idconnector = "";
-    let idconnector1;
-    let idconnector2;
+    let pindata;
+    let idpin1;
+    let idpin2;
+    let pinoutdata;
+    let pinindata;
 
     let point1 = {x:0,y:0};
     let point2 = {x:0,y:0};
@@ -63,13 +64,6 @@
         mjs.context.contextmenu.set({sm_context:'LOGICNODE'});
     }
 
-    /*
-    let mouse = {
-        x:0,
-        y:0
-    }
-    */
-
     // translate page to SVG co-ordinate
     function svgPoint(element, x, y) {
         var pt = svg.createSVGPoint();
@@ -91,17 +85,21 @@
         //console.log(e);
         if(e.button == 0){
             //console.log(e)
-            //console.log(idconnector1);
-            if(nodetype == "pin"){
-                idconnector1 = idconnector;
-                let svgP = svgPoint(svg, e.clientX, e.clientY);
-                //set draw line to dot from mouse down.
-                point1.x = svgP.x;
-                point1.y = svgP.y;
-                point2.x = svgP.x;
-                point2.y = svgP.y;
-                bline = true;
+            if(pindata !=null){
+                if((pindata.type == "pin")&&(pindata.mouse == "over")){
+                    idpin1 = pindata;
+                    let svgP = svgPoint(svg, e.clientX, e.clientY);
+                    //set draw line to dot from mouse down.
+                    point1.x = svgP.x;
+                    point1.y = svgP.y;
+                    point2.x = svgP.x;
+                    point2.y = svgP.y;
+                    bline = true;
+                }else{
+                    bline = false;
+                }
             }else{
+                bline = false;
                 //console.log("clear?");
                 resetpoint();
             }
@@ -111,62 +109,68 @@
     }
 
     function checknodepoints(){
-        //if(idconnector2.length)
-        if((idconnector1 !=null)&&(idconnector2 !=null)){
-            //console.log(idconnector1.length);
-            //console.log(idconnector2.length);
+        if((idpin1 !=null)&&(idpin2 !=null)){
             //console.log("pass");
-            getconnectors();
-            idconnector1 = null;
-            idconnector2 = null;
+            if((idpin1.pinout == true)&&(idpin2.pinout == false)){
+                pinoutdata = idpin1;
+                pinindata = idpin2;
+                getconnectors();
+            }else if((idpin1.pinout == false)&&(idpin2.pinout == true)){
+                pinoutdata = idpin2;
+                pinindata = idpin1;
+                getconnectors();
+            }else{
+                console.log("error?");
+            }
+            idpin1 = null;
+            idpin1 = null;
         }else{
             //console.log("fail");
-            //console.log(idconnector1);
-            //console.log(idconnector2);
-            idconnector1 = null;
-            idconnector2 = null;
+            idpin1 = null;
+            idpin2 = null;
         }
     }
 
     function getconnectors(){
-        let elcon1 = document.getElementById(idconnector1);
-        let elcon2 = document.getElementById(idconnector2);
-        //console.log(elcon1);
-        //console.dir(elcon1);
-        //console.log(elcon2);
-        let connector ={
+        let bfound = false;
+        let connector = {
             idcomponent: generateId(20),
-            idpinin:idconnector1,
-            idpinout:idconnector2,
+            idpinin:pinindata.id,
+            idpinout:pinoutdata.id,
         };
-        /*
-        let cconnector = new NodeConnectorComponent({
-            target:svg,
-            props:connector
-        });*/
+        /*let cconnector = new NodeConnectorComponent({target:svg,props:connector});*/
+        //check connectors
+        for(let i=0;i<connectors.length;i++){
+            if((connectors[i].idpinin == pinindata.id)&&(connectors[i].idpinout == pinoutdata.id)){
+                bfound = true;
+                break;
+            }
+        }
 
-        //console.log(cconnector);
-        connectors.push(connector);
-        connectors = connectors;
-        console.log(connectors);
+        if(bfound == false){
+            connectors.push(connector);
+            connectors = connectors;
+            console.log(connectors);
+        }
     }
-
-
 
     function handle_svgmouseup(e){
         //e.preventDefault();
         if(e.button == 0){
             //console.log(e)
-            if(nodetype == "pin"){
-                idconnector2 = idconnector;
-                //console.log(idconnector2);
-                //console.log(idconnector);
-                let svgP = svgPoint(svg, e.clientX, e.clientY);
-                point2.x = svgP.x;
-                point2.y = svgP.y;
-                bline = false;
-                checknodepoints();
+            if(pindata !=null){
+                if((pindata.type == "pin")&&(pindata.mouse == "over")){
+                    idpin2 = pindata;
+                    let svgP = svgPoint(svg, e.clientX, e.clientY);
+                    point2.x = svgP.x;
+                    point2.y = svgP.y;
+                    //console.log(idpin1);
+                    //console.log(pindata);
+                    checknodepoints();
+                }
             }
+            bline = false;
+            resetpoint();
         }
         //window.removeEventListener('mousemove',handle_svgmousemove);
         window.removeEventListener('mouseup',handle_svgmouseup);
@@ -255,13 +259,6 @@
     function handle_node(e){
         //console.log(e)
         //console.log(e.detail)
-        //console.log(e.detail.mouse);
-        if(e.detail == "over"){
-            bnode = true;
-        }
-        if(e.detail == "out"){
-            bnode = false;
-        }
         if(e.detail.mouse != null){
             if(e.detail.mouse == "out"){
                 bnode = false;
@@ -271,13 +268,14 @@
             }
         }
         if(e.detail.id != null){
-            //console.log(e.detail.id);
+            //console.log(e.detail);
             //console.log(e.detail.mouse);
             if(e.detail.mouse == "over"){
-                nodetype = e.detail.type;
-                idconnector =  e.detail.id;
+                if(e.detail.type == "pin"){
+                    pindata = e.detail;
+                }
             }else{
-                idconnector = null;
+                pindata = null;
             }
         }
         checkpanmove();
