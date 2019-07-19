@@ -137,9 +137,7 @@
                 cont2.style.width = window_width +"px";
                 //console.log("offsetWidth:" +  splitter.parentNode.offsetWidth  + " offsetLeft:" + splitter.parentNode.offsetLeft +" : " +  window_width);
             //}
-
-            oldx = window_width;
-            
+            //oldx = window_width;
             
         }
         //window.dispatchEvent(new Event('resize')); //overload not used here
