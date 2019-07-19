@@ -13,8 +13,9 @@
     let m = {x:0,y:0};
     export let bresize = false;
     export let bhorizontal = false;
+    let splitsize = 10;
     let sheight = '100%';
-    let swidth = '10px';
+    let swidth = splitsize + 'px';
     let resizetag = 'n-resize';
     let splitter;
 
@@ -88,7 +89,7 @@
         let parent = splitter.parentNode;
         window_width = parent.clientWidth;
         window_height = parent.clientHeight;
-        if(bresize == true){
+        if(bresize == true){//check for there more two screen port???
             if(bhorizontal == true){
                 let dx = last_x;
                 cont1.style.width=dx+"px";
@@ -104,24 +105,27 @@
                 dy = window_height - dy;
                 cont2.style.height=dy+"px";
             }
-        }else{
+        }else{// if one viewport do something here
             if(cont1 == null){
                 return;
             }
             if(bhorizontal == true){
+                console.log("horizontal");
                 let dx = last_x;
                 //cont1.style.width=dx+"px";
                 dx += splitter.clientWidth;
                 cont1.style.marginLeft=dx+"px";
                 dx = window_width - dx;
-                cont1.style.width=dx-splitter.clientWidth+"px";
+                cont1.style.width=dx+"px";
             }else{
+                console.log("vertical");
                 let dy = last_y;
                 //cont1.style.height=dy+"px";
                 dy += splitter.clientHeight
                 cont1.style.marginTop=dy+"px";
                 dy = window_height - dy;
-                cont1.style.height=dy-splitter.clientHeight+"px";
+                console.log(splitter.clientHeight);
+                cont1.style.height=dy+"px";
             }
         }
         //window.dispatchEvent(new Event('resize')); //overload not used here
@@ -159,7 +163,7 @@
 
         if(bhorizontal){
             sheight = '100%';
-            swidth = '10px';
+            swidth = splitsize + 'px';
             resizetag = 'w-resize';
             if(bresize){
                 splitter.style.marginLeft = (window_width / 2) + 'px';
@@ -167,7 +171,7 @@
                 last_y = 0;
             }
         }else{
-            sheight = '10px';
+            sheight = splitsize +'px';
             swidth = '100%';
             resizetag = 'n-resize';
             if(bresize){
@@ -176,26 +180,16 @@
                 last_y = window_height / 2;
             }
         }
-        //console.log(bhorizontal);
+        console.log(bhorizontal);
         splitter.style.height = sheight;
         splitter.style.width = swidth;
         splitter.style.cursor = resizetag;
 
         if(bresize == false){
-            //console.log(splitter.clientHeight)
-            //console.log(splitter.offsetTop);
-            //console.dir(splitter);
-            //cont1.style.marginTop = splitter.offsetParent.offsetTop + splitter.offsetTop + 'px';
-            //cont1.style.marginTop = splitter.offsetParent.offsetTop + 'px';
-            cont1.style.marginTop = splitter.clientHeight + 'px';
-            cont1.style.height = splitter.parentNode.clientHeight - splitter.clientHeight + 'px';
-            //console.log(splitter.clientHeight );
-            //cont1.style.height = 'calc(100% -' + splitter.clientHeight  - 20 + 'px)';
-            //cont1.style.height = '10px';
-            //console.log(cont1.style.height);
-            //cont1.style.marginTop = splitter.clientHeight + 'px';
-            //console.log(splitter.offsetParent.offsetTop)
-            //console.log(cont1.style.marginTop;
+            if(bhorizontal == false){//v single region
+                cont1.style.marginTop = splitter.clientHeight + 'px';
+                cont1.style.height = splitter.parentNode.clientHeight - splitter.clientHeight + 'px';
+            }
         }
 
         

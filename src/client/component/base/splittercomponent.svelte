@@ -2,7 +2,7 @@
     //https://codepen.io/cnupm99/pen/pvNyYX
     //https://jsbin.com/qewecajiro/edit?css,js,output
 
-    import { onMount, onDestroy, setContext, createEventDispatcher } from 'svelte'
+    import { onMount, onDestroy, setContext, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
     //import mjs from '../../mjs.js';
     import { context } from '../../mjs.js';
@@ -11,7 +11,7 @@
     export let iddiv2;
     let m = {x:0,y:0};
     export let bresize = false;
-    export let bhorizontal = false;
+    export let bhorizontal = false; //vertical
     export let px;
     export let py;
     let sheight = '100%';
@@ -80,6 +80,7 @@
         window_height = parent.clientHeight;
 
         if(bhorizontal == true){
+            console.log("bhorizontal");
             let dx = last_x;
             //if(cont1){
                 cont1.style.width=dx+"px";
@@ -94,6 +95,7 @@
                 cont2.style.width=dx+"px";
             }
         }else{
+            console.log("vertical");
             let dy = last_y;
             //if(cont1){
                 cont1.style.height=dy+"px";

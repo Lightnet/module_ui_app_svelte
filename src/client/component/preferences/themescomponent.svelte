@@ -39,7 +39,7 @@
     //});
 
     afterUpdate(()=>{
-        console.log("changes...???");
+        //console.log("changes...???");
         PrefsThemesConfig.set(config);
     })
 

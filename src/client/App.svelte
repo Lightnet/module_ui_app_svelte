@@ -23,6 +23,8 @@
 
 	import { appconfig } from './mjs.js';
 
+	
+
 	const dispatch = createEventDispatcher();
 	let config;
 	let gun;
@@ -31,14 +33,14 @@
 		//console.log(value);
 		config = value;
 	});
-
+	/*
 	appconfig.set({
 		name: 'mjs',
 		usegunlocal:false,
 		usecustomtheme:false,
 		username:"Guest"
 	});
-	
+	*/
 	export let name;
 	//let showModal = false;
 	//let msgmodal = "None";
@@ -92,7 +94,25 @@
 			//console.log("guin client network");
 			//gun = mjs.gun = Gun(['http://localhost:8080/gun']);
 			//gun = mjs.gun = Gun(location.origin + '/gun');
-			gun = mjs.gun = Gun(['http://localhost:8080' + '/gun']);
+			//console.log(window.location.hostname);
+			if(window.location.hostname == 'localhost'){
+				//console.log("localhost:3000");
+				gun = mjs.gun = Gun(['http://localhost:8080' + '/gun']);
+			}else{
+				//console.log("url");
+				gun = mjs.gun = Gun('http://'+ window.location.hostname + '/gun');
+			}
+
+			gun.on('hi', peer => {//peer connect
+				//console.log('connect peer to',peer);
+				//console.log('peer connect!');
+			});
+
+			gun.on('bye', (peer)=>{// peer disconnect
+				//console.log('disconnected from', peer);
+				//console.log('disconnected from peer!');
+			});
+
 			gun.get('mark').put({
 				name: "Mark",
 				email: "mark@gunDB.io",
@@ -101,6 +121,7 @@
 			gun.get('mark').on(function(data, key){
 				//console.log("update:", data);
 			});
+			
 			//console.log(gun);
 		}
 		//window.dispatchEvent(new Event('resize'));

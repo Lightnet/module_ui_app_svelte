@@ -10,7 +10,7 @@
     let idcontent = generateId(20);
     let elementcontent;
 
-    let id2 = generateId(20);
+    let idscreen1 = generateId(20);
     let screen = "properties";
     //screen = "outliner"
     screen = "preferences"
@@ -28,11 +28,9 @@
 
     onMount(() => {
         //console.log("mount");
-        
         elementcontent = document.getElementById(idcontent);
+        elementscreen = document.getElementById(idscreen1);
         handle_divider_resize();
-        elementscreen = document.getElementById(id2);
-
         window.addEventListener('resize', handle_divider_resize);
     });
 
@@ -57,7 +55,6 @@
 
     .screenregion {
 		background-color: dimgrey;
-        /*margin-top: +10px;*/
         height:100%;
         width:100%;
         float:left;
@@ -65,8 +62,8 @@
     }
 </style>
 <div id="{idcontent}" class="panelregion">
-    <SplitterComponent bhorizontal={false} bresize={false} iddiv1={id2}></SplitterComponent>
-    <div id="{id2}" class="screenregion" on:mousemove={handle_screenregion}>
+    <SplitterComponent bhorizontal={false} bresize={false} iddiv1={idscreen1}></SplitterComponent>
+    <div id="{idscreen1}" class="screenregion" on:mousemove={handle_screenregion}>
         <EditorComponent viewport="{screen}"></EditorComponent>
     </div>
 </div>
