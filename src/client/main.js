@@ -16,7 +16,8 @@ import App from './App.svelte';
 //import {StringProperty} from './component/props/StringProperty'
 import {utils} from './mjs'
 
-localStorage.clear();
+//localStorage.clear();
+//window.localStorage.clear(); //try this to clear all local storage
 
 // test ops
 import object_ot_test from './component/types/object_ot_test'

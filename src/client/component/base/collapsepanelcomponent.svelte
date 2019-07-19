@@ -1,11 +1,9 @@
 <script>
-    //import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
+    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     //import { UserName } from '../../stores.js';
-
+    const dispatch = createEventDispatcher();
     export let obj;
     export let btogglepanel = true;
-
-    //const dispatch = createEventDispatcher();
 
     //onMount(async () => {	
     //});
@@ -24,6 +22,8 @@
 
     function togglepanal(){
         btogglepanel = !btogglepanel;
+        btogglepanel = btogglepanel;
+        dispatch("click");
         //console.log(btogglepanel);
     }
 </script>

@@ -1,10 +1,9 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    //import { UserName } from '../../stores.js';
     import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
     //import mjs from '../../../mjs.js';
     import {StatusBarConfig} from '../../../mjs.js';
-    //const dispatch = createEventDispatcher();
+    const dispatch = createEventDispatcher();
     export let bCollapse = true;
     let config;
 
@@ -29,6 +28,10 @@
 
     function handle_change(e){
         //console.log("input???");
+    }
+
+    function handle_click(e){
+        dispatch("click");
     }
 
 </script>
@@ -63,7 +66,7 @@
     }
 
 </style>
-<CollapsePanelComponent  btogglepanel={bCollapse}>
+<CollapsePanelComponent  btogglepanel={bCollapse} on:click={handle_click}>
     <span slot="header"> Status Bar </span>
 
     <div slot="content"> 

@@ -81,6 +81,57 @@ export const StatusBarConfig = new writable({
 });
 useLocalStorage(StatusBarConfig, appid + themeid + "StatusBarFooter");
 
+export const PropertiesConfig = new writable({
+    menubtn:{
+        d:"#232323",
+        h:"#5177b2"
+    },
+    tabbtn:{
+        d:"#232323",
+        h:"#5177b2",
+        a:"#5177b2"
+    },
+    tabbg:{
+        c:"#232323"
+    },
+    panel:{
+        d:"#232323",
+        h:"#5177b2",
+        c:"#232323"
+    },
+    bg:{
+        c:"#232323"
+    }
+});
+useLocalStorage(PropertiesConfig, appid + themeid + "Properties");
+
+
+export const PrefsThemesConfig = new writable({
+    isuserinferface:false,
+    istextstyle:false,
+    isbonecolorsets:false,
+    is3dview:false,
+    isgraphiceditor:false,
+    isdopesheet:false,
+    isnonlinearanimation:false,
+    isuvimageeditor:false,
+    isvideosquenceseditor:false,
+    istexteditor:false,
+    islogicnodeeditor:false,
+    isnodeeditor:false,
+    isproperties:false,
+    isontliner:false,
+    ispreferences:false,
+    isinfo:false,
+    isfilebrowser:false,
+    isjavascriptconsole:false,
+    ismovieclipeditor:false,
+    istopbar:false,
+    isstatusbar:false,
+});
+
+useLocalStorage(PrefsThemesConfig, appid + themeid + "PrefsThemes");
+
 
 export const LogicNodeID = writable('');
 

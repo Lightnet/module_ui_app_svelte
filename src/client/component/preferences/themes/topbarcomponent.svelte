@@ -1,10 +1,9 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    //import { UserName } from '../../stores.js';
     import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
     //import mjs from '../../../mjs.js';
     import {TopBarConfig} from '../../../mjs.js';
-    //const dispatch = createEventDispatcher();
+    const dispatch = createEventDispatcher();
     export let bCollapse = false;
     let config;
 
@@ -12,7 +11,6 @@
 		//console.log(value);
 		config = value;
 	});
-
 
     onMount(() => {
         //console.log("mount");
@@ -28,8 +26,8 @@
         TopBarConfig.set(config);
     })
 
-    function handle_change(e){
-        //console.log("input???");
+    function handle_click(e){
+        dispatch("click");
     }
 
 </script>
@@ -60,7 +58,7 @@
     }
 
 </style>
-<CollapsePanelComponent  btogglepanel={bCollapse}>
+<CollapsePanelComponent  btogglepanel={bCollapse} on:click={handle_click}>
     <span slot="header"> Top Bar </span>
 
     <div slot="content"> 
