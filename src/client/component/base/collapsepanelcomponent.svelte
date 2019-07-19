@@ -1,6 +1,8 @@
 <script>
-    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    //import { UserName } from '../../stores.js';
+    //import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
+    import { createEventDispatcher } from 'svelte';
+    import B280DA11 from '../icon/b280DA11.svelte';
+    import B280DA12 from '../icon/b280DA12.svelte';
     const dispatch = createEventDispatcher();
     export let obj;
     export let btogglepanel = true;
@@ -51,7 +53,11 @@
 </style>
 <div class="panel">
     <div class="header" on:click={togglepanal}>
-        <i class="fa {btogglepanel == true ? "fa-caret-right" : "fa-caret-down" }"></i>
+        {#if btogglepanel == true }
+            <B280DA11></B280DA11>
+        {:else}
+            <B280DA12></B280DA12>
+        {/if}
         <slot name='header'></slot>
     </div>
     {#if !btogglepanel}
