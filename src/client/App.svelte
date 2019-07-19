@@ -44,9 +44,9 @@
 	let view;
 
 	let viewworkspace = "horizontal";
-	//viewworkspace = "layout";
+	viewworkspace = "layout";
 	//viewworkspace = "testdivide";
-	viewworkspace = "testoffsetdivide";
+	//viewworkspace = "testoffsetdivide";
 	//viewworkspace = "preferences";
 	//viewworkspace = "logicnodeeditor";
 

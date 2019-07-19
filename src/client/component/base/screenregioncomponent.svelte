@@ -38,6 +38,7 @@
         width:100%;
         float:left;
         overflow: hidden;
+        /*position: relative;*/
         position:absolute;
     }
 </style>

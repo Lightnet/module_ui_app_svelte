@@ -15,13 +15,16 @@
     export let bhorizontal = false; //vertical
     export let px;
     export let py;
+    export let position = "absolute";
     let sheight = '100%';
     let swidth = '10px';
     let resizetag = 'n-resize';
     let splitter;
-    var cont1,cont2;
-    var last_x = 0;
-    var last_y = 0;
+    let cont1,cont2;
+    let last_x = 0;
+    let last_y = 0;
+    let oldx = 0;
+    let oldy = 0;
     //let bpress = false;
     let window_width,window_height;
 
@@ -50,7 +53,7 @@
             //splitter.style.height;
             //console.log(parent.clientHeight);
             //console.dir(splitter);
-            resetPosition();
+            //resetPosition();
         }
         if((bresize == true)&&(bhorizontal == false)){
             if(event.clientY){
@@ -64,7 +67,7 @@
                     return;
                 }
                 splitter.style.marginTop = m.y - parent.offsetTop +  'px';
-                resetPosition();
+                //resetPosition();
             }
         }
         window.dispatchEvent(new Event('resize'));
@@ -73,6 +76,7 @@
     function resetPosition(){
         //function resetPosition(){
         let parent = splitter.parentNode;
+        //console.dir(parent);
         window_width = parent.clientWidth;
         window_height = parent.clientHeight;
         //console.log(iddiv2)
@@ -87,27 +91,56 @@
             //}
             dx += splitter.clientWidth;
             //splitter.style.height = "100px";
-            splitter.style.height = window_height + 'px';
+            //splitter.style.height = window_height + 'px';
             //console.log(window_height);
             //console.log(cont2)
             //if(cont2 !=null){
                 cont2.style.marginLeft=dx+"px";
-                dx = window_width - dx;
+                dx = window_width - dx;//  - parent;
                 cont2.style.width=dx+"px";
-                cont2.style.height=window_height + 'px';
+                //cont2.style.height=window_height + 'px';
             //}
         }else{
-            //console.log("vertical");
+            window_width = splitter.parentNode.offsetWidth - splitter.parentNode.offsetLeft;
+            window_height = splitter.parentNode.offsetHeight - splitter.parentNode.offsetTop;
+            //if(splitter.parentNode.clientWidth == window.innerWidth){
+                //console.log("exit?");
+                //window_width = oldx;
+                //return;
+            //}
+            //console.dir(splitter.parentNode.clientWidth);
+            //console.log("//============================");
+            //console.log(splitter.offsetWidth);
+            //console.log(splitter.clientWidth);
+            //console.log(splitter.parentNode.clientWidth)
+            //console.log(splitter.parentNode.offsetWidth)
+            //window_width = splitter.offsetWidth;
+            //console.log(window.innerWidth);
+            //console.log("window_width: "+window_width+"window_height: "+window_height);
             let dy = last_y;
             //if(cont1){
                 cont1.style.height=dy+"px";
+                cont1.style.width = window_width +"px";
+                splitter.style.width = window_width  +"px";
             //}
             dy += splitter.clientHeight
             //if(cont2){
+                if(window_width < 0){
+                    return;
+                }
+                //if(window_width == window.innerWidth){
+                    //return;
+                //}
                 cont2.style.marginTop=dy+"px";
                 dy = window_height - dy;
                 cont2.style.height=dy+"px";
+                cont2.style.width = window_width +"px";
+                //console.log("offsetWidth:" +  splitter.parentNode.offsetWidth  + " offsetLeft:" + splitter.parentNode.offsetLeft +" : " +  window_width);
             //}
+
+            oldx = window_width;
+            
+            
         }
         //window.dispatchEvent(new Event('resize')); //overload not used here
     }
@@ -147,12 +180,40 @@
                 splitter.style.marginLeft = px + 'px';
                 //console.log(px);
             }
+
+            splitter.style.top = "0px";
+            splitter.style.float = "left";
             
             last_x = window_width / 2;
             last_y = 0;
         }else{
+            //console.log("splitter");
+            //console.log(splitter);
+            //console.dir(splitter);
+            /*
+            console.log(splitter.clientHeight);
+            console.log(splitter.clientLeft);
+            console.log(splitter.clientTop);
+            console.log(splitter.clientWidth);
+
+            console.log(splitter.parentNode.clientHeight);
+            console.log(splitter.parentNode.clientLeft);
+            console.log(splitter.parentNode.clientTop);
+            console.log(splitter.parentNode.clientWidth);
+            
+            console.log(splitter.offsetHeight);
+            console.log(splitter.offsetLeft);
+            console.log(splitter.offsetTop);
+            console.log(splitter.offsetWidth);
+            
+            console.log(splitter.parentNode.offsetHeight);
+            console.log(splitter.parentNode.offsetLeft);
+            console.log(splitter.parentNode.offsetTop);
+            console.log(splitter.parentNode.offsetWidth);
+            */
+
             sheight = '10px';
-            swidth = '100%';
+            swidth = splitter.parentNode.offsetWidth - splitter.parentNode.offsetLeft + "px";
             resizetag = 'n-resize';
             if(py == null){
                 splitter.style.marginTop = (window_height / 2) + 'px';
@@ -161,11 +222,19 @@
             }
             last_x = 0;
             last_y = window_height / 2;
+            //splitter.style.width ="500px";
+            //swidth ="500px";
+            //cont1.style.width ="500px";
+            //cont2.style.width ="500px";
+
+            cont1.style.width = swidth;
+            cont2.style.width = swidth;
         }
         //console.log(bhorizontal);
         splitter.style.height = sheight;
         splitter.style.width = swidth;
         splitter.style.cursor = resizetag;
+        splitter.style.position = position;
         
         //console.log(splitter.style.height)
         //console.log(splitter.style.width)
@@ -189,7 +258,9 @@
         height:100%;
         float:left;
         position:absolute;
-        z-index:1;
+        /*position:fixed;*/
+        /*position: relative;*/
+        z-index:9999;
     }
 </style>
 

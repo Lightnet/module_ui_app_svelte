@@ -75,11 +75,13 @@
     }
 </style>
 <div id="{idcontent}" class="panelregion">
+    
     <div id="{id1}" class="screenregion" on:mousemove={handle_screenregion1}>
         <EditorComponent viewport="3dviewport" ></EditorComponent>
     </div>
-    <SplitterComponent bhorizontal={false} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
+    <SplitterComponent bhorizontal={false} bresize={true} iddiv1={id1} iddiv2={id2} ></SplitterComponent>
     <div id="{id2}" class="screenregion" on:mousemove={handle_screenregion2}>
         <EditorComponent viewport="{screen2}" ></EditorComponent>
     </div>
+    
 </div>

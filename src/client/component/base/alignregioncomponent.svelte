@@ -37,7 +37,9 @@
         height:100%;
         width:100%;
         float:left;
-        /*position:absolute;*/
+        /*top:0px;*/
+        /*position: relative;*/
+        position:absolute;
         overflow: hidden;
     }
 </style>

@@ -47,11 +47,17 @@
 </style>
 
 <AlignRegionComponent idcomponent={idcomponent} align="v">
+    
     <ScreenRegionComponent idcomponent={id1}>
+    
         <EditorComponent viewport="{screen1}"></EditorComponent>
+
     </ScreenRegionComponent>
-    <SplitterComponent bhorizontal={false} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
+    <SplitterComponent bhorizontal={false} bresize={true} position="fixed" iddiv1={id1} iddiv2={id2}></SplitterComponent>
     <ScreenRegionComponent idcomponent="{id2}">
+        
         <EditorComponent viewport="{screen2}"></EditorComponent>
+        
     </ScreenRegionComponent>
+    
 </AlignRegionComponent>
