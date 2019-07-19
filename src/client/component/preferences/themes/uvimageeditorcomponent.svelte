@@ -1,9 +1,8 @@
 <script>
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
-    //import { UserName } from '../../stores.js';
     import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
-    import mjs from '../../../mjs.js';
-    //const dispatch = createEventDispatcher();
+    //import mjs from '../../../mjs.js';
+    const dispatch = createEventDispatcher();
     export let bCollapse = true;
     onMount(() => {
         //console.log("mount");
@@ -12,6 +11,10 @@
     onDestroy(() => {
         //console.log("onDestroy");
     });
+
+    function handle_click(e){
+        dispatch("click");
+    }
 
 </script>
 
@@ -39,7 +42,7 @@
     }
 
 </style>
-<CollapsePanelComponent btogglepanel={bCollapse}>
+<CollapsePanelComponent btogglepanel={bCollapse} on:click={handle_click}>
     <span slot="header"> UV/Image Editor </span>
 
     <div slot="content"> 

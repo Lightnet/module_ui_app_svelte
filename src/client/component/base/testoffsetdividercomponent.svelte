@@ -1,21 +1,22 @@
 <script>
-    import {onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
+    import {onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
+    import AlignRegionComponent from './alignregioncomponent.svelte';
+    import HeaderSplitterComponent from './headersplittercomponent.svelte';
     import SplitterComponent from './splittercomponent.svelte';
-    import EditorComponent from '../editor/editorcomponent.svelte'
+    import EditorComponent from '../editor/editorcomponent.svelte';
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
-
     import DivDividerVComponent from './divdividervcomponent.svelte';
-
     import OffsetDivDividerVComponent from './testdividecomponent.svelte';
     //const dispatch = createEventDispatcher();
 
     let idcontent = generateId(20);
     let elementcontent;
-
     let id1 = generateId(20);
-    
     let id2 = generateId(20);
+
+    let idalignregion1 = generateId(20);
+
     let screenregion2;
     let screen2 = "properties";
     //let screen2 = "outliner"
@@ -67,27 +68,16 @@
         float:left;
         position:absolute;
     }
-    /*
-    .screenregion2 {
-		background-color:grey;
-        height:100%;
-        width:45%;
-        float:left;
-        position:absolute;
-    }
-    */
 </style>
 <div id="{idcontent}" class="panelregion">
-    <div id="{id1}" class="screenregion">
-        <EditorComponent viewport="3dviewport"></EditorComponent>
-    </div>
-    <SplitterComponent bhorizontal={true} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
-    <div id="{id2}" class="screenregion" on:mousemove={handle_screenregion}>
-        <OffsetDivDividerVComponent></OffsetDivDividerVComponent>
-        
-        <!--
-        <DivDividerVComponent></DivDividerVComponent>
-        <EditorComponent viewport="{screen2}"></EditorComponent>
-        -->
-    </div>
+    <HeaderSplitterComponent bhorizontal={false} bresize={false} iddiv1={idalignregion1} />
+    <AlignRegionComponent idcomponent={idalignregion1} align="v">
+        <div id="{id1}" class="screenregion">
+            <EditorComponent viewport="3dviewport"></EditorComponent>
+        </div>
+        <SplitterComponent bhorizontal={true} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
+        <div id="{id2}" class="screenregion" on:mousemove={handle_screenregion}>
+            <EditorComponent viewport="properties"></EditorComponent>
+        </div>
+    </AlignRegionComponent>
 </div>

@@ -18,19 +18,20 @@
     function handle_divresize(event){
         //console.log("resize");
         let parent = elementcontent.parentNode;
-        if(parent){
-            elementcontent.style.height = parent.clientHeight + 'px';
-            elementcontent.style.width = parent.clientWidth + 'px';
-        }
+        //if(parent){
+        elementcontent.style.height = parent.clientHeight + 'px';
+        elementcontent.style.width = parent.clientWidth + 'px';
+        //}
     }
 
     onMount(() => {
         //console.log("mount");
-        window.addEventListener('resize', handle_divresize);
         elementcontent = document.getElementById(idcontent);
         screenregion1 = document.getElementById(id1);
         screenregion2 = document.getElementById(id2);
-        handle_divresize()
+        handle_divresize();
+        window.addEventListener('resize', handle_divresize);
+        //window.dispatchEvent(new Event('resize'));
     });
 
     afterUpdate(()=>{

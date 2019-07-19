@@ -1,9 +1,8 @@
 <script>
     import {onMount, onDestroy, createEventDispatcher } from 'svelte'
-    //import { UserName } from '../../stores.js';
     import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
-    import mjs from '../../../mjs.js';
-    //const dispatch = createEventDispatcher();
+    //import mjs from '../../../mjs.js';
+    const dispatch = createEventDispatcher();
     export let bCollapse = true;
 
     onMount(() => {
@@ -13,6 +12,10 @@
     onDestroy(() => {
         //console.log("onDestroy");
     });
+
+    function handle_click(e){
+        dispatch("click");
+    }
 
 </script>
 
@@ -40,7 +43,7 @@
     }
 
 </style>
-<CollapsePanelComponent btogglepanel={bCollapse}>
+<CollapsePanelComponent btogglepanel={bCollapse} on:click={handle_click}>
     <span slot="header"> Bone Color Sets</span>
 
     <div slot="content"> 
