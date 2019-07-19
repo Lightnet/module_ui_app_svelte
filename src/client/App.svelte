@@ -11,7 +11,7 @@
 	import NavFooterComponent from './component/mainwindow/navfootercomponent.svelte'
 	import SplitterComponent from './component/base/splittercomponent.svelte'
 	import ContextMenuComponent from './component/base/contextmenucomponent.svelte'
-	import DivDividerComponent from './component/base/divdividercomponent.svelte'
+	import LayoutLayoutComponent from './component/base/LayoutLayoutComponent.svelte'
 	import DivDividerVComponent from './component/base/sdivdividerv.svelte'
 	import DivDividerHComponent from './component/base/sdivdividerh.svelte'
 	import LayoutLogicNodeEditorComponent from './component/base/layoutlogicnodeeditorcomponent.svelte'
@@ -20,10 +20,7 @@
 	import TestDivideHComponent from './component/base/testdividecomponent.svelte'
 	//import Gun from 'gun/gun';
 	import mjs from './mjs.js';
-
 	import { appconfig } from './mjs.js';
-
-	
 
 	const dispatch = createEventDispatcher();
 	let config;
@@ -49,8 +46,8 @@
 	let viewworkspace = "horizontal";
 	//viewworkspace = "layout";
 	//viewworkspace = "testdivide";
-	//viewworkspace = "testoffsetdivide";
-	viewworkspace = "preferences";
+	viewworkspace = "testoffsetdivide";
+	//viewworkspace = "preferences";
 	//viewworkspace = "logicnodeeditor";
 
 	let elementheader;
@@ -60,6 +57,8 @@
 	let idheader = generateId(20);
 	let idcontent = generateId(20);
 	let idfooter = generateId(20);
+	let idscreen = generateId(20);
+	let elscreen;
 
 	//function showmodal(msg){
 		//showModal = true;
@@ -77,12 +76,23 @@
 	}
 
 	function resizediv(){
-		//console.log("resize")
-		elementcontent.style.height = (window.innerHeight - elementheader.clientHeight - elementfooter.clientHeight) + 'px';
-		elementcontent.style.width = window.innerWidth + 'px';
+		//console.log("resize");
+		
+		//console.log("elementheader.clientHeight: "+elementheader.clientHeight );
+		//console.log("elementfooter.clientHeight: "+elementfooter.clientHeight );
+		let parent = elementcontent.parentNode;
+		//console.log(elscreen.parentNode)
+		elscreen.style.height = elscreen.parentNode.clientHeight + 'px';
+		//console.dir(elementcontent );
+		//elementcontent.style.height = (parent.clientHeight - (elementheader.clientHeight + elementfooter.clientHeight + elementcontent.offsetTop )) + 'px';
+		elementcontent.style.height = (parent.clientHeight - (elementcontent.offsetTop + elementfooter.clientHeight )) + 'px';
+		//elementcontent.style.height = (parent.clientHeight - (elementheader.clientHeight + elementfooter.clientHeight )) + 'px';
+		elementcontent.style.width = parent.clientWidth + 'px';
 	}
 
 	onMount(async () => {
+		elscreen = document.getElementById(idscreen);
+
 		elementheader = document.getElementById(idheader);
 		elementcontent = document.getElementById(idcontent);
 		elementfooter = document.getElementById(idfooter);
@@ -191,7 +201,7 @@
 	}
 </style>
 
-<div class="editarea">
+<div id="{idscreen}" class="editarea">
 	<NavHeaderComponent
 		idassign={idheader}
 		name={name}
@@ -200,7 +210,7 @@
 	<div id={idcontent} class="panelcontent contentarea">
 
 		{#if viewworkspace == 'layout'}
-			<DivDividerComponent></DivDividerComponent>
+			<LayoutLayoutComponent></LayoutLayoutComponent>
 		{/if}
 
 		{#if viewworkspace == "horizontal"}
@@ -227,7 +237,6 @@
 			<LayoutPreferencesComponent />
 		{/if}
 		
-
 	</div>
 	<NavFooterComponent idassign={idfooter}></NavFooterComponent>
 </div>

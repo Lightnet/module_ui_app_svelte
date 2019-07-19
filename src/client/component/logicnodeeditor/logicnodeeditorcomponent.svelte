@@ -270,6 +270,7 @@
         window.addEventListener('resize', handle_logicnodeeditor_resize);
         //window.addEventListener('click', handle_nonclick);
         //drawpoint = setInterval(drawconntector, 400);
+        window.dispatchEvent(new Event('resize'));
     });
 
     onDestroy(() => {

@@ -34,8 +34,8 @@
     let bmovedivide = false;
 
     function handle_divider(event){
-        console.log("down");
-        console.log(event);
+        //console.log("down");
+        //console.log(event);
         if(event.button == 0){
             createdivider(event);
             if(bmovedivide == false){
@@ -147,7 +147,7 @@
 
     .placeregion{
         opacity: 0.5;
-        background-color: red;
+        /*background-color: red;*/
         filter: alpha(opacity=50); /* For IE8 and earlier */
         position:absolute;
     }

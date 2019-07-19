@@ -110,21 +110,24 @@
                 return;
             }
             if(bhorizontal == true){
-                console.log("horizontal");
+                //console.log("horizontal");
                 let dx = last_x;
                 //cont1.style.width=dx+"px";
                 dx += splitter.clientWidth;
                 cont1.style.marginLeft=dx+"px";
                 dx = window_width - dx;
                 cont1.style.width=dx+"px";
+                //cont1.style.height = window_height;//dx+"px";
+
             }else{
-                console.log("vertical");
+                //console.log("vertical");
+                //console.dir(parent)
                 let dy = last_y;
                 //cont1.style.height=dy+"px";
-                dy += splitter.clientHeight
+                dy += splitter.clientHeight;
                 cont1.style.marginTop=dy+"px";
-                dy = window_height - dy;
-                console.log(splitter.clientHeight);
+                dy = window_height - dy;// - parent.offsetTop;
+                //console.log(splitter.clientHeight);
                 cont1.style.height=dy+"px";
             }
         }
@@ -180,7 +183,7 @@
                 last_y = window_height / 2;
             }
         }
-        console.log(bhorizontal);
+        //console.log(bhorizontal);
         splitter.style.height = sheight;
         splitter.style.width = swidth;
         splitter.style.cursor = resizetag;

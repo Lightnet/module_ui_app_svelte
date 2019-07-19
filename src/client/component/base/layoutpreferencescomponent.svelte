@@ -1,5 +1,7 @@
 <script>
-    import {onMount, onDestroy, createEventDispatcher } from 'svelte'
+    import {onMount, onDestroy, createEventDispatcher } from 'svelte';
+    import AlignRegionComponent from './alignregioncomponent.svelte';
+    import ScreenRegionComponent from './screenregioncomponent.svelte'
     import SplitterComponent from './headersplittercomponent.svelte';
     import EditorComponent from '../editor/editorcomponent.svelte'
     import { generateId } from '../helper/generateid.js';
@@ -9,6 +11,8 @@
 
     let idcontent = generateId(20);
     let elementcontent;
+
+    let idalignregion1 = generateId(20);
 
     let idscreen1 = generateId(20);
     let screen = "properties";
@@ -42,6 +46,8 @@
     function handle_screenregion(event){
         mjs.context.screenregion = elementscreen;
     }
+
+    //<div id="{idscreen1}" class="screenregion" on:mousemove={handle_screenregion}>
 </script>
 
 <style>
@@ -52,18 +58,12 @@
         float:left;
         position:absolute;
     }
-
-    .screenregion {
-		background-color: dimgrey;
-        height:100%;
-        width:100%;
-        float:left;
-        position:absolute;
-    }
 </style>
 <div id="{idcontent}" class="panelregion">
-    <SplitterComponent bhorizontal={false} bresize={false} iddiv1={idscreen1}></SplitterComponent>
-    <div id="{idscreen1}" class="screenregion" on:mousemove={handle_screenregion}>
-        <EditorComponent viewport="{screen}"></EditorComponent>
-    </div>
+    <SplitterComponent bhorizontal={false} bresize={false} iddiv1={idalignregion1}></SplitterComponent>
+    <AlignRegionComponent idcomponent={idalignregion1} align="v">
+        <ScreenRegionComponent>
+            <EditorComponent viewport="{screen}"></EditorComponent>
+        </ScreenRegionComponent>
+    </AlignRegionComponent>
 </div>

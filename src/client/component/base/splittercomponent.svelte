@@ -7,6 +7,7 @@
     //import mjs from '../../mjs.js';
     import { context } from '../../mjs.js';
 
+    let idsplitter = generateId(20);
     export let iddiv1;
     export let iddiv2;
     let m = {x:0,y:0};
@@ -18,15 +19,11 @@
     let swidth = '10px';
     let resizetag = 'n-resize';
     let splitter;
-
     var cont1,cont2;
     var last_x = 0;
     var last_y = 0;
-
     //let bpress = false;
     let window_width,window_height;
-
-    let idsplitter = generateId(20);
 
     function handle_screenarea(event){
         m.x = event.clientX;
@@ -78,24 +75,29 @@
         let parent = splitter.parentNode;
         window_width = parent.clientWidth;
         window_height = parent.clientHeight;
+        //console.log(iddiv2)
+        //cont2 = document.getElementById(iddiv2);
 
         if(bhorizontal == true){
-            console.log("bhorizontal");
+            //console.log("bhorizontal");
             let dx = last_x;
             //if(cont1){
                 cont1.style.width=dx+"px";
+                cont1.style.height=window_height + 'px';
             //}
             dx += splitter.clientWidth;
             //splitter.style.height = "100px";
-            //splitter.style.height = window_height + 'px';
+            splitter.style.height = window_height + 'px';
             //console.log(window_height);
-            if(cont2){
+            //console.log(cont2)
+            //if(cont2 !=null){
                 cont2.style.marginLeft=dx+"px";
                 dx = window_width - dx;
                 cont2.style.width=dx+"px";
-            }
+                cont2.style.height=window_height + 'px';
+            //}
         }else{
-            console.log("vertical");
+            //console.log("vertical");
             let dy = last_y;
             //if(cont1){
                 cont1.style.height=dy+"px";

@@ -3,41 +3,44 @@
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
 
-    let id1 = generateId(20);
+    export let idcomponent = generateId(20);
     let assignid;
-    let screenregion1;
-    export let align = "h";
+    let screenregion;
+    //export let align = "h";
+    //export let bautosize = true;
 
     export function getID(){
-        return id1;
+        return idcomponent;
     }
     
     onMount(() => {
-        console.log(id1);
-        screenregion1 = document.getElementById(id1);
-        screenregion1.setAttribute('align',align);
+        //console.log(idcomponent);
+        screenregion = document.getElementById(idcomponent);
+        //screenregion1.setAttribute('align',align);
     });
 
     onDestroy(() => {
         //console.log("onDestroy")
-        id1 = null;
-        screenregion1 = null;
+        idcomponent = null;
+        screenregion = null;
     });
 
     function handle_screenregion(event){
-        mjs.context.screenregion = screenregion1;
+        mjs.context.screenregion = screenregion;
     }
 
 </script>
     
 <style>
     .screenregion {
-		background-color: brown;
+		/*background-color: brown;*/
         height:100%;
         width:100%;
         float:left;
-        /*position:absolute;*/
         overflow: hidden;
+        position:absolute;
     }
 </style>
-<div id="{id1}" class="screenregion" on:mousemove={handle_screenregion}></div>
+<div id="{idcomponent}" class="screenregion" on:mousemove={handle_screenregion}>
+    <slot></slot>
+</div>
