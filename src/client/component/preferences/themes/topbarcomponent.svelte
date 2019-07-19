@@ -3,12 +3,12 @@
     //import { UserName } from '../../stores.js';
     import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
     //import mjs from '../../../mjs.js';
-    import {MainHeaderConfig} from '../../../mjs.js';
+    import {TopBarConfig} from '../../../mjs.js';
     //const dispatch = createEventDispatcher();
     export let bCollapse = false;
     let config;
 
-    const TopBarUnsubscribe = MainHeaderConfig.subscribe(value => {
+    const TopBarUnsubscribe = TopBarConfig.subscribe(value => {
 		//console.log(value);
 		config = value;
 	});
@@ -24,12 +24,12 @@
     });
 
     afterUpdate(()=>{
-        console.log("changes...???");
-        MainHeaderConfig.set(config);
+        //console.log("changes...???");
+        TopBarConfig.set(config);
     })
 
     function handle_change(e){
-        console.log("input???");
+        //console.log("input???");
     }
 
 </script>
@@ -71,6 +71,8 @@
         <br> Button Default: <div class="colorpanel" style="background-color:{config.workspacebtn.d};"></div><input bind:value={config.workspacebtn.d}>
         <br> Button Hover:<div class="colorpanel" style="background-color:{config.workspacebtn.h};"></div><input bind:value={config.workspacebtn.h}>
         <br> Button Active:<div class="colorpanel" style="background-color:{config.workspacebtn.a};"></div><input bind:value={config.workspacebtn.a}>
+        <br> Background:
+        <br> Color:<div class="colorpanel" style="background-color:{config.bg.c};"></div><input bind:value={config.bg.c}>
 
     </div>
 </CollapsePanelComponent>

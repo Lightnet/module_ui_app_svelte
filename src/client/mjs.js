@@ -50,8 +50,11 @@ themeconfig.subscribe(value=>{
     themeid = value;
 });
 useLocalStorage(themeconfig, appid + "theme");
-
-export const MainHeaderConfig = new writable({
+//===============================================
+// Theme style setting
+// Edit remove or add will break style need to reset store data.
+//===============================================
+export const TopBarConfig = new writable({
     menubtn:{
         d:"#232323",
         h:"#5177b2"
@@ -60,9 +63,24 @@ export const MainHeaderConfig = new writable({
         d:"#2b2b2b",
         h:"#3a3a3a",
         a:"#424242"
+    },
+    bg:{
+        c:"#232323"
     }
 });
-useLocalStorage(MainHeaderConfig, appid + themeid + "mainheader");
+useLocalStorage(TopBarConfig, appid + themeid + "TopBarHeader");
+
+export const StatusBarConfig = new writable({
+    menubtn:{
+        d:"#232323",
+        h:"#5177b2"
+    },
+    bg:{
+        c:"#232323"
+    }
+});
+useLocalStorage(StatusBarConfig, appid + themeid + "StatusBarFooter");
+
 
 export const LogicNodeID = writable('');
 

@@ -8,13 +8,13 @@
 	import DropMenuListComponent from '../base/dropmenulistcomponent.svelte';
 
 	import mjs from '../../mjs.js';
-	import {MainHeaderConfig} from '../../mjs.js';
+	import {TopBarConfig} from '../../mjs.js';
 	import { generateId } from '../helper/generateid.js';
 
 	export let name;
 	export let idassign;
 	let elcomponent;
-	let idstyle = generateId(20)
+	let idstyle = generateId(20);
     const dispatch = createEventDispatcher();
 	//let menus = [];
 	let templatepanel;
@@ -33,10 +33,10 @@
 	let workspaces = [];
 	let CollapseFileMenu = false;
 
-	let MainHeaderStyle = {};
+	let TopBarStyle = {};
 
-	const MainHeaderConfigUnsub = MainHeaderConfig.subscribe(value=>{
-		MainHeaderStyle = value;
+	const TopBarConfigConfigUnsub = TopBarConfig.subscribe(value=>{
+		TopBarStyle = value;
 		//console.log("vaule theme change?");
 		checktheme();
 	});
@@ -79,12 +79,13 @@
 		//console.log(MainHeaderStyle);
 		//https://stackoverflow.com/questions/3304014/how-to-interpolate-variables-in-strings-in-javascript-without-concatenation
 		let css = `
-		.headerubtn{ background-color: ${MainHeaderStyle.menubtn.d} !important; }
-		.headerubtn:hover{ background-color: ${MainHeaderStyle.menubtn.h} !important; } 
-		.headerubtn:active{ background-color: ${MainHeaderStyle.menubtn.a} !important; }
-		.workspacebtn{ background-color: ${MainHeaderStyle.workspacebtn.d} !important; }
-		.workspacebtn:hover{ background-color: ${MainHeaderStyle.workspacebtn.h} !important; } 
-		.workspacebtn:active{ background-color: ${MainHeaderStyle.workspacebtn.a} !important; }
+		.headerubtn{ background-color: ${TopBarStyle.menubtn.d} !important; }
+		.headerubtn:hover{ background-color: ${TopBarStyle.menubtn.h} !important; } 
+		.headerubtn:active{ background-color: ${TopBarStyle.menubtn.a} !important; }
+		.workspacebtn{ background-color: ${TopBarStyle.workspacebtn.d} !important; }
+		.workspacebtn:hover{ background-color: ${TopBarStyle.workspacebtn.h} !important; } 
+		.workspacebtn:active{ background-color: ${TopBarStyle.workspacebtn.a} !important; }
+		.headertopbar{ background-color: ${TopBarStyle.bg.c} !important;}
 		`;
 		//console.log(css);
 		createstyle(elcomponent,css);
@@ -100,7 +101,7 @@
 			elsytle =null;
 		}
 		if(elsytle == null){
-			console.log("create style");
+			//console.log("create style");
 			elsytle = document.createElement('style');
 			elsytle.setAttribute("id",idstyle);
 			elsytle.appendChild(document.createTextNode(css));
@@ -188,7 +189,7 @@
 	});
 
 	onDestroy(()=>{
-		MainHeaderConfigUnsub();
+		TopBarConfigConfigUnsub();
 		CollapseFileMenuUnsubscribe();
 	})
 
@@ -273,9 +274,13 @@
 		background-color: #424242 ;
 	}
 
+	.headertopbar{
+		background-color: #424242;
+	}
+
 </style>
 
-<div id="{idassign}" on:mousemove={handleMousemove} class="navbar">
+<div id="{idassign}" on:mousemove={handleMousemove} class="navbar headertopbar">
 
 	{#if CollapseFileMenu == true}
 		<DropMenuListComponent name="Menu" prefix="_menuheader" items={mainmenus} />	

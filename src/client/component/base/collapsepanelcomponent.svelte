@@ -51,7 +51,7 @@
 </style>
 <div class="panel">
     <div class="header" on:click={togglepanal}>
-        <i class="fa {btogglepanel == true ? "fa-caret-down" : "fa-caret-right"}"></i>
+        <i class="fa {btogglepanel == true ? "fa-caret-right" : "fa-caret-down" }"></i>
         <slot name='header'></slot>
     </div>
     {#if !btogglepanel}

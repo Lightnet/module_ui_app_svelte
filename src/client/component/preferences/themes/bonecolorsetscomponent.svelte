@@ -1,5 +1,5 @@
 <script>
-    import { onMount, onDestroy, createEventDispatcher } from 'svelte'
+    import {onMount, onDestroy, createEventDispatcher } from 'svelte'
     //import { UserName } from '../../stores.js';
     import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
     import mjs from '../../../mjs.js';
