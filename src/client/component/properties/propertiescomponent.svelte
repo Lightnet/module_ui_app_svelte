@@ -7,6 +7,7 @@
     import { onMount, onDestroy, createEventDispatcher } from 'svelte'
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
+    import { PropertiesConfig } from '../../mjs.js';
 
     import MaterialComponent from './materialcomponent.svelte';
     import ModifiersComponent from './modifierscomponent.svelte';
@@ -51,12 +52,63 @@
 
     let idcontext = generateId(20);
     let elementcontext;
+    let idstyle = generateId(20);
     
     let m = {x:0, y:0};
 
     let activeobject;//props
     export let context = "OBJECT";
     let itemtabs = [];
+
+    let PropertiesStyle = {};
+
+    const PropertiesConfigUnsub = PropertiesConfig.subscribe(value=>{
+		PropertiesStyle = value;
+		console.log("PropertiesStyle theme change?");
+		checktheme();
+    });
+    
+    function checktheme(){
+		if(elementcontext ==null){
+			return;
+		}
+		let css = `
+		.propsbtn {background-color: ${PropertiesStyle.menubtn.h} !important; }
+		.propsbtn:hover { background-color: ${PropertiesStyle.menubtn.h} !important; } 
+        .propsbtn:active { background-color: ${PropertiesStyle.menubtn.a} !important; }
+        .propstabbtn { background-color: ${PropertiesStyle.tabbtn.d} !important; }
+		.propstabbtn:hover { background-color: ${PropertiesStyle.tabbtn.h} !important; } 
+        .propstabbtn:active { background-color: ${PropertiesStyle.tabbtn.a} !important; }
+        .propstabactive { background-color: ${PropertiesStyle.tabbtn.a} !important; }
+        .propstabbg { background-color: ${PropertiesStyle.tabbg.c} !important; }
+		.propspanel { background-color: ${PropertiesStyle.panel.d} !important; }
+		.propspanel:hover { background-color: ${PropertiesStyle.panel.h} !important; } 
+		.propspanel:active { background-color: ${PropertiesStyle.panel.a} !important; }
+		.propspanelbg { background-color: ${PropertiesStyle.bg.c} !important;}
+        `;
+        //console.log(css);
+		//console.log(css);
+		createstyle(elementcontext,css);
+	}
+
+	function createstyle(element,_css){
+		//let css = '.menubtn:hover{ background-color: white !important; }';
+		//remove element to update style
+		let css = _css;
+		let elsytle = document.getElementById(idstyle);
+		if(elsytle){
+			elsytle.remove();
+			elsytle =null;
+		}
+		if(elsytle == null){
+			//console.log("create style");
+			elsytle = document.createElement('style');
+			elsytle.setAttribute("id",idstyle);
+			elsytle.appendChild(document.createTextNode(css));
+			console.log(elsytle);
+			element.appendChild(elsytle);
+		}
+    }
 
     function handle_props_resize(event){
         //console.log("resize");
@@ -89,12 +141,13 @@
     
     onMount(() => {
         //console.log("mount");
-        window.addEventListener('resize', handle_props_resize);
+        
         activeobject = mjs.context.view_layer.objects.active;
 
         elementcontext = document.getElementById(idcontext);
         elementtab = document.getElementById(idtab);
         elementcontent = document.getElementById(idcontent);
+        checktheme();
 
         //console.log(elementtab.style.width);
         //console.log(elementtab.clientWidth);
@@ -118,6 +171,7 @@
         ];
 
         tabselect(context);
+        window.addEventListener('resize', handle_props_resize);
         //fixed odd resize when swtiching views 
         window.dispatchEvent(new Event('resize'));
     });
@@ -144,6 +198,7 @@
 
     onDestroy(() => {
         window.removeEventListener('resize', handle_props_resize);
+        PropertiesConfigUnsub();
     });
 
     function handle_mouse_over(event){
@@ -261,14 +316,14 @@
         width:32px;
         padding: 0px 0px 0px 0px;
     }
+    /*.propsbtn{background-color: aquamarine;}*/
 
 </style>
 <div id="{idcontext}" class="contextprops" on:mousemove={handle_mouse_over}>
     
-    <div id={idtab} class="tab">
-        
+    <div id={idtab} class="tab propstabbg">
         {#each itemtabs as tab }
-            <button class="tabbutton tooltip {context === tab.sm_context ? 'active' : ''}" on:mousemove={handle_mousemove} on:click={()=>{tabselect(tab.sm_context)}}>
+            <button class="tabbutton tooltip {context === tab.sm_context ? 'active propstabactive' : ''}  propstabbtn" on:mousemove={handle_mousemove} on:click={()=>{tabselect(tab.sm_context)}}>
                 <svelte:component this={tab.sm_icon} on:click={()=>{tabselect(tab.sm_context)}} />
                 <span class="tooltiptext" style="top:{m.y}px;left:{m.x}px;">{tab.sm_label}</span>
             </button>

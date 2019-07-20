@@ -35,7 +35,7 @@
 
 	let TopBarStyle = {};
 
-	const TopBarConfigConfigUnsub = TopBarConfig.subscribe(value=>{
+	const TopBarConfigUnsub = TopBarConfig.subscribe(value=>{
 		TopBarStyle = value;
 		//console.log("vaule theme change?");
 		checktheme();
@@ -189,7 +189,7 @@
 	});
 
 	onDestroy(()=>{
-		TopBarConfigConfigUnsub();
+		TopBarConfigUnsub();
 		CollapseFileMenuUnsubscribe();
 	})
 

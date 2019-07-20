@@ -1,5 +1,5 @@
 <script>
-    import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+    import { onMount, afterUpdate ,onDestroy, createEventDispatcher } from 'svelte';
     import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
     //import mjs from '../../../mjs.js';
     import {PropertiesConfig} from '../../../mjs.js';
@@ -22,6 +22,14 @@
     });
     function handle_click(e){
         dispatch("click");
+        PropertiesConfig.set(config);
+    }
+    afterUpdate(()=>{
+        console.log("update changes...???");
+        PropertiesConfig.set(config);
+    })
+    function handle_change(e){
+        console.log("input change?");
     }
 
 </script>
@@ -61,10 +69,17 @@
 
     <div slot="content"> 
         Menu
-        <br> Button Default: <div class="colorpanel" style="background-color:{config.menubtn.d};"></div><input bind:value={config.menubtn.d}>
+        <br> Button Default: <div class="colorpanel" style="background-color:{config.menubtn.d};"></div><input bind:value={config.menubtn.d} on:change={handle_change}>
         <br> Button Hover:<div class="colorpanel" style="background-color:{config.menubtn.h};"></div><input bind:value={config.menubtn.h}>
-        <br> Background:
-        <br> Color:<div class="colorpanel" style="background-color:{config.bg.c};"></div><input bind:value={config.bg.c}>
+        <br>Tab
+        <br> Default: <div class="colorpanel" style="background-color:{config.tabbtn.d};"></div><input bind:value={config.tabbtn.d}>
+        <br> Hover:<div class="colorpanel" style="background-color:{config.tabbtn.h};"></div><input bind:value={config.tabbtn.h}>
+        <br> Active:<div class="colorpanel" style="background-color:{config.tabbtn.a};"></div><input bind:value={config.tabbtn.a}>
+        <br> bg:<div class="colorpanel" style="background-color:{config.tabbg.c};"></div><input bind:value={config.tabbg.c}>
+        <br> Panel:
+        <br> Default:<div class="colorpanel" style="background-color:{config.panel.d};"></div><input bind:value={config.panel.d}>
+        <br> Hover:<div class="colorpanel" style="background-color:{config.panel.h};"></div><input bind:value={config.panel.h}>
+        <br> bg:<div class="colorpanel" style="background-color:{config.panel.c};"></div><input bind:value={config.panel.c}>
     </div>
 </CollapsePanelComponent>
 

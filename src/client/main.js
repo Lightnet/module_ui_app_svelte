@@ -22,7 +22,7 @@ import {utils} from './mjs'
 // test ops
 import object_ot_test from './component/types/object_ot_test'
 import object_ot_calltest from './component/types/object_ot_calltest'
-import object_mt_test from './component/types/object_mt_test'
+//import object_mt_test from './component/types/object_mt_test'
 //file menu header
 import object_ot_filenew from './component/types/object_ot_filenew'
 import object_ot_filesave from './component/types/object_ot_filesave'

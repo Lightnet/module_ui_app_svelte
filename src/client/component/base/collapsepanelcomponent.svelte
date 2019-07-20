@@ -6,6 +6,10 @@
     const dispatch = createEventDispatcher();
     export let obj;
     export let btogglepanel = true;
+    export let clmenu;
+    export let clpanel = "mjspanel";
+    export let clpanelbg = "mjspanelbg";
+    export let clconbg = "mjsconbg";
 
     //onMount(async () => {	
     //});
@@ -51,8 +55,8 @@
         width:100%;
     }
 </style>
-<div class="panel">
-    <div class="header" on:click={togglepanal}>
+<div class="panel {clpanelbg}">
+    <div class="header {clpanel}" on:click={togglepanal}>
         {#if btogglepanel == true }
             <B280DA11></B280DA11>
         {:else}

@@ -96,7 +96,7 @@
 		elementheader = document.getElementById(idheader);
 		elementcontent = document.getElementById(idcontent);
 		elementfooter = document.getElementById(idfooter);
-
+		/*
 		if(config.usegunlocal == true){
 			mjs.gun = Gun();
 			//console.log("gun client storage");
@@ -134,6 +134,7 @@
 			
 			//console.log(gun);
 		}
+		*/
 		//window.dispatchEvent(new Event('resize'));
 		//console.log(AFRAME);
 		//console.dir(AFRAME);

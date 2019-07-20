@@ -54,6 +54,8 @@ useLocalStorage(themeconfig, appid + "theme");
 // Theme style setting
 // Edit remove or add will break style need to reset store data.
 //===============================================
+//===============================================
+// Theme Top Bar
 export const TopBarConfig = new writable({
     menubtn:{
         d:"#232323",
@@ -69,7 +71,8 @@ export const TopBarConfig = new writable({
     }
 });
 useLocalStorage(TopBarConfig, appid + themeid + "TopBarHeader");
-
+//===============================================
+// Theme Status Bar
 export const StatusBarConfig = new writable({
     menubtn:{
         d:"#232323",
@@ -80,7 +83,8 @@ export const StatusBarConfig = new writable({
     }
 });
 useLocalStorage(StatusBarConfig, appid + themeid + "StatusBarFooter");
-
+//===============================================
+// Theme Properties Editor
 export const PropertiesConfig = new writable({
     menubtn:{
         d:"#232323",
@@ -97,6 +101,7 @@ export const PropertiesConfig = new writable({
     panel:{
         d:"#232323",
         h:"#5177b2",
+        a:"#5177b2",
         c:"#232323"
     },
     bg:{
@@ -105,7 +110,8 @@ export const PropertiesConfig = new writable({
 });
 useLocalStorage(PropertiesConfig, appid + themeid + "Properties");
 
-
+//===============================================
+// Preferences Themes tab
 export const PrefsThemesConfig = new writable({
     isuserinferface:false,
     istextstyle:false,
