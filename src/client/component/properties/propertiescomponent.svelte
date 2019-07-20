@@ -64,7 +64,7 @@
 
     const PropertiesConfigUnsub = PropertiesConfig.subscribe(value=>{
 		PropertiesStyle = value;
-		console.log("PropertiesStyle theme change?");
+		//console.log("PropertiesStyle theme change?");
 		checktheme();
     });
     
@@ -105,7 +105,7 @@
 			elsytle = document.createElement('style');
 			elsytle.setAttribute("id",idstyle);
 			elsytle.appendChild(document.createTextNode(css));
-			console.log(elsytle);
+			//console.log(elsytle);
 			element.appendChild(elsytle);
 		}
     }

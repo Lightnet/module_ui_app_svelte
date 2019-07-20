@@ -3,6 +3,7 @@
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
     import LogicNodeNavigationComponent from "../logicnodeeditor/LogicNodeNavigationComponent.svelte";
+    import TextEditorNavigationComponent from "../texteditor/TextEditorNavigationComponent.svelte";
 
     import EditorNavmenuComponent from './editornavmenucomponent.svelte';
     import b280K26 from '../icon/b280K26.svelte';
@@ -40,7 +41,7 @@
         items.push({sm_label:"Drivers",sm_context:"drivers",sm_category:"animation",icon:b280K26,sm_navmenu:null});
         //items.push({sm_label:"Nonlinear Animation",sm_context:"nonlinearanimation",sm_category:"animation",icon:null,sm_navmenu:null});
 
-        items.push({sm_label:"Text Editor",sm_context:"texteditor",sm_category:"scripting",icon:b280Z9,sm_navmenu:null});
+        items.push({sm_label:"Text Editor",sm_context:"texteditor",sm_category:"scripting",icon:b280Z9,sm_navmenu:TextEditorNavigationComponent});
         items.push({sm_label:"Script Console",sm_context:"scriptconsole",sm_category:"scripting",icon:b280Z18,sm_navmenu:null});
         items.push({sm_label:"Info",sm_context:"info",sm_category:"scripting",icon:b280Z7,sm_navmenu:null});
 

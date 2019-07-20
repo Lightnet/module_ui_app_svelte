@@ -20,3 +20,8 @@ function createstyle(element){
         element.appendChild(style);
     }
 ```
+
+```javascript
+console.dir(); //create list var and function for element
+
+```

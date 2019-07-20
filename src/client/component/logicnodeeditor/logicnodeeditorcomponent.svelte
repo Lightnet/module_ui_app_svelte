@@ -1,5 +1,9 @@
 <svelte:options accessors={true}/>
 <script>
+    //https://github.com/jillix/svg.connectable.js
+    //https://depuits.github.io/ned/
+    //https://github.com/depuits/ned
+
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
     //import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
@@ -10,13 +14,17 @@
     import NodeConsolelogComponent from './NodeConsolelogComponent.svelte';
     import DrawGridComponent from "./DrawGridComponent.svelte";
 
+    import NodeTestComponent from "./NodeTestComponent.svelte";
+
     import {NodeTick} from "./nodescripts/NodeTick.js";
     import {NodeConsolelog} from "./nodescripts/NodeConsolelog.js";
 
     import mjs from '../../mjs.js';
     import {LogicNodeID} from '../../mjs.js';
     import SVG from 'svg.js';
-    import 'svg.panzoom.js';
+    //import 'svg.panzoom.js';
+    import svgPanZoom from 'svg-pan-zoom';
+    import '@svgdotjs/svg.draggable.js';
     //let count = 0;
     //const dispatch = createEventDispatcher();
     
@@ -39,6 +47,7 @@
     let height;
     let width;
     let idsvg = "draw" + generateId(20);
+    let panZoom;
 
     export let connectors = [];//links to connector point list here for update position?
     export let nodes = []; //node blocks types
@@ -65,6 +74,11 @@
             point2.x = svgP.x;
             point2.y = svgP.y;
         }
+
+        let screen2d = screenToWorld({x:e.clientX,y:e.clientY});
+        //console.log(screen2d);
+
+
         //console.log(m);
         mjs.context.contextmenu.set({sm_context:'LOGICNODE'});
     }
@@ -185,12 +199,12 @@
 
     function checkpanmove(){
         if(bnode){
-            //SVG('drawing').panZoom(false);
-            draw.panZoom(false);
+            //draw.panZoom(false);
             //console.log("false");
+            //panZoom.disablePan();
         }else{
-            //SVG('drawing').panZoom();
-            draw.panZoom();
+            //draw.panZoom();
+            //panZoom.enablePan();
             //console.log("true");
         }
         //SVG('drawing').panZoom(false);
@@ -215,6 +229,21 @@
         nodes = nodes;
     }
 
+
+
+    function screenToWorld(pos) {
+        var rect = svg.getBoundingClientRect();
+        var pan = panZoom.getPan();
+        var zoom = panZoom.getZoom();
+
+        return { 
+            x: (((pos.x - rect.left) - pan.x) / zoom), 
+            y: (((pos.y - rect.top) - pan.y) / zoom)
+        };
+    };
+
+
+
     onMount(() => {
         elementcontent = document.getElementById(id);
         LogicNodeID.set(id);
@@ -223,8 +252,11 @@
         if (SVG.supported) {
             //var draw = SVG('drawing').size('100%', '100%').viewbox(0,0,800,1000)
             draw = SVG(idsvg).size('100%', '100%');
+
+
+
                 //.viewbox(0,0,elementcontent.clientWidth,elementcontent.clientHeight);
-            draw.panZoom({zoomMin: 0.5, zoomMax: 20});
+            //draw.panZoom({zoomMin: 0.5, zoomMax: 20});
             //https://svgjs.com/docs/2.7/elements/
             //line = draw.line(0, 0, 0, 0).stroke({ width: 1 });
             //console.log(line);
@@ -260,12 +292,22 @@
             //});
 
             svg = document.getElementById(idsvg);
+            //console.log(svgPanZoom);
+
+            panZoom = svgPanZoom(svg);
+            panZoom.disablePan();
+            //console.log(panZoom);
+            //var pan = panZoom.getPan();
+            //console.log(pan);
+
+
+
         } else {
             alert('SVG not supported');
             //console.log("SVG not supported");
         }
 
-        setupnodes();
+        //setupnodes();//odd error
         
         window.addEventListener('resize', handle_logicnodeeditor_resize);
         //window.addEventListener('click', handle_nonclick);
@@ -333,11 +375,15 @@
     <svg id="{idsvg}">
 
         <DrawGridComponent />
+        
+        
+        <NodeTestComponent svg={svg} panZoom={panZoom} px="20" py="20" on:node={handle_node} />
+
         <!--
         <BaseNodeComponent svg={svg} px="20" py="20" on:node={handle_node} />
         <BaseNodeComponent svg={svg} px="150" py="20" on:node={handle_node} />
         <NodeVariableComponent svg={svg} px="200" py="150" on:node={handle_node} />
-        -->
+
         {#each Object.keys(nodes) as index}
             {#if nodes[index].nodetype == "BaseNode"}
                 <BaseNodeComponent svg={svg} {...nodes[index]} on:node={handle_node} />
@@ -359,6 +405,6 @@
             <NodeConnectorComponent svg={svg} {...connectors[index]} />
         {/each}
         <line class="nonselect" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:rgb(100,100,100);stroke-width:2" />
-
+        -->
     </svg>
 </div>

@@ -1,6 +1,6 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import LogicNodeEditorComponent from './logicnodeeditorcomponent.svelte';
+    //import LogicNodeEditorComponent from './logicnodeeditorcomponent.svelte';
     import { LogicNodeID } from '../../mjs.js';
 
     const dispatch = createEventDispatcher();

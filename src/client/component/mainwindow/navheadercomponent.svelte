@@ -126,6 +126,7 @@
 
 		workspaces = [
 			{sm_label:"Layout", sm_context:"layout",ops:workspace_view },
+			{sm_label:"Text Editor", sm_context:"texteditor",ops:workspace_view },
 			{sm_label:"Horizontal", sm_context:"horizontal",ops:workspace_view },
 			{sm_label:"Vertical", sm_context:"vertical",ops:workspace_view },
 			{sm_label:"Test Divide", sm_context:"testdivide",ops:workspace_view },

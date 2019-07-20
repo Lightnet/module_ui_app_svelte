@@ -58,6 +58,8 @@ Links:
  * https://enlight.nyc/projects/code-editor/
  * 
  * https://codepen.io/xgundam05/pen/KjqJn node editor simple svg
+ * https://codepen.io/xgundam05/pen/bNeYbb Node Editor UI (v2)
+ * https://codepen.io/osublake/pen/4c3752574267b3a986cb8eee7ccb8c81
  * 
  * https://rete.js.org/#/docs
  * 
@@ -71,9 +73,9 @@ Links:
  * https://stackoverflow.com/questions/7676006/obtaining-an-original-svg-viewbox-via-javascript
  * https://stackoverflow.com/questions/14208673/how-to-draw-grid-using-html5-and-canvas-or-svg
  * 
+ * https://github.com/karma-runner/karma/issues/1373
  * 
- * 
- * 
+ * http://openexchangerates.github.io/javascript-sandbox-console/
  * 
  * 
  * 

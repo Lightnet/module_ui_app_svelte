@@ -2,22 +2,27 @@
 	//https://svelte.dev/docs#setContext
 	//https://svelte.dev/examples#reactive-statements
 
+	//https://github.com/svgdotjs/svg.draggable.js
+	//https://codepen.io/osublake/pen/4c3752574267b3a986cb8eee7ccb8c81
+	//https://github.com/depuits/ned
+
 	import { onMount, afterUpdate, onDestroy, createEventDispatcher} from 'svelte'
 	import { generateId } from './component/helper/generateid.js';
 
 	import Modal from './component/base/modalcomponent.svelte';
-	import Panel from './component/base/panel.svelte'
-	import NavHeaderComponent from './component/mainwindow/navheadercomponent.svelte'
-	import NavFooterComponent from './component/mainwindow/navfootercomponent.svelte'
-	import SplitterComponent from './component/base/splittercomponent.svelte'
-	import ContextMenuComponent from './component/base/contextmenucomponent.svelte'
-	import LayoutLayoutComponent from './component/base/LayoutLayoutComponent.svelte'
-	import DivDividerVComponent from './component/base/sdivdividerv.svelte'
-	import DivDividerHComponent from './component/base/sdivdividerh.svelte'
-	import LayoutLogicNodeEditorComponent from './component/base/layoutlogicnodeeditorcomponent.svelte'
-	import LayoutPreferencesComponent from './component/base/layoutpreferencescomponent.svelte'
-	import DivDividerOffSetHComponent from './component/base/testoffsetdividercomponent.svelte'
-	import TestDivideHComponent from './component/base/testdividecomponent.svelte'
+	import Panel from './component/base/panel.svelte';
+	import NavHeaderComponent from './component/mainwindow/navheadercomponent.svelte';
+	import NavFooterComponent from './component/mainwindow/navfootercomponent.svelte';
+	import SplitterComponent from './component/base/splittercomponent.svelte';
+	import ContextMenuComponent from './component/base/contextmenucomponent.svelte';
+	import LayoutLayoutComponent from './component/base/LayoutLayoutComponent.svelte';
+	import DivDividerVComponent from './component/base/sdivdividerv.svelte';
+	import DivDividerHComponent from './component/base/sdivdividerh.svelte';
+	import LayoutLogicNodeEditorComponent from './component/base/layoutlogicnodeeditorcomponent.svelte';
+	import LayoutPreferencesComponent from './component/base/layoutpreferencescomponent.svelte';
+	import DivDividerOffSetHComponent from './component/base/testoffsetdividercomponent.svelte';
+	import TestDivideHComponent from './component/base/testdividecomponent.svelte';
+	import LayoutTextEditorComponent from './component/base/LayoutTextEditorComponent.svelte';
 	//import Gun from 'gun/gun';
 	import mjs from './mjs.js';
 	import { appconfig } from './mjs.js';
@@ -44,11 +49,12 @@
 	let view;
 
 	let viewworkspace = "horizontal";
-	viewworkspace = "layout";
+	//viewworkspace = "layout";
 	//viewworkspace = "testdivide";
 	//viewworkspace = "testoffsetdivide";
 	//viewworkspace = "preferences";
 	//viewworkspace = "logicnodeeditor";
+	viewworkspace = "texteditor";
 
 	let elementheader;
 	let elementcontent;
@@ -237,7 +243,12 @@
 		{#if viewworkspace == "preferences"}
 			<LayoutPreferencesComponent />
 		{/if}
-		
+
+		{#if viewworkspace == "texteditor"}
+			<LayoutTextEditorComponent />
+		{/if}
+
+
 	</div>
 	<NavFooterComponent idassign={idfooter}></NavFooterComponent>
 </div>
