@@ -3,7 +3,7 @@
     //https://codepen.io/grimen/pen/lBuiG/
     //https://dev.to/pulljosh/how-to-load-html-css-and-js-code-into-an-iframe-2blc
     //https://codepen.io/
-
+    // https://enlight.nyc/projects/code-editor/
 
 
 
@@ -37,10 +37,18 @@
     inputscript = `
     let text = "test";
     console.log("test");
+    function fntext(){
+        console.log("test");
+    }
+    fntext();
     `;
 
     outputscript = `
-    console.log("test");
+    //console.log("test");
+    function fntext(){
+        console.log("test");
+    }
+    fntext();
     `;
 
     function getBlobURL(code, type){
@@ -57,7 +65,6 @@
         let cssURL = getBlobURL(css, 'text/css');
         let jsURL = getBlobURL(js, 'text/javascript');
         let source = ``;
-        
         source += `
             <html>
             <head>`;
@@ -69,14 +76,13 @@
             source += `<script  src="${jsURL}" />`;
         }
         
-        source +=`</head>
+        source +=`</ head>
             <body>
                 ${html || ''}
-            </body>
-            </html>
+            </ body>
+            </ html>
         `;
         
-
         return getBlobURL(source, 'text/html')
     }
 
@@ -94,8 +100,9 @@
         let result = svelte.compile(inputscript, {
             // options
             format:"cjs",
+            generate:"dom",
             css:false,
-            immutable:true,
+            immutable:false,
         });
         console.log(result)
         outputscript = result.js.code;
@@ -206,17 +213,102 @@
         bdebug =true;
     }
 
+    function btntest3(){
+        console.log("test");
+        let jsblob = new Blob([outputscript], {type: 'text/javascript'});
+        let jsurl = URL.createObjectURL(jsblob);
+        let iframe = document.getElementById(iddebug);
+        var code = iframe.contentWindow.document;
+        iframe.sandbox = 'allow-forms allow-scripts allow-same-origin';
+
+        let codehtml = "Hello World";
+        
+        //<script type="text/javascript" src="${jsurl}" />
+        let html = codehtml +
+            `<style>
+                body{
+                    color:white;
+                }
+            </style>`;
+        code.open();
+        code.writeln(
+            html
+            //"hello world"
+        );
+        //code.writeln(
+            //`<script type="text/javascript" src="${jsurl}"/>` //does not work for some reason
+        //);
+        code.close();
+
+        let script = document.createElement('script');
+        script.type = "text/javascript";
+        script.src = jsurl;
+        iframe.appendChild(script);
+    }
+
+    function btntest2(){
+
+        let jsblob = new Blob([outputscript], {type: 'text/javascript'});
+        //let jsblob = new Blob([jsscript], {type: 'text/html'});
+        let jsurl = URL.createObjectURL(jsblob);
+        //<script type="text/javascript" src="${jsurl}">
+        let html = '';
+
+        html = `
+        <style>
+        body { 
+        background:gray; 
+        color: white;
+        }
+        </style>
+        <h1>This is Blob Content</h1>
+        `;
+        //console.log(html);
+
+
+        var blob = new Blob([html], {type: 'text/html'});
+        //let simplescript = 'console.log("test");';
+        //var blob = new Blob([outputscript], {type: 'text/javascript'});
+
+        let iframe = document.getElementById(iddebug);
+        //iframe.src = url;
+        //iframe.src="/test.html";
+        //console.log(blob);
+        iframe.src = URL.createObjectURL(blob);
+        //iframe.src = jsurl;
+        iframe.sandbox = 'allow-forms allow-scripts allow-same-origin';
+        //console.dir(iframe);
+
+        let script;
+        //script = document.createElement('script');
+        //script.type = "text/javascript";
+        //script.innerHTML ="console.log('here test');";
+        //script.innerHTML = outputscript;
+        //script.src = "/bundle.js";
+        //iframe.appendChild(script);
+
+        script = document.createElement('script');
+        script.type = "text/javascript";
+        //script.innerHTML ="console.log('here test');";
+        //script.innerHTML = outputscript;
+        script.src = jsurl;
+        iframe.appendChild(script);
+
+    }
+
+
+
     function btntest(){
 
         var html = `
-<style>
-body { 
-  background: blue; 
-  color: white;
-}
-</style>
-<h1>This is Blob Content</h1>
-`;
+        <style>
+        body { 
+        background: blue; 
+        color: white;
+        }
+        </style>
+        <h1>This is Blob Content</h1>
+        `;
 
         var blob = new Blob([html], {type: 'text/html'});
         let simplescript = 'console.log("test");';
@@ -234,60 +326,6 @@ body {
         //script.innerHTML ="console.log('here test');";
         script.innerHTML = outputscript;
 
-        //script.src = "my.js";
-
-        //iframe.contentDocument.head.append(script);
-        iframe.appendChild(script);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //document.getElementById(iddebug).contentWindow.console = console;
-
-        /*var html = `
-<style>
-body { 
-  background: blue; 
-  color: white;
-}
-</style>
-<h1>This is Blob Content</h1>
-<script  type="text/javascript"> console.log("test");
-`;
-*/
-        /*
-        var blob = new Blob([html], {type: 'text/html'});
-        //var blob = new Blob([outputscript], {type: 'text/javascript'});
-        let iframe = document.getElementById(iddebug);
-        iframe.src = URL.createObjectURL(blob);
-        */
-        /*
-        let url = getGeneratedPageURL({
-            html: '<p>Hello, world!</p>',
-            css: 'p { color: blue; }',
-            //js: outputscript
-            js: 'console.log("test");alert("test");'
-        });
-
-        */
-        //let iframe = document.getElementById(iddebug);
-        //iframe.src = url;
-        
-        //iframe.src='https://www.google.com/';
-        //iframe.src=url;
-        //iframe.src="/test.html";
-        //iframe.sandbox = 'allow-forms allow-scripts allow-same-origin';
-
         /*
         let oldDoc = iframe.contentDocument;
         
@@ -302,14 +340,10 @@ body {
         }, 100);
         */
         
-        
-
-
         //let doc = document.getElementById(iddebug).contentWindow.document;
         //let jsURL = getBlobURL(outputscript, 'text/javascript');
         //let jsURL = getBlobURL(outputscript, 'text/javascript');
         
-
         //text/javascript
         //let jsxml = `<script type="application/javascript" src=${jsURL}>`;
         //jsxml += 
@@ -329,7 +363,7 @@ body {
     <button on:click={btncode}> Code </button>
     <button on:click={btnscript}> Script </button>
     <button on:click={btndebug}> Debug </button>
-    <button on:click={btntest}> Test </button>
+    <button on:click={btntest3}> Run </button>
     {#if bcode == true}
         <textarea id={idtextscript} bind:value={inputscript}></textarea>
     {/if}
