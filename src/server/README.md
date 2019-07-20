@@ -1,0 +1,1 @@
+Server will handle game object is possible.

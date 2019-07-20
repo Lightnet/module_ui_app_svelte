@@ -42,7 +42,7 @@
         color:white;
     }
 </style>
-<CollapsePanelComponent>
+<CollapsePanelComponent  clpanel="propspanel" clpanelbg="propspanelbg">
     <span slot="header"> Transform </span>
 
     <div slot="content"> 

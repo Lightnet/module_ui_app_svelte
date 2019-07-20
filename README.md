@@ -19,7 +19,7 @@ Code languages:
  * opera (pass)
 
 # Information:
- Prototype build to create module layout application to render svelte in the way emulation blender3D format and style that is base on the idea. The hard part will be how to handle div content. Just idea design.
+ Prototype build to create module layout application to render svelte in the way emulation blender3D 2.8x format and style that is base on the idea. As well Godot 3.x Game engine node system. The hard part will be how to handle html, css, svg and other browser support as well other things to keep thing simple. Just idea design.
 
 # Nodejs pacakges:
  * svelte 3.6.2
@@ -63,7 +63,7 @@ gulp default
 ```
 
 # Guide & Design:
- It base on Blender3D python design and as well layout UI but coded part in layout is not the same as used Svelte 3 to instance the object or html render UI that depend on code and setup.
+ It base on Blender3D python design and as well layout UI but coded javascript is different since the layout builds. Svelte 3 can be used but will be prototype build to instance the object or render html UI that depend on code and setup.
 
 ```javascript
 //svelte 3
@@ -75,7 +75,7 @@ mjs short is module javascript
 import bpy
 ```
 
- It is base on Blender3D python import bpy. The reason to have module design and layout is to keep things clean like Blender3D to sort out the best ways to access. The scene and object scene can be remade as long as the objects are saved in object data format like json.
+ It is base on Blender3D python import bpy. The reason to have module design and layout is to keep things clean like Blender3D to sort out the best ways to access. The scene and object scene can be remade as long as the objects are saved in object data format like json. It need to be string format not binary data since html and javascript can't read binary data but it can be format in different way to compress in text format.
 
  The static functions and variables will hold into one file to management objects, events, and instances as well holding data types. For current viewport screen when dealing with workspace area.
 

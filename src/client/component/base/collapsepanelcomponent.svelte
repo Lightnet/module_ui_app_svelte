@@ -9,7 +9,7 @@
     export let clmenu;
     export let clpanel = "mjspanel";
     export let clpanelbg = "mjspanelbg";
-    export let clconbg = "mjsconbg";
+    //export let clconbg = "mjsconbg";
 
     //onMount(async () => {	
     //});
@@ -65,7 +65,7 @@
         <slot name='header'></slot>
     </div>
     {#if !btogglepanel}
-    <div class="context">
+    <div class="context {clpanelbg}">
         <slot name='content'></slot>
     </div>
     {/if}

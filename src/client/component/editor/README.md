@@ -1,0 +1,1 @@
+This is editor for module to help easy to switch type of editor in the layout.

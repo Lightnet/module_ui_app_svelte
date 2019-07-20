@@ -1,0 +1,1 @@
+This is used for game server network build. As well share object if possible to sync.

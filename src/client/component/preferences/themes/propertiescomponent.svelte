@@ -79,7 +79,7 @@
         <br> Panel:
         <br> Default:<div class="colorpanel" style="background-color:{config.panel.d};"></div><input bind:value={config.panel.d}>
         <br> Hover:<div class="colorpanel" style="background-color:{config.panel.h};"></div><input bind:value={config.panel.h}>
-        <br> bg:<div class="colorpanel" style="background-color:{config.panel.c};"></div><input bind:value={config.panel.c}>
+        <br> bg:<div class="colorpanel" style="background-color:{config.bg.c};"></div><input bind:value={config.bg.c}>
     </div>
 </CollapsePanelComponent>
 

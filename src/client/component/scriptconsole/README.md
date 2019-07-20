@@ -1,0 +1,1 @@
+Not build stand alone logging type for easy to access?

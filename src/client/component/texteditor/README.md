@@ -1,0 +1,1 @@
+Text editor is simple but not easy worked on. Still need better to debug a bit safe?
