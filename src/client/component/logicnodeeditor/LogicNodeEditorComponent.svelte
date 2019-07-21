@@ -30,7 +30,8 @@
     
     export let id = generateId(20);
     let elementcontent;
-    let bnode = false;
+    let bzoompan = false;
+    let bconnector = false;
 
     let pindata;
     let idpin1;
@@ -97,6 +98,8 @@
             //console.log(e)
             if(pindata !=null){
                 if((pindata.type == "pin")&&(pindata.mouse == "over")){
+                    bconnector = true;
+
                     idpin1 = pindata;
                     let svgP = svgPoint(svg, e.clientX, e.clientY);
                     //set draw line to dot from mouse down.
@@ -113,6 +116,8 @@
                 //console.log("clear?");
                 resetpoint();
             }
+
+            
         }
         window.addEventListener('mouseup',handle_svgmouseup);
     }
@@ -188,6 +193,7 @@
                 }
             }
             bline = false;
+            bconnector = false;
             resetpoint();
         }
         window.removeEventListener('mouseup',handle_svgmouseup);
@@ -198,12 +204,10 @@
     }
 
     function checkpanmove(){
-        if(bnode){
-            //draw.panZoom(false);
+        if(bzoompan){
             //console.log("false");
             panZoom.disablePan();
         }else{
-            //draw.panZoom();
             panZoom.enablePan();
             //console.log("true");
         }
@@ -225,7 +229,7 @@
         visualnodes.push({nodetype:"NodeTick",px:150,py:200});
         visualnodes.push({nodetype:"NodeConsolelog",px:300,py:200});
         //visualnodes = visualnodes;
-        console.log(visualnodes)
+        //console.log(visualnodes);
     }
 
     function screenToWorld(pos) {
@@ -287,7 +291,7 @@
             //console.log(svgPanZoom);
 
             panZoom = svgPanZoom(svg);
-            //panZoom.disablePan();
+            panZoom.disablePan();
             //console.log(panZoom);
             //var pan = panZoom.getPan();
             //console.log(pan);
@@ -315,13 +319,13 @@
     //handle node stuff to prevent camera panning.
     function handle_node(e){
         //console.log(e)
-        //console.log(e.detail)
+        //console.log(e.detail);
         if(e.detail.mouse != null){
-            if(e.detail.mouse == "out"){
-                bnode = false;
+            if((e.detail.mouse == "out")&&(bconnector == false)){//check for mouse down when drag connector
+                bzoompan = false;
             }
             if(e.detail.mouse == "over"){
-                bnode = true;
+                bzoompan = true;
             }
         }
         if(e.detail.id != null){
@@ -397,7 +401,7 @@
         <!-- when connector is add give error so it need to add wait to get data loaded correctly -->
         {#await connectors then value}
             {#each Object.keys(connectors) as index}
-                <NodeConnectorComponent svg={svg} {...connectors[index]} />
+                <NodeConnectorComponent svg={svg} panZoom={panZoom} {...connectors[index]} />
             {/each}
         {/await}
         <line class="nonselect" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:rgb(100,100,100);stroke-width:2" />

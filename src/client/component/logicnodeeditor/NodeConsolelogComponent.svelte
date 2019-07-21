@@ -137,6 +137,7 @@
 
     function handle_click(e){
         //console.log("click select node?");
+        /*
         console.log("//=================")
         console.log("pinins:"+ pinins.length + " pinouts:" + pinouts.length);
         for(let i=0;i<pinins.length;i++){
@@ -145,6 +146,7 @@
         for(let i=0;i<pinouts.length;i++){
             console.log("pinouts Index:" + i + " Count:" + pinouts[i].connectors.length);
         }
+        */
     }
 
 </script>
@@ -160,9 +162,9 @@
 <NodeComponent panZoom={panZoom} idcomponent={idcomponent} px={px} py={py} svg={svg} nwidth={nwidth} nheight={nheight} on:node={handle_node} on:click={handle_click}>
     <text x="4" y="20" style="stroke: white; fill:white;"> {nodename} </text>
     {#each pinins as pinin}
-        <NodePinComponent {...pinin} on:node={handle_node}/>
+        <NodePinComponent svg={svg} panZoom={panZoom} {...pinin} on:node={handle_node}/>
     {/each}
     {#each pinouts as pinout}
-        <NodePinComponent {...pinout} on:node={handle_node}/>
+        <NodePinComponent svg={svg} panZoom={panZoom} {...pinout} on:node={handle_node}/>
     {/each}
 </NodeComponent>

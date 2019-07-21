@@ -161,12 +161,12 @@
     <text x="4" y="20" style="stroke: white; fill:white;"> {nodename} </text>
     {#each pinins as pinin}
         <!--{console.log(pinout)}-->
-        <NodePinComponent {...pinin} on:node={handle_node}/>
+        <NodePinComponent svg={svg} panZoom={panZoom} {...pinin} on:node={handle_node}/>
         <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
     {/each}
     {#each pinouts as pinout}
         <!--{console.log(pinout)}-->
-        <NodePinComponent {...pinout} on:node={handle_node}/>
+        <NodePinComponent svg={svg} panZoom={panZoom} {...pinout} on:node={handle_node}/>
         <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
     {/each}
 </NodeComponent>

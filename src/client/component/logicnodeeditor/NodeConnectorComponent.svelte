@@ -24,6 +24,7 @@
     let elpinin;
     export let idpinout;
     let elpinout;
+    let pinsize = 20;
 
     // translate page to SVG co-ordinate
     function svgPoint(element, x, y) {
@@ -39,25 +40,36 @@
         if(elpinin == null){
             return;
         }
-
         if(elpinout == null){
             return;
         }
-
-        point1.x = elpinin.parentNode.getBoundingClientRect().x + parseFloat(elpinin.getAttribute("x"));
-        point1.y = elpinin.parentNode.getBoundingClientRect().y + parseFloat(elpinin.getAttribute("y"));
-
-        let svgP = svgPoint(svg, point1.x, point1.y);
-        point1.x = svgP.x;
-        point1.y = svgP.y;
-        point1=point1;
-
-        point2.x = elpinout.parentNode.getBoundingClientRect().x + parseFloat(elpinout.getAttribute("x"));
-        point2.y = elpinout.parentNode.getBoundingClientRect().y + parseFloat(elpinout.getAttribute("y"));
-        svgP = svgPoint(svg, point2.x, point2.y);
-        point2.x = svgP.x;
-        point2.y = svgP.y;
-        point2 =point2
+        let g = SVG.get(elpinin.parentNode.id);
+        let p = SVG.get(elpinin.id);
+        point1.x = g.x() + p.x() + (pinsize/2);
+        point1.y = g.y() + p.y() + (pinsize/2);
+        g = SVG.get(elpinout.parentNode.id);
+        p = SVG.get(elpinout.id);
+        point2.x = g.x() + p.x() + (pinsize/2);
+        point2.y = g.y() + p.y() + (pinsize/2);
+        //let svgP;
+        //console.log(elpinin.id)
+        //console.log(elpinin.parentNode.id);
+        //point1.x = elpinin.parentNode.getBoundingClientRect().x + parseFloat(elpinin.getAttribute("x"));
+        //point1.y = elpinin.parentNode.getBoundingClientRect().y + parseFloat(elpinin.getAttribute("y"));
+        //point1.x = g.x() + parseFloat(elpinin.getAttribute("x"));
+        //point1.y = g.y() + parseFloat(elpinin.getAttribute("y"));
+        //let svgP = svgPoint(svg, point1.x, point1.y);
+        //point1.x = svgP.x;
+        //point1.y = svgP.y;
+        //point1=point1;
+        //point2.x = elpinout.parentNode.getBoundingClientRect().x + parseFloat(elpinout.getAttribute("x"));
+        //point2.y = elpinout.parentNode.getBoundingClientRect().y + parseFloat(elpinout.getAttribute("y"));
+        //svgP = svgPoint(svg, point2.x, point2.y);
+        //point2.x = svgP.x;
+        //point2.y = svgP.y;
+        //point2.x = g.x() + parseFloat(elpinout.getAttribute("x"));
+        //point2.y = g.y() + parseFloat(elpinout.getAttribute("y"));
+        //point2 = point2
     }
 
     onMount(() => {

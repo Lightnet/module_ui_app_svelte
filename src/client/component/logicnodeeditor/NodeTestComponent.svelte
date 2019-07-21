@@ -40,7 +40,8 @@
         };
     };
 
-    function screenToWorldEl(el,pos) {
+    /*
+    function screenToWorldEl(el,pos) {//nope
         var rect = svg.getBoundingClientRect();
         var pan = panZoom.getPan();
         var zoom = panZoom.getZoom();
@@ -53,6 +54,7 @@
             y: (((pos.y - (rect.top + el.y)) - pan.y) / zoom)
         };
     };
+    */
 
     //handle connector event tag check when connect
     function handle_mouseover(e){

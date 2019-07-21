@@ -51,11 +51,11 @@
         pointer-events: none;
     }
 </style>
-<NodeComponent panZoom={panZoom} idcomponent={idcomponent} px={px} py={py} svg={svg} nwidth={nwidth} nheight={nheight} on:node={handle_node}>
+<NodeComponent svg={svg} panZoom={panZoom} idcomponent={idcomponent} px={px} py={py} nwidth={nwidth} nheight={nheight} on:node={handle_node}>
     <text x="4" y="20" style="stroke: white; fill:white;"> {nodename} </text>
     {#each pinouts as pinout}
         <!--{console.log(pinout)}-->
-        <NodePinComponent {...pinout} on:node={handle_node}/>
+        <NodePinComponent svg={svg} panZoom={panZoom} {...pinout} on:node={handle_node}/>
         <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
     {/each}
 </NodeComponent>
