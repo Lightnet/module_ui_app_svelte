@@ -35,12 +35,20 @@
     let bdebug = false;
 
     inputscript = `
-    let text = "test";
-    console.log("test");
+    //console.log("test");
     function fntext(){
         console.log("test");
     }
     fntext();
+    class Text{
+        constructor(){
+            this.tt="test";
+            console.log("class test...");
+        }
+    }
+
+    let t = new Text();
+    console.log(t);
     `;
 
     outputscript = `
@@ -49,6 +57,15 @@
         console.log("test");
     }
     fntext();
+    class Text{
+        constructor(){
+            this.tt="test";
+            console.log("class test...");
+        }
+    }
+
+    let t = new Text();
+    console.log(t);
     `;
 
     function getBlobURL(code, type){
@@ -97,6 +114,15 @@
     }
 
     function compilescript(){
+        //https://babeljs.io/docs/en/next/babel-standalone.html
+        //https://github.com/babel/babel-standalone/tree/master/packages/babili-standalone
+        //https://stackoverflow.com/questions/37228247/how-to-use-babel-directly-from-a-script-tag-without-installing-babel-itself
+        //outputscript = Babel.transform(inputscript, { presets: ['es2015'] }).code;
+        outputscript = Babel.transform(inputscript, { presets: ['es2015'] }).code;
+        console.log(Babel.version);
+        //outputscript = Babel.transform(inputscript).code;
+
+        /* //Svelte 3
         let result = svelte.compile(inputscript, {
             // options
             format:"cjs",
@@ -106,6 +132,8 @@
         });
         console.log(result)
         outputscript = result.js.code;
+        */
+
     }
     
     onMount(() => {
@@ -215,7 +243,7 @@
 
     function btntest3(){
         console.log("test");
-        let jsblob = new Blob([outputscript], {type: 'text/javascript'});
+        let jsblob = new Blob([outputscript], {type: 'text/babel'});
         let jsurl = URL.createObjectURL(jsblob);
         let iframe = document.getElementById(iddebug);
         var code = iframe.contentWindow.document;
@@ -248,6 +276,7 @@
 
     function btntest2(){
 
+        //let jsblob = new Blob([outputscript], {type: 'text/javascript'});
         let jsblob = new Blob([outputscript], {type: 'text/javascript'});
         //let jsblob = new Blob([jsscript], {type: 'text/html'});
         let jsurl = URL.createObjectURL(jsblob);

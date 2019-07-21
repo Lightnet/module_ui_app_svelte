@@ -77,10 +77,12 @@ Links:
  * 
  * http://openexchangerates.github.io/javascript-sandbox-console/
  * 
+ * https://babeljs.io/docs/en/next/babel-standalone.html
+ * https://github.com/babel/babel-standalone/tree/master/packages/babili-standalone
+ * https://stackoverflow.com/questions/37228247/how-to-use-babel-directly-from-a-script-tag-without-installing-babel-itself
+ * https://www.w3schools.com/whatis/tryit.asp?filename=trywhatis_react_jsx
  * 
- * 
- * 
- * 
+ * https://github.com/lukeed/polka
  * 
  * 
  * 
