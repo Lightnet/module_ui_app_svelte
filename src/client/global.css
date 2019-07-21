@@ -40,9 +40,9 @@ input, button, select, textarea {
 	padding: 0.4em;
 	margin: 0 0 0.5em 0;
 	border:none;
-	/*background-color:#595959;*/
+	background-color:#595959;
     font-size: 12px;
-    height:22px !important;
+    /*height:22px !important;*/
 	/*box-sizing: border-box;*/
 	/*border: 1px solid #ccc;*/
 	/*border-radius: 2px;*/
@@ -78,8 +78,6 @@ input[type="text"]{
 	line-height: 22px; 
 	height: 22px;
 }
-
-
 
 button {
 	color:white;

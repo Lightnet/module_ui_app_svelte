@@ -18,13 +18,13 @@
     let idcontent = generateId(20);
     let elementcontent;
 
-    let idtextscript = generateId(20);
+    let idtextcode ="code" + generateId(20);
+    let eltextcode;
+
+    let idtextscript = "script"+ generateId(20);
     let eltextscript;
 
-    let idoutscript = generateId(20);
-    let eloutscript;
-
-    let iddebug = generateId(20);
+    let iddebug = "iframe"+ generateId(20);
     let eldebug;
 
     let inputscript = "";
@@ -112,6 +112,17 @@
         let parent = elementcontent.parentNode;
         elementcontent.style.height = parent.clientHeight + 'px';
         elementcontent.style.width = parent.clientWidth + 'px';
+        /*
+        if(bcode){
+            adjustcodesize();
+        }
+        if(bscripot){
+            adjustscriptsize();
+        }
+        */
+        if(bdebug){
+            adjustdebugsize();
+        }
     }
 
     function compilescript(){
@@ -137,13 +148,32 @@
     onMount(() => {
         //console.log("mount")
         elementcontent = document.getElementById(idcontent);
+        eltextcode = document.getElementById(idtextcode);
         eltextscript = document.getElementById(idtextscript);
-        eloutscript = document.getElementById(idoutscript);
         eldebug = document.getElementById(iddebug);
+
+
+        let parent = elementcontent.parentNode;
+        //console.log(parent.clientWidth);
+        eltextcode = document.getElementById(idtextcode);
+        eltextcode.style.width = parent.clientWidth + "px";
+        eltextcode.style.height = (parent.clientHeight - 50) + "px";
 
         handle_texteditor_resize();
         window.addEventListener('resize', handle_texteditor_resize);
         window.addEventListener('compilescript', compilescript);
+
+        /*
+        if(bcode){
+            adjustcodesize();
+        }
+        if(bscripot){
+            adjustscriptsize();
+        }
+        */
+        if(bdebug){
+            adjustdebugsize();
+        }
     });
 
     onDestroy(() => {
@@ -158,12 +188,14 @@
 
     afterUpdate(()=>{
         console.log("afterUpdate...");
+        /*
         if(bcode){
             adjustcodesize();
         }
         if(bscripot){
             adjustscriptsize();
-        }
+        }        
+        */
         if(bdebug){
             adjustdebugsize();
         }
@@ -175,12 +207,15 @@
     }
 
     function adjustcodesize(){
+        console.log("code??");
         elementcontent = document.getElementById(idcontent);
         let parent = elementcontent.parentNode;
         //console.log(parent.clientWidth);
-        eltextscript = document.getElementById(idtextscript);
-        eltextscript.style.width = parent.clientWidth + "px";
-        eltextscript.style.height = (parent.clientHeight - 50) + "px";
+        eltextcode = document.getElementById(idtextcode);
+        eltextcode.style.width = parent.clientWidth + "px";
+        eltextcode.style.height = (parent.clientHeight - 50) + "px";
+        console.log(parent.clientHeight);
+        console.log(eltextcode.style.height);
     }
 
     function btncode(){
@@ -189,11 +224,13 @@
         bdebug =false;
     }
     function adjustscriptsize(){
+        console.log("code??");
         let parent = elementcontent.parentNode;
-        eloutscript = document.getElementById(idoutscript);
+        eltextscript = document.getElementById(idtextscript);
         //console.log(eloutscript);
-        eloutscript.style.width = parent.clientWidth + "px";
-        eloutscript.style.height = (parent.clientHeight - 50) + "px";
+        eltextscript.style.width = parent.clientWidth + "px";
+        eltextscript.style.height = (parent.clientHeight - 50) + "px";
+        console.log(parent.clientHeight);
     }
     function btnscript(){
         bcode =false;
@@ -364,8 +401,16 @@
 </script>
 
 <style>
-
+    textarea { 
+        width:100%;
+        height: 100%; 
+    }
+    .textauto{
+        width:100%;
+        height:100%;
+    }
 </style>
+
 <div id="{idcontent}" on:mousemove={handle_mousemove}>
     <!--Text Editor<button on:click={compilescript}> Compile </button>-->
     <button on:click={btncode}> Code </button>
@@ -373,10 +418,12 @@
     <button on:click={btndebug}> Debug </button>
     <button on:click={btntest3}> Run </button>
     {#if bcode == true}
-        <textarea id={idtextscript} bind:value={inputscript}></textarea>
+        <textarea id={idtextcode} bind:value={inputscript}></textarea>
     {/if}
     {#if bscripot == true}
-        <textarea id={idoutscript} bind:value={outputscript}></textarea>
+        <div class="textauto">
+        <textarea id={idtextscript} bind:value={outputscript}></textarea>
+        </div>
     {/if}
     {#if bdebug == true}
         <iframe title="" id={iddebug}

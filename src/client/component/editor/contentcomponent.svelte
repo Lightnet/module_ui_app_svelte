@@ -2,7 +2,7 @@
     import { onMount, onDestroy, createEventDispatcher } from 'svelte'
 
     import Viewport3DComponent from '../viewport3d/viewport3dcomponent.svelte';
-    import LogicNodeEditorComponent from '../logicnodeeditor/logicnodeeditorcomponent.svelte';
+    import LogicNodeEditorComponent from '../logicnodeeditor/LogicNodeEditorComponent.svelte';
     import TexteditorComponent from '../texteditor/texteditorcomponent.svelte';
     import ScriptConsoleComponent from '../scriptconsole/scriptconsolecomponent.svelte';
     import InfoComponent from '../info/infocomponent.svelte';
