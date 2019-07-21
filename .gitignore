@@ -4,3 +4,4 @@ data.json/
 node_modules/
 public/
 data/
+__sapper__/
