@@ -24,6 +24,7 @@
     import SVG from 'svg.js';
     //import 'svg.panzoom.js';
     import svgPanZoom from 'svg-pan-zoom';
+    //import 'svg-pan-zoom';
     import '@svgdotjs/svg.draggable.js';
     //let count = 0;
     //const dispatch = createEventDispatcher();
