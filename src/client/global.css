@@ -12,6 +12,8 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
+
+
 a {
 	color: white;
 	background: #3a3a3a;
@@ -38,12 +40,30 @@ input, button, select, textarea {
 	padding: 0.4em;
 	margin: 0 0 0.5em 0;
 	border:none;
-	background-color:#595959;
+	/*background-color:#595959;*/
     font-size: 12px;
-    height:22px;
+    height:22px !important;
 	/*box-sizing: border-box;*/
 	/*border: 1px solid #ccc;*/
 	/*border-radius: 2px;*/
+}
+input{
+	line-height:22px;
+	height:22px;
+	padding: 0px 0px 0px 0px;
+}
+input[type="number"]{
+	line-height:22px;
+	height:22px;
+	padding: 0px 0px 0px 0px;
+	font-size: 12px;
+}
+input[type="text"]{
+	padding: 0px 0px !important;
+}
+
+input[type="color"]{
+	padding: 0px 0px 0px 0px!important;
 }
 
 input:disabled {
@@ -53,6 +73,13 @@ input:disabled {
 input[type="range"] {
 	height: 0;
 }
+
+input[type="text"]{ 
+	line-height: 22px; 
+	height: 22px;
+}
+
+
 
 button {
 	color:white;

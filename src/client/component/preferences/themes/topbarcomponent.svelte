@@ -33,6 +33,7 @@
 </script>
 
 <style>
+    /*
     button{
         background-color:grey;
         font-size: 12px;
@@ -44,33 +45,42 @@
     button:hover{
         background-color: lightslategrey;
     }
+    */
 
-    /*input{font-size: 12px;height:22px;}*/
+    input[type="color"]{
+        -webkit-appearance: none;
+        width: 22px;
+	    height: 22px;
+        border: none;
+        padding: 0;
+    }
+    input[type="color"]::-webkit-color-swatch-wrapper {
+	    padding: 0;
+    }
+    input[type="color"]::-webkit-color-swatch {
+    	border: none;
+    }
+    input[type="text"]{
+        padding: 0px 0px;
+    }
 
     div{
         color:white;
     }
-
-    .colorpanel{
-        float:left;
-        height:32px;
-        width:32px;
-    }
-
 </style>
 <CollapsePanelComponent  btogglepanel={bCollapse} on:click={handle_click}>
     <span slot="header"> Top Bar </span>
 
     <div slot="content"> 
         Menu
-        <br> Button Default: <div class="colorpanel" style="background-color:{config.menubtn.d};"></div><input bind:value={config.menubtn.d}>
-        <br> Button Hover:<div class="colorpanel" style="background-color:{config.menubtn.h};"></div><input bind:value={config.menubtn.h}>
+        <br> Button Default: <input type="color" bind:value={config.menubtn.d}><input type="text" bind:value={config.menubtn.d}>
+        <br> Button Hover:<input type="color" bind:value={config.menubtn.h}><input bind:value={config.menubtn.h}>
         <br> Workspace
-        <br> Button Default: <div class="colorpanel" style="background-color:{config.workspacebtn.d};"></div><input bind:value={config.workspacebtn.d}>
-        <br> Button Hover:<div class="colorpanel" style="background-color:{config.workspacebtn.h};"></div><input bind:value={config.workspacebtn.h}>
-        <br> Button Active:<div class="colorpanel" style="background-color:{config.workspacebtn.a};"></div><input bind:value={config.workspacebtn.a}>
+        <br> Button Default: <input type="color" bind:value={config.workspacebtn.d}><input type="text" bind:value={config.workspacebtn.d}>
+        <br> Button Hover:<input type="color" bind:value={config.workspacebtn.h}><input type="text" bind:value={config.workspacebtn.h}>
+        <br> Button Active:<input type="color" bind:value={config.workspacebtn.a}><input type="text" bind:value={config.workspacebtn.a}>
         <br> Background:
-        <br> Color:<div class="colorpanel" style="background-color:{config.bg.c};"></div><input bind:value={config.bg.c}>
+        <br> Color:<input type="color" bind:value={config.bg.c}><input type="text" bind:value={config.bg.c}>
 
     </div>
 </CollapsePanelComponent>

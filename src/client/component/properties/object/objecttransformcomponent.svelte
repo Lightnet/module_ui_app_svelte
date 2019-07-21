@@ -29,17 +29,14 @@
     }
 
 </script>
-
-<style>
-    input{
-        background-color:#595959;
-        color:white;
-        font-size: 12px;
-        height:22px;
-    }
     
+<style>
     div{
-        color:white;
+	    color:white;
+    }
+    input[type="number"]{ 
+	    line-height: 22px; 
+	    height: 100% !important;
     }
 </style>
 <CollapsePanelComponent  clpanel="propspanel" clpanelbg="propspanelbg">
@@ -48,21 +45,21 @@
     <div slot="content"> 
         {#if obj.name != null}
             <label> Location:
-            x:<input bind:value={obj.position.x}>
-            y:<input bind:value={obj.position.y}>
-            z:<input bind:value={obj.position.z}>
+            x:<input type="number" bind:value={obj.position.x}>
+            y:<input type="number" bind:value={obj.position.y}>
+            z:<input type="number" bind:value={obj.position.z}>
             </label>
 
             <label> Rotation:
-            x:<input bind:value={obj.rotation.x}>
-            y:<input bind:value={obj.rotation.y}>
-            z:<input bind:value={obj.rotation.z}>
+            x:<input type="number" bind:value={obj.rotation.x}>
+            y:<input type="number" bind:value={obj.rotation.y}>
+            z:<input type="number" bind:value={obj.rotation.z}>
             </label>
 
             <label> Scale:
-            x:<input bind:value={obj.scale.x}>
-            y:<input bind:value={obj.scale.y}>
-            z:<input bind:value={obj.scale.z}>
+            x:<input type="number" bind:value={obj.scale.x}>
+            y:<input type="number" bind:value={obj.scale.y}>
+            z:<input type="number" bind:value={obj.scale.z}>
             </label>
         {/if}
     </div>

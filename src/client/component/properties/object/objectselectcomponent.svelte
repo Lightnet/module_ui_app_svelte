@@ -175,6 +175,11 @@
     div{
         color:white;
     }
+    
+    input[type="text"]{
+        padding: 0px 0px;
+    }
+    
 </style>
 <div id="{idcontent}" class="objelect">
     <div class="dropdown" on:click={()=>{toggle_objselect()}}>
@@ -189,7 +194,7 @@
         </div>
     </div>
 
-    <input id="{idinputobj}" bind:value={activeobject.name} placeholder="None" class="objinput">
+    <input type="text" id="{idinputobj}" bind:value={activeobject.name} placeholder="None" class="objinput">
 </div>
 
 

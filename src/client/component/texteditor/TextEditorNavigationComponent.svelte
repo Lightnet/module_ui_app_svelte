@@ -18,6 +18,10 @@
 </script>
 
 <style>
+    input[type="text"]{
+        padding: 0px 0px;
+        border: none;
+    }
     button{
         height:22px;
     }
@@ -25,7 +29,7 @@
 
 <button on:click={runcompilescript}> Run Compile </button>
 
-<input bind:value={textfilename}>
+<input type="text" bind:value={textfilename}>
 
 <button> Select </button>
 <button> New </button>

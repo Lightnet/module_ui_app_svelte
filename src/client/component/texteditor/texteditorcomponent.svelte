@@ -3,9 +3,10 @@
     //https://codepen.io/grimen/pen/lBuiG/
     //https://dev.to/pulljosh/how-to-load-html-css-and-js-code-into-an-iframe-2blc
     //https://codepen.io/
-    // https://enlight.nyc/projects/code-editor/
-
-
+    //https://enlight.nyc/projects/code-editor/
+    //https://babeljs.io/docs/en/next/babel-standalone.html
+    //https://github.com/babel/babel-standalone/tree/master/packages/babili-standalone
+    //https://stackoverflow.com/questions/37228247/how-to-use-babel-directly-from-a-script-tag-without-installing-babel-itself
 
     import { onMount,beforeUpdate, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
@@ -114,12 +115,10 @@
     }
 
     function compilescript(){
-        //https://babeljs.io/docs/en/next/babel-standalone.html
-        //https://github.com/babel/babel-standalone/tree/master/packages/babili-standalone
-        //https://stackoverflow.com/questions/37228247/how-to-use-babel-directly-from-a-script-tag-without-installing-babel-itself
+        //babeljs compile
         //outputscript = Babel.transform(inputscript, { presets: ['es2015'] }).code;
         outputscript = Babel.transform(inputscript, { presets: ['es2015'] }).code;
-        console.log(Babel.version);
+        //console.log(Babel.version);
         //outputscript = Babel.transform(inputscript).code;
 
         /* //Svelte 3
@@ -133,7 +132,6 @@
         console.log(result)
         outputscript = result.js.code;
         */
-
     }
     
     onMount(() => {
@@ -142,14 +140,6 @@
         eltextscript = document.getElementById(idtextscript);
         eloutscript = document.getElementById(idoutscript);
         eldebug = document.getElementById(iddebug);
-
-        
-        //console.log(eltextscript);
-        //eloutscript.style.width = parent.clientWidth + "px";
-        //eloutscript.style.height = (parent.clientHeight - 50) + "px";
-        //eldebug.style.width = parent.clientWidth + "px";
-        //eldebug.style.height = (parent.clientHeight - 50) + "px";
-
 
         handle_texteditor_resize();
         window.addEventListener('resize', handle_texteditor_resize);
@@ -167,7 +157,7 @@
     });
 
     afterUpdate(()=>{
-        //console.log("afterUpdate...");
+        console.log("afterUpdate...");
         if(bcode){
             adjustcodesize();
         }
@@ -215,25 +205,6 @@
         eldebug = document.getElementById(iddebug);
         eldebug.style.width = parent.clientWidth + "px";
         eldebug.style.height = (parent.clientHeight - 50) + "px";
-        //console.log(eldebug);
-        //console.dir(eldebug);
-        //let url = getGeneratedPageURL({
-            //html: '<p>Hello, world!</p>',
-            //css: 'p { color: blue; }',
-            //js: outputscript
-        //});
-        //let iframe = document.querySelector('#iframe');
-        //let iframe = document.getElementById(iddebug);
-        //iframe.src = url;
-        //iframe.src = "test";
-        //let jsxml = `<script > ${outputscript} `;
-        //let jsxml = outputscript;
-        //let jsxml = outputscript;
-
-        //let doc = document.getElementById(iddebug).contentWindow.document;
-        //doc.open();
-        //doc.write(jsxml);
-        //doc.close();
     }
     function btndebug(){
         bcode =false;
@@ -242,7 +213,7 @@
     }
 
     function btntest3(){
-        console.log("test");
+        console.log("compile test");
         let jsblob = new Blob([outputscript], {type: 'text/babel'});
         let jsurl = URL.createObjectURL(jsblob);
         let iframe = document.getElementById(iddebug);
@@ -271,7 +242,17 @@
         let script = document.createElement('script');
         script.type = "text/javascript";
         script.src = jsurl;
-        iframe.appendChild(script);
+        //iframe.appendChild(script);
+        //iframe.contentWindow.document.appendChild(script);//nope
+        //iframe.contentWindow.document.append(script);//nope
+        let iframedoc = iframe.document;
+        if (iframe.contentDocument)
+			iframedoc = iframe.contentDocument;
+		else if (iframe.contentWindow)
+            iframedoc = iframe.contentWindow.document;
+        //iframedoc.body.append(script);//works
+        iframedoc.head.append(script);//works
+        //console.dir(iframe.contentWindow.document)
     }
 
     function btntest2(){
@@ -324,8 +305,6 @@
         iframe.appendChild(script);
 
     }
-
-
 
     function btntest(){
 

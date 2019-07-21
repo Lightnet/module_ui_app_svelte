@@ -35,51 +35,46 @@
 </script>
 
 <style>
-    button{
-        background-color:grey;
-        font-size: 12px;
-        color:white;
-        height:22px;
-        padding: 0px 4px 10px 4px;
+    
+    input[type="color"]{
+        -webkit-appearance: none;
+        width: 22px;
+	    height: 22px;
+        border: none;
+        padding: 0;
     }
-
-    button:hover{
-        background-color: lightslategrey;
+    input[type="color"]::-webkit-color-swatch-wrapper {
+	    padding: 0;
     }
-
-    input{
-        /*background-color:grey;*/
-        font-size: 12px;
-        height:22px;
+    input[type="color"]::-webkit-color-swatch {
+    	border: none;
+    }
+    
+    input[type="text"]{
+        padding: 0px 0px;
     }
 
     div{
         color:white;
     }
     
-    .colorpanel{
-        float:left;
-        height:32px;
-        width:32px;
-    }
-
 </style>
 <CollapsePanelComponent  btogglepanel={bCollapse} on:click={handle_click}>
     <span slot="header"> Properties </span>
 
     <div slot="content"> 
         Menu
-        <br> Button Default: <div class="colorpanel" style="background-color:{config.menubtn.d};"></div><input bind:value={config.menubtn.d} on:change={handle_change}>
-        <br> Button Hover:<div class="colorpanel" style="background-color:{config.menubtn.h};"></div><input bind:value={config.menubtn.h}>
+        <br> Button Default: <input type="color" bind:value={config.menubtn.d} on:change={handle_change}><input type="text" bind:value={config.menubtn.d} on:change={handle_change}>
+        <br> Button Hover:<input type="color" bind:value={config.menubtn.h}><input type="text" bind:value={config.menubtn.h}>
         <br>Tab
-        <br> Default: <div class="colorpanel" style="background-color:{config.tabbtn.d};"></div><input bind:value={config.tabbtn.d}>
-        <br> Hover:<div class="colorpanel" style="background-color:{config.tabbtn.h};"></div><input bind:value={config.tabbtn.h}>
-        <br> Active:<div class="colorpanel" style="background-color:{config.tabbtn.a};"></div><input bind:value={config.tabbtn.a}>
-        <br> bg:<div class="colorpanel" style="background-color:{config.tabbg.c};"></div><input bind:value={config.tabbg.c}>
+        <br> Default: <input type="color" bind:value={config.tabbtn.d}><input type="text" bind:value={config.tabbtn.d}>
+        <br> Hover:<input type="color" bind:value={config.tabbtn.h}><input type="text" bind:value={config.tabbtn.h}>
+        <br> Active:<input type="color" bind:value={config.tabbtn.a}><input type="text" bind:value={config.tabbtn.a}>
+        <br> bg:<input type="color" bind:value={config.tabbg.c}><input type="text" bind:value={config.tabbg.c}>
         <br> Panel:
-        <br> Default:<div class="colorpanel" style="background-color:{config.panel.d};"></div><input bind:value={config.panel.d}>
-        <br> Hover:<div class="colorpanel" style="background-color:{config.panel.h};"></div><input bind:value={config.panel.h}>
-        <br> bg:<div class="colorpanel" style="background-color:{config.bg.c};"></div><input bind:value={config.bg.c}>
+        <br> Default:<input type="color" bind:value={config.panel.d}><input type="text" bind:value={config.panel.d}>
+        <br> Hover:<input type="color" bind:value={config.panel.h}><input type="text" bind:value={config.panel.h}>
+        <br> bg:<input type="color" bind:value={config.bg.c}><input type="text" bind:value={config.bg.c}>
     </div>
 </CollapsePanelComponent>
 
