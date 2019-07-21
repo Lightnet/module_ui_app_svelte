@@ -21,7 +21,7 @@
     export let svg;
     export let panZoom;
     let bmove = false;
-    
+    //let pt;
     //out and in pin connector
     //let pinins = [];
     //let pinouts = [];
@@ -37,6 +37,20 @@
         return { 
             x: (((pos.x - rect.left) - pan.x) / zoom), 
             y: (((pos.y - rect.top) - pan.y) / zoom)
+        };
+    };
+
+    function screenToWorldEl(el,pos) {
+        var rect = svg.getBoundingClientRect();
+        var pan = panZoom.getPan();
+        var zoom = panZoom.getZoom();
+        //console.log(rect);
+        //console.log(pan);
+        //console.log(zoom);
+
+        return { 
+            x: (((pos.x - (rect.left + el.x)) - pan.x) / zoom), 
+            y: (((pos.y - (rect.top + el.y)) - pan.y) / zoom)
         };
     };
 
@@ -63,43 +77,61 @@
         if(bmove){
             //let svgP = svgPoint(svg, e.clientX - px,e.clientY - py);
             //let svgP = screenToWorld({x:e.clientX - px,y:e.clientY - py});
-            let svgP = screenToWorld({x:e.clientX - 5,y:e.clientY - 5});
+            let svgP = screenToWorld({x:e.clientX,y:e.clientY});
             //console.log(svgP);
-            if(svgP.x == NaN){
+            //if(svgP.x == NaN){
                 //svgP.x = 0;
-                return;
-            }
-            tx = svgP.x;
-            ty = svgP.y;
-            //tx = svgP.x - px;
-            //ty = svgP.y - py;
+                //return;
+            //}
+            //tx = svgP.x;
+            //ty = svgP.y;
+            tx = svgP.x + px;
+            ty = svgP.y + py;
+            //pt = svg.createSVGPoint();
+            //var cursorpt =  pt.matrixTransform(elcomponent.getScreenCTM().inverse());
+            //console.log(cursorpt);
             dispatch("node",{id:idcomponent,type:"nodeblock",mouse:"move"})
         }
     }
 
     function handle_mousedown(e){
+        //https://stackoverflow.com/questions/29261304/how-to-get-the-click-coordinates-relative-to-svg-element-holding-the-onclick-lis
         if(e.button == 0){
             bmove = true;
+            let svgP;
             //console.log(SVG);
             let g = SVG.get(idcomponent);
             //let g = SVG.get(elcomponent);
             //let g = SVG.get("#"+idcomponent);
-            console.log(g);
-            console.dir(g);
-            console.log(g.x());
-
-
-
-
-            let svgP;
+            //console.log(g);
+            //console.dir(g);
+            //console.log(g.x() + ":" + g.y());
+            //x: (((pos.x - rect.left) - pan.x) / zoom), 
+            svgP = screenToWorld({x:e.clientX,y:e.clientY});
+            //console.log(svgP);
+            px = g.x() - svgP.x;
+            py = g.y() - svgP.y;
+            //svgP = screenToWorld({x:e.clientX,y:e.clientY});
+            //pt = svg.createSVGPoint();
+            //pt.x = g.x();
+            //pt.y = g.y();
+            //var cursorpt =  pt.matrixTransform(svg.getScreenCTM().inverse());
+            //console.log(cursorpt);
             //let svgP = svgPoint(elcomponent, e.clientX, e.clientY);
             //svgP = svgPoint(elcomponent, e.clientX, e.clientY);
             //svgP = screenToWorld({x:svgP.x,y:svgP.y});
-            svgP = screenToWorld({x:e.clientX,y:e.clientY});
-            console.log("svgP=====================");
-            console.log(svgP);
-            px = svgP.x;
-            py = svgP.y;
+            //let elP = screenToWorld({x:g.x(),y:g.y()});
+            //console.log(svgP.x - elP.x);
+            //svgP = screenToWorld({x:e.clientX-g.x() ,y:e.clientY-g.y() });
+            //svgP = screenToWorldEl({x:g.x(),y:g.y()}, {x:e.clientX,y:e.clientY});
+            //console.log("svgP=====================");
+            //console.log(svgP);
+            //px = svgP.x + elP.x;
+            //py = svgP.y + elP.y;
+            //px =  elP.x;
+            //py =  elP.y;
+            //px = svgP.x - elP.x;
+            //py = svgP.y - elP.y;
         }
         window.addEventListener('mouseup',handle_mouseup);
         window.addEventListener('mousemove',handle_mousemove);
@@ -119,6 +151,7 @@
         elcomponent = document.getElementById(idcomponent);
         tx = px;
         ty = py;
+        //pt = svg.createSVGPoint();
     });
 
     onDestroy(()=>{

@@ -17,6 +17,7 @@
     export let ncolor ="#333";
     export let draw;
     export let svg;
+    export let panZoom;
     let bmove = false;
     
     //out and in pin connector
@@ -40,13 +41,30 @@
         return pt.matrixTransform(element.getScreenCTM().inverse());
     }
 
+    function screenToWorld(pos) {
+        var rect = svg.getBoundingClientRect();
+        var pan = panZoom.getPan();
+        var zoom = panZoom.getZoom();
+        //console.log(rect);
+        //console.log(pan);
+        //console.log(zoom);
+
+        return { 
+            x: (((pos.x - rect.left) - pan.x) / zoom), 
+            y: (((pos.y - rect.top) - pan.y) / zoom)
+        };
+    };
+
     function handle_mousemove(e){
         //let x = e.clientX - e.pageX;
         //console.log(x)
         if(bmove){
-            let svgP = svgPoint(svg, e.clientX - px,e.clientY - py);
-            tx = svgP.x;
-            ty = svgP.y;
+            //let svgP = svgPoint(svg, e.clientX - px,e.clientY - py);
+            //tx = svgP.x;
+            //ty = svgP.y;
+            let svgP = screenToWorld({x:e.clientX,y:e.clientY});
+            tx = svgP.x + px;
+            ty = svgP.y + py;
             dispatch("node",{id:idcomponent,type:"nodeblock",mouse:"move"})
         }
     }
@@ -54,9 +72,15 @@
     function handle_mousedown(e){
         if(e.button == 0){
             bmove = true;
-            let svgP = svgPoint(elcomponent, e.clientX, e.clientY);
-            px = svgP.x;
-            py = svgP.y;
+            //let svgP = svgPoint(elcomponent, e.clientX, e.clientY);
+            //px = svgP.x;
+            //py = svgP.y;
+            let g = SVG.get(idcomponent);
+            let svgP = screenToWorld({x:e.clientX,y:e.clientY});
+            //offset drag
+            px = g.x() - svgP.x;
+            py = g.y() - svgP.y;
+
         }
         window.addEventListener('mouseup',handle_mouseup);
         window.addEventListener('mousemove',handle_mousemove);

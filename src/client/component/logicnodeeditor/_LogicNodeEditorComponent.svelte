@@ -50,7 +50,7 @@
     let panZoom;
 
     export let connectors = [];//links to connector point list here for update position?
-    export let nodes = []; //node blocks types
+    export let visualnodes = []; //node blocks types
     export let propnodes = []; //node variables
 
     function resetpoint(){
@@ -201,10 +201,10 @@
         if(bnode){
             //draw.panZoom(false);
             //console.log("false");
-            //panZoom.disablePan();
+            panZoom.disablePan();
         }else{
             //draw.panZoom();
-            //panZoom.enablePan();
+            panZoom.enablePan();
             //console.log("true");
         }
         //SVG('drawing').panZoom(false);
@@ -217,19 +217,16 @@
         //console.log(ntick)
 
         propnodes.push({name:"text",type:"string",default:"test1",id:"100001"});
-        propnodes = propnodes;
+        //propnodes = propnodes;
 
-        //nodes.push({nodetype:"BaseNode",px:20,py:20});
-        //nodes.push({nodetype:"BaseNode",px:150,py:20});
-        //nodes.push({nodetype:"NodeVariable",px:150,py:150});
-        nodes.push({nodetype:"NodeTick",px:150,py:200});
-
-        nodes.push({nodetype:"NodeConsolelog",px:300,py:200});
-
-        nodes = nodes;
+        visualnodes.push({nodetype:"BaseNode",px:20,py:20});
+        visualnodes.push({nodetype:"BaseNode",px:150,py:20});
+        visualnodes.push({nodetype:"NodeVariable",px:150,py:150});
+        visualnodes.push({nodetype:"NodeTick",px:150,py:200});
+        visualnodes.push({nodetype:"NodeConsolelog",px:300,py:200});
+        //visualnodes = visualnodes;
+        console.log(visualnodes)
     }
-
-
 
     function screenToWorld(pos) {
         var rect = svg.getBoundingClientRect();
@@ -242,8 +239,6 @@
         };
     };
 
-
-
     onMount(() => {
         elementcontent = document.getElementById(id);
         LogicNodeID.set(id);
@@ -252,10 +247,7 @@
         if (SVG.supported) {
             //var draw = SVG('drawing').size('100%', '100%').viewbox(0,0,800,1000)
             draw = SVG(idsvg).size('100%', '100%');
-
-
-
-                //.viewbox(0,0,elementcontent.clientWidth,elementcontent.clientHeight);
+            //.viewbox(0,0,elementcontent.clientWidth,elementcontent.clientHeight);
             //draw.panZoom({zoomMin: 0.5, zoomMax: 20});
             //https://svgjs.com/docs/2.7/elements/
             //line = draw.line(0, 0, 0, 0).stroke({ width: 1 });
@@ -295,19 +287,17 @@
             //console.log(svgPanZoom);
 
             panZoom = svgPanZoom(svg);
-            panZoom.disablePan();
+            //panZoom.disablePan();
             //console.log(panZoom);
             //var pan = panZoom.getPan();
             //console.log(pan);
-
-
-
         } else {
             alert('SVG not supported');
             //console.log("SVG not supported");
         }
 
-        //setupnodes();//odd error
+        //odd error needs to be add wait since svgPanZoom was added before it was normal
+        setupnodes();
         
         window.addEventListener('resize', handle_logicnodeeditor_resize);
         //window.addEventListener('click', handle_nonclick);
@@ -376,35 +366,41 @@
 
         <DrawGridComponent />
         
-        
-        <NodeTestComponent svg={svg} panZoom={panZoom} px="20" py="20" on:node={handle_node} />
-
         <!--
-        <BaseNodeComponent svg={svg} px="20" py="20" on:node={handle_node} />
-        <BaseNodeComponent svg={svg} px="150" py="20" on:node={handle_node} />
-        <NodeVariableComponent svg={svg} px="200" py="150" on:node={handle_node} />
-
-        {#each Object.keys(nodes) as index}
-            {#if nodes[index].nodetype == "BaseNode"}
-                <BaseNodeComponent svg={svg} {...nodes[index]} on:node={handle_node} />
-            {/if}
-            {#if nodes[index].nodetype == "NodeVariable"}
-                <NodeVariableComponent svg={svg} {...nodes[index]} on:node={handle_node} />
-            {/if}
-            {#if nodes[index].nodetype == "NodeTick"}
-                <NodeTickComponent svg={svg} {...nodes[index]} on:node={handle_node} />
-            {/if}
-            {#if nodes[index].nodetype == "NodeConsolelog"}
-                <NodeConsolelogComponent svg={svg} {...nodes[index]} on:node={handle_node} />
-            {/if}
-
-
-
-        {/each}
-        {#each Object.keys(connectors) as index}
-            <NodeConnectorComponent svg={svg} {...connectors[index]} />
-        {/each}
-        <line class="nonselect" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:rgb(100,100,100);stroke-width:2" />
+        <NodeTestComponent svg={svg} panZoom={panZoom} px="20" py="20" on:node={handle_node} />
+        <BaseNodeComponent svg={svg} panZoom={panZoom} px="20" py="20" on:node={handle_node} />
+        <BaseNodeComponent svg={svg} panZoom={panZoom} px="150" py="20" on:node={handle_node} />
+        <NodeVariableComponent svg={svg} panZoom={panZoom} px="200" py="150" on:node={handle_node} />
         -->
+        <!-- wait add to deal with error loading incorrectly -->
+        {#await visualnodes then datanodes}
+            <!--{console.log(visualnodes)}-->
+            <!--{console.log(datanodes)}-->
+            {#each Object.keys(datanodes) as index}
+                {#if datanodes[index].nodetype == "BaseNode"}
+                    <BaseNodeComponent svg={svg} panZoom={panZoom} {...datanodes[index]} on:node={handle_node} />
+                    <!--<BaseNodeComponent svg={svg} panZoom={panZoom} px="20" py="20" on:node={handle_node} />-->
+                {/if}
+                
+                {#if datanodes[index].nodetype == "NodeVariable"}
+                    <NodeVariableComponent svg={svg} panZoom={panZoom}  {...datanodes[index]} on:node={handle_node} />
+                {/if}
+                {#if datanodes[index].nodetype == "NodeTick"}
+                    <NodeTickComponent svg={svg} panZoom={panZoom}  {...datanodes[index]} on:node={handle_node} />
+                {/if}
+                {#if datanodes[index].nodetype == "NodeConsolelog"}
+                    <NodeConsolelogComponent svg={svg} panZoom={panZoom}  {...datanodes[index]} on:node={handle_node} />
+                {/if}
+                
+            {/each}
+        {/await}
+        <!-- when connector is add give error so it need to add wait to get data loaded correctly -->
+        {#await connectors then value}
+            {#each Object.keys(connectors) as index}
+                <NodeConnectorComponent svg={svg} {...connectors[index]} />
+            {/each}
+        {/await}
+        <line class="nonselect" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:rgb(100,100,100);stroke-width:2" />
+        
     </svg>
 </div>

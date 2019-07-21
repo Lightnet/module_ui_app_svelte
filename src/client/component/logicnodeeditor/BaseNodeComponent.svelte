@@ -19,6 +19,7 @@
     let color ="#333";
     //export let draw;
     export let svg;
+    export let panZoom;
     let bmove = false;
     
     //out and in pin connector
@@ -156,7 +157,7 @@
         pointer-events: none;
     }
 </style>
-<NodeComponent idcomponent={idcomponent} px={px} py={py} svg={svg} on:node={handle_node}>
+<NodeComponent panZoom={panZoom} idcomponent={idcomponent} px={px} py={py} svg={svg} on:node={handle_node}>
     <text x="4" y="20" style="stroke: white; fill:white;"> {nodename} </text>
     {#each pinins as pinin}
         <!--{console.log(pinout)}-->
