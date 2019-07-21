@@ -101,8 +101,13 @@
                 //cont2.style.height=window_height + 'px';
             //}
         }else{
-            window_width = splitter.parentNode.offsetWidth - splitter.parentNode.offsetLeft;
-            window_height = splitter.parentNode.offsetHeight - splitter.parentNode.offsetTop;
+            //window_width = splitter.parentNode.offsetWidth - splitter.parentNode.offsetLeft;
+            //window_height = splitter.parentNode.offsetHeight - splitter.parentNode.offsetTop;
+            //console.log(splitter.parentNode.offsetWidth);
+
+            window_width = splitter.parentNode.offsetHeight;
+            window_width = splitter.parentNode.offsetWidth;
+            //console.log(window_width);
             //if(splitter.parentNode.clientWidth == window.innerWidth){
                 //console.log("exit?");
                 //window_width = oldx;
