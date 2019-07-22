@@ -300,6 +300,8 @@
             //console.log("SVG not supported");
         }
 
+        console.dir(NodeTestComponent);
+
         //odd error needs to be add wait since svgPanZoom was added before it was normal
         setupnodes();
         

@@ -7,6 +7,8 @@
     //https://babeljs.io/docs/en/next/babel-standalone.html
     //https://github.com/babel/babel-standalone/tree/master/packages/babili-standalone
     //https://stackoverflow.com/questions/37228247/how-to-use-babel-directly-from-a-script-tag-without-installing-babel-itself
+    //https://www.npmjs.com/package/svelte/v/3.0.0-alpha26
+
 
     import { onMount,beforeUpdate, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
@@ -36,7 +38,10 @@
     let bdebug = false;
 
     inputscript = `
-    //console.log("test");
+    console.log("test");
+    `;
+
+    inputscript =`//console.log("test");
     function fntext(){
         console.log("test");
     }
@@ -126,21 +131,21 @@
     }
 
     function compilescript(){
+        
         //babeljs compile
-        //outputscript = Babel.transform(inputscript, { presets: ['es2015'] }).code;
         outputscript = Babel.transform(inputscript, { presets: ['es2015'] }).code;
         //console.log(Babel.version);
         //outputscript = Babel.transform(inputscript).code;
 
-        /* //Svelte 3
+        /*//Svelte 3
         let result = svelte.compile(inputscript, {
             // options
-            format:"cjs",
-            generate:"dom",
-            css:false,
-            immutable:false,
+            format:"esm",
+            //generate:"dom",
+            //immutable:false,
+            css:false
         });
-        console.log(result)
+        console.log(result);
         outputscript = result.js.code;
         */
     }

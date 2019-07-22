@@ -102,20 +102,20 @@
 		elementheader = document.getElementById(idheader);
 		elementcontent = document.getElementById(idcontent);
 		elementfooter = document.getElementById(idfooter);
-		/*
+		
 		if(config.usegunlocal == true){
 			mjs.gun = Gun();
-			//console.log("gun client storage");
+			console.log("gun client storage");
 		}else{
 			//console.log("guin client network");
 			//gun = mjs.gun = Gun(['http://localhost:8080/gun']);
 			//gun = mjs.gun = Gun(location.origin + '/gun');
 			//console.log(window.location.hostname);
 			if(window.location.hostname == 'localhost'){
-				//console.log("localhost:3000");
+				console.log("localhost:3000");
 				gun = mjs.gun = Gun(['http://localhost:8080' + '/gun']);
 			}else{
-				//console.log("url");
+				console.log("url");
 				gun = mjs.gun = Gun('http://'+ window.location.hostname + '/gun');
 			}
 
@@ -140,7 +140,7 @@
 			
 			//console.log(gun);
 		}
-		*/
+		
 		//window.dispatchEvent(new Event('resize'));
 		//console.log(AFRAME);
 		//console.dir(AFRAME);

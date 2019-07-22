@@ -85,4 +85,4 @@ Links:
  * https://github.com/lukeed/polka
  * 
  * http://thinkofdev.com/javascript-how-to-load-dynamic-contents-html-string-json-to-iframe/
- * 
+ * https://github.com/amark/gun/wiki/Getting-Started-(v0.3.x)
