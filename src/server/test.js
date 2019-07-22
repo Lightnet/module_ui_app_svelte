@@ -1,12 +1,3 @@
-/*
- Project: module_ui_app_svelte
-
- Created by: Lightnet
-
- License: MIT
-
- */
-
 //export function promiseTimeout(ms, promise){
 function promiseTimeout(ms, promise){
     // Create a promise that rejects in <ms> milliseconds
@@ -25,3 +16,9 @@ function promiseTimeout(ms, promise){
     ])
 }
 exports.promiseTimeout = promiseTimeout;
+
+function TextImportCall(){
+	console.log("import test me");
+}
+
+exports.TextImportCall = TextImportCall;

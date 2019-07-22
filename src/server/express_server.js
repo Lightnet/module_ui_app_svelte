@@ -3,8 +3,19 @@
 // server.js
 // where your node app starts
 //===============================================
-const fs = require('fs');
-var path = require('path');
+//import './test.js';
+//import './test';
+
+import {TextImportCall} from './test';
+TextImportCall();
+//console.log(test);
+
+//import { promiseTimeout } from './test.js';
+//console.log(promiseTimeout)
+
+
+//const fs = require('fs');
+//var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
@@ -160,7 +171,7 @@ app.use(function (req, res, next) {
 // UE4 get and post
 //=========================================================
 
-var ue4 = require('./src/server/ue4api');
+var ue4 = require('./ue4api');
 app.use('/ue4', ue4);
 
 //=========================================================

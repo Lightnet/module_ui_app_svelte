@@ -2,6 +2,15 @@
 // https://dev.to/kvng_zeez/introducing-polka-a-micro-web-server-3p55
 // https://www.npmjs.com/package/polka
 
+//import "./test";
+//import "./test";
+
+//import {TextImportCall} from './test';
+//TextImportCall();
+
+console.log("Polka Server Init...")
+//console.log(__dirname);
+
 const polka = require('polka');
 const sirv = require('sirv');
 const compression = require('compression');
@@ -30,10 +39,10 @@ var gunconfig = {
 var gun = Gun(gunconfig);
 //console.log(gun);
 gun.on('hi', peer => {//peer connect
-  console.log('connect peer to',peer);
-  //console.log('peer connect!');
+  //console.log('connect peer to',peer);
+  console.log('peer connect!');
 });
 gun.on('bye', (peer)=>{// peer disconnect
-  console.log('disconnected from', peer);
-  //console.log('disconnected from peer!');
+  //console.log('disconnected from', peer);
+  console.log('disconnected from peer!');
 });

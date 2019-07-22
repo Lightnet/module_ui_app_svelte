@@ -1,5 +1,13 @@
 # svelte gulp build
 
+
+```
+"@babel/core": "^7.5.5",
+"@babel/preset-env": "^7.5.5",
+"gulp-babel": "^8.0.0",
+```
+
+
 Links:
  * https://nshki.com/es6-in-gulp-projects/
  * https://www.npmjs.com/package/gulp-better-rollup

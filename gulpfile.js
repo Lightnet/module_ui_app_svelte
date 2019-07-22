@@ -1,64 +1,22 @@
-const path = require('path');
-//const fs = require('fs');
-var gulp = require('gulp');
-var clean = require('gulp-clean');
-var rename = require('gulp-rename');
-
-var webpack = require('webpack');
-const webpackStream = require('webpack-stream');
-const nodeExternals = require('webpack-node-externals');
-var nodemon = require('gulp-nodemon');
-
-const svelte = require('rollup-plugin-svelte');
-const resolve = require('rollup-plugin-node-resolve');
-const commonjs = require('rollup-plugin-commonjs');
-const rollup = require('gulp-better-rollup');
-
-//var gls = require('gulp-live-server');
-var browserSync = require('browser-sync').create();
-//const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+//https://github.com/babel/gulp-babel
 
 const mode = process.env.NODE_ENV || 'development';
 const dev = mode === 'development';
 const prod = mode === 'production';
 var started = false;
 
-const commonModule = {
-    rules: [
-        {
-            test: /\.js$/,
-            exclude: /node_modules/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    //presets: ['babel-preset-env'],
-                },
-            },
-        },
-    ],
-};
-
-/* BACK-END CONFIG */
-var backWebpackConfig = {
-    mode: "development",
-    target : 'node',
-    entry: "./server.js",
-    output: {
-        path: path.resolve(__dirname, "./"),
-        filename: "backend.js"
-    },
-    //watch:true,
-    watchOptions : {
-        aggregateTimeout: 300,
-        poll: 1000,
-        ignored: /node_modules/
-    },
-    plugins: [
-    ],
-    module : commonModule,
-    target: 'node',
-    externals: [nodeExternals()],
-}
+//const path = require('path');
+//const fs = require('fs');
+var gulp = require('gulp');
+var clean = require('gulp-clean');
+var rename = require('gulp-rename');
+var nodemon = require('gulp-nodemon');
+const svelte = require('rollup-plugin-svelte');
+const resolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
+const rollup = require('gulp-better-rollup');
+var browserSync = require('browser-sync').create();
+//const babel = require('gulp-babel');
 
 //===============================================
 // Rollup
@@ -87,17 +45,22 @@ function frontrollup_build(){
 //
 //===============================================
 function backend_build(){
-    return gulp.src('./server.js')
-        //.pipe(webpackStream(backWebpackConfig))
-        .pipe(webpackStream(backWebpackConfig), webpack)
-        .pipe(gulp.dest('./'));
+    return gulp.src('./app.js')
+		//.pipe(babel({
+            //presets: ['@babel/preset-env', { modules: false }],
+            //presets: ['@babel/preset-env'],
+            //plugins: [
+                //["add-module-exports"],
+                //["@babel/plugin-syntax-dynamic-import"]
+            //]
+        //}))
+        .pipe(rename('backend.js'))
+		.pipe(gulp.dest('./'))
 }
 
 async function cleanbundle(done){
     return gulp.src(['public/bundle.js','public/bundle.js.map'], {read: false, allowEmpty:true})
         .pipe(clean());
-    //await timeout(5000);
-    //return done();
 }
 
 function serve(cb){

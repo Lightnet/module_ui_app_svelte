@@ -9,6 +9,7 @@
  */
 
 //import { promiseTimeout } from './timeout-promise';
+//import test from './timeout-promise';
 var promiseTimeout = require('./timeout-promise').promiseTimeout;
 
 var express = require('express');

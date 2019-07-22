@@ -23,13 +23,12 @@ Code languages:
 
 # Nodejs pacakges:
  * svelte 3.6.2
- * express 4.17.1
- * babel-core 6.26.3
  * rollup 1.16.3
  * gulp 4.0.2
- * webpack 4.32.2
  * gulp-nodemon 2.4.2
  * gun 0.2019.627
+ * polka 0.5.2
+ * esm 3.2.25
 
 # Features:
  * right click context menu (wip)
