@@ -20,7 +20,7 @@
     import {NodeConsolelog} from "./nodescripts/NodeConsolelog.js";
 
     import mjs from '../../mjs.js';
-    import {LogicNodeID} from '../../mjs.js';
+    import {LogicNodeID, LogicNodeThemeConfig} from '../../mjs.js';
     import SVG from 'svg.js';
     //import 'svg.panzoom.js';
     import svgPanZoom from 'svg-pan-zoom';
@@ -29,6 +29,7 @@
     //const dispatch = createEventDispatcher();
     
     export let id = generateId(20);
+
     let elementcontent;
     let bzoompan = false;
     let bconnector = false;
@@ -43,7 +44,7 @@
     let point2 = {x:0,y:0};
     let bline = false;
     let strokecolor = "rgb(100,100,100)";
-    strokecolor = "green";
+    strokecolor = "#008000";
     let strokewidth = 2;
     strokewidth = 4;
 
@@ -57,6 +58,17 @@
     export let connectors = [];//links to connector point list here for update position?
     export let visualnodes = []; //node blocks types
     export let propnodes = []; //node variables
+
+    //let LogicNodeConfig = {};
+
+    const LogicNodeConfigUnsub = LogicNodeThemeConfig.subscribe(detail=>{
+        //LogicNodeConfig = detail;
+        //console.log(detail);
+        //console.log("PropertiesStyle theme change?");
+        strokecolor = detail.node.strokecolors;
+        strokewidth = detail.node.strokewidths;
+    });
+    
 
     function resetpoint(){
         point1 = {x:0,y:0};
@@ -298,6 +310,7 @@
         //console.log("onDestroy");
         window.removeEventListener('resize', handle_logicnodeeditor_resize);
         //window.removeEventListener('click', handle_nonclick);
+        LogicNodeConfigUnsub();
     });
 
     //handle node stuff to prevent camera panning.
@@ -388,7 +401,13 @@
                 <NodeConnectorComponent svg={svg} panZoom={panZoom} {...connectors[index]} />
             {/each}
         {/await}
-        <line class="nonselect" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:{strokecolor};stroke-width:{strokewidth}" />
+        <line class="nonselect" 
+            x1="{point1.x}" 
+            y1="{point1.y}" 
+            x2="{point2.x}" 
+            y2="{point2.y}" 
+            style="stroke:{strokecolor};stroke-width:{strokewidth}"
+        />
         
     </svg>
 </div>

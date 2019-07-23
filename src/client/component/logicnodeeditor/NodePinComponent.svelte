@@ -1,6 +1,7 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
+    import {LogicNodeThemeConfig} from '../../mjs.js';
     import SVG from 'svg.js';
     const dispatch = createEventDispatcher();
 
@@ -11,7 +12,7 @@
     //let height;
     //let width;
     let color = "#FFA07A";
-    let defaultcolor = "#FFA07A";
+    //let defaultcolor = "#FFA07A";
     let overcolor = "#B9785C";
     let outcolor = "#FFA07A";
     //export let draw;
@@ -22,6 +23,19 @@
     export let bpinout = true;
     export let nodeid;
     export let pintype = "flow";
+    let pinsize = 20;
+
+    //let LogicNodeConfig = {};
+
+    const LogicNodeConfigUnsub = LogicNodeThemeConfig.subscribe(detail=>{
+        //LogicNodeConfig = detail;
+        //console.log(detail);
+        //console.log("PropertiesStyle theme change?");
+        color = detail.node.pin.d;
+        overcolor = detail.node.pin.h;
+        outcolor = detail.node.pin.d;
+        pinsize = detail.node.pinsize;
+    });
 
     onMount(() => {
         elcomponent = document.getElementById(idcomponent);
@@ -33,7 +47,7 @@
     });
 
     onDestroy(()=>{
-
+        LogicNodeConfigUnsub();
     });
 
     function handle_mouseover(e){
@@ -61,8 +75,8 @@
     id="{idcomponent}"
     x="{px}"
     y="{py}"
-    width="20" 
-    height="20" 
+    width="{pinsize}" 
+    height="{pinsize}" 
     fill="{color}"
     on:mouseover={handle_mouseover}
     on:mouseout={handle_mouseout}

@@ -111,29 +111,78 @@ export const PropertiesConfig = new writable({
 useLocalStorage(PropertiesConfig, appid + themeid + "Properties");
 
 //===============================================
+// Theme Properties Editor
+export const LogicNodeThemeConfig = new writable({
+    menubtn:{
+        d:"#232323",
+        h:"#5177b2"
+    },
+    tabbtn:{
+        d:"#232323",
+        h:"#5177b2",
+        a:"#5177b2"
+    },
+    tabbg:{
+        c:"#232323"
+    },
+    panel:{
+        d:"#232323",
+        h:"#5177b2",
+        a:"#5177b2",
+        c:"#232323"
+    },
+    bg:{
+        c:"#232323"
+    },
+    node:{
+        headercolor:"#000000",
+        panelcolor:"#383838",
+        fontcolor:"#ffffff",
+        fontsize:12,
+        fontfamily:"Courier New",
+
+        strokecolor:"#008000",
+        strokecolorh:"#008000",
+        strokecolora:"#008000",
+        strokewidth:2,
+        strokecolors:"#008000",
+        strokecolorhs:"#008000",
+        strokecoloras:"#008000",
+        strokewidths:2,
+        pin:{
+            d:"#ff8000",
+            h:"#ffb693",
+            a:"#ffb693",
+        },
+        pinsize:20
+    }
+});
+useLocalStorage(LogicNodeThemeConfig, appid + themeid + "LogicNode");
+
+//===============================================
 // Preferences Themes tab
 export const PrefsThemesConfig = new writable({
-    isuserinferface:false,
-    istextstyle:false,
-    isbonecolorsets:false,
-    is3dview:false,
-    isgraphiceditor:false,
-    isdopesheet:false,
-    isnonlinearanimation:false,
-    isuvimageeditor:false,
-    isvideosquenceseditor:false,
-    istexteditor:false,
+    isuserinferface:true,
+    istextstyle:true,
+    isbonecolorsets:true,
+    is3dview:true,
+    isgraphiceditor:true,
+    isdopesheet:true,
+    isnonlinearanimation:true,
+    isuvimageeditor:true,
+    isvideosquenceseditor:true,
+    istexteditor:true,
     islogicnodeeditor:false,
-    isnodeeditor:false,
+    isnodeeditor:true,
     isproperties:false,
-    isontliner:false,
-    ispreferences:false,
-    isinfo:false,
-    isfilebrowser:false,
-    isjavascriptconsole:false,
-    ismovieclipeditor:false,
-    istopbar:false,
-    isstatusbar:false,
+    isontliner:true,
+    ispreferences:true,
+    isinfo:true,
+    isfilebrowser:true,
+    isjavascriptconsole:true,
+    ismovieclipeditor:true,
+    istopbar:true,
+    isstatusbar:true,
 });
 
 useLocalStorage(PrefsThemesConfig, appid + themeid + "PrefsThemes");

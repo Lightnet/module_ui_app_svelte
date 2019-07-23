@@ -3,6 +3,7 @@
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
     import NodePinComponent from "./NodePinComponent.svelte";
+    import {LogicNodeThemeConfig} from '../../mjs.js';
     import SVG from 'svg.js';
     //import 'svg.panzoom.js';
     const dispatch = createEventDispatcher();
@@ -32,6 +33,17 @@
     //out and in pin connector
     export let pinins = [];
     export let pinouts = [];
+    //let config;
+
+    const LogicNodeConfigUnsub = LogicNodeThemeConfig.subscribe(detail=>{
+		//config = detail;
+        //console.log("LogicNodeThemeConfig theme change?");
+        headercolor = detail.node.headercolor;
+        panelcolor = detail.node.panelcolor;
+        fontcolor = detail.node.fontcolor;
+        fontsize = detail.node.fontsize;
+        fontfamily = detail.node.fontfamily;
+    });
 
     //handle connector event tag check when connect
     function handle_mouseover(e){
@@ -144,7 +156,7 @@
     });
 
     onDestroy(()=>{
-
+        LogicNodeConfigUnsub();
     });
 
     function handle_node(e){

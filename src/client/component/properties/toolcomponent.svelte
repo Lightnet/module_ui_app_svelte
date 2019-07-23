@@ -14,9 +14,11 @@
 </script>
 
 <style>
+    /*
     div{
         color: azure;
     }
+    */
 </style>
 
 <AutosizeDivComponent>
