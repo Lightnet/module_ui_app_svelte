@@ -9,6 +9,16 @@
 	<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </svelte:head>
+<script>
+	import Nav from '../components/Nav.svelte';
+	export let segment;
+	console.log("test");
+	//console.log(window);
+</script>
+<Nav {segment}/>
+
+<slot></slot>
+
 
 <!--
 <script>

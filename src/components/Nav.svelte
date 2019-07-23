@@ -1,17 +1,23 @@
 <script>
 	export let segment;
+	console.log("NAV");
+	//console.log(window);
 </script>
 
 <style>
+	
 	nav {
+		color:white;
 		border-bottom: 1px solid rgba(255,62,0,0.1);
 		font-weight: 300;
 		padding: 0 1em;
+		height:22px;
 	}
 
 	ul {
 		margin: 0;
 		padding: 0;
+		height:22px;
 	}
 
 	/* clearfix */
@@ -24,6 +30,7 @@
 	li {
 		display: block;
 		float: left;
+		height:22px;
 	}
 
 	.selected {
@@ -43,15 +50,20 @@
 
 	a {
 		text-decoration: none;
-		padding: 1em 0.5em;
+		/*padding: 1em 0.5em;*/
+		padding: 2px 2px;
 		display: block;
+		color:white;
+		height:22px;
 	}
 </style>
 
 <nav>
 	<ul>
-		<li><a class='{segment === undefined ? "selected" : ""}' href='.'>home</a></li>
-		<li><a class='{segment === "about" ? "selected" : ""}' href='about'>about</a></li>
+		<li><a class='{segment === undefined ? "selected" : ""}' href='.'>Home</a></li>
+		<li><a class='{segment === "editor" ? "selected" : ""}' href='editor'>Editor</a></li>
+		<li><a class='{segment === "about" ? "selected" : ""}' href='about'>About</a></li>
+		
 
 		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->

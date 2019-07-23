@@ -88,7 +88,7 @@
     onDestroy(()=>{
         window.removeEventListener('mousemove', handle_MousePostion);
         StatusBarConfigUnsub();
-        mouseregionunsub();
+        //mouseregionunsub();
         contextmenuunsubscribe();
     });
 </script>
