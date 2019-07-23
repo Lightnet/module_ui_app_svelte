@@ -8,18 +8,17 @@
 
     let nodename = "Tick";
     let idcomponent = "node" + generateId(20);
-    let nodeid;
+    //let nodeid;
     let elcomponent;
     export let px;
     export let py;
-    export let nheight = 30;
+    export let nheight = 60;
     export let nwidth = 100;
-    let color ="#FFA07A";
     //export let draw;
     export let svg;
     export let panZoom;
     //out and in pin connector
-    let pinins = []; 
+    let pinins = [];
     let pinouts = [];
 
     function tick(){
@@ -63,7 +62,7 @@
         let genid = "pin" + generateId(20);
         pinouts.push({
             px:nwidth-10,
-            py:(index*20+4),
+            py:(index*20+30),
             idcomponent:genid,
             nodeid:idcomponent,
             pintype:args.pintype || "flow",
@@ -140,6 +139,7 @@
 </style>
 <NodeComponent
     idcomponent={idcomponent}
+    nodename={nodename}
     panZoom={panZoom}
     px={px}
     py={py}

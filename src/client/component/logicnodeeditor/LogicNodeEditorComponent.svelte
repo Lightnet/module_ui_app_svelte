@@ -59,8 +59,7 @@
     export let visualnodes = []; //node blocks types
     export let propnodes = []; //node variables
 
-    //let LogicNodeConfig = {};
-
+    //load theme style node color and others.
     const LogicNodeConfigUnsub = LogicNodeThemeConfig.subscribe(detail=>{
         //LogicNodeConfig = detail;
         //console.log(detail);
@@ -91,11 +90,8 @@
             point2.x = svgP.x;
             point2.y = svgP.y;
         }
-
-        let screen2d = screenToWorld({x:e.clientX,y:e.clientY});
+        //let screen2d = screenToWorld({x:e.clientX,y:e.clientY});
         //console.log(screen2d);
-
-
         //console.log(m);
         mjs.context.contextmenu.set({sm_context:'LOGICNODE'});
     }
@@ -115,7 +111,6 @@
             if(pindata !=null){
                 if((pindata.type == "pin")&&(pindata.mouse == "over")){
                     bconnector = true;
-
                     idpin1 = pindata;
                     let svgP = svgPoint(svg, e.clientX, e.clientY);
                     //set draw line to dot from mouse down.
@@ -223,11 +218,11 @@
         if(bzoompan){
             //console.log("false");
             panZoom.disablePan();
+            
         }else{
             panZoom.enablePan();
             //console.log("true");
         }
-        //SVG('drawing').panZoom(false);
     }
 
     function setupnodes(){
@@ -242,7 +237,7 @@
         visualnodes.push({nodetype:"BaseNode",px:20,py:20});
         visualnodes.push({nodetype:"BaseNode",px:150,py:20});
         visualnodes.push({nodetype:"NodeVariable",px:150,py:150});
-        visualnodes.push({nodetype:"NodeTick",px:150,py:200});
+        visualnodes.push({nodetype:"NodeTick",px:150,py:250});
         visualnodes.push({nodetype:"NodeConsolelog",px:300,py:200});
         //visualnodes = visualnodes;
         //console.log(visualnodes);
@@ -294,7 +289,7 @@
             //console.log("SVG not supported");
         }
 
-        console.dir(NodeTestComponent);
+        //console.dir(NodeTestComponent);
 
         //odd error needs to be add wait since svgPanZoom was added before it was normal
         setupnodes();

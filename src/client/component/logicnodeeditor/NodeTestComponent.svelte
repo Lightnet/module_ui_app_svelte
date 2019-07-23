@@ -40,22 +40,6 @@
         };
     };
 
-    /*
-    function screenToWorldEl(el,pos) {//nope
-        var rect = svg.getBoundingClientRect();
-        var pan = panZoom.getPan();
-        var zoom = panZoom.getZoom();
-        //console.log(rect);
-        //console.log(pan);
-        //console.log(zoom);
-
-        return { 
-            x: (((pos.x - (rect.left + el.x)) - pan.x) / zoom), 
-            y: (((pos.y - (rect.top + el.y)) - pan.y) / zoom)
-        };
-    };
-    */
-
     //handle connector event tag check when connect
     function handle_mouseover(e){
         dispatch("node",{id:idcomponent,type:"nodeblock",mouse:"over"});
@@ -74,19 +58,9 @@
     }
 
     function handle_mousemove(e){
-        //let x = e.clientX - e.pageX;
         //console.log(x)
         if(bmove){
-            //let svgP = svgPoint(svg, e.clientX - px,e.clientY - py);
-            //let svgP = screenToWorld({x:e.clientX - px,y:e.clientY - py});
             let svgP = screenToWorld({x:e.clientX,y:e.clientY});
-            //console.log(svgP);
-            //if(svgP.x == NaN){
-                //svgP.x = 0;
-                //return;
-            //}
-            //tx = svgP.x;
-            //ty = svgP.y;
             tx = svgP.x + px;
             ty = svgP.y + py;
             //pt = svg.createSVGPoint();
@@ -103,37 +77,9 @@
             let svgP;
             //console.log(SVG);
             let g = SVG.get(idcomponent);
-            //let g = SVG.get(elcomponent);
-            //let g = SVG.get("#"+idcomponent);
-            //console.log(g);
-            //console.dir(g);
-            //console.log(g.x() + ":" + g.y());
-            //x: (((pos.x - rect.left) - pan.x) / zoom), 
             svgP = screenToWorld({x:e.clientX,y:e.clientY});
-            //console.log(svgP);
             px = g.x() - svgP.x;
             py = g.y() - svgP.y;
-            //svgP = screenToWorld({x:e.clientX,y:e.clientY});
-            //pt = svg.createSVGPoint();
-            //pt.x = g.x();
-            //pt.y = g.y();
-            //var cursorpt =  pt.matrixTransform(svg.getScreenCTM().inverse());
-            //console.log(cursorpt);
-            //let svgP = svgPoint(elcomponent, e.clientX, e.clientY);
-            //svgP = svgPoint(elcomponent, e.clientX, e.clientY);
-            //svgP = screenToWorld({x:svgP.x,y:svgP.y});
-            //let elP = screenToWorld({x:g.x(),y:g.y()});
-            //console.log(svgP.x - elP.x);
-            //svgP = screenToWorld({x:e.clientX-g.x() ,y:e.clientY-g.y() });
-            //svgP = screenToWorldEl({x:g.x(),y:g.y()}, {x:e.clientX,y:e.clientY});
-            //console.log("svgP=====================");
-            //console.log(svgP);
-            //px = svgP.x + elP.x;
-            //py = svgP.y + elP.y;
-            //px =  elP.x;
-            //py =  elP.y;
-            //px = svgP.x - elP.x;
-            //py = svgP.y - elP.y;
         }
         window.addEventListener('mouseup',handle_mouseup);
         window.addEventListener('mousemove',handle_mousemove);

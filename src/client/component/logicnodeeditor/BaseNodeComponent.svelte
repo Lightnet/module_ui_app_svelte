@@ -7,7 +7,7 @@
     //import 'svg.panzoom.js';
     const dispatch = createEventDispatcher();
 
-    let nodename = "Node";
+    let nodename = "Base Node";
     let idcomponent = "node" + generateId(20);
     let elcomponent;
     export let px = 0;
@@ -26,63 +26,13 @@
     let pinins = []; 
     let pinouts = [];
 
-    //handle connector event tag check when connect
-    function handle_mouseover(e){
-        dispatch("node",{id:idcomponent,type:"node",mouse:"over"});
-    }
-
-    function handle_mouseout(e){
-        dispatch("node",{id:null,type:"node",mouse:"out"});
-    }
-
-    // translate page to SVG co-ordinate
-    function svgPoint(element, x, y) {
-        var pt = svg.createSVGPoint();
-        pt.x = x;
-        pt.y = y;
-        return pt.matrixTransform(element.getScreenCTM().inverse());
-    }
-
-    function handle_mousemove(e){
-        //let x = e.clientX - e.pageX;
-        //console.log(x)
-        if(bmove){
-            let svgP = svgPoint(svg, e.clientX - px,e.clientY - py);
-            tx = svgP.x;
-            ty = svgP.y;
-        }
-    }
-
-    function handle_mousedown(e){
-        if(e.button == 0){
-            bmove = true;
-            let svgP = svgPoint(elcomponent, e.clientX, e.clientY);
-            px = svgP.x;
-            py = svgP.y;
-        }
-        window.addEventListener('mouseup',handle_mouseup);
-        window.addEventListener('mousemove',handle_mousemove);
-    }
-
-    function handle_mouseup(e){
-        //console.log(e);
-        if(e.button == 0){
-            bmove = false;
-            //console.log(bmove);
-        }
-        window.removeEventListener('mouseup',handle_mouseup);
-        window.removeEventListener('mousemove',handle_mousemove);
-    }
-
     function setuppin(){
         //pinins.push({px:-10,py:20,idcomponent:generateId(20),nodeid:idcomponent,boutput:false});
         //pinins = pinins;
         addpinin()
-
-        addpinout()
-
         //pinouts.push({px:90,py:20,idcomponent:generateId(20),nodeid:idcomponent,boutput:true});
         //pinouts = pinouts;
+        addpinout()
     }
 
     function addpinin(args){
@@ -143,8 +93,7 @@
             //console.log("update move???")
         }
     }
-
-    //window.dispatchEvent(new Event('resize'));
+    
 </script>
 <style>
     /* https://stackoverflow.com/questions/34445147/make-svg-text-unselectable */

@@ -11,9 +11,9 @@
     let elcomponent;
     export let px;
     export let py;
-    export let nheight = 30;
+    export let nheight = 60;
     export let nwidth = 100;
-    let color ="#FFA07A";
+    //let color ="#FFA07A";
     //export let draw;
     export let svg;
     export let panZoom;
@@ -23,7 +23,7 @@
 
     onMount(() => {
         elcomponent = document.getElementById(idcomponent);
-        pinouts.push({px:90,py:4,idcomponent:generateId(20),nodeid:idcomponent,boutput:true});
+        pinouts.push({px:90,py:30,idcomponent:generateId(20),nodeid:idcomponent,boutput:true});
         pinouts = pinouts;
     });
 
@@ -47,6 +47,7 @@
 </style>
 <NodeComponent
     idcomponent={idcomponent}
+    nodename={nodename}
     svg={svg}
     panZoom={panZoom}
     px={px} 

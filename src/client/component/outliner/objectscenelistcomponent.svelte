@@ -30,10 +30,12 @@
 </script>
 
 <style>
+    /*
     label{
         font-size: 12px;
         float:left;
     }
+    */
     input{
         font-size: 12px;
     }
