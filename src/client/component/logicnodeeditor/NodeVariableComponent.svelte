@@ -43,19 +43,18 @@
 
 </script>
 <style>
-    text {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        pointer-events: none;
-    }
+    
 </style>
-<NodeComponent svg={svg} panZoom={panZoom} idcomponent={idcomponent} px={px} py={py} nwidth={nwidth} nheight={nheight} on:node={handle_node}>
-    <text x="4" y="20" style="stroke: white; fill:white;"> {nodename} </text>
-    {#each pinouts as pinout}
-        <!--{console.log(pinout)}-->
-        <NodePinComponent svg={svg} panZoom={panZoom} {...pinout} on:node={handle_node}/>
-        <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
-    {/each}
+<NodeComponent
+    idcomponent={idcomponent}
+    svg={svg}
+    panZoom={panZoom}
+    px={px} 
+    py={py} 
+    nwidth={nwidth} 
+    nheight={nheight} 
+    on:node={handle_node}
+    pinouts={pinouts}
+    >
+
 </NodeComponent>

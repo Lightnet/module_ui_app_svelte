@@ -151,20 +151,21 @@
 
 </script>
 <style>
-    text {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        pointer-events: none;
-    }
+    
 </style>
-<NodeComponent panZoom={panZoom} idcomponent={idcomponent} px={px} py={py} svg={svg} nwidth={nwidth} nheight={nheight} on:node={handle_node} on:click={handle_click}>
-    <text x="4" y="20" style="stroke: white; fill:white;"> {nodename} </text>
-    {#each pinins as pinin}
-        <NodePinComponent svg={svg} panZoom={panZoom} {...pinin} on:node={handle_node}/>
-    {/each}
-    {#each pinouts as pinout}
-        <NodePinComponent svg={svg} panZoom={panZoom} {...pinout} on:node={handle_node}/>
-    {/each}
+<NodeComponent
+    idcomponent={idcomponent}
+    panZoom={panZoom}
+    px={px} 
+    py={py} 
+    svg={svg} 
+    nwidth={nwidth} 
+    nheight={nheight} 
+    on:node={handle_node} 
+    on:click={handle_click}
+    nodename={nodename}
+    pinins={pinins}
+    pinouts={pinouts}
+    >
+
 </NodeComponent>

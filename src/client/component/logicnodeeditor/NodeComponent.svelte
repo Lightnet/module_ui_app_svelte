@@ -1,28 +1,37 @@
 <script>
+    //https://meta.wikimedia.org/wiki/SVG_fonts
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
-    //import NodePinComponent from "./NodePinComponent.svelte";
+    import NodePinComponent from "./NodePinComponent.svelte";
     import SVG from 'svg.js';
     //import 'svg.panzoom.js';
     const dispatch = createEventDispatcher();
 
     export let idcomponent;// = "node" + generateId(20);
     let elcomponent;
+    export let nodename = "Node Name";
     export let px = 0;
     export let py = 0;
     let tx = 0;
     let ty = 0;
     export let nheight = 100;
     export let nwidth = 100;
-    export let ncolor ="#333";
+    
     export let draw;
     export let svg;
     export let panZoom;
     let bmove = false;
+
+    let headercolor = "black";
+    let panelcolor = "#383838"
+    let fontcolor = "white";
+    let fontsize = 12;
+    let fontfamily = "Courier New";
+
     
     //out and in pin connector
-    //let pinins = [];
-    //let pinouts = [];
+    export let pinins = [];
+    export let pinouts = [];
 
     //handle connector event tag check when connect
     function handle_mouseover(e){
@@ -96,6 +105,38 @@
         window.removeEventListener('mousemove',handle_mousemove);
     }
 
+    function addpinin(args){
+        if(args==null){
+            args={};
+        }
+        let index = pinins.length;
+        pinins.push({
+            px:-10,
+            py:(index*20+30 + index * 4),
+            idcomponent:generateId(20),
+            nodeid:idcomponent,
+            pintype:args.pintype || "flow",
+            boutput:false
+        });
+        pinins = pinins;
+    }
+
+    function addpinout(args){
+        if(args==null){
+            args={};
+        }
+        let index = pinouts.length;
+        pinouts.push({
+            px:nwidth - 10,
+            py:(index*20+30),
+            idcomponent:generateId(20),
+            nodeid:idcomponent,
+            pintype:args.pintype || "flow",
+            boutput:true
+        });
+        pinouts = pinouts;
+    }
+
     onMount(() => {
         elcomponent = document.getElementById(idcomponent);
         tx = px;
@@ -116,7 +157,13 @@
 
 </script>
 <style>
-
+    text {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        pointer-events: none;
+    }
 </style>
 <g id="{idcomponent}" transform="translate({tx} {ty})">
     <rect 
@@ -124,7 +171,7 @@
         y="0"
         width="{nwidth}" 
         height="{nheight}" 
-        fill="{ncolor}"
+        fill="{panelcolor}"
         on:click={handle_click}
         on:mousedown={handle_mousedown}
         on:mouseover={handle_mouseover}
@@ -132,8 +179,36 @@
         >
     </rect>
     <!--<text x="4" y="20" style="stroke: white; fill:white;"> Node </text>-->
+    <rect 
+        x="0"
+        y="0"
+        fill="{headercolor}"
+        width="{nwidth}" 
+        height="22"
+        on:click={handle_click}
+        on:mousedown={handle_mousedown}
+        on:mouseover={handle_mouseover}
+        on:mouseout={handle_mouseout}
+        >
+    </rect>
+    <!-- text x="4" y="20" -->
+    <text x="{nwidth/2}" y="16" font-family="{fontfamily}" font-size="{fontsize}" text-anchor="middle" style="stroke:{fontcolor};"> {nodename} </text>
+
+
+    {#each pinins as pinin}
+        <!--{console.log(pinout)}-->
+        <NodePinComponent svg={svg} panZoom={panZoom} {...pinin} on:node={handle_node}/>
+        <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
+    {/each}
+    {#each pinouts as pinout}
+        <!--{console.log(pinout)}-->
+        <NodePinComponent svg={svg} panZoom={panZoom} {...pinout} on:node={handle_node}/>
+        <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
+    {/each}
+
     <slot>
-    <text x="4" y="20" style="stroke: white; fill:white;"> Node Name </text>
+        <text x="4" y="20" style="stroke:{fontcolor};"> {nodename} </text>
     </slot>
+
     <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
 </g>

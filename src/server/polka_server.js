@@ -14,8 +14,8 @@ console.log("Polka Server Init...")
 const polka = require('polka');
 const sirv = require('sirv');
 const compression = require('compression');
-const uuidv4 = require('uuid/v4')
-const helmet  = require('helmet');
+//const uuidv4 = require('uuid/v4');
+//const helmet  = require('helmet');
 const Gun = require('gun');
 //if you did not config env it will null default
 var { PORT , NODE_ENV } = process.env;

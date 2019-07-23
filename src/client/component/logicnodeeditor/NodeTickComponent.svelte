@@ -136,19 +136,19 @@
 
 </script>
 <style>
-    text {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        pointer-events: none;
-    }
+
 </style>
-<NodeComponent panZoom={panZoom} idcomponent={idcomponent} px={px} py={py} svg={svg} nwidth={nwidth} nheight={nheight} on:node={handle_node} on:click={handle_click}>
-    <text x="4" y="20" style="stroke: white; fill:white;"> {nodename} </text>
-    {#each pinouts as pinout}
-        <!--{console.log(pinout)}-->
-        <NodePinComponent svg={svg} panZoom={panZoom} {...pinout} on:node={handle_node}/>
-        <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
-    {/each}
+<NodeComponent
+    idcomponent={idcomponent}
+    panZoom={panZoom}
+    px={px}
+    py={py}
+    svg={svg} 
+    nwidth={nwidth} 
+    nheight={nheight} 
+    on:node={handle_node} 
+    on:click={handle_click}
+    pinouts={pinouts}
+    >
+
 </NodeComponent>

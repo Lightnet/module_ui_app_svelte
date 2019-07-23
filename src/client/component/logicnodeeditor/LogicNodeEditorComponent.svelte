@@ -42,6 +42,10 @@
     let point1 = {x:0,y:0};
     let point2 = {x:0,y:0};
     let bline = false;
+    let strokecolor = "rgb(100,100,100)";
+    strokecolor = "green";
+    let strokewidth = 2;
+    strokewidth = 4;
 
     let svg;
     let draw;
@@ -251,28 +255,6 @@
         if (SVG.supported) {
             //var draw = SVG('drawing').size('100%', '100%').viewbox(0,0,800,1000)
             draw = SVG(idsvg).size('100%', '100%');
-            //.viewbox(0,0,elementcontent.clientWidth,elementcontent.clientHeight);
-            //draw.panZoom({zoomMin: 0.5, zoomMax: 20});
-            //https://svgjs.com/docs/2.7/elements/
-            //line = draw.line(0, 0, 0, 0).stroke({ width: 1 });
-            //console.log(line);
-
-            //draw.panZoom(false)
-            //draw.on('panStart', function(ev) {
-                //ev.preventDefault();
-                //console.log(ev);
-            //});
-
-            //draw.on('pinchZoomStart', function(ev) {
-                //ev.preventDefault()
-                //console.log(ev);
-            //});
-            
-            //draw.on('zoom', function(ev) {
-                //ev.preventDefault();
-                //console.log(draw.zoom())
-                //console.log(ev.detail.focus);
-            //});
 
             //console.log($this);
             //console.log(window);
@@ -406,7 +388,7 @@
                 <NodeConnectorComponent svg={svg} panZoom={panZoom} {...connectors[index]} />
             {/each}
         {/await}
-        <line class="nonselect" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:rgb(100,100,100);stroke-width:2" />
+        <line class="nonselect" x1="{point1.x}" y1="{point1.y}" x2="{point2.x}" y2="{point2.y}" style="stroke:{strokecolor};stroke-width:{strokewidth}" />
         
     </svg>
 </div>
