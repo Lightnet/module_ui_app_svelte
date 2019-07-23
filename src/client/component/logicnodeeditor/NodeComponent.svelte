@@ -74,7 +74,7 @@
             x: (((pos.x - rect.left) - pan.x) / zoom), 
             y: (((pos.y - rect.top) - pan.y) / zoom)
         };
-    };
+    }
 
     function handle_mousemove(e){
         //let x = e.clientX - e.pageX;

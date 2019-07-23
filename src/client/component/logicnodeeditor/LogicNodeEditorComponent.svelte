@@ -88,7 +88,8 @@
 
     function handle_mousemove(e){
         if(bline){
-            let svgP = svgPoint(svg, e.clientX, e.clientY);
+            //let svgP = svgPoint(svg, e.clientX, e.clientY);
+            let svgP = screenToWorld({x: e.clientX,y:e.clientY});
             point2.x = svgP.x;
             point2.y = svgP.y;
         }
@@ -114,7 +115,8 @@
                 if((pindata.type == "pin")&&(pindata.mouse == "over")){
                     bconnector = true;
                     idpin1 = pindata;
-                    let svgP = svgPoint(svg, e.clientX, e.clientY);
+                    //let svgP = svgPoint(svg, e.clientX, e.clientY);
+                    let svgP = screenToWorld({x: e.clientX,y:e.clientY});
                     //set draw line to dot from mouse down.
                     point1.x = svgP.x;
                     point1.y = svgP.y;
@@ -207,8 +209,11 @@
             }
             bline = false;
             bconnector = false;
+            bzoompan = false;
             resetpoint();
         }
+        checkpanmove();
+        //console.log("up??");
         window.removeEventListener('mouseup',handle_svgmouseup);
     }
 
@@ -265,17 +270,11 @@
         if (SVG.supported) {
             //var draw = SVG('drawing').size('100%', '100%').viewbox(0,0,800,1000)
             draw = SVG(idsvg).size('100%', '100%');
-
-            console.log(window.app);
-            console.log(window.text);
             
 
             svg = document.getElementById(idsvg);
             panZoom = svgPanZoom(svg);
             panZoom.disablePan();
-            //console.log(panZoom);
-            //var pan = panZoom.getPan();
-            //console.log(pan);
         } else {
             alert('SVG not supported');
             //console.log("SVG not supported");
