@@ -47,9 +47,6 @@
 </script>
 
 <style>
-    .panel{
-        width: 100%;
-    }
 
     div{
         color:white;
@@ -61,14 +58,6 @@
         height:22px;
     }
 
-    .header{
-        background-color: lightblue;
-        width:100%;
-    }
-    .context{
-        background-color:lightslategray;
-        width:100%;
-    }
 </style>
 <CollapsePanelComponent>
     <span slot="header"> Visibility </span>

@@ -1,6 +1,6 @@
 <script>
     export let url;
-    export let title;
+    //export let title;
     export let width = 20;
     export let height = 20;
 </script>

@@ -195,6 +195,9 @@ export var gun = null;
 //===============================================
 // access view area
 //===============================================
+//export const Main = writable({});
+export var Main;
+
 export const currentregion = writable('None');
 export const sl_viewregion = writable('None');
 export const sl_category = writable('None');
@@ -323,6 +326,7 @@ function unregister_class(obj){
 utils.unregister_class = unregister_class;
 
 export default {
+    Main,
     data,
     types,
     props,

@@ -3,7 +3,6 @@
     //https://codepen.io/osublake/pen/4c3752574267b3a986cb8eee7ccb8c81
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
-    //import NodePinComponent from "./NodePinComponent.svelte";
     import SVG from 'svg.js';
     //import 'svg.panzoom.js';
     const dispatch = createEventDispatcher();
@@ -135,5 +134,4 @@
     <slot>
     <text x="4" y="20" style="stroke: white; fill:white;"> Node Name </text>
     </slot>
-    <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
 </g>

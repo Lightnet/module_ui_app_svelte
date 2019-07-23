@@ -1,10 +1,11 @@
 <svelte:options accessors={true}/>
 <script>
+    'use strict';
     //https://github.com/jillix/svg.connectable.js
     //https://depuits.github.io/ned/
     //https://github.com/depuits/ned
-
-    import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+    import { onMount, onDestroy, createEventDispatcher,setContext } from 'svelte';
+    import { get } from 'svelte/store';
     import { generateId } from '../helper/generateid.js';
     //import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
     import BaseNodeComponent from './BaseNodeComponent.svelte';
@@ -55,6 +56,8 @@
     let idsvg = "draw" + generateId(20);
     let panZoom;
 
+    //setContext('editor','testparent');
+
     export let connectors = [];//links to connector point list here for update position?
     export let visualnodes = []; //node blocks types
     export let propnodes = []; //node variables
@@ -68,7 +71,6 @@
         strokewidth = detail.node.strokewidths;
     });
     
-
     function resetpoint(){
         point1 = {x:0,y:0};
         point2 = {x:0,y:0};
@@ -256,6 +258,7 @@
 
     onMount(() => {
         elementcontent = document.getElementById(id);
+        //console.dir(elementcontent);
         LogicNodeID.set(id);
         //console.log(id);
         handle_logicnodeeditor_resize();
@@ -263,22 +266,11 @@
             //var draw = SVG('drawing').size('100%', '100%').viewbox(0,0,800,1000)
             draw = SVG(idsvg).size('100%', '100%');
 
-            //console.log($this);
-            //console.log(window);
-            //console.dir(elementcontent);
-
-            //document.querySelectorAll(".svelte-container").forEach(element => {
-                //if (!element.hasChildNodes()) {
-                    //console.log(element);
-                    //new App({
-                    //target: element
-                    //});
-                //}
-            //});
+            console.log(window.app);
+            console.log(window.text);
+            
 
             svg = document.getElementById(idsvg);
-            //console.log(svgPanZoom);
-
             panZoom = svgPanZoom(svg);
             panZoom.disablePan();
             //console.log(panZoom);

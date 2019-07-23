@@ -1,12 +1,12 @@
 <script>
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
-    import NodePinComponent from "./NodePinComponent.svelte";
     import NodeComponent from "./NodeComponent.svelte";
     import { generateId } from '../helper/generateid.js';
     //import SVG from 'svg.js';
     const dispatch = createEventDispatcher();
 
     let nodename = "Tick";
+    export let nodetype;
     let idcomponent = "node" + generateId(20);
     //let nodeid;
     let elcomponent;

@@ -5,7 +5,7 @@
     const dispatch = createEventDispatcher();
     export let selecttext = "Viewport 3D";
     let selecticon;
-    export let idcomponent;
+    export let idcomponent = generateId(20);
     export let viewport = "3dviewport";
     export let name = "menu";
     export let id = generateId(20);

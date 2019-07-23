@@ -18,7 +18,7 @@
     export let nheight = 100;
     export let nwidth = 100;
     
-    export let draw;
+    //export let draw;
     export let svg;
     export let panZoom;
     let bmove = false;
@@ -206,21 +206,13 @@
     <!-- text x="4" y="20" -->
     <text x="{nwidth/2}" y="16" font-family="{fontfamily}" font-size="{fontsize}" text-anchor="middle" style="stroke:{fontcolor};"> {nodename} </text>
 
-
     {#each pinins as pinin}
-        <!--{console.log(pinout)}-->
-        <NodePinComponent svg={svg} panZoom={panZoom} {...pinin} on:node={handle_node}/>
-        <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
+        <NodePinComponent svg={svg} {...pinin} on:node={handle_node}/>
     {/each}
     {#each pinouts as pinout}
-        <!--{console.log(pinout)}-->
-        <NodePinComponent svg={svg} panZoom={panZoom} {...pinout} on:node={handle_node}/>
-        <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
+        <NodePinComponent svg={svg} {...pinout} on:node={handle_node}/>
     {/each}
-
     <slot>
         <text x="4" y="20" style="stroke:{fontcolor};"> {nodename} </text>
     </slot>
-
-    <!--<NodePinComponent px="100" py="20" on:node={handle_node}/>-->
 </g>

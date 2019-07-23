@@ -1,13 +1,16 @@
 <script>
-    import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+    import { onMount, onDestroy, createEventDispatcher, getContext } from 'svelte';
     import { generateId } from '../helper/generateid.js';
-    import NodePinComponent from "./NodePinComponent.svelte";
     import NodeComponent from "./NodeComponent.svelte";
     import SVG from 'svg.js';
     //import 'svg.panzoom.js';
     const dispatch = createEventDispatcher();
 
+    //var answer = getContext('editor');
+    //console.log(answer)
+
     let nodename = "Base Node";
+    export let nodetype;
     let idcomponent = "node" + generateId(20);
     let elcomponent;
     export let px = 0;

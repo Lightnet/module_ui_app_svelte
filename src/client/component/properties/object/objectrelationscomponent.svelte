@@ -32,11 +32,12 @@
 </script>
 
 <style>
+    /*
     input{
-        /*background-color:grey;*/
         font-size: 12px;
         height:22px;
     }
+    */
 
     div{
         color:white;

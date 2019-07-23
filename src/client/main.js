@@ -7,14 +7,15 @@
 
  Information: Work in progres.
  */
-
+'use strict';
 import App from './App.svelte';
 //import App from './Test.svelte';
 //import svelte from 'svelte/compiler';
 //console.log(`running svelte version ${svelte.VERSION}`);
 
 //import {StringProperty} from './component/props/StringProperty'
-import {utils} from './mjs'
+import {utils} from './mjs';
+import mjs from './mjs';
 
 //localStorage.clear();
 //window.localStorage.clear(); //try this to clear all local storage
@@ -133,6 +134,12 @@ app.$on("workspace",(event)=>{
 	//console.log(event);
 	//console.log("workspace: " + event.detail);
 })
+//console.log(app);
+//mjs.Main.set(app);
+//mjs.Main = app;
+window.app = app;
+var text = "test";
+window.text = text;
 
 
 //let strtest = new mjs.props.StringProperty({name:"test",default:"beta"});

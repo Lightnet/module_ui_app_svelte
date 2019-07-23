@@ -19,7 +19,7 @@
     export let svg;
     export let boutput = true;
     export let pins = [];
-    //export let connectors = [];
+    export let connectors = [];
     export let bpinout = true;
     export let nodeid;
     export let pintype = "flow";

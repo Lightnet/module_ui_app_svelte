@@ -1,7 +1,6 @@
 <script>
 	//https://svelte.dev/docs#setContext
 	//https://svelte.dev/examples#reactive-statements
-
 	//https://github.com/svgdotjs/svg.draggable.js
 	//https://codepen.io/osublake/pen/4c3752574267b3a986cb8eee7ccb8c81
 	//https://github.com/depuits/ned
@@ -44,6 +43,11 @@
 	});
 	*/
 	export let name;
+	export let version = "0.0.1";
+
+	export function getVersion(){
+		return version;
+	}
 	//let showModal = false;
 	//let msgmodal = "None";
 	let view;
@@ -133,14 +137,14 @@
 				//console.log('disconnected from peer!');
 			});
 
-			gun.get('mark').put({
-				name: "Mark",
-				email: "mark@gunDB.io",
-			});
+			//gun.get('mark').put({
+				//name: "Mark",
+				//email: "mark@gunDB.io",
+			//});
 
-			gun.get('mark').on(function(data, key){
+			//gun.get('mark').on(function(data, key){
 				//console.log("update:", data);
-			});
+			//});
 			
 			//console.log(gun);
 		}

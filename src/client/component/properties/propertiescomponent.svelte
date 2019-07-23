@@ -310,12 +310,13 @@
         opacity: 1;
         z-index: 3;
     }
-
+    /*
     i{
         height:32px;
         width:32px;
         padding: 0px 0px 0px 0px;
     }
+    */
     /*.propsbtn{background-color: aquamarine;}*/
 
 </style>

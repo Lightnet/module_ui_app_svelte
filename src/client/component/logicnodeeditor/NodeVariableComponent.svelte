@@ -7,6 +7,7 @@
     const dispatch = createEventDispatcher();
 
     let nodename = "Variable";
+    export let nodetype;
     let idcomponent = "node" + generateId(20);
     let elcomponent;
     export let px;
