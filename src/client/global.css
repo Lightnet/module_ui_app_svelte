@@ -3,6 +3,9 @@ html, body {
 	width: 100%;
 	height: 100vh;
 }
+*{
+	font-size: 12px;
+}
 
 body {
 	color: #4b4b4b;
@@ -12,21 +15,30 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
 
-
-
 a {
 	color: white;
 	background: #3a3a3a;
 	text-decoration: none;
+	padding: 4px 4px 2px 4px;
 }
+/*
+a:link{
+	text-decoration: none;
+}
+*/
 
 a:hover {
-	background: #3a3a3a;
-	text-decoration: underline;
+	background: #5177b2;
+	/*text-decoration: underline;*/
+}
+
+a:active {
+	background: #5177b2;
+	/*text-decoration: underline;*/
 }
 
 a:visited {
-	color: rgb(0,80,160);
+	color: white;
 }
 
 label {
@@ -93,7 +105,7 @@ button:hover {
 }
 
 button:active {
-	background-color: #424242;
+	background-color: #5177b2;
 }
 
 button:focus {

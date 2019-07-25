@@ -1,8 +1,9 @@
 <script>
 	//https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp
 	//https://www.w3schools.com/howto/howto_js_dropdown.asp
-	import { onMount, beforeUpdate, onDestroy, createEventDispatcher } from 'svelte'
-	import Panel from '../base/panel.svelte'
+	import { onMount, beforeUpdate, onDestroy, createEventDispatcher } from 'svelte';
+	import DisplayUser from "../access/DisplayUser.svelte";
+	//import Panel from '../base/panel.svelte'
 	//import DropMenu from '../base/dropmenu.svelte';
 	import DropMenuComponent from '../base/dropmenucomponent.svelte';
 	import DropMenuListComponent from '../base/dropmenulistcomponent.svelte';
@@ -308,5 +309,5 @@
 		{/each}
 		<button class="workspacebtn">+</button>
 	</div>
-
+	<DisplayUser></DisplayUser>
 </div>

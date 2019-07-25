@@ -12,7 +12,7 @@
     
     onMount(() => {
         //console.log("mount")
-        console.log("access?");
+        //console.log("access?");
     });
 
     //afterUpdate(() => {

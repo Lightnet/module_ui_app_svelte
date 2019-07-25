@@ -190,14 +190,48 @@ useLocalStorage(PrefsThemesConfig, appid + themeid + "PrefsThemes");
 
 export const LogicNodeID = writable('');
 
+//===============================================
+// Gun /SEA
 export var gun = {};
 export function setGun(value){
     //console.log("set?");
     gun = value;
 }
-
 export function getGun(){
     return gun;
+}
+
+export const onUserName = writable("Guest");
+export const onPub = writable("");
+var userData = {};
+
+export var sea = {
+    epriv:"",
+    eqpub:"",
+    priv:"",
+    pub:"",
+}
+export const onLogin = writable(false);
+
+export function setSea(data){
+    sea = data;
+    onPub.set(data.pub);
+}
+
+export function pair(){
+    return sea;
+}
+
+export function getPub(){
+    return sea.pub;
+}
+
+export function setUser(data){
+    //username = user.alias;
+    //console.log(data);
+    //console.log(onUserName);
+    onUserName.set(data.alias);
+    userData = user;
 }
 
 //===============================================
@@ -344,7 +378,12 @@ export default {
     utils,
     gun,
     setGun,
-    getGun
+    getGun,
+    setSea,
+    pair,
+    onUserName,
+    onPub,
+    setUser,
 }
 
 //module.exports.gun = gun;

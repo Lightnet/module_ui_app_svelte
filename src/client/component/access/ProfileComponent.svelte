@@ -1,6 +1,6 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    //import { UserName } from '../../stores.js';
+    import DisplayUser from './DisplayUser.svelte';
     import { generateId } from '../helper/generateid.js';
 
     let idcomponent = generateId(20);
@@ -12,7 +12,7 @@
     
     onMount(() => {
         //console.log("mount")
-        console.log("access?");
+        //console.log("access?");
     });
 
     //afterUpdate(() => {
@@ -28,5 +28,6 @@
 
 </style>
 <div id="{idcomponent}">
-
+    Profile...
+    <DisplayUser></DisplayUser>
 </div>

@@ -26,7 +26,7 @@
 		transform: translate(-50%,-50%);
 		padding: 1em;
 		border-radius: 0.2em;
-		background: white;
+		background: black;
 	}
 
 	button {
@@ -39,8 +39,9 @@
 <div class='modal'>
 	<slot name='header'></slot>
 	<hr>
-	<slot></slot>
+		<slot name='body'></slot>
 	<hr>
-
-	<button on:click='{() => dispatch("close")}'>Close</button>
+	<slot name='footer'>
+		<button on:click='{() => dispatch("close")}'>Close</button>
+	</slot>
 </div>

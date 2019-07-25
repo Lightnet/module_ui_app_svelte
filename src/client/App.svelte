@@ -106,7 +106,7 @@
 		
 		if(config.usegunlocal == true){
 			gun = Gun();
-			console.log("gun client storage");
+			//console.log("gun client storage");
 			mjs.gun = gun;
 			mjs.setGun(gun);
 		}else{
@@ -118,11 +118,10 @@
 			//console.dir(window.location);
 
 			if(window.location.hostname == 'localhost'){
-				console.log("localhost:3000");
+				//console.log("localhost:3000");
 				gun = Gun(['http://localhost:8080' + '/gun']);
-				
 			}else{
-				console.log("url");
+				//console.log("url");
 				//gun = mjs.gun = Gun('http://'+ window.location.hostname + '/gun');
 				gun = mjs.gun = Gun(window.location.origin + '/gun');
 			}
@@ -141,16 +140,13 @@
 			mjs.setGun(gun);
 			//setGun(gun);
 			//console.log(setGun);
-
 			//gun.get('mark').put({
 				//name: "Mark",
 				//email: "mark@gunDB.io",
 			//});
-
 			//gun.get('mark').on(function(data, key){
 				//console.log("update:", data);
 			//});
-			
 			//console.log(gun);
 		}
 		
@@ -182,7 +178,6 @@
 		light.name = "PointLight";
 		scene.add(light);
 		//console.log(THREE);
-
 
 		//let sky = new THREE.Sky();
 		//sky.scale.setScalar( 450000 );
