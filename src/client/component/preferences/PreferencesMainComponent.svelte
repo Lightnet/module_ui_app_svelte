@@ -43,7 +43,6 @@
         elcomponent.style.height = parent.clientHeight + 'px';
         elcomponent.style.width = parent.clientWidth + 'px';
 
-        /*
         if(parent){
             //idcontent.style.height = parent.clientHeight + 'px';
             //idcontent.style.width = parent.clientWidth + 'px';
@@ -60,7 +59,7 @@
             elcontent.style.width = pwidth + 'px';
             elcontent.style.height = parent.clientHeight + 'px';
         }
-        */
+        
     }
 
     onMount(() => {

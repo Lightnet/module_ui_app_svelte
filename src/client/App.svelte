@@ -8,12 +8,11 @@
 	import { onMount, afterUpdate, onDestroy, createEventDispatcher} from 'svelte'
 	import { generateId } from './component/helper/generateid.js';
 
-	import Modal from './component/base/modalcomponent.svelte';
-	import Panel from './component/base/panel.svelte';
-	import NavHeaderComponent from './component/mainwindow/navheadercomponent.svelte';
-	import NavFooterComponent from './component/mainwindow/navfootercomponent.svelte';
+	import AppHeaderComponent from './component/mainwindow/AppHeaderComponent.svelte';
+	import AppFooterComponent from './component/mainwindow/AppFooterComponent.svelte';
+	import ContextMenuComponent from './component/base/ContextMenuComponent.svelte';
 	import SplitterComponent from './component/base/splittercomponent.svelte';
-	import ContextMenuComponent from './component/base/contextmenucomponent.svelte';
+
 	import LayoutLayoutComponent from './component/base/LayoutLayoutComponent.svelte';
 	import DivDividerVComponent from './component/base/sdivdividerv.svelte';
 	import DivDividerHComponent from './component/base/sdivdividerh.svelte';
@@ -24,7 +23,7 @@
 	import LayoutTextEditorComponent from './component/base/LayoutTextEditorComponent.svelte';
 	//import Gun from 'gun/gun';
 	import mjs from './mjs.js';
-	import { appconfig } from './mjs.js';
+	import { appconfig,setGun } from './mjs.js';
 
 	const dispatch = createEventDispatcher();
 	let config;
@@ -48,10 +47,8 @@
 	export function getVersion(){
 		return version;
 	}
-	//let showModal = false;
-	//let msgmodal = "None";
-	let view;
 
+	let view;
 	let viewworkspace = "horizontal";
 	//viewworkspace = "layout";
 	//viewworkspace = "testdivide";
@@ -108,8 +105,10 @@
 		elementfooter = document.getElementById(idfooter);
 		
 		if(config.usegunlocal == true){
-			mjs.gun = Gun();
+			gun = Gun();
 			console.log("gun client storage");
+			mjs.gun = gun;
+			mjs.setGun(gun);
 		}else{
 			//console.log("guin client network");
 			//gun = mjs.gun = Gun(['http://localhost:8080/gun']);
@@ -120,7 +119,8 @@
 
 			if(window.location.hostname == 'localhost'){
 				console.log("localhost:3000");
-				gun = mjs.gun = Gun(['http://localhost:8080' + '/gun']);
+				gun = Gun(['http://localhost:8080' + '/gun']);
+				
 			}else{
 				console.log("url");
 				//gun = mjs.gun = Gun('http://'+ window.location.hostname + '/gun');
@@ -136,6 +136,11 @@
 				//console.log('disconnected from', peer);
 				//console.log('disconnected from peer!');
 			});
+
+			mjs.gun = gun;
+			mjs.setGun(gun);
+			//setGun(gun);
+			//console.log(setGun);
 
 			//gun.get('mark').put({
 				//name: "Mark",
@@ -217,11 +222,11 @@
 </style>
 
 <div id="{idscreen}" class="editarea">
-	<NavHeaderComponent
+	<AppHeaderComponent
 		idassign={idheader}
 		name={name}
 		on:workspace={handle_workspace} >
-	</NavHeaderComponent>
+	</AppHeaderComponent>
 	<div id={idcontent} class="panelcontent contentarea">
 
 		{#if viewworkspace == 'layout'}
@@ -258,6 +263,6 @@
 
 
 	</div>
-	<NavFooterComponent idassign={idfooter}></NavFooterComponent>
+	<AppFooterComponent idassign={idfooter}></AppFooterComponent>
 </div>
 <ContextMenuComponent></ContextMenuComponent>

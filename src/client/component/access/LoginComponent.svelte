@@ -1,15 +1,11 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import AutoSizeDivComponent from "../base/AutoSizeDivComponent.svelte";
-    import LoginComponent from "./LoginComponent.svelte";
     //import { UserName } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
-    import { gun } from '../../mjs.js';
-
-    import mjs from '../../mjs.js';
 
     let idcomponent = generateId(20);
-    let blogin = false;
+    let loginid = "";
+    let password = "";
 
     //const dispatch = createEventDispatcher();
 
@@ -19,10 +15,6 @@
     onMount(() => {
         //console.log("mount")
         //console.log("access?");
-        console.log(gun);
-        //console.log(mjs.gun);
-        //console.log(mjs.getGun());
-        //console.log(getGun());
     });
 
     //afterUpdate(() => {
@@ -31,18 +23,25 @@
 
     onDestroy(() => {
        //console.log("onDestroy")
+       password="";
     });
+
+    function btnlogin(e){
+        console.log(e);
+    }
+
+    function btnregister(e){
+        console.log(e);
+    }
 </script>
 
 <style>
 
 </style>
-<AutoSizeDivComponent idcomponent={idcomponent}>
-    {#if blogin}
-        <a href="/#">Profile</a>
-    {:else}
-        <LoginComponent></LoginComponent>
-    {/if}
-
-
-</AutoSizeDivComponent>
+<div id="{idcomponent}">
+    <br>Access
+    <br>User: <input type="text" bind:value={loginid} placeholder="Alias">
+    <br>Password: <input type="text" bind:value={password} placeholder="Passphase">
+    <br><button on:click={btnlogin}> Login </button>
+    <button on:click={btnregister}> Register </button>
+</div>

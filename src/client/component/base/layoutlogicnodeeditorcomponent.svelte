@@ -13,7 +13,8 @@
     let id2 = generateId(20);
     let screen = "properties";
     //screen = "outliner"
-    screen = "logicnodeeditor"
+    //screen = "logicnodeeditor"
+    screen = "access"
     let elementscreen;
     
 

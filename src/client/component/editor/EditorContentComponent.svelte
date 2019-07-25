@@ -16,7 +16,7 @@
 
     const dispatch = createEventDispatcher();
 
-    export let viewport = "3dviewport";
+    //export let viewport = "3dviewport";
     export let idheader;
     let elementheader;
     let idcontent = generateId(20);

@@ -190,7 +190,15 @@ useLocalStorage(PrefsThemesConfig, appid + themeid + "PrefsThemes");
 
 export const LogicNodeID = writable('');
 
-export var gun = null;
+export var gun = {};
+export function setGun(value){
+    //console.log("set?");
+    gun = value;
+}
+
+export function getGun(){
+    return gun;
+}
 
 //===============================================
 // access view area
@@ -335,7 +343,11 @@ export default {
     context,
     utils,
     gun,
+    setGun,
+    getGun
 }
+
+//module.exports.gun = gun;
 
 //var test = new object_ot_splitarea();
 //test.execute({});
