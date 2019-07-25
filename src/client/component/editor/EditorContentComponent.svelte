@@ -1,6 +1,6 @@
 <script>
     import { onMount, onDestroy, createEventDispatcher } from 'svelte'
-
+    /*
     import Viewport3DComponent from '../viewport3d/viewport3dcomponent.svelte';
     import LogicNodeEditorComponent from '../logicnodeeditor/LogicNodeEditorComponent.svelte';
     import TexteditorComponent from '../texteditor/texteditorcomponent.svelte';
@@ -10,7 +10,7 @@
     import PropertiesComponent from '../properties/propertiescomponent.svelte';
     import FileBrowserComponent from '../filebrowser/filebrowsercomponent.svelte';
     import PreferencesComponent from '../preferences/preferencescomponent.svelte';
-        
+    */
     import { generateId } from '../helper/generateid.js';
     //import mjs from '../../mjs.js';
 
@@ -51,6 +51,8 @@
     }
 </style>
 <div id="{idcontent}" class="editorcontext">
+    <slot></slot>
+    <!--
     {#if viewport === '3dviewport'}
         <Viewport3DComponent />
     {/if}
@@ -86,4 +88,5 @@
     {#if viewport === 'scriptconsole'}
         <ScriptConsoleComponent />
     {/if}
+    -->
 </div>

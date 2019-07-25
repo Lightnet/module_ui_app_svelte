@@ -2,7 +2,7 @@
     import { onMount, onDestroy } from 'svelte'
     import { generateId } from '../helper/generateid.js';
 
-    let idcontent = generateId(20);
+    export let idcomponent = generateId(20);
     let elementcontent;
 
     function handle_auto_resize(event){
@@ -17,7 +17,7 @@
     
     onMount(() => {
         //console.log("mount");
-        elementcontent = document.getElementById(idcontent);
+        elementcontent = document.getElementById(idcomponent);
         handle_auto_resize();
         window.addEventListener('resize', handle_auto_resize);
     });
@@ -37,6 +37,6 @@
         color: azure;
     }
 </style>
-<div id="{idcontent}" class="autoresizediv">
+<div id="{idcomponent}" class="autoresizediv">
     <slot></slot>
 </div>

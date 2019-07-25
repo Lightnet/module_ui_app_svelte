@@ -7,7 +7,10 @@ import { terser } from 'rollup-plugin-terser';
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-	input: 'src/client/main.js',
+	input: [
+		'@babel/polyfill',
+		'src/client/main.js'
+	],
 	output: {
 		sourcemap: true,
 		format: 'iife',

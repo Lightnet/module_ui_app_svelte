@@ -21,7 +21,7 @@
 
     let tabitem = [];
 
-    let idcomponent = generateId(20);
+    let idcompprefs= generateId(20);
     let elcomponent;
 
     let idtab = generateId(20);
@@ -43,6 +43,7 @@
         elcomponent.style.height = parent.clientHeight + 'px';
         elcomponent.style.width = parent.clientWidth + 'px';
 
+        /*
         if(parent){
             //idcontent.style.height = parent.clientHeight + 'px';
             //idcontent.style.width = parent.clientWidth + 'px';
@@ -59,10 +60,11 @@
             elcontent.style.width = pwidth + 'px';
             elcontent.style.height = parent.clientHeight + 'px';
         }
+        */
     }
 
     onMount(() => {
-        elcomponent = document.getElementById(idcomponent);
+        elcomponent = document.getElementById(idcompprefs);
         elcontent = document.getElementById(idcontent);
         eltab = document.getElementById(idtab);
 
@@ -149,29 +151,9 @@
         padding: 0px 0px 0px 0px;
     }
 
-    button{
-		border:none;
-        outline: none;
-        background-color:#595959;
-        font-size: 12px;
-        color:white;
-        height:22px;
-        padding: 0px 4px 4px 4px;
-		display: inline-block;
-		text-decoration: none;
-    }
-
     .tabbtn{
         width:100%;
     }
-
-	button:hover{
-        background-color: #686868;
-    }
-
-	button:active {
-  		background-color: #557bb6;
-	}
 
     .active {
   		background-color: #557bb6;
@@ -202,7 +184,7 @@
 
 </style>
 
-<div id="{idcomponent}" class="perferences" on:mousemove={handle_mousemove}>
+<div id="{idcompprefs}" class="perferences" on:mousemove={handle_mousemove}>
     
     <div id={idtab} class="tab">
         <div  class="vertical-menu">
@@ -221,4 +203,5 @@
             <svelte:component this={viewcomponent}/>
         {/if}
     </div>
+    
 </div>

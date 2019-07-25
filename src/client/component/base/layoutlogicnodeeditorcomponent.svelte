@@ -64,12 +64,6 @@
         position:absolute;
     }
 
-    .placeregion{
-        opacity: 0.5;
-        background-color: red;
-        filter: alpha(opacity=50); /* For IE8 and earlier */
-        position:absolute;
-    }
 </style>
 <div id="{idcontent}" class="panelregion">
     <SplitterComponent bhorizontal={false} bresize={false} iddiv1={id2}></SplitterComponent>
