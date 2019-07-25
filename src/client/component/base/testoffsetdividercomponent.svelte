@@ -3,7 +3,7 @@
     import AlignRegionComponent from './alignregioncomponent.svelte';
     import HeaderSplitterComponent from './headersplittercomponent.svelte';
     import SplitterComponent from './splittercomponent.svelte';
-    import EditorComponent from '../editor/editorcomponent.svelte';
+    import EditorMainComponent from '../editor/EditorMainComponent.svelte';
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
     import DivDividerVComponent from './divdividervcomponent.svelte';
@@ -73,11 +73,11 @@
     <HeaderSplitterComponent bhorizontal={false} bresize={false} iddiv1={idalignregion1} />
     <AlignRegionComponent idcomponent={idalignregion1} align="v">
         <div id="{id1}" class="screenregion">
-            <EditorComponent viewport="3dviewport"></EditorComponent>
+            <EditorMainComponent viewport="3dviewport"></EditorMainComponent>
         </div>
         <SplitterComponent bhorizontal={true} bresize={true} iddiv1={id1} iddiv2={id2}></SplitterComponent>
         <div id="{id2}" class="screenregion" on:mousemove={handle_screenregion}>
-            <EditorComponent viewport="properties"></EditorComponent>
+            <EditorMainComponent viewport="properties"></EditorMainComponent>
         </div>
     </AlignRegionComponent>
 </div>

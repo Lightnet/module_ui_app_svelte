@@ -3,7 +3,7 @@
     import AlignRegionComponent from './alignregioncomponent.svelte';
     import ScreenRegionComponent from './screenregioncomponent.svelte'
     import SplitterComponent from './headersplittercomponent.svelte';
-    import EditorComponent from '../editor/editorcomponent.svelte'
+    import EditorMainComponent from '../editor/EditorMainComponent.svelte'
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
 
@@ -63,7 +63,7 @@
     <SplitterComponent bhorizontal={false} bresize={false} iddiv1={idalignregion1}></SplitterComponent>
     <AlignRegionComponent idcomponent={idalignregion1} align="v">
         <ScreenRegionComponent>
-            <EditorComponent viewport="{screen}"></EditorComponent>
+            <EditorMainComponent viewport="{screen}"></EditorMainComponent>
         </ScreenRegionComponent>
     </AlignRegionComponent>
 </div>

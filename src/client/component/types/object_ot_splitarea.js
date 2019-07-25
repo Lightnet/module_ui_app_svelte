@@ -12,10 +12,7 @@ import { Operator } from './operator';
 
 import Pointer from '../base/drawsplit.svelte';
 import Splitter from '../base/splittercomponent.svelte';
-//import EditorComponent from '../editor/editorcomponent.svelte';
-
 import ScreenRegionComponent from '../base/screenregioncomponent.svelte';
-//import { generateId } from '../helper/generateid.js';
 import { context } from '../../mjs.js';
 
 

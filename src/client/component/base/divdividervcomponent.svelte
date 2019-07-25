@@ -3,7 +3,7 @@
     import ScreenRegionComponent from './screenregioncomponent.svelte';
     import AlignRegionComponent from './alignregioncomponent.svelte';
     import SplitterComponent from './splittercomponent.svelte';
-    import EditorComponent from '../editor/editorcomponent.svelte';
+    import EditorMainComponent from '../editor/EditorMainComponent.svelte';
     import { generateId } from '../helper/generateid.js';
     //const dispatch = createEventDispatcher();
 
@@ -50,13 +50,13 @@
     
     <ScreenRegionComponent idcomponent={id1}>
     
-        <EditorComponent viewport="{screen1}"></EditorComponent>
+        <EditorMainComponent viewport="{screen1}"></EditorMainComponent>
 
     </ScreenRegionComponent>
     <SplitterComponent bhorizontal={false} bresize={true} position="fixed" iddiv1={id1} iddiv2={id2}></SplitterComponent>
     <ScreenRegionComponent idcomponent="{id2}">
         
-        <EditorComponent viewport="{screen2}"></EditorComponent>
+        <EditorMainComponent viewport="{screen2}"></EditorMainComponent>
         
     </ScreenRegionComponent>
     

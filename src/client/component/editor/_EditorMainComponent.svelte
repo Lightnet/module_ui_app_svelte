@@ -1,11 +1,14 @@
 <script>
-    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
+    import { onMount, onDestroy, createEventDispatcher } from 'svelte'
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
+
+    import EditorHeaderComponent from './EditorHeaderComponent.svelte';
+    import EditorContentComponent from './EditorContentComponent.svelte';
+
     import LogicNodeNavigationComponent from "../logicnodeeditor/LogicNodeNavigationComponent.svelte";
     import TextEditorNavigationComponent from "../texteditor/TextEditorNavigationComponent.svelte";
 
-    import EditorNavmenuComponent from './editornavmenucomponent.svelte';
     import b280K26 from '../icon/b280K26.svelte';
     import b280Z1 from '../icon/b280Z1.svelte';
     import b280Z3 from '../icon/b280Z3.svelte';
@@ -18,13 +21,30 @@
     import b280Z18 from '../icon/b280Z18.svelte';
 
     const dispatch = createEventDispatcher();
-    
-    export let idheader;
+
     export let viewport = "3dviewport";
-    let navmenu;
     let items = [];
 
+    let idheader = generateId(20);
+    let idcontent = generateId(20);
+    let elementcontent;
+
+    function handle_viewport(event){
+        //console.log("viewport:")
+        //console.log(event.detail);
+        viewport = event.detail;
+    }
+
+    function handle_editor_resize(event){
+        //console.log("resize");
+        let parent = elementcontent.parentNode;
+        elementcontent.style.height = parent.clientHeight + 'px';
+        elementcontent.style.width = parent.clientWidth + 'px';
+    }
+
     onMount(() => {
+        //console.log("onMount");
+
         items.push({sm_label:"Viewport 3D",sm_context:"3dviewport",sm_category:"general",icon:b280Z1,sm_navmenu:null});
         //items.push({sm_label:"imageeditor",sm_context:"imageeditor",sm_category:"general",icon:null,sm_navmenu:null});
         //items.push({sm_label:"uveditor",sm_context:"uveditor",sm_category:"general",icon:null,sm_navmenu:null});
@@ -50,67 +70,25 @@
         items.push({sm_label:"File Browser",sm_context:"filebrowser",sm_category:"data",icon:b280Z5,sm_navmenu:null});
         items.push({sm_label:"Preferences",sm_context:"preferences",sm_category:"data",icon:b280Z14,sm_navmenu:null});
         items = items;
-        selectviewnavmenu(viewport);
+
+        elementcontent = document.getElementById(idcontent);
+        window.addEventListener('resize', handle_editor_resize);
+        handle_editor_resize();
     });
 
-    function selectviewnavmenu(view){
-        //console.log(view);
-        for(let i=0;i<items.length;i++){
-            if(items[i].sm_context == view){
-                navmenu = items[i].sm_navmenu;
-                break;
-            }
-        }
-    }
-
-    onDestroy(() => {
-        items = [];
+     onDestroy(() => {
+        //console.log("onDestroy")
+        window.removeEventListener('resize', handle_editor_resize);
     });
-
-    function handle_viewport(e){
-        dispatch('viewport', e.detail);
-        //console.log(e.detail);
-        for(let i=0;i<items.length;i++){
-            if(items[i].sm_context == e.detail){
-                navmenu = items[i].sm_navmenu;
-                break;
-            }
-        }
-    }
-
 </script>
 
 <style>
-    .navbar {
-        overflow: hidden;
-        background-color: #3b3b3b;
-        font-family: Arial, Helvetica, sans-serif;
+    .editorscreen{
+        height:100%;
         width:100%;
     }
-
-    .navbar a {
-        float: left;
-        font-size: 12px;
-        color: white;
-        text-align: center;
-        padding: 4px 4px;
-        text-decoration: none;
-    }
-
-    .navbar a:hover {
-        background-color: #424242;
-    }
-
-    .navbar a:hover {
-        background-color: #424242;
-    }
-    
 </style>
-
-<div id="{idheader}" class="navbar">
-    <a href="/#">Editor</a>
-    <EditorNavmenuComponent items={items} on:viewport={handle_viewport} viewport={viewport}></EditorNavmenuComponent>
-    {#if navmenu != null}
-        <svelte:component this={navmenu} />
-    {/if}
+<div id="{idcontent}" class="editorscreen">
+    <EditorHeaderComponent idheader={idheader} viewport={viewport} on:viewport={handle_viewport} items={items}></EditorHeaderComponent>
+    <EditorContentComponent viewport={viewport} idheader={idheader}></EditorContentComponent>
 </div>

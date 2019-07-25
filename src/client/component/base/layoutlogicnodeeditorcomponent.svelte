@@ -1,7 +1,7 @@
 <script>
     import {onMount, onDestroy, createEventDispatcher } from 'svelte'
     import SplitterComponent from './headersplittercomponent.svelte';
-    import EditorComponent from '../editor/editorcomponent.svelte'
+    import EditorMainComponent from '../editor/EditorMainComponent.svelte'
     import { generateId } from '../helper/generateid.js';
     import mjs from '../../mjs.js';
 
@@ -74,6 +74,6 @@
 <div id="{idcontent}" class="panelregion">
     <SplitterComponent bhorizontal={false} bresize={false} iddiv1={id2}></SplitterComponent>
     <div id="{id2}" class="screenregion" on:mousemove={handle_screenregion}>
-        <EditorComponent viewport="{screen}"></EditorComponent>
+        <EditorMainComponent viewport="{screen}"></EditorMainComponent>
     </div>
 </div>
