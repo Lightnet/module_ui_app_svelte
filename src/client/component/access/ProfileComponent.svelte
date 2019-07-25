@@ -1,6 +1,8 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import DisplayUser from './DisplayUser.svelte';
+    import AliasInformationComponent from './AliasInformationComponent.svelte';
+    import DisplayUser from './DisplayUserComponent.svelte';
+    import PublicKeyComponent from "./PublicKeyComponent.svelte";
     import { generateId } from '../helper/generateid.js';
 
     let idcomponent = generateId(20);
@@ -28,6 +30,8 @@
 
 </style>
 <div id="{idcomponent}">
-    Profile...
     <DisplayUser></DisplayUser>
+    <PublicKeyComponent></PublicKeyComponent>
+    
+    <AliasInformationComponent></AliasInformationComponent>
 </div>

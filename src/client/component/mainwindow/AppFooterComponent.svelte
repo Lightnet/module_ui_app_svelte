@@ -115,10 +115,6 @@
 
     .navbar label {
         float: left;
-        font-size: 12px;
-        color: white;
-        text-align: center;
-        padding: 4px 4px;
         text-decoration: none;
     }
 

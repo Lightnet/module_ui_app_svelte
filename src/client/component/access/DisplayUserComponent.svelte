@@ -13,4 +13,4 @@
     });
 
 </script>
-<span>User:{username}</span>
+<label>User: {username}</label>

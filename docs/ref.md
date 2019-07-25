@@ -9,6 +9,7 @@
 
 
 Links:
+ * 
  * https://nshki.com/es6-in-gulp-projects/
  * https://www.npmjs.com/package/gulp-better-rollup
  * https://svelte.dev/examples#actions
@@ -94,3 +95,22 @@ Links:
  * 
  * http://thinkofdev.com/javascript-how-to-load-dynamic-contents-html-string-json-to-iframe/
  * https://github.com/amark/gun/wiki/Getting-Started-(v0.3.x)
+ * https://stackoverflow.com/questions/2820586/how-can-i-control-the-width-of-a-label-tag/2820603
+ * https://stackoverflow.com/questions/10816853/css-label-width-not-taking-effect
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 

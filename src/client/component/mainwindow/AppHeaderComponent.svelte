@@ -2,7 +2,7 @@
 	//https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp
 	//https://www.w3schools.com/howto/howto_js_dropdown.asp
 	import { onMount, beforeUpdate, onDestroy, createEventDispatcher } from 'svelte';
-	import DisplayUser from "../access/DisplayUser.svelte";
+	import DisplayUser from "../access/DisplayUserComponent.svelte";
 	//import Panel from '../base/panel.svelte'
 	//import DropMenu from '../base/dropmenu.svelte';
 	import DropMenuComponent from '../base/dropmenucomponent.svelte';

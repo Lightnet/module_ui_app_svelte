@@ -33,14 +33,14 @@
 		//console.log(value);
 		config = value;
 	});
-	/*
+	
 	appconfig.set({
 		name: 'mjs',
 		usegunlocal:false,
 		usecustomtheme:false,
 		username:"Guest"
 	});
-	*/
+	
 	export let name;
 	export let version = "0.0.1";
 
@@ -118,26 +118,27 @@
 			//console.dir(window.location);
 
 			if(window.location.hostname == 'localhost'){
-				//console.log("localhost:3000");
+				console.log("localhost:3000");
 				gun = Gun(['http://localhost:8080' + '/gun']);
 			}else{
-				//console.log("url");
+				console.log("url");
 				//gun = mjs.gun = Gun('http://'+ window.location.hostname + '/gun');
 				gun = mjs.gun = Gun(window.location.origin + '/gun');
 			}
 
 			gun.on('hi', peer => {//peer connect
 				//console.log('connect peer to',peer);
-				//console.log('peer connect!');
+				console.log('peer connect!');
 			});
 
 			gun.on('bye', (peer)=>{// peer disconnect
 				//console.log('disconnected from', peer);
-				//console.log('disconnected from peer!');
+				console.log('disconnected from peer!');
 			});
 
 			mjs.gun = gun;
 			mjs.setGun(gun);
+
 			//setGun(gun);
 			//console.log(setGun);
 			//gun.get('mark').put({
@@ -149,6 +150,11 @@
 			//});
 			//console.log(gun);
 		}
+		console.log(gun);
+		//let peers = gun.get('peers')
+    	//peers.once(function(data){
+			//console.log(data);
+		//});
 		
 		//window.dispatchEvent(new Event('resize'));
 		//console.log(AFRAME);
