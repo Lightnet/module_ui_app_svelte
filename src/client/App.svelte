@@ -151,6 +151,11 @@
 			//console.log(gun);
 		}
 		console.log(gun);
+
+		//gun.on('auth',ack=>{
+			//console.log('auth');
+			//console.log(ack);
+		//});
 		//let peers = gun.get('peers')
     	//peers.once(function(data){
 			//console.log(data);

@@ -19,6 +19,79 @@ Links:
  * https://gun.eco/docs/Building-Storage-Adapters#hook-into-guns-io-events
 
 
+
+# gun.on() event list: 
+ * hi (peer)
+ * bye (peer)
+ * auth (SEA)
+
+```javascript
+
+
+```
+
+
+```
+gun.get('@')
+
+
+```
+
+# gun listen
+```javascript
+gun.on('hi', peer => {//peer connect
+  //console.log('connect peer to',peer);
+  console.log('peer connect!');
+});
+gun.on('bye', (peer)=>{// peer disconnect
+  //console.log('disconnected from', peer);
+  console.log('disconnected from peer!');
+});
+```
+
+
+SEA user recall
+```javascript
+let user = gun.user();
+user.recall().then(function(ack){
+  if (!ack || !ack.sea){
+    //console.log(ack);
+  }
+});
+
+```
+
+# Sea User:
+ * Unstable not used for prodction.
+ * auth (user login)
+ * leave (user logout)
+ * create (create user)
+ * user._.sea (key for use for pair key)
+ * user.is (check user exist and pub key)
+ * user._.soul (user id, can't tamper)
+
+
+SEA Auth
+```javascript
+gun.on('auth',ack=>{
+	console.log('auth');
+	console.log(ack);
+});
+```
+
+```javascript
+let user = gun.user();
+
+user.recall().then(function(ack){
+  if (!ack || !ack.sea){
+    console.log(ack);
+  }
+});
+
+```
+
+
+
 # module setup
 
 ```javascript

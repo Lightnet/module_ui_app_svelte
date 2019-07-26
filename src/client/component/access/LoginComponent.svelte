@@ -116,6 +116,7 @@
             </td>
         </tr>
     </table>
+    
     {#if showModal}
     <ModalComponent on:close="{()=> {showModal=false;}}">
         <h2 slot="header">

@@ -169,11 +169,21 @@
         console.log("finish");
     }
 
-    function btntest(){
+    async function btntest(){
+
+        console.log(gun);
         console.log(gun.user());
-        let user = gun.user()
-        console.log(user);
-        console.log(user._.sea);
+        let user = gun.user();
+        console.log(user.pair());
+        //let user = gun.user();
+        //console.log(user);
+        //console.log(user._.sea);
+
+        //user.recall().then(function(ack){
+            //if (!ack || !ack.sea){
+                //console.log(ack);
+            //}
+        //});
     }
 </script>
 
