@@ -53,7 +53,7 @@
         }
         //console.log(who);
         //user._.sea = pair()
-        console.log(user._.sea)
+        //console.log(user._.sea);
         let sec = await Gun.SEA.secret(who.epub, user._.sea); // Diffie-Hellman
         let enc = await Gun.SEA.encrypt(message, sec); //encrypt message
         //console.log(to);
@@ -114,8 +114,11 @@
         let user = gun.user();
         contacts = [];
 
-        user.get('contact').once().map().once((data,id)=>{
+        let contact = user.get('contact').once().map().once((data,id)=>{
             //console.log(data);
+            if(data ==null){
+                return;
+            }
             if(!data.alias)//check for name to exist
                 return;
             //var option = $('#' + id).get(0) || $('<option>').attr('id', id).appendTo('#contacts');//check if option id exist else create.
@@ -132,6 +135,7 @@
                 //$(option).hide();//hide element
             }
         });
+        //contact.off();
     }
 
     function selectcontact(event){
@@ -144,6 +148,9 @@
 
     async function addcontact(){
         console.log("addcontact");
+        if((publickey == "")||(publickey.length ==0))
+            return;
+
         if (bfound == false)
             return;
         let user = gun.user();
@@ -154,6 +161,9 @@
     }
 
     function removecontact(){
+        if((publickey == "")||(publickey.length ==0))
+            return;
+            
         if (bfound == false)
             return;
         let user = gun.user();
