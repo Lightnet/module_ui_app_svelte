@@ -81,6 +81,6 @@
 
 </style>
 <div id="{idcontent}" class="itempanel" on:mousemove={handle_mousemove}>
-    <span>Scene</span>
+    <label>Scene</label>
     <ObjectSceneListComponent entities={entities}></ObjectSceneListComponent>
 </div>

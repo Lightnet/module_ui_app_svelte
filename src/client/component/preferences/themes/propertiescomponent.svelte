@@ -25,7 +25,7 @@
         PropertiesConfig.set(config);
     }
     afterUpdate(()=>{
-        console.log("update changes...???");
+        //console.log("update changes...???");
         PropertiesConfig.set(config);
     })
     function handle_change(e){

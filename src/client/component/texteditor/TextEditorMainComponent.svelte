@@ -192,7 +192,7 @@
     });
 
     afterUpdate(()=>{
-        console.log("afterUpdate...");
+        //console.log("afterUpdate...");
         /*
         if(bcode){
             adjustcodesize();

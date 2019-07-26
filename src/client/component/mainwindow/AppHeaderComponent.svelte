@@ -5,7 +5,7 @@
 	import DisplayUser from "../access/DisplayUserComponent.svelte";
 	//import Panel from '../base/panel.svelte'
 	//import DropMenu from '../base/dropmenu.svelte';
-	import DropMenuComponent from '../base/dropmenucomponent.svelte';
+	import DropMenuComponent from '../base/DropMenuComponent.svelte';
 	import DropMenuListComponent from '../base/dropmenulistcomponent.svelte';
 
 	import mjs from '../../mjs.js';
@@ -291,12 +291,13 @@
 		<a href="/#"> {name} </a>
 		<DropMenuComponent name="File" prefix="_menuheader" items={filemenus} clmenu="headerubtn"/>
 		<DropMenuComponent name="Edit" prefix="_menuheader" items={editmenus} clmenu="headerubtn"/>
-		<DropMenuComponent name="View" prefix="_menuheader" items={viewmenus} clmenu="headerubtn"/>
+		
 		<!--
+		<DropMenuComponent name="View" prefix="_menuheader" items={viewmenus} clmenu="headerubtn"/>
 		<DropMenuComponent name="Render" prefix="_menuheader" items={rendermenus}  clmenu="headerubtn"/>
 		-->
 		<DropMenuComponent name="Window" prefix="_menuheader" items={windowmenus} clmenu="headerubtn"/>
-		<DropMenuComponent name="Access" prefix="_menuheader" items={accessmenus} clmenu="headerubtn"/>
+		<!--<DropMenuComponent name="Access" prefix="_menuheader" items={accessmenus} clmenu="headerubtn"/>-->
 		<DropMenuComponent name="Help" prefix="_menuheader" items={helpmenus} clmenu="headerubtn"/>
 		<!--<a href="/#" on:click={testcall}>Test Call</a>
 		<a href="/#" on:click={checktemplatepanel}>Test Panel</a>-->

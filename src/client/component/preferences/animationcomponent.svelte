@@ -1,6 +1,6 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
+    import AutosizeDivComponent from '../base/AlignRegionComponent.svelte';
     import TimeLineComponent from "./animation/timelinecomponent.svelte";
     import mjs from '../../mjs.js';
     //const dispatch = createEventDispatcher();

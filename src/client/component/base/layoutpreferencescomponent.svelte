@@ -1,6 +1,6 @@
 <script>
     import {onMount, onDestroy, createEventDispatcher } from 'svelte';
-    import AlignRegionComponent from './alignregioncomponent.svelte';
+    import AlignRegionComponent from './AlignRegionComponent.svelte';
     import ScreenRegionComponent from './screenregioncomponent.svelte'
     import SplitterComponent from './headersplittercomponent.svelte';
     import EditorMainComponent from '../editor/EditorMainComponent.svelte'

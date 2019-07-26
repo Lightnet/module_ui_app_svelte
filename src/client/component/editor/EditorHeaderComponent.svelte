@@ -31,14 +31,17 @@
     });
 
     function handle_viewport(e){
-        dispatch('viewport', e.detail);
+        //dispatch('viewport', e.detail);
         //console.log(e.detail);
         for(let i=0;i<items.length;i++){
             if(items[i].sm_context == e.detail){
                 navmenu = items[i].sm_navmenu;
+                //dispatch('viewport', e.detail);
+                dispatch('viewport', {context:e.detail,comp:items[i].comp });
                 break;
             }
         }
+        
     }
 
 </script>
@@ -72,10 +75,15 @@
 
 <div id="{idheader}" class="navbar">
     <a href="/#">Editor</a>
-    
     <EditorNavmenuComponent items={items} on:viewport={handle_viewport} viewport={viewport}></EditorNavmenuComponent>
-    
-    {#if navmenu != null}
-        <svelte:component this={navmenu} />
-    {/if}
+    <slot></slot>
+
+    {#await navmenu}
+        <div></div>
+    {:then menu}
+        {#if menu != null}
+            <svelte:component this={menu} />
+        {/if}
+    {/await}
+
 </div>

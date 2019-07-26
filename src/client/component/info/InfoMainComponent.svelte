@@ -1,7 +1,7 @@
 <script>
     import { onMount, onDestroy, createEventDispatcher } from 'svelte'
     import { generateId } from '../helper/generateid.js';
-    //import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
+    //import AutosizeDivComponent from '../base/AlignRegionComponent.svelte';
     import mjs from '../../mjs.js';
     //const dispatch = createEventDispatcher();
 

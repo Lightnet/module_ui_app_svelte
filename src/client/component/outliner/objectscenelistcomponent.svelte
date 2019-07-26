@@ -30,48 +30,6 @@
 </script>
 
 <style>
-    /*
-    label{
-        font-size: 12px;
-        float:left;
-    }
-    */
-    input{
-        font-size: 12px;
-    }
-
-    button{
-        background-color:#333;
-        font-size: 12px;
-        color:white;
-        height:22px;
-        /*align-self: auto;*/
-        /*text-align: center;*/
-        /*padding-bottom:10px;*/
-        padding: 0px 4px 10px 4px;
-    }
-
-    button:hover{
-        background-color: lightslategrey;
-    }
-
-    input{
-        background-color:grey;
-        font-size: 12px;
-        height:22px;
-    }
-
-    input[type="checkbox"]{
-        /*  Reset to static positioning (ideally, remove the position: absolute; from Bootstrap) */
-        position: static;
-        /* Properly align using flex */
-        align-self: center;
-        /* Align in the case where flex doesn't apply (checkbox & radio addons, mostly) */
-        vertical-align: middle;
-        /* Setting width and height is optional; alignment works without. However, setting it allows for more predictable layouts. */
-        min-width: 16px;
-        min-height: 16px;
-    }
 
     /**
     * Framework starts from here ...

@@ -11,7 +11,7 @@
 	import AppHeaderComponent from './component/mainwindow/AppHeaderComponent.svelte';
 	import AppFooterComponent from './component/mainwindow/AppFooterComponent.svelte';
 	import ContextMenuComponent from './component/base/ContextMenuComponent.svelte';
-	import SplitterComponent from './component/base/splittercomponent.svelte';
+	import SplitterComponent from './component/base/SplitterComponent.svelte';
 
 	import LayoutLayoutComponent from './component/base/LayoutLayoutComponent.svelte';
 	import DivDividerVComponent from './component/base/sdivdividerv.svelte';

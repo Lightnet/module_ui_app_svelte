@@ -82,6 +82,17 @@ input[type="text"]{
 input[type="color"]{
 	padding: 0px 0px 0px 0px!important;
 }
+input[type="checkbox"]{
+	/*  Reset to static positioning (ideally, remove the position: absolute; from Bootstrap) */
+	position: static;
+	/* Properly align using flex */
+	align-self: center;
+	/* Align in the case where flex doesn't apply (checkbox & radio addons, mostly) */
+	vertical-align: middle;
+	/* Setting width and height is optional; alignment works without. However, setting it allows for more predictable layouts. */
+	min-width: 16px;
+	min-height: 16px;
+}
 
 input:disabled {
 	color: #ccc;

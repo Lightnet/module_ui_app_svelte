@@ -7,7 +7,7 @@
     import { onMount, onDestroy, createEventDispatcher,setContext } from 'svelte';
     import { get } from 'svelte/store';
     import { generateId } from '../helper/generateid.js';
-    //import AutosizeDivComponent from '../base/autosizedivcomponent.svelte';
+    //import AutosizeDivComponent from '../base/AlignRegionComponent.svelte';
     import BaseNodeComponent from './BaseNodeComponent.svelte';
     import NodeVariableComponent from './NodeVariableComponent.svelte';
     import NodeConnectorComponent from './NodeConnectorComponent.svelte';
@@ -297,6 +297,10 @@
         window.removeEventListener('resize', handle_logicnodeeditor_resize);
         //window.removeEventListener('click', handle_nonclick);
         LogicNodeConfigUnsub();
+
+        connectors = [];
+        visualnodes = [];
+        propnodes = []; 
     });
 
     //handle node stuff to prevent camera panning.

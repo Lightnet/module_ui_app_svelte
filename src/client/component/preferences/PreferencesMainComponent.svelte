@@ -102,6 +102,8 @@
     onDestroy(() => {
         //console.log("onDestroy");
         window.removeEventListener('resize', handle_preferences_resize);
+        viewcomponent =null;
+        tabitem=null;
     });
 
     function handle_mousemove(event){
@@ -198,9 +200,13 @@
     </div>
 
     <div id="{idcontent}" class="dataprops">
-        {#if viewcomponent !=null}
-            <svelte:component this={viewcomponent}/>
-        {/if}
+        {#await viewcomponent}
+            <div> Loading... </div>
+        {:then prefscomp}
+            {#if prefscomp !=null}
+                <svelte:component this={viewcomponent}/>
+            {/if}
+        {/await}
     </div>
     
 </div>

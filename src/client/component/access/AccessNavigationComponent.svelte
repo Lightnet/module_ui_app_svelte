@@ -1,6 +1,6 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
-    import AutoSizeDivComponent from "../base/autosizedivcomponent.svelte"
+    import AutoSizeDivComponent from "../base/AlignRegionComponent.svelte"
     //import { UserName } from '../../stores.js';
     import { generateId } from '../helper/generateid.js';
 

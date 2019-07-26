@@ -19,8 +19,22 @@
 
     function onclick(e) {
         //console.log("click");
-        //console.log(e.target)
+        //console.log(e.target);
+        if(e.target.id == null){
+            btoggle = false;
+        }
+
+        if(e.target.id != name+prefix){
+            //console.log(".....");
+            if (btoggle == true) {
+      			//myDropdown.classList.remove('show');
+      			btoggle = false;
+			}
+        }else{
+            //btoggle = false;
+        }
 		//if (!e.target.matches('.dropbtn')){
+        /*
         if (!e.target.matches("#"+name+prefix)){
 			//var myDropdown = document.getElementById(iddropmenu);
 			//if (myDropdown.classList.contains('show')) {
@@ -28,7 +42,8 @@
       			//myDropdown.classList.remove('show');
       			btoggle = false
 			}
-		}
+        }
+        */
     }
     
     onMount(()=>{

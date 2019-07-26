@@ -10,11 +10,10 @@
     import UserChangePassphaseComponent from "./UserChangePassphaseComponent.svelte";
     import LogoutComponent from "./LogoutComponent.svelte";
 
-
     import { generateId } from '../helper/generateid.js';
     import { gun, onLogin } from '../../mjs.js';
-
     import mjs from '../../mjs.js';
+    //const dispatch = createEventDispatcher();
 
     let idcomponent = generateId(20);
     let blogin = false;
@@ -22,17 +21,12 @@
     let navmenus = [];
     let accessview = ProfileComponent;
 
-    //const dispatch = createEventDispatcher();
-
     const LoginuUsub = onLogin.subscribe(value => {
         //console.log(value);
         //console.log("login",value);
 		blogin = value;
 	});
 
-    //onMount(async () => {	
-    //});
-    
     onMount(() => {
         //console.log("mount")
         //console.log("access?");
