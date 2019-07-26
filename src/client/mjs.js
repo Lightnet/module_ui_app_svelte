@@ -234,6 +234,19 @@ export function setUser(data){
     userData = user;
 }
 
+export function onLogout(){
+    onUserName.set("Guest");
+    userData = {};
+    sea={
+        epriv:"",
+        eqpub:"",
+        priv:"",
+        pub:"",
+    }
+    onPub.set("");
+    onLogin.set(false);
+}
+
 //===============================================
 // access view area
 //===============================================
@@ -384,6 +397,7 @@ export default {
     onUserName,
     onPub,
     setUser,
+    onLogout,
 }
 
 //module.exports.gun = gun;

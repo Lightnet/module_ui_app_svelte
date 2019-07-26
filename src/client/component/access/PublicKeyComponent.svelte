@@ -8,9 +8,9 @@
 
 
     const onPubUnsubscribe = onPub.subscribe(value => {
-		//console.log(value);
-		pub = value;
-	});
+		  //console.log(value);
+		  pub = value;
+	  });
 
     onDestroy(()=>{
         onPubUnsubscribe();

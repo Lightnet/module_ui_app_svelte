@@ -26,9 +26,7 @@
     async function searchprofile(){
         let user = gun.user();
         let find = gun.user();
-        console.log(user._.sea)
-
-        
+        //console.log(user._.sea);
         find.get('profile').on(function(data, key, at, ev){//get map data
             //console.log(data);
             //console.log(key);

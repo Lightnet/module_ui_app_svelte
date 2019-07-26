@@ -34,12 +34,14 @@
 		config = value;
 	});
 	
+	/*
 	appconfig.set({
 		name: 'mjs',
 		usegunlocal:false,
 		usecustomtheme:false,
 		username:"Guest"
 	});
+	*/
 	
 	export let name;
 	export let version = "0.0.1";
@@ -266,7 +268,6 @@
 		{#if viewworkspace == "texteditor"}
 			<LayoutTextEditorComponent />
 		{/if}
-
 
 	</div>
 	<AppFooterComponent idassign={idfooter}></AppFooterComponent>

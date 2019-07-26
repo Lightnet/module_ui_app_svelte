@@ -78,7 +78,7 @@
 
     onMount(() => {
         //console.log("onMount");
-        items.push({sm_label:"Access",sm_context:"access",sm_category:"general",icon:b280V24,sm_navmenu:null,comp:AccessMainComponent});
+        items.push({sm_label:"Access",sm_context:"access",sm_category:"general",icon:b280V24,sm_navmenu:AccessNavigationComponent,comp:AccessMainComponent});
         items.push({sm_label:"Viewport 3D",sm_context:"3dviewport",sm_category:"general",icon:b280Z1,sm_navmenu:null,comp:Viewport3DMainComponent});
         //items.push({sm_label:"imageeditor",sm_context:"imageeditor",sm_category:"general",icon:null,sm_navmenu:null,comp:null});
         //items.push({sm_label:"uveditor",sm_context:"uveditor",sm_category:"general",icon:null,sm_navmenu:null,comp:null});
@@ -126,7 +126,7 @@
 </style>
 <div id="{idcontent}" class="editorscreen">
     <EditorHeaderComponent idheader={idheader} viewport={viewport} on:viewport={handle_viewport} items={items}>
-    
+
     </EditorHeaderComponent>
     <!--<EditorContentComponent viewport={viewport} idheader={idheader}>-->
     <EditorContentComponent idheader={idheader}>
@@ -136,7 +136,7 @@
         {/if}
         Fail to load need to rework layout...
         
-
+        
         {#await contexteditor}
             <div> Loading... </div>
         {:then editorcomp}

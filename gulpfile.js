@@ -8,7 +8,8 @@ var started = false;
 //const path = require('path');
 //const fs = require('fs');
 var gulp = require('gulp');
-var clean = require('gulp-clean');
+//var clean = require('gulp-clean'); // outdate
+const del = require('del');
 var rename = require('gulp-rename');
 var nodemon = require('gulp-nodemon');
 const svelte = require('rollup-plugin-svelte');
@@ -38,6 +39,7 @@ var frontrollupconfig = {
 function frontrollup_build(){
     return gulp.src('src/client/main.js')
     .pipe(rollup(frontrollupconfig, 'umd'))
+    //.pipe(rollup(require('./rollup.config.js'), 'umd'))
     .pipe(rename('bundle.js'))
     .pipe(gulp.dest('public/'));
 }
@@ -68,21 +70,46 @@ function backend_build(){
 }
 exports.backend_build = backend_build;
 async function cleanbundle(done){
-    return gulp.src(['public/bundle.js','public/bundle.js.map'], {read: false, allowEmpty:true})
-        .pipe(clean());
+    //return gulp.src(['public/bundle.js','public/bundle.js.map'], {read: false, allowEmpty:true})
+        //.pipe(clean());
+    //del
+    del.sync([ 'public/bundle.js','public/bundle.js.map' ]);
+    return done();
 }
 exports.cleanbundle = cleanbundle;
-function serve(cb){
-    return nodemon({
-		script: 'backend.js'
+function serve(done){
+    var stream = nodemon({
+        //nodemon: require('nodemon'),
+        script: 'backend.js',
+        //watch:['src/client'],
+        watch:['public/'],
+        ext: 'js svelte',
+        ignore: ['backend.js','gulpfile.js','rollup.config.js','node_modules/','data/'],
+        //tasks: ['cleanscript'],
+        done: done,
 	}).on('start', function () {
+        console.log('===================================');
+        console.log('started!');
 		// to avoid nodemon being started multiple times
 		// thanks @matthisk
 		if (!started) {
-			cb();
+			done();
 			started = true; 
-		} 
-	});
+        } 
+        console.log('started END=========!');
+    }).on('restart', function () {
+        console.log('===================================');
+        console.log('restarted!');
+        //cleanscript();
+        if(browserSync){
+            browserSync.reload();
+        }
+    }).on('crash', function() {
+        console.log('===================================');
+        console.error('Application has crashed!\n');
+        stream.emit('restart', 5);  // restart the server in 5 seconds
+    });
+    return stream;
 }
 exports.serve = serve;
 function refreshbrowser(cb){
@@ -92,7 +119,8 @@ function refreshbrowser(cb){
 exports.refreshbrowser = refreshbrowser;
 function watch(done) {
     gulp.watch(['./server.js','./src/server/**/*.*'], gulp.series(backend_build));
-    gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontrollup_build, copy_html, copy_css, lib_test, refreshbrowser));
+    //gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontrollup_build, lib_test, refreshbrowser));
+    gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontrollup_build, lib_test));
     return done();
 }
 exports.watch = watch;
@@ -132,6 +160,10 @@ const build = gulp.series(
     browser_sync,
     lib_test
 );
+
+const cleanscript = gulp.series(cleanbundle, frontrollup_build);
+//const cleanscript = gulp.series(cleanbundle);
+exports.cleanscript = cleanscript;
 
 const buildscript = gulp.series( frontrollup_build, backend_build, copy_css, copy_svg, copy_html);
 exports.buildscript = buildscript;

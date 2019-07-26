@@ -27,7 +27,7 @@ Links:
 
 ```javascript
 
-
+//user._.sea = pair()
 ```
 
 
@@ -90,6 +90,14 @@ user.recall().then(function(ack){
 
 ```
 
+```javascript
+// now let's share private data with someone:
+var alice = await SEA.pair();
+var bob = await SEA.pair();
+var enc = await SEA.encrypt('shared data', await SEA.secret(bob.epub, alice));
+await SEA.decrypt(enc, await SEA.secret(alice.epub, bob));
+// `.secret` is Elliptic-curve Diffie–Hellman
+```
 
 
 # module setup
