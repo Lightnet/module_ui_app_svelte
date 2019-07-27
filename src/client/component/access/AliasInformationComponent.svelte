@@ -3,6 +3,7 @@
     import ModalComponent from "../base/ModalComponent.svelte";
     import { generateId } from '../helper/generateid.js';
     import { gun, pair } from '../../mjs.js';
+    import DecryptComponent from "./DecryptComponent.svelte";
 
     let idcomponent = generateId(20);
     let alias = "";
@@ -67,13 +68,21 @@
         
     }
     
-    onMount(() => {
+    onMount(async () => {
         //console.log("mount");
-        searchprofile();
+        //alias = await getprofilevar('alias', alias);
+        //searchprofile();
         //console.log(gun);
         //console.log(gun.user());
         //let user = gun.user()
         //console.log(user._.sea);
+        let user = gun.user();
+        //console.log(profi);
+        user.get('profile').get('alias').decryptvalue('alias',ack=>{
+            console.log("???")
+            console.log(ack);
+            alias= ack;
+        });
     });
 
     //afterUpdate(() => {
@@ -84,18 +93,93 @@
        //console.log("onDestroy")
     });
 
-    async function inputalias(event){
-        console.log(event)
-        console.log("test....")
+    async function getprofilevar(_name,_value){
         let user = gun.user();
-        user.get('profile').get('alias').put(alias);
+        let pair = user._.sea;
+        //console.log(pair);
+        //console.log(user.is.pub);
+        let pkey = await user.get('trust').get(pair.pub).get(_name+'profile'+"~"+pair.pub).then();
+        pkey =  "SEA"+ JSON.stringify(pkey);
+        //let pdata = await user.get('trust').get(pair.pub).then();
+        //console.log(pdata);
+        console.log(pkey);
+        
+        pkey = await SEA.decrypt(pkey, pair);
+        console.log("pkey",pkey);
+
+        var mix = await Gun.SEA.secret(await user.get('epub').then(), pair);
+        console.log("mix",mix);
+
+        pkey = await Gun.SEA.decrypt(pkey, mix);
+        console.log("pkey:",pkey);
+        
+        return _value;
+        /*
+        console.log(pdata);
+        console.log(pkey);
+        if(pkey == null){
+            console.log("KEY NULL");
+            return _value;
+        }
+        var mix = await Gun.SEA.secret(await user.get('epub').then(), pair);
+        console.log("mix",mix)
+        let epub = await user.get('epub').then();
+        console.log("epub",epub)
+        pkey = await Gun.SEA.decrypt(pkey, mix);
+        console.log(pkey);
+        if(pkey == null){
+            console.log("KEY NULL");
+            return _value;
+        }
+        let val = await Gun.SEA.decrypt(_value, pkey);
+        console.log(val);
+        return val || _value;
+        */
+	}
+
+    async function inputalias(event){
+        //console.log(event);
+        console.log("typing...");
+        let user = gun.user();
+        //user.get('profile').get('alias').put(alias);
         //user.get('profile').get('alias').secret(alias,ack=>{
             //console.log(ack);
         //});
         //user.get('profile').get('alias').put(alias);
-        //user.get('profile').get('alias').secret(alias);
-        console.log("alias");
+        user.get('profile').get('alias').encryptput(alias);
+        //user.get('profile').get('alias').accesskey('')
+        //console.log(user);
+        
+        //user.get('profile').accesskey('alias')
+        //console.log("alias");
     }
+
+    async function decryptalias(event){
+        let user = gun.user();
+        //console.log(profi);
+        //user.get('profile').get('alias').decryptget('alias',ack=>{
+            //console.log("???")
+            //console.log(ack);
+        //});
+
+        //work but not other user data yet
+        //user.get('profile').get('alias').decryptvalue('alias',ack=>{
+            //console.log("???")
+            //console.log(ack);
+        //});
+
+        user.get('profile').get('alias').decryptget('alias',ack=>{
+            console.log("???")
+            console.log(ack);
+        });
+    }
+
+    async function getaliaskey(event){
+        let user = gun.user();
+        user.get('profile').get('alias').secretgetkey('alias');
+    }
+
+
     async function inputborn(event){
         let user = gun.user();
         //user.get('profile').get('born').secret(this.born,ack=>{
@@ -162,7 +246,7 @@
         let key = publickey;
         let to = gun.user(key);
         //user.get('profile').get(this.profiledata).grant(to);
-        user.get('profile').get(profileparam).trust(to);
+        user.get('profile').get(profileparam).grantkey(to);
 
         console.log("finish");
     }
@@ -194,7 +278,12 @@
     <table>
         <tr>
             <td>Alias</td>
-            <td><input type="text" on:keyup={inputalias} bind:value={alias}><button on:click={()=>grant('alias')}>+</button></td>
+            <td><input type="text" on:keyup={inputalias} bind:value={alias}>
+            <button on:click={()=>grant('alias')}>+</button>
+            <button on:click={decryptalias}> decrypt </button>
+            <button on:click={getaliaskey}> Key </button>
+            
+            </td>
         </tr>
         <tr>
             <td>Born</td>
@@ -209,6 +298,8 @@
             <td><input type="text" on:keyup={inputskills} bind:value={skills}><button on:click={()=>grant('skills')}>+</button></td>
         </tr>
     </table>
+
+    <DecryptComponent> </DecryptComponent>
 
     {#if show_grant_Modal}
     <ModalComponent on:close="{()=> {show_grant_Modal=false;}}">

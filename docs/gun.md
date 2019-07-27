@@ -49,6 +49,11 @@ gun.on('bye', (peer)=>{// peer disconnect
 });
 ```
 
+# SEA Section:
+
+```
+SEA.random(16).toString();
+```
 
 SEA user recall
 ```javascript
@@ -133,9 +138,6 @@ Gun.chain.token=function(cb, opt){
 }());
 ```
 
-
-
-
 Testing...
 
 ```javascript
@@ -168,43 +170,43 @@ User.prototype.trust = async function(user){
 //line:1018
 //User.prototype.grant = function(to, cb)
 User.prototype.grant = function(to, cb){
-      console.log("`.grant` API MAY BE DELETED OR CHANGED OR RENAMED, DO NOT USE!");
-      var gun = this, user = gun.back(-1).user(), pair = user.pair(), path = '';
-      gun.back(function(at){ if(at.is){ return } path += (at.get||'') });
-      (async function(){
-      var enc, sec = await user.get('trust').get(pair.pub).get(path).then();
-      sec = await SEA.decrypt(sec, pair);
-      if(!sec){
-        sec = SEA.random(16).toString();
-        enc = await SEA.encrypt(sec, pair);
-        user.get('trust').get(pair.pub).get(path).put(enc);
-      }
-      var pub = to.get('pub').then();
-      var epub = to.get('epub').then();
-      pub = await pub; epub = await epub;
-      var dh = await SEA.secret(epub, pair);
-      enc = await SEA.encrypt(sec, dh);
-      user.get('trust').get(pub).get(path).put(enc, cb);
-      }());
-      return gun;
-    }
+  console.log("`.grant` API MAY BE DELETED OR CHANGED OR RENAMED, DO NOT USE!");
+  var gun = this, user = gun.back(-1).user(), pair = user.pair(), path = '';
+  gun.back(function(at){ if(at.is){ return } path += (at.get||'') });
+  (async function(){
+  var enc, sec = await user.get('trust').get(pair.pub).get(path).then();
+  sec = await SEA.decrypt(sec, pair);
+  if(!sec){
+    sec = SEA.random(16).toString();
+    enc = await SEA.encrypt(sec, pair);
+    user.get('trust').get(pair.pub).get(path).put(enc);
+  }
+  var pub = to.get('pub').then();
+  var epub = to.get('epub').then();
+  pub = await pub; epub = await epub;
+  var dh = await SEA.secret(epub, pair);
+  enc = await SEA.encrypt(sec, dh);
+  user.get('trust').get(pub).get(path).put(enc, cb);
+  }());
+  return gun;
+}
 
-    User.prototype.secret = function(data, cb){
-      console.log("`.secret` API MAY BE DELETED OR CHANGED OR RENAMED, DO NOT USE!");
-      var gun = this, user = gun.back(-1).user(), pair = user.pair(), path = '';
-      gun.back(function(at){ if(at.is){ return } path += (at.get||'') });
-      (async function(){
-      var enc, sec = await user.get('trust').get(pair.pub).get(path).then();
-      sec = await SEA.decrypt(sec, pair);
-      if(!sec){
-        sec = SEA.random(16).toString();
-        enc = await SEA.encrypt(sec, pair);
-        user.get('trust').get(pair.pub).get(path).put(enc);
-      }
-      enc = await SEA.encrypt(data, sec);
-      gun.put(enc, cb);
-      }());
-      return gun;
-    }
+User.prototype.secret = function(data, cb){
+  console.log("`.secret` API MAY BE DELETED OR CHANGED OR RENAMED, DO NOT USE!");
+  var gun = this, user = gun.back(-1).user(), pair = user.pair(), path = '';
+  gun.back(function(at){ if(at.is){ return } path += (at.get||'') });
+  (async function(){
+  var enc, sec = await user.get('trust').get(pair.pub).get(path).then();
+  sec = await SEA.decrypt(sec, pair);
+  if(!sec){
+    sec = SEA.random(16).toString();
+    enc = await SEA.encrypt(sec, pair);
+    user.get('trust').get(pair.pub).get(path).put(enc);
+  }
+  enc = await SEA.encrypt(data, sec);
+  gun.put(enc, cb);
+  }());
+  return gun;
+}
 
 ```
