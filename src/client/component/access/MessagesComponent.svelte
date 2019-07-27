@@ -5,13 +5,13 @@
     let messages=[];
     let contacts=[];
     let bdisplaycontact=true;
-    let alias='';
-    let publickey='BS--EegYmTqQOmgPm-VXlIa6ZGjCt37ohqkpDTdO5Xo.1EmRqLHjuBy5wymWxkg9URmytpdYK8C792-9SgTZtjc';
-    let messagesubject='test';
-    let messagecontent='test';
-    let selectitem='';
+    let alias="";
+    let publickey="";
+    let messagesubject="test";
+    let messagecontent="test";
+    let selectitem="";
     let bfound=false;
-    let statussearch='Normal';
+    let statussearch="Normal";
     let chatboxheight=134;
     let chatmessageheight=136;
 
@@ -26,6 +26,12 @@
 
     onDestroy(()=>{
         //onUserNameUnsubscribe();
+        messages=null;
+        contacts=null;
+        alias=null;
+        publickey=null;
+        messagesubject=null;
+        messagecontent=null;
     });
 
     function togglecontact(){
@@ -147,10 +153,9 @@
     }
 
     async function addcontact(){
-        console.log("addcontact");
+        //console.log("addcontact");
         if((publickey == "")||(publickey.length ==0))
             return;
-
         if (bfound == false)
             return;
         let user = gun.user();

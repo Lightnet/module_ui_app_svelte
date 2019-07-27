@@ -1,5 +1,5 @@
 <script>
-    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
+    import { onMount, onDestroy } from 'svelte';
     import ModalComponent from "../base/ModalComponent.svelte";
     import { generateId } from '../helper/generateid.js';
     import { gun, pair } from '../../mjs.js';
@@ -36,12 +36,12 @@
         getchangehint();
     });
 
-    //afterUpdate(() => {
-        //console.log("afterUpdate")
-    //});
-
     onDestroy(() => {
        //console.log("onDestroy")
+       question1="";
+       question2="";
+       hint="";
+       message="";
     });
 
     async function clickchangehint(e){

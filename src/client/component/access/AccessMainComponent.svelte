@@ -9,9 +9,10 @@
     import UserPassphaseHintComponent from "./UserPassphaseHintComponent.svelte";
     import UserChangePassphaseComponent from "./UserChangePassphaseComponent.svelte";
     import LogoutComponent from "./LogoutComponent.svelte";
-
     import AdminComponent from "./AdminComponent.svelte";
     import MessagesComponent from "./MessagesComponent.svelte";
+
+    import DatabaseComponent from "./DatabaseComponent.svelte";
 
     import { generateId } from '../helper/generateid.js';
     import { gun, onLogin } from '../../mjs.js';
@@ -42,7 +43,7 @@
         navmenus.push({name:"Contacts",context:"contacts",comp:ContactsComponent});
         navmenus.push({name:"Passphase Hint",context:"passphasehint",comp:UserPassphaseHintComponent});
         navmenus.push({name:"Change Passphase",context:"changepassphase",comp:UserChangePassphaseComponent});
-        navmenus.push({name:"Database",context:"database",comp:null});
+        navmenus.push({name:"Database",context:"database",comp:DatabaseComponent});
         navmenus.push({name:"Admin",context:"admin",comp:AdminComponent});
         navmenus.push({name:"Logout",context:"logout",comp:LogoutComponent});
     });

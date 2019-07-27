@@ -1,10 +1,10 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     import { generateId } from '../helper/generateid.js';
-    import { gun, onUserName } from '../../mjs.js';
+    import { gun } from '../../mjs.js';
+    
     //const dispatch = createEventDispatcher();
     let idcomponent = generateId(20);
-
     let statussearch='Normal';
     let bfound='';
     let alias='';

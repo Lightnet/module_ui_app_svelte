@@ -6,7 +6,6 @@
     let publickey = generateId(20);
     let pub = "";
 
-
     const onPubUnsubscribe = onPub.subscribe(value => {
 		  //console.log(value);
 		  pub = value;

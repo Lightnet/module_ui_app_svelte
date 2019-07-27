@@ -17,6 +17,8 @@ const compression = require('compression');
 //const uuidv4 = require('uuid/v4');
 //const helmet  = require('helmet');
 const Gun = require('gun');
+//require('gun/sea');
+
 //if you did not config env it will null default
 var { PORT , NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
@@ -46,3 +48,9 @@ gun.on('bye', (peer)=>{// peer disconnect
   //console.log('disconnected from', peer);
   console.log('disconnected from peer!');
 });
+
+//gun.on('auth', (ack)=>{// peer disconnect
+  //console.log(ack);
+  //console.log('disconnected from', peer);
+  //console.log('disconnected from peer!');
+//});

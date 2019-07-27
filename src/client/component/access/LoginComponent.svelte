@@ -4,13 +4,14 @@
     import { generateId } from '../helper/generateid.js';
     import { gun, setSea, onLogin, setUser } from '../../mjs.js';
 
+    const dispatch = createEventDispatcher();
     let idcomponent = generateId(20);
     let loginid = "test";
     let password = "test";
     let showModal = false;
     let message = "";
 
-    const dispatch = createEventDispatcher();
+    
 
     //onMount(async () => {	
     //});

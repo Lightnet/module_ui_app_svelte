@@ -5,9 +5,8 @@
     import PublicKeyComponent from "./PublicKeyComponent.svelte";
     import { generateId } from '../helper/generateid.js';
 
-    let idcomponent = generateId(20);
-
     //const dispatch = createEventDispatcher();
+    let idcomponent = generateId(20);
 
     //onMount(async () => {	
     //});

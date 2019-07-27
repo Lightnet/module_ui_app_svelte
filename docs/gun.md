@@ -24,17 +24,17 @@ Links:
  * hi (peer)
  * bye (peer)
  * auth (SEA)
+ * ack
+ * create
+ * get
+ * put
+ * in
+ * node
+ * Those tag are found in gun._.tag
 
 ```javascript
 
 //user._.sea = pair()
-```
-
-
-```
-gun.get('@')
-
-
 ```
 
 # gun listen
@@ -71,6 +71,8 @@ user.recall().then(function(ack){
  * user._.soul (user id, can't tamper)
 
 
+ * https://gun.eco/docs/API
+ 
 SEA Auth
 ```javascript
 gun.on('auth',ack=>{
@@ -99,6 +101,20 @@ await SEA.decrypt(enc, await SEA.secret(alice.epub, bob));
 // `.secret` is Elliptic-curve Diffie–Hellman
 ```
 
+# Sea User Custom Module Setup
+```javascript
+//setup is simalar but on User.
+//This base with out init (var gun = Gun())  first but setup module first.
+Gun.User.prototype.cunstomfun=function(cb, opt){
+  console.log("custom test");
+  opt = opt || {};
+  cb = cb || function(ctx) { return ctx };
+  let gun = this;
+
+  return gun;
+}
+
+```
 
 # module setup
 
@@ -138,7 +154,7 @@ peers.once(function(data){
 ```
 
  gun/sea.js
-```
+```javascript
 //line:1009
 User.prototype.trust = async function(user){
       // TODO: BUG!!! SEA `node` read listener needs to be async, which means core needs to be async too.

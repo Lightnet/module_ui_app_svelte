@@ -1,31 +1,26 @@
 <script>
-    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
+    import { onMount, onDestroy } from 'svelte';
     import ModalComponent from "../base/ModalComponent.svelte";
     import { generateId } from '../helper/generateid.js';
     import { gun, pair } from '../../mjs.js';
 
+    //const dispatch = createEventDispatcher();
     let idcomponent = generateId(20);
     let oldpassphrase="";
     let newpassphrase="";
     let showModal = false;
     let message = "";
-
-    //const dispatch = createEventDispatcher();
-
-    //onMount(async () => {	
-    //});
     
     onMount(() => {
         //console.log("mount")
         //console.log("access?");
     });
 
-    //afterUpdate(() => {
-        //console.log("afterUpdate")
-    //});
-
     onDestroy(() => {
-       //console.log("onDestroy")
+       //console.log("onDestroy");
+       oldpassphrase="";
+       newpassphrase="";
+       message="";
     });
 
     function changepassphrase(e){
