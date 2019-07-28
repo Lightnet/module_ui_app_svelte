@@ -210,3 +210,48 @@ User.prototype.secret = function(data, cb){
 }
 
 ```
+
+```javascript
+  var alice = await SEA.pair();
+  var bob = await SEA.pair();
+  var enc = await SEA.encrypt('shared data', await SEA.secret(bob.epub, alice));
+  var msg = await SEA.decrypt(enc, await SEA.secret(alice.epub, bob));
+  console.log(msg);
+```
+Create trust table.
+generate key that is share able. But create encrypt top layer or root graph with pathing.
+
+
+```javascript
+  //https://jsbin.com/macobegopi/edit?js,console
+    var alice = await SEA.pair();
+    var sec = Gun.text.random(16);
+    console.log(sec);
+    var enc1 = await SEA.encrypt(sec, alice);
+    
+    //share key
+    var bob = await SEA.pair();
+    var dh = await SEA.secret(bob.epub, alice);
+    var enc3 = await SEA.encrypt(sec, dh);//////////////
+    
+    console.log("enc1",enc1);
+    var emsg = await SEA.encrypt("data test", sec);
+    
+    // this deal when create function with user sign in
+    // to get from user own key
+    var secret = await SEA.decrypt(enc1, alice);
+    //messsage main
+    var dmsg = await SEA.decrypt(emsg, secret);
+    console.log(dmsg);
+    
+    //when accessing key from another account.
+    //message share
+    var mix = await SEA.secret(alice.epub, bob);
+    //console.log(mix);
+    var key = await SEA.decrypt(enc3, mix);
+    //console.log(key);
+    
+    var dmsg1 = await SEA.decrypt(emsg, key);
+    console.log(dmsg1);
+
+```

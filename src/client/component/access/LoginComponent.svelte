@@ -8,10 +8,9 @@
     let idcomponent = generateId(20);
     let loginid = "test";
     let password = "test";
+    //loginid="beta",password="beta";
     let showModal = false;
     let message = "";
-
-    
 
     //onMount(async () => {	
     //});

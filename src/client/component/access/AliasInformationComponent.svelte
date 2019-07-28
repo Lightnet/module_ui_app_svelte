@@ -78,9 +78,9 @@
         //console.log(user._.sea);
         let user = gun.user();
         //console.log(profi);
-        user.get('profile').get('alias').decryptvalue('alias',ack=>{
-            console.log("???")
-            console.log(ack);
+        user.get('profile').get('alias').decryptvalue(ack=>{
+            //console.log("???");
+            //console.log(ack);
             alias= ack;
         });
     });
@@ -172,6 +172,15 @@
             console.log("???")
             console.log(ack);
         });
+    }
+
+    function aliasrevokekey(){
+
+        let user = gun.user();
+        publickey = "Zf3MC4zSKx9brn3LSRN0bobf3dCUvWyDZG40ioiRj2c.PL7ChkXlFyCK5CFbJibhd2bpw2fpfSxxSLmGnh1LkOg";
+        let key = publickey;
+        let to = gun.user(key);
+        user.get('profile').get('alias').revokekey(to);
     }
 
     async function getaliaskey(event){
@@ -280,6 +289,7 @@
             <td>Alias</td>
             <td><input type="text" on:keyup={inputalias} bind:value={alias}>
             <button on:click={()=>grant('alias')}>+</button>
+            <button on:click={aliasrevokekey}> revoke </button>
             <button on:click={decryptalias}> decrypt </button>
             <button on:click={getaliaskey}> Key </button>
             

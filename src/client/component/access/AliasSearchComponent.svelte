@@ -28,10 +28,37 @@
             return;
         }
         let user = gun.user();
-        let pair = user._.sea;
-
+        //console.log(user);
+        //publickey = "";
         let to = gun.user(publickey);
-        console.log(to);
+        //console.log(to);
+        to.get("profile").get("alias").decryptdata(to,ack=>{
+            console.log(ack);
+        });
+
+        //to.get("profile").get("alias").decryptdata();
+
+
+        //let proalias = to.get("profile").get("alias").decryptdata();
+        //let proalias = to.get("profile").get("alias");
+        //console.log(proalias)
+        //console.dir(proalias)
+
+        //.decryptdata();
+        //let to = gun.user(publickey);
+        //console.log(to);
+
+        //let aliasl = await to.get("profile").get("alias").then();
+        //console.log(aliasl);
+
+
+
+
+
+
+
+
+
         //console.log(user.is);
         //to.get("profile").get("alias").once((ack)=>{
             //console.log(ack);
@@ -50,17 +77,37 @@
         //console.log(key);
         //}
 
-
+        /* //some what work
+        let v = await to.get("profile").get("alias").then();
+        console.log(v);
+        v = "SEA"+ JSON.stringify(v);
         let path = "aliasprofile~uPrVZC0gZ_ZFO6sVtHlXQLpRv4dIr5XXQdqmB16lvH8.yMHCDgghJ6TyejUic-u-mIBUo36cQaPWW059HFfrIW4";
         let key = await to.get('trust').get(pair.pub).get(path).then();
         key = "SEA"+ JSON.stringify(key);
         console.log(key);
+        let sec = await SEA.decrypt(key, pair);
+        let mvalue = await SEA.decrypt(v, sec);
+        console.log(sec);
+        console.log(mvalue);
+        */
 
 
 
-        //let epub = await to.get('pub').then();
-        //console.log("epub",epub);
-        let mix = await Gun.SEA.secret(await to.get('epub').then(), user._.sea);
+
+
+
+
+        //to.get('trust').get(pair.pub).get(path).once((data,key)=>{
+            //console.log(data,key);
+        //})
+        //to.get('trust').map().once((data,key)=>{
+            //console.log(data,key);
+        //})
+        //to.get('trust').get(pair.pub).once((data,key)=>{
+            //console.log(data,key);
+        //});
+        //let mix;
+        //mix = await Gun.SEA.secret(await to.get('epub').then(), user._.sea);
         
 
         //user.get("profile").get("alias").decryptget("alias",(ack)=>{
