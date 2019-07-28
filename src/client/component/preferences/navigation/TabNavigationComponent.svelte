@@ -1,7 +1,7 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     import AutosizeDivComponent from '../../base/AutoSizeDivComponent.svelte';
-    import OrbitandPanComponent from "./PrefsOrbitandPanComponent.svelte";
+    import OrbitandPanComponent from "./PrefsOrbitAndPanComponent.svelte";
     import mjs from '../../../mjs.js';
     //const dispatch = createEventDispatcher();
     

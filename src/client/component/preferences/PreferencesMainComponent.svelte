@@ -12,7 +12,7 @@
     import  LightsComponent from './lights/TabLightsComponent.svelte';
     import  NavigationComponent from './navigation/TabNavigationComponent.svelte';
     import  SaveAndLoadComponent from './saveandload/TabSaveAndLoadComponent.svelte';
-    import  SystemComponent from './system/Tabsystemcomponent.svelte';
+    import  SystemComponent from './system/TabSystemComponent.svelte';
     import  ThemesComponent from './themes/TabThemesComponent.svelte';
     import  ViewportComponent from './viewport/TabViewportComponent.svelte';
 

@@ -1,7 +1,7 @@
 <script>
     import { onMount, onDestroy, createEventDispatcher } from 'svelte'
     import { generateId } from '../../helper/generateid.js';
-    import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
+    import CollapsePanelComponent from '../../base/CollapsePanelComponent.svelte';
     import { get } from 'svelte/store';
     import mjs from '../../../mjs.js';
     const dispatch = createEventDispatcher();

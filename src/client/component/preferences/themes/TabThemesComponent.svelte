@@ -7,7 +7,7 @@
     import BoneColorSetsComponent from "./PrefsBoneColorSetsComponent.svelte";
     import View3DComponent from "./PrefsView3DComponent.svelte";
     import GraphEditorComponent from "./PrefsGraphEditorComponent.svelte";
-    import DopeSheetcomponent from "./PrefsDopeSheetcomponent.svelte";
+    import DopeSheetcomponent from "./PrefsDopeSheetComponent.svelte";
     import NonlinearAnimationComponent from "./PrefsNonlinearAnimationComponent.svelte";
     import UVImageEditorComponent from "./PrefsUVImageEditorComponent.svelte";
     import VideoSequenceEditorComponent from "./PrefsVideoSequenceEditorComponent.svelte";

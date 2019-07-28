@@ -2,7 +2,7 @@
     //import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     //import { UserName } from '../../stores.js';
 
-    import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
+    import CollapsePanelComponent from '../../base/CollapsePanelComponent.svelte';
 
     export let obj;
     export let btogglepanel = true;

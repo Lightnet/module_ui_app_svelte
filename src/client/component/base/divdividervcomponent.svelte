@@ -1,8 +1,8 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import ScreenRegionComponent from './screenregioncomponent.svelte';
+    import ScreenRegionComponent from './ScreenRegionComponent.svelte';
     import AlignRegionComponent from './AlignRegionComponent.svelte';
-    import SplitterComponent from './splittercomponent.svelte';
+    import SplitterComponent from './SplitterComponent.svelte';
     import EditorMainComponent from '../editor/EditorMainComponent.svelte';
     import { generateId } from '../helper/generateid.js';
     //const dispatch = createEventDispatcher();
