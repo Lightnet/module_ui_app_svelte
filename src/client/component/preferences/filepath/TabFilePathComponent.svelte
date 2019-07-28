@@ -1,8 +1,8 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import AutosizeDivComponent from '../base/AlignRegionComponent.svelte';
-    import mjs from '../../mjs.js';
-    import DisplayComponent from "./viewport/displaycomponent.svelte";
+    import AutosizeDivComponent from '../../base/AutoSizeDivComponent.svelte';
+    import DataComponent from "./PrefsDataComponent.svelte";
+    import mjs from '../../../mjs.js';
     //const dispatch = createEventDispatcher();
     
     //onMount(() => {
@@ -23,5 +23,5 @@
 </style>
 
 <AutosizeDivComponent>
-    <DisplayComponent />
+    <DataComponent />
 </AutosizeDivComponent>

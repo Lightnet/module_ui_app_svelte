@@ -3,6 +3,7 @@
     import AliasInformationComponent from './AliasInformationComponent.svelte';
     import DisplayUser from './DisplayUserComponent.svelte';
     import PublicKeyComponent from "./PublicKeyComponent.svelte";
+    import AliasSearchComponent from "./AliasSearchComponent.svelte"
     import { generateId } from '../helper/generateid.js';
 
     //const dispatch = createEventDispatcher();
@@ -33,4 +34,5 @@
     <PublicKeyComponent></PublicKeyComponent>
     
     <AliasInformationComponent></AliasInformationComponent>
+    <AliasSearchComponent></AliasSearchComponent>
 </div>

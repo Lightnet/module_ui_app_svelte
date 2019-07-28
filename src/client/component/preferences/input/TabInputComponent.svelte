@@ -1,8 +1,8 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import AutosizeDivComponent from '../base/AlignRegionComponent.svelte';
-    import KeyboardComponent from "./input/keyboardcomponent.svelte";
-    import mjs from '../../mjs.js';
+    import AutosizeDivComponent from '../../base/AutoSizeDivComponent.svelte';
+    import KeyboardComponent from "./PrefsKeyboardComponent.svelte";
+    import mjs from '../../../mjs.js';
     //const dispatch = createEventDispatcher();
     
     //onMount(() => {

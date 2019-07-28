@@ -1,12 +1,14 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import AutosizeDivComponent from '../base/AlignRegionComponent.svelte';
-    import mjs from '../../mjs.js';
-    import DisplayComponent from "./interface/editorcomponent.svelte";
-    import EditorComponent from "./interface/editorcomponent.svelte";
-    import MenusComponent from "./interface/menuscomponent.svelte";
-    import TextRenderComponent from "./interface/textrendercomponent.svelte";
-    import TranslationComponent from "./interface/translationcomponent.svelte";
+    import AutosizeDivComponent from '../../base/AutoSizeDivComponent.svelte';
+    
+    import DisplayComponent from "./PrefsDisplayComponent.svelte";
+    import EditorComponent from "./PrefsEditorComponent.svelte";
+    import MenusComponent from "./PrefsMenusComponent.svelte";
+    import TextRenderComponent from "./PrefsTextRenderComponent.svelte";
+    import TranslationComponent from "./PrefsTranslationComponent.svelte";
+
+    import mjs from '../../../mjs.js';
 
     //const dispatch = createEventDispatcher();
     

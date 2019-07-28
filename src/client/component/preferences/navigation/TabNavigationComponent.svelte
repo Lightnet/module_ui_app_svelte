@@ -1,8 +1,8 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import AutosizeDivComponent from '../base/AlignRegionComponent.svelte';
-    import TimeLineComponent from "./animation/timelinecomponent.svelte";
-    import mjs from '../../mjs.js';
+    import AutosizeDivComponent from '../../base/AutoSizeDivComponent.svelte';
+    import OrbitandPanComponent from "./PrefsOrbitandPanComponent.svelte";
+    import mjs from '../../../mjs.js';
     //const dispatch = createEventDispatcher();
     
     //onMount(() => {
@@ -23,5 +23,5 @@
 </style>
 
 <AutosizeDivComponent>
-    <TimeLineComponent />
+    <OrbitandPanComponent />
 </AutosizeDivComponent>

@@ -1,9 +1,8 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import AutosizeDivComponent from '../base/AlignRegionComponent.svelte';
-    import CyclesRenderDevicesComponent from "./system/cyclesrenderdevicescomponent.svelte";
-    import mjs from '../../mjs.js';
-    
+    import AutosizeDivComponent from '../../base/AutoSizeDivComponent.svelte';
+    //import UserInterfaceComponent from "./themes/userinterfacecomponent.svelte";
+    import mjs from '../../../mjs.js';
     //const dispatch = createEventDispatcher();
     
     //onMount(() => {
@@ -24,5 +23,5 @@
 </style>
 
 <AutosizeDivComponent>
-    <CyclesRenderDevicesComponent />
+    Addons Component
 </AutosizeDivComponent>

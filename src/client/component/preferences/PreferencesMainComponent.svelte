@@ -2,19 +2,19 @@
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     import { generateId } from '../helper/generateid.js';
 
-    import  InterfaceComponent from './inferfacecomponent.svelte';
-    import  AddonsComponent from './addonscomponent.svelte';
-    import  EditingComponent from './editingcomponent.svelte';
-    import  AnimationComponent from './animationcomponent.svelte';
-    import  FilePathComponent from './filepathcomponent.svelte';
-    import  InputComponent from './inputcomponent.svelte';
-    import  KeymapComponent from './keymapcomponent.svelte';
-    import  LightsComponent from './lightscomponent.svelte';
-    import  NavigationComponent from './navigationcomponent.svelte';
-    import  SaveAndLoadComponent from './saveandloadcomponent.svelte';
-    import  SystemComponent from './systemcomponent.svelte';
-    import  ThemesComponent from './themescomponent.svelte';
-    import  ViewportComponent from './viewportcomponent.svelte';
+    import  InterfaceComponent from './interface/TabInferfaceComponent.svelte';
+    import  AddonsComponent from './addons/TabAddonsComponent.svelte';
+    import  EditingComponent from './editing/TabEditingComponent.svelte';
+    import  AnimationComponent from './animation/TabAnimationComponent.svelte';
+    import  FilePathComponent from './filepath/TabFilePathComponent.svelte';
+    import  InputComponent from './input/TabInputComponent.svelte';
+    import  KeymapComponent from './keymap/TabKeymapComponent.svelte';
+    import  LightsComponent from './lights/TabLightsComponent.svelte';
+    import  NavigationComponent from './navigation/TabNavigationComponent.svelte';
+    import  SaveAndLoadComponent from './saveandload/TabSaveAndLoadComponent.svelte';
+    import  SystemComponent from './system/Tabsystemcomponent.svelte';
+    import  ThemesComponent from './themes/TabThemesComponent.svelte';
+    import  ViewportComponent from './viewport/TabViewportComponent.svelte';
 
     import mjs from '../../mjs.js';
     //const dispatch = createEventDispatcher();

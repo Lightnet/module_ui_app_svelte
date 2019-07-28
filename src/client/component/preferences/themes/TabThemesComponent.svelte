@@ -1,30 +1,31 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import AutosizeDivComponent from '../base/AlignRegionComponent.svelte';
-    import mjs from '../../mjs.js';
-    import UserInterfaceComponent from "./themes/userinterfacecomponent.svelte";
-    import TextStyleComponent from "./themes/textstylecomponent.svelte";
-    import BoneColorSetsComponent from "./themes/bonecolorsetscomponent.svelte";
-    import View3DComponent from "./themes/view3dcomponent.svelte";
-    import GraphEditorComponent from "./themes/grapheditorcomponent.svelte";
-    import DopeSheetcomponent from "./themes/dopesheetcomponent.svelte";
-    import NonlinearAnimationComponent from "./themes/nonlinearanimationcomponent.svelte";
-    import UVImageEditorComponent from "./themes/uvimageeditorcomponent.svelte";
-    import VideoSequenceEditorComponent from "./themes/videosequenceeditorcomponent.svelte";
-    import TextEditorComponent from "./themes/texteditorcomponent.svelte";
-    import LogicNodeEditorComponent from "./themes/logicnodeeditorcomponent.svelte";
-    import NodeEditorComponent from "./themes/nodeeditorcomponent.svelte";
-    import PropertiesComponent from "./themes/propertiescomponent.svelte";
-    import OutlinerComponent from "./themes/outlinercomponent.svelte";
-    import PreferencesComponent from "./themes/preferencescomponent.svelte";
-    import InfoComponent from "./themes/infocomponent.svelte";
-    import FileBrowserComponent from "./themes/filebrowsercomponent.svelte";
-    import JavascriptConolesComponent from "./themes/javascriptconolescomponent.svelte";
-    import MovieClipEditorComponent from "./themes/movieclipeditorcomponent.svelte";
-    import TopBarComponent from "./themes/topbarcomponent.svelte";
-    import StatusBarComponent from "./themes/statusbarcomponent.svelte";
+    import AutosizeDivComponent from '../../base/AutoSizeDivComponent.svelte';
+    
+    import UserInterfaceComponent from "./PrefsUserInterfaceComponent.svelte";
+    import TextStyleComponent from "./PrefsTextStyleComponent.svelte";
+    import BoneColorSetsComponent from "./PrefsBoneColorSetsComponent.svelte";
+    import View3DComponent from "./PrefsView3DComponent.svelte";
+    import GraphEditorComponent from "./PrefsGraphEditorComponent.svelte";
+    import DopeSheetcomponent from "./PrefsDopeSheetcomponent.svelte";
+    import NonlinearAnimationComponent from "./PrefsNonlinearAnimationComponent.svelte";
+    import UVImageEditorComponent from "./PrefsUVImageEditorComponent.svelte";
+    import VideoSequenceEditorComponent from "./PrefsVideoSequenceEditorComponent.svelte";
+    import TextEditorComponent from "./PrefsTextEditorComponent.svelte";
+    import LogicNodeEditorComponent from "./PrefsLogicNodeEditorComponent.svelte";
+    import NodeEditorComponent from "./PrefsNodeEditorComponent.svelte";
+    import PropertiesComponent from "./PrefsPropertiesComponent.svelte";
+    import OutlinerComponent from "./PrefsOutlinerComponent.svelte";
+    import PreferencesComponent from "./PrefsPreferencesComponent.svelte";
+    import InfoComponent from "./PrefsInfoComponent.svelte";
+    import FileBrowserComponent from "./PrefsFileBrowserComponent.svelte";
+    import JavascriptConsoleComponent from "./PrefsJavascriptConsoleComponent.svelte";
+    import MovieClipEditorComponent from "./PrefsMovieClipEditorComponent.svelte";
+    import TopBarComponent from "./PrefsTopBarComponent.svelte";
+    import StatusBarComponent from "./PrefsStatusBarComponent.svelte";
 
-    import {PrefsThemesConfig} from '../../mjs.js';
+    //import mjs from '../../../mjs.js';
+    import {PrefsThemesConfig} from '../../../mjs.js';
     let config;
 
     const PrefsThemesConfigUnsubscribe = PrefsThemesConfig.subscribe(value => {
@@ -78,7 +79,7 @@
     <PreferencesComponent bCollapse={config.ispreferences} on:click={()=>{  config.ispreferences =!config.ispreferences }} />
     <InfoComponent bCollapse={config.isinfo} on:click={()=>{  config.isinfo =!config.isinfo }} />
     <FileBrowserComponent  bCollapse={config.isfilebrowser} on:click={()=>{  config.isfilebrowser =!config.isfilebrowser }} />
-    <JavascriptConolesComponent bCollapse={config.isjavascriptconsole} on:click={()=>{  config.isjavascriptconsole =!config.isjavascriptconsole }} />
+    <JavascriptConsoleComponent bCollapse={config.isjavascriptconsole} on:click={()=>{  config.isjavascriptconsole =!config.isjavascriptconsole }} />
     <MovieClipEditorComponent  bCollapse={config.ismovieclipeditor} on:click={()=>{  config.ismovieclipeditor =!config.ismovieclipeditor }} />
     <TopBarComponent bCollapse={config.istopbar} on:click={()=>{  config.istopbar =!config.istopbar }} />
     <StatusBarComponent bCollapse={config.isstatusbar} on:click={()=>{  config.isstatusbar =!config.isstatusbar }} />
