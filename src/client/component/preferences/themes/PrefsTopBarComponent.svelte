@@ -1,6 +1,6 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import CollapsePanelComponent from '../../base/collapsepanelcomponent.svelte';
+    import CollapsePanelComponent from '../../base/CollapsePanelComponent.svelte';
     //import mjs from '../../../mjs.js';
     import {TopBarConfig} from '../../../mjs.js';
     const dispatch = createEventDispatcher();

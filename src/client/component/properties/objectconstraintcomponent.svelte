@@ -1,6 +1,6 @@
 <script>
     import { onMount, onDestroy, createEventDispatcher } from 'svelte';
-    import AutosizeDivComponent from '../base/AutosizeDivComponent.svelte';
+    import AutosizeDivComponent from '../base/AutoSizeDivComponent.svelte';
     import mjs from '../../mjs.js';
 
     onMount(() => {
