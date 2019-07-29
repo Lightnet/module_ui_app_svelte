@@ -17,6 +17,7 @@ import App from './App.svelte';
 //import {StringProperty} from './component/props/StringProperty'
 import {utils} from './mjs';
 import mjs from './mjs';
+//import './gunjstrustsharekey';
 
 //localStorage.clear();
 //window.localStorage.clear(); //try this to clear all local storage
@@ -69,7 +70,6 @@ import object_ot_headershowmenus from './component/types/object_ot_headershowmen
 
 let register_class = utils.register_class;
 
-
 register_class(object_ot_exportobj);
 
 register_class(object_ot_filenew);
@@ -107,7 +107,6 @@ register_class(object_ot_joinarea);
 register_class(object_ot_splitarea);
 
 register_class(object_ot_headershowmenus);
-
 
 /*
 AFRAME.registerComponent('natural-size', {

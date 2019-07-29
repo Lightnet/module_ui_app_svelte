@@ -5,6 +5,7 @@
     import PublicKeyComponent from "./PublicKeyComponent.svelte";
     import AliasSearchComponent from "./AliasSearchComponent.svelte"
     import { generateId } from '../helper/generateid.js';
+    import GunGraphTestComponent from "./GunGraphTestComponent.svelte";
 
     //const dispatch = createEventDispatcher();
     let idcomponent = generateId(20);
@@ -32,6 +33,7 @@
 <div id="{idcomponent}">
     <DisplayUser></DisplayUser>
     <PublicKeyComponent></PublicKeyComponent>
+    <GunGraphTestComponent></GunGraphTestComponent>
     
     <AliasInformationComponent></AliasInformationComponent>
     <AliasSearchComponent></AliasSearchComponent>

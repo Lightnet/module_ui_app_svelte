@@ -140,8 +140,7 @@
 
 			mjs.gun = gun;
 			mjs.setGun(gun);
-
-			//setGun(gun);
+			
 			//console.log(setGun);
 			//gun.get('mark').put({
 				//name: "Mark",
@@ -150,9 +149,7 @@
 			//gun.get('mark').on(function(data, key){
 				//console.log("update:", data);
 			//});
-			//console.log(gun);
 		}
-		console.log(gun);
 
 		//gun.on('auth',ack=>{
 			//console.log('auth');

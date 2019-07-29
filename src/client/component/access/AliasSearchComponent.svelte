@@ -1,118 +1,70 @@
 <script>
-    import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
+    import { onMount, onDestroy } from 'svelte';
     import { generateId } from '../helper/generateid.js';
     import { gun } from '../../mjs.js';
-    //const dispatch = createEventDispatcher();
     let idcomponent = generateId(20);
     let publickey = "uPrVZC0gZ_ZFO6sVtHlXQLpRv4dIr5XXQdqmB16lvH8.yMHCDgghJ6TyejUic-u-mIBUo36cQaPWW059HFfrIW4";
+    publickey = "Zf3MC4zSKx9brn3LSRN0bobf3dCUvWyDZG40ioiRj2c.PL7ChkXlFyCK5CFbJibhd2bpw2fpfSxxSLmGnh1LkOg";
+    let alias = "";
+    let born = "";
+    let education = "";
+    let skills = "";
 
-    //onMount(async () => {	
-    //});
+    let displaystatus = "Input Public Key!";
+    let bpublickey = true;
     
     onMount(() => {
         //console.log("mount")
-        //console.log("access?");
     });
-
-    //afterUpdate(() => {
-        //console.log("afterUpdate")
-    //});
 
     onDestroy(() => {
        //console.log("onDestroy")
     });
 
+    async function inputcheck(e){
+        let to = gun.user(publickey);
+        //console.log(to);
+        let aliascheck = await to.get("alias").then();
+        //console.log(aliascheck)
+        if(aliascheck){
+            displaystatus=`Found ${aliascheck}!`;
+            bpublickey = true;
+        }else{
+            displaystatus=`None!`;
+            bpublickey = false;
+        }
+    }
+
     async function checkprofile_alias(){
-        if(publickey == ""){
+        if(!bpublickey){
             console.log("none!");
             return;
         }
+        //console.log(gun);
         let user = gun.user();
         //console.log(user);
         //publickey = "";
         let to = gun.user(publickey);
         //console.log(to);
         to.get("profile").get("alias").decryptdata(to,ack=>{
-            console.log(ack);
+            //console.log(ack);
+            alias = ack;
         });
 
-        //to.get("profile").get("alias").decryptdata();
-
-
-        //let proalias = to.get("profile").get("alias").decryptdata();
-        //let proalias = to.get("profile").get("alias");
-        //console.log(proalias)
-        //console.dir(proalias)
-
-        //.decryptdata();
-        //let to = gun.user(publickey);
-        //console.log(to);
-
-        //let aliasl = await to.get("profile").get("alias").then();
-        //console.log(aliasl);
-
-
-
-
-
-
-
-
-
-        //console.log(user.is);
-        //to.get("profile").get("alias").once((ack)=>{
+        to.get("profile").get("born").decryptdata(to,ack=>{
             //console.log(ack);
-        //});
+            born = ack;
+        });
 
+        to.get("profile").get("education").decryptdata(to,ack=>{
+            //console.log(ack);
+            education = ack;
+        },{sharekeytype:"graph"});
 
-        //{ ok code here... self
-        //let v = await to.get("profile").get("alias").then();
-        //console.log(v);
-        //v = "SEA"+ JSON.stringify(v);
-        //console.log(v);
-        //let mix;
-        //let key;
-        //mix = "v1cKN214dvZdXDac";
-        //key = await Gun.SEA.decrypt(v, mix);
-        //console.log(key);
-        //}
-
-        /* //some what work
-        let v = await to.get("profile").get("alias").then();
-        console.log(v);
-        v = "SEA"+ JSON.stringify(v);
-        let path = "aliasprofile~uPrVZC0gZ_ZFO6sVtHlXQLpRv4dIr5XXQdqmB16lvH8.yMHCDgghJ6TyejUic-u-mIBUo36cQaPWW059HFfrIW4";
-        let key = await to.get('trust').get(pair.pub).get(path).then();
-        key = "SEA"+ JSON.stringify(key);
-        console.log(key);
-        let sec = await SEA.decrypt(key, pair);
-        let mvalue = await SEA.decrypt(v, sec);
-        console.log(sec);
-        console.log(mvalue);
-        */
-
-
-
-
-
-
-
-        //to.get('trust').get(pair.pub).get(path).once((data,key)=>{
-            //console.log(data,key);
-        //})
-        //to.get('trust').map().once((data,key)=>{
-            //console.log(data,key);
-        //})
-        //to.get('trust').get(pair.pub).once((data,key)=>{
-            //console.log(data,key);
-        //});
-        //let mix;
-        //mix = await Gun.SEA.secret(await to.get('epub').then(), user._.sea);
-        
-
-        //user.get("profile").get("alias").decryptget("alias",(ack)=>{
-            //console.log("ACK:", ack);
-        //});
+        to.get("profile").get("skills").decryptdata(to,ack=>{
+            //console.log(ack);
+            skills = ack;
+        });
     }
 
 </script>
@@ -121,6 +73,53 @@
 
 </style>
 <div id="{idcomponent}">
-    <button on:click={checkprofile_alias}>Alias</button><input bind:value={publickey}>
+    
+    <table>
+    <tr>
+        <td>
+            <button on:click={checkprofile_alias}>Alias Public Key:</button>
+        </td>
+        <td>
+            <input type="text" bind:value={publickey} on:keyup={inputcheck}> Status: {displaystatus}
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            Alias:
+        </td>
+        <td>
+            <input type="text" bind:value={alias}>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            born:
+        </td>
+        <td>
+            <input type="text" bind:value={born}>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            education:
+        </td>
+        <td>
+            <input type="text" bind:value={education}>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            skills:
+        </td>
+        <td>
+            <input type="text" bind:value={skills}>
+        </td>
+    </tr>
+    
+    </table>
 
 </div>

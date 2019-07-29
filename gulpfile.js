@@ -45,7 +45,7 @@ function frontrollup_build(){
 }
 exports.frontrollup_build = frontrollup_build;
 function lib_test(){
-    return gulp.src('src/client/tokenprototype.js')
+    return gulp.src('src/client/gunjstrustsharekey.js')
     //.pipe(rollup(frontrollupconfig, 'umd'))
     //.pipe(rename('bundle.js'))
     .pipe(gulp.dest('public/'));
@@ -73,7 +73,7 @@ async function cleanbundle(done){
     //return gulp.src(['public/bundle.js','public/bundle.js.map'], {read: false, allowEmpty:true})
         //.pipe(clean());
     //del
-    del.sync([ 'public/bundle.js','public/bundle.js.map' ]);
+    del.sync([ 'public/bundle.js','public/bundle.js.map','public/gunjstrustsharekey.js' ]);
     return done();
 }
 exports.cleanbundle = cleanbundle;
@@ -161,11 +161,11 @@ const build = gulp.series(
     lib_test
 );
 
-const cleanscript = gulp.series(cleanbundle, frontrollup_build);
+const cleanscript = gulp.series(cleanbundle, frontrollup_build, lib_test);
 //const cleanscript = gulp.series(cleanbundle);
 exports.cleanscript = cleanscript;
 
-const buildscript = gulp.series( frontrollup_build, backend_build, copy_css, copy_svg, copy_html);
+const buildscript = gulp.series( frontrollup_build, backend_build, copy_css, copy_svg, copy_html, lib_test);
 exports.buildscript = buildscript;
 
 /*
