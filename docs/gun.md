@@ -1,24 +1,11 @@
 Links:
-
-
-
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
-
-
  
  * 
  * https://gun.eco/docs/Building-Storage-Adapters#hook-into-guns-io-events
 
-
+```
+var msg = (typeof data == 'string')? data : JSON.stringify(data);
+```
 
 # gun.on() event list: 
  * hi (peer)
@@ -35,6 +22,11 @@ Links:
 ```javascript
 
 //user._.sea = pair()
+```
+
+```javascript
+gun.get('list').get(id)// will get the 1 thing out of a list.
+
 ```
 
 # gun listen
@@ -253,5 +245,154 @@ generate key that is share able. But create encrypt top layer or root graph with
     
     var dmsg1 = await SEA.decrypt(emsg, key);
     console.log(dmsg1);
+
+```
+
+
+```javascript
+//https://gun.eco/docs/API#-a-name-opt-a-gun-opt-options-
+
+gun.opt({
+  uuid: function () {
+    return Math.floor(Math.random() * 4294967296);
+  }
+});
+
+```
+
+
+```javascript
+if(at.opt.secure){
+  each.end({err: "Soul is missing public key at '" + key + "'."});
+  return;
+}
+// TODO: Ask community if should auto-sign non user-graph data.
+check['any'+soul+key] = 1;
+at.on('secure', function(msg){ this.off();
+  check['any'+soul+key] = 0;
+  if(at.opt.secure){ msg = null }
+  each.end(msg || {err: "Data cannot be modified."});
+}).on.on('secure', msg);
+//each.end({err: "Data cannot be modified."});
+return;
+```
+
+
+# set share key node value //user
+
+```javascript
+  let user = gun.user();
+  let pair = user._.sea;
+  //console.log(pair);
+  let enc, sec;
+  //sec = await gun.get(keyID).get(pair.pub).then();
+  //console.log("testing..???");
+  sec = await user.get('trust').get(pair.pub).get(keyID).then();
+  //console.log("testing..???");
+  sec = await SEA.decrypt(sec, pair);
+  console.log("SECRET",sec);
+  if(!sec){
+      sec = SEA.random(16).toString();
+      enc = await SEA.encrypt(sec, pair);
+      //gun.get(keyID).get(pair.pub).put(enc);
+      user.get('trust').get(pair.pub).get(keyID).put(enc);
+      //console.log("created finish?");
+  }
+  enc = await SEA.encrypt(ValueText, sec);
+  console.log(enc);
+  enc = JSON.stringify(enc);
+  enc = window.btoa(enc);
+  //console.log(enc);
+  gun.get(keyID).put({value:enc});
+  let v = await gun.get(keyID).get('value').then();
+  console.log(v);
+
+```
+
+# get share key node value //user
+
+```javascript
+  let user = gun.user();
+  let pair = user._.sea;
+  //console.log(pair);
+  let enc, sec;
+  sec = await user.get('trust').get(pair.pub).get(keyID).then();
+  //sec = await user.get(keyID).get('trust').get(keyID).then();
+  //console.log(sec);
+  sec = await SEA.decrypt(sec, pair);
+  console.log("SECRET:",sec);
+  let key = await gun.get(keyID).get('value').then();
+  console.log(key);
+  key = window.atob(key);
+  //console.log(key);
+  key = JSON.parse(key);
+  //console.log(key);
+  //console.log(typeof key);
+  let mvalue = await SEA.decrypt(key, sec);
+  console.log(mvalue);
+
+```
+
+# set key value share key //gun
+
+```javascript
+  console.log(gun);
+  let user = gun.user();
+  let pair = user._.sea;
+  //console.log(pair);
+  let enc, sec;
+  sec = await gun.get(keyID).get('trust').get(pair.pub).get(keyID).then();
+  console.log(sec);
+  if(sec !=null){
+      sec = JSON.parse(sec);
+      sec = await SEA.decrypt(sec, pair);
+  }
+  console.log("SECRET",sec);
+  if(!sec){
+      sec = SEA.random(16).toString();
+      enc = await SEA.encrypt(sec, pair);
+      enc = JSON.stringify(enc);
+      gun.get(keyID).get('trust').get(pair.pub).get(keyID).put(enc);
+      //console.log("created finish?");
+  }
+  enc = await SEA.encrypt(ValueText, sec);
+  console.log(enc);
+  enc = JSON.stringify(enc);
+  //enc = window.btoa(enc);
+  //console.log(enc);
+  gun.get(keyID).put({value:enc});
+  //let v = await gun.get(keyID).get('value').then();
+  //console.log(v);
+```
+
+```javascript
+  //console.log(gun);
+  let user = gun.user();
+  let pair = user._.sea;
+  //console.log(pair);
+  let enc, sec;
+  sec = await gun.get(keyID).get('trust').get(pair.pub).get(keyID).then();
+  sec = JSON.parse(sec);
+  //console.log(sec);
+  sec = await SEA.decrypt(sec, pair);
+  console.log("SECRET:",sec);
+  gun.get(keyID).get('value').once(ack=>{
+      console.log(ack);
+  });
+  let key = await gun.get(keyID).get('value').then();
+  console.log(key);
+  //key = window.atob(key);
+  //console.log(key);
+  key = JSON.parse(key);
+  //console.log(key);
+  //console.log(typeof key);
+  let mvalue = await SEA.decrypt(key, sec);
+  console.log(mvalue);
+
+```
+
+```
+individual listener can be on(function(data, key, msg, event){ event.off() but not always logical to do it in the callback itself
+chain.off() is to clear out everything on that chain (and below!) ideally in future chain.off(1) or chain.off(true) and waht @rm-rf-etc is saying chain.off('class') and stuff to make more finegrain removal
 
 ```

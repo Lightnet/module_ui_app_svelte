@@ -13,6 +13,7 @@
     import MessagesComponent from "./MessagesComponent.svelte";
 
     import DatabaseComponent from "./DatabaseComponent.svelte";
+    import TestAreaComponent from "./TestAreaComponent.svelte";
 
     import { generateId } from '../helper/generateid.js';
     import { gun, onLogin } from '../../mjs.js';
@@ -24,6 +25,7 @@
     let bforgot = false;
     let navmenus = [];
     let accessview = ProfileComponent;
+    accessview = TestAreaComponent;
 
     const LoginuUsub = onLogin.subscribe(value => {
         //console.log(value);
@@ -37,7 +39,7 @@
         //console.log(mjs.gun);
         //console.log(mjs.getGun());
         //console.log(getGun());
-
+        navmenus.push({name:"Test Area",context:"testarea",comp:TestAreaComponent});
         navmenus.push({name:"Profile",context:"profile",comp:ProfileComponent});
         navmenus.push({name:"Messages",context:"messages",comp:MessagesComponent});
         navmenus.push({name:"Contacts",context:"contacts",comp:ContactsComponent});
