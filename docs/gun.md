@@ -29,6 +29,17 @@ gun.get('list').get(id)// will get the 1 thing out of a list.
 
 ```
 
+```
+https://gun.eco/docs/RAD#lex
+lib/time.js ? Yeah, it is kinda being deprecated now in favor of https://gun.eco/docs/RAD#lex (which currently has a bug on it)
+
+var mixer;
+for(let i=0;i<users.length;i++) {
+mixer.push(gun.get('AppName'+'~'+users[i].pub).get(someDeterministicPath));
+}
+compare nodes with mix.js
+```
+
 # gun listen
 ```javascript
 gun.on('hi', peer => {//peer connect
@@ -395,4 +406,13 @@ return;
 individual listener can be on(function(data, key, msg, event){ event.off() but not always logical to do it in the callback itself
 chain.off() is to clear out everything on that chain (and below!) ideally in future chain.off(1) or chain.off(true) and waht @rm-rf-etc is saying chain.off('class') and stuff to make more finegrain removal
 
+```
+```javascript
+const opt = {
+    localStorage: false
+};
+const gun = Gun(opt);
+f = gun.get('foo1').put({id: 'foo1'})
+gun.get('foo-set').set(f)
+gun.get('foo-set').map().on(console.log)
 ```
