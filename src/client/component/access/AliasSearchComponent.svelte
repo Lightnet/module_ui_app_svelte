@@ -3,8 +3,8 @@
     import { generateId } from '../helper/generateid.js';
     import { gun } from '../../mjs.js';
     let idcomponent = generateId(20);
-    let publickey = "uPrVZC0gZ_ZFO6sVtHlXQLpRv4dIr5XXQdqmB16lvH8.yMHCDgghJ6TyejUic-u-mIBUo36cQaPWW059HFfrIW4";
-    publickey = "Zf3MC4zSKx9brn3LSRN0bobf3dCUvWyDZG40ioiRj2c.PL7ChkXlFyCK5CFbJibhd2bpw2fpfSxxSLmGnh1LkOg";
+    let publickey = "";
+    //publickey = "";
     let alias = "";
     let born = "";
     let education = "";

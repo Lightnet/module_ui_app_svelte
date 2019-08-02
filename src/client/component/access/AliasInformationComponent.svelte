@@ -30,7 +30,7 @@
             //console.log("???");
             //console.log(ack);
             alias= ack;
-        });
+        },{sharekeydebug:true});
         //,{sharekeytype:"graph"}
 
         user.get('profile').get('born').decryptvalue(ack=>{
