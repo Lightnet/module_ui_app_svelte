@@ -157,7 +157,7 @@ const build = gulp.series(
     copy_svg, 
     watch, 
     serve, 
-    browser_sync,
+    //browser_sync,
     lib_test
 );
 

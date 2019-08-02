@@ -8,6 +8,8 @@
 	//https://codepen.io/osublake/pen/4c3752574267b3a986cb8eee7ccb8c81
 	//https://github.com/depuits/ned
 
+	localStorage.clear();
+
 	import { onMount, afterUpdate, onDestroy, createEventDispatcher} from 'svelte'
 	import { generateId } from './component/helper/generateid.js';
 
@@ -110,7 +112,7 @@
 		elementfooter = document.getElementById(idfooter);
 		
 		if(config.usegunlocal == true){
-			gun = Gun();
+			gun = Gun('http://localhost:8080' + '/gun');
 			//console.log("gun client storage");
 			mjs.gun = gun;
 			mjs.setGun(gun);

@@ -6,9 +6,9 @@
 
     let keyID = "Q64yIfkgENykj0cu";
     let ValueText = "datarandom";
-    let randomvalue = "test";
-    let publickey = "cOzsO0uke3PwynAGcikph_CeunXuqBtSFmpBegewQDs.PP137p5tNBdngHcPCGkx2IdxQsLZx-U0BijsYMIlMfk";
-    //publickey ="lytXt-q_9LEwrqH2-nAu_NQiDfQNO4qByddkM3GA58g.13StRY8U4pis5oRx5swLUIEMOk9KiZEce4YjygrWwIc";
+    let kvalue = "test";
+    let publickey = "";
+    //publickey ="";
 
     // Define the string
     //var decodedString = atob(encodedString);
@@ -142,7 +142,7 @@
     }
 
     async function btnencryptput(){
-        gun.get("yEh5TG412ppoqXTm").get('key').encryptput(randomvalue);
+        gun.get("yEh5TG412ppoqXTm").get('key').encryptput(kvalue);
     }
 
     async function btndecryptvalue(){
@@ -157,28 +157,22 @@
     }
 
 </script>
+<!--
 <br>KEY: <input bind:value={keyID} />
 <br>VALUE: <input bind:value={ValueText} />
-<br>
 <button on:click={btnTestGun}>Test gun</button>
-
 <button on:click={btnsharekeyset}>Sharekey Set</button>
 <button on:click={btnsharekeyget}>Sharekey Get</button>
 <button on:click={btnkeydata}>Key data</button>
-
-<br>
-<br>KEY Query: <input bind:value={hashkey} />
+KEY Query: <input bind:value={hashkey} />
 <br><button on:click={btnkeyquery}>Query</button>
-
+-->
 <br>
 <br>
 <button on:click={btnencryptput}>btnencryptput</button>
 <button on:click={btndecryptvalue}>btndecryptvalue</button>
-<button on:click={btndecryptdata}>btndecryptdata cb</button>
-
 <br>Public Key: <input bind:value={publickey} />
-<br>Value: <input bind:value={randomvalue} />
-
+<br>Value: <input bind:value={kvalue} />
 <br><button on:click={btngrantkey}>btngrantkey</button>
-<br><button on:click={btnrevokekey}>btnrevokekey</button>
-<br><button on:click={btndecryptdatauser}>btndecryptdatauser</button>
+<button on:click={btnrevokekey}>btnrevokekey</button>
+<button on:click={btndecryptdatauser}>btndecryptdatauser</button>

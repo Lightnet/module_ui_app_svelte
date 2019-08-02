@@ -82,8 +82,8 @@
         work in progress...
     */
     Gun.on('opt', function(context) {
-        //context.opt.sharekeytype="path";//path working
-        context.opt.sharekeytype="graph";//prototype party working sea will convert to string.
+        context.opt.sharekeytype="path";//path working
+        //context.opt.sharekeytype="graph";//prototype party working sea will convert to string.
         context.opt.sharekeydebug = false;
         context.opt.sharekeyvalue = 'value';
         context.opt.sharekeytrust = 'trust';
@@ -585,4 +585,4 @@
     //this deal with gun root function call
     Gun.chain.decryptdata = decryptdata;
     
-    }());
+}());
