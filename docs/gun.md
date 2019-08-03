@@ -416,3 +416,61 @@ f = gun.get('foo1').put({id: 'foo1'})
 gun.get('foo-set').set(f)
 gun.get('foo-set').map().on(console.log)
 ```
+
+
+https://gun.eco/docs/FAQ#does-gun-have-some-form-of-acl-access-rights-a-name-acl-a-
+
+Does GUN have some form of ACL (access rights)? 
+Not yet. But you can add ALC yourself. If you want an example of how to implement ACL, check out this short demo video: https://youtu.be/ZiELAFqNSLQ And peek at this ~150 lines of HTML/CSS/JS that implements it: https://gist.github.com/amark/44b8110a3c848917d6c738f9c3a36e24
+
+To restrict a group of data: (decentralized method)
+
+One thing you could do (to keep it decentralized / P2P) is to create a user (see tutorial above), make that user be an organization (that maybe only you have the login to), and then the organization can specify OTHER users (actual user profiles) to be admins. Now your app's users all "trust" the public key of the organization, and then run fully decentralized logic where they reject (which can happen automatically in SEA) data from anybody that isn't an admin, even as admins change/add/remove over time from the organization.
+
+To add a bit more detail: You would save an ACL table on the organization account. In that ACL table have the path (or soul) of the data that will have others write permission on it. Store on that path/soul in the ACL table, a table of pubkeys allowed to write to that data. Now write wrapper extension around a read function (or do this at a wire adapter level) that checks the ACL table for that record (actually, on 2nd thought, maybe easier to just have the organization reference the ACL table on the record itself, rather than as a separate record), then perform a read from those other pubkeys on the matching path (+org name, depending on your schema) and merge (ideally with HAM) the results before passing back the data. Achieve this in 2 ways either wire adapter that sniffs for ACL schema structures and lets matching writes pass through the firewall or chain extension that upon read of this item, just checks/does an extra lookup and merges results through Ham before returning.
+
+To restrict a group of data: (centralized method)
+
+You are able to write middleware hooks to restrict data - although note, they're usually speaking "the wire spec" but it isn't that bad, for example, check this sample out:
+
+https://github.com/zrrrzzt/bullet-catcher
+
+https://github.com/zrrrzzt/gun-restrict-examples
+
+Again, this is more "centralized" logic which is perfectly possible in GUN, the community just mostly focuses around building tooling for P2P/decentralized logic.
+
+
+
+```
+Looks like setting an array has to be done as a loop if the items in the array are gun nodes. Here's what I mean.
+
+const dbArray = (...arr) => Object.assign({}, arr);
+
+const attachments = [
+  [gun.get('pages').get('0'), dbArray(
+    gun.get('page/1'),
+    gun.get('page/2'),
+  )],
+];
+^ this example actually works, until you try to do the same thing to set rows on pages. Gun throws Invalid graph when trying this.
+
+But, the structure itself is not invalid, it can be done as a loop instead, like this:
+
+const setArray = (parent, children) => {
+  children.forEach((child, id) => parent.get(id).put(child));
+};
+
+setArray(gun.get('page/1').get('rows'), [
+  gun.get('row/1'),
+  gun.get('row/2'),
+  gun.get('row/3'),
+  gun.get('row/3'),
+  gun.get('row/4'),
+]),
+
+Lightnet @Lightnet 21:20
+@rm-rf-etc I feel there something off the code .get('0') .get('rows') are the same format ?
+
+Rob @rm-rf-etc 21:23
+@Lightnet ah, I think you found a bug. Let me try that without .get('0')
+```

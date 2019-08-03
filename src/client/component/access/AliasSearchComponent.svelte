@@ -49,22 +49,22 @@
         to.get("profile").get("alias").decryptdata(to,ack=>{
             //console.log(ack);
             alias = ack;
-        });
+        },{sharekeytype:"graph"});
 
         to.get("profile").get("born").decryptdata(to,ack=>{
             //console.log(ack);
             born = ack;
-        });
+        },{sharekeytype:"path"});
 
         to.get("profile").get("education").decryptdata(to,ack=>{
             //console.log(ack);
             education = ack;
-        },{sharekeytype:"graph"});
+        },{sharekeytype:"path"});
 
         to.get("profile").get("skills").decryptdata(to,ack=>{
             //console.log(ack);
             skills = ack;
-        });
+        },{sharekeytype:"path"});
     }
 
 </script>

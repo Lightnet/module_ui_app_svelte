@@ -17,7 +17,16 @@ import App from './App.svelte';
 //import {StringProperty} from './component/props/StringProperty'
 import {utils} from './mjs';
 import mjs from './mjs';
-//import './gunjstrustsharekey';
+/*
+import Gun from 'gun/gun';
+import 'gun/lib/then';
+import '../common/gunjstrustsharekeyv2';
+import 'gun/sea';
+*/
+//require('gun/sea');
+//require('gun/sea');
+
+
 
 //localStorage.clear();
 //window.localStorage.clear(); //try this to clear all local storage

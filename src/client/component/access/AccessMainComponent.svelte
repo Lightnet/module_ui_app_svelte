@@ -25,7 +25,7 @@
     let bforgot = false;
     let navmenus = [];
     let accessview = ProfileComponent;
-    accessview = TestAreaComponent;
+    //accessview = TestAreaComponent;
 
     const LoginuUsub = onLogin.subscribe(value => {
         //console.log(value);

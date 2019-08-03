@@ -1,6 +1,7 @@
 /*
     Self contain Sandbox Gun Module:
     
+    version: 2.0
 
     Created by: Lightnet
 
@@ -86,12 +87,13 @@
      - Grant/Revoke self share key break share keys.
      - User encrypt json format will do fine. Gun encrypt root need to string and not json.
      - Need to fix which is user or gun root check for easy access when call function.
+     - when user is store in root but when get from `let to = gun.user('key')` will not auto detect as user but gun object.
 */
 (function() {
     var Gun = (typeof window !== "undefined")? window.Gun : require('gun/gun');
     
     Gun.on('opt', function(context) {
-        context.opt.sharekeytype="path";// path for user //This will auto check default for gun and user
+        //context.opt.sharekeytype="path";// path for user //This will auto check default for gun and user
         //context.opt.sharekeytype="graph"; //gun graph sea key will be convert to string and base (bug).
         context.opt.sharekeydebug = true;
         context.opt.sharekeyvalue = 'value';
@@ -106,7 +108,7 @@
         let to = gun.user(publickey);
         user.get('profile').get('alias').grantkey(to);
     */
-    var grantkey = Gun.User.prototype.grantkey=async function(to, cb, opt){
+    function grantkey(to, cb, opt){
         // added new user to key to share current graph key
         console.log("`.grantkey` PROTOTYPE API MAY BE CHANGED OR RENAMED USE!");
         cb = cb || function(ctx) { return ctx };
@@ -114,7 +116,6 @@
         let gun = this, user = gun.back(-1).user(), pair = user._.sea, path = '';
         gun.back(function(at){ if(at.is){ return } path += (at.get||'') });
     
-        opt.sharekeytype = opt.sharekeytype || gun._.root.opt.sharekeytype;
         opt.sharekeydebug = opt.sharekeydebug ||  gun._.root.opt.sharekeydebug;
         opt.sharekeyvalue = opt.sharekeyvalue ||  gun._.root.opt.sharekeyvalue;
         opt.sharekeytrust = opt.sharekeytrust ||  gun._.root.opt.sharekeytrust;
@@ -203,7 +204,6 @@
         }());
         return gun;
     }
-    Gun.chain.grantkey = grantkey;
     /*
         //- Recreated new salt key to share.
         //- reencrypt key value on new salt
@@ -212,7 +212,7 @@
         let to = gun.user(publickey);
         user.get('profile').get('alias').revokekey(to);
     */
-    var revokekey = Gun.User.prototype.revokekey=async function(to, cb, opt){
+    function revokekey(to, cb, opt){
         // recreated new salt key share current graph key
         console.log("`.revokekey` PROTOTYPE API MAY BE CHANGED OR RENAMED USE!");
         cb = cb || function(ctx) { return ctx };
@@ -222,7 +222,6 @@
         //console.log(path);
         if(!to){console.log("to User not set!");}
     
-        opt.sharekeytype = opt.sharekeytype || gun._.root.opt.sharekeytype;
         opt.sharekeydebug = opt.sharekeydebug ||  gun._.root.opt.sharekeydebug;
         opt.sharekeyvalue = opt.sharekeyvalue ||  gun._.root.opt.sharekeyvalue;
         opt.sharekeytrust = opt.sharekeytrust ||  gun._.root.opt.sharekeytrust;
@@ -389,13 +388,12 @@
         }());
         return gun;
     }
-    Gun.chain.revokekey = revokekey;
     /*
         //user...encryptput(value);
         let user = gun.user();
         user.get('profile').get('alias').encryptput("name");
     */
-    var encryptput = Gun.User.prototype.encryptput = function(data, cb, opt){
+    function encryptput(data, cb, opt){
         // encrypt key > put value
         console.log("`.encryptput` PROTOTYPE API MAY BE CHANGED OR RENAMED USE!");
         cb = cb || function(ctx) { return ctx };
@@ -403,7 +401,7 @@
         let gun = this, user = gun.back(-1).user(), pair = user._.sea, path = '';
         let rootgun = this;
         gun.back(function(at){ if(at.is){ return } path += (at.get||'') });
-        opt.sharekeytype = opt.sharekeytype || gun._.root.opt.sharekeytype;//Check sharekey type
+
         opt.sharekeydebug = opt.sharekeydebug ||  gun._.root.opt.sharekeydebug;
         opt.sharekeyvalue = opt.sharekeyvalue ||  gun._.root.opt.sharekeyvalue;
         opt.sharekeytrust = opt.sharekeytrust ||  gun._.root.opt.sharekeytrust;
@@ -482,8 +480,6 @@
         }());
         return gun;
     }
-    
-    Gun.chain.encryptput = encryptput;
     /*
         user...decryptvalue(cb);
         let user = gun.user();
@@ -491,14 +487,13 @@
             //console.log(ack);
         });
     */
-    var decryptvalue = Gun.User.prototype.decryptvalue = function(cb,opt){
+    function decryptvalue(cb,opt){
         //get decrypt key to return value
         console.log("`.decryptvalue` PROTOTYPE API MAY BE CHANGED OR RENAMED USE!");
         cb = cb || function(ctx) { return ctx };
         opt = opt || {};
         let gun = this, user = gun.back(-1).user(), pair = user._.sea, path = '';
     
-        opt.sharekeytype = opt.sharekeytype || gun._.root.opt.sharekeytype;
         opt.sharekeydebug = opt.sharekeydebug ||  gun._.root.opt.sharekeydebug;
         opt.sharekeyvalue = opt.sharekeyvalue ||  gun._.root.opt.sharekeyvalue;
         opt.sharekeytrust = opt.sharekeytrust ||  gun._.root.opt.sharekeytrust;
@@ -564,7 +559,6 @@
         }());
         return gun;
     }
-    Gun.chain.decryptvalue = decryptvalue;
     //working to decrypt data??
     /*
         //user...decryptdata(to,db);
@@ -575,13 +569,13 @@
             console.log(ack);
         });
     */
-    var decryptdata = Gun.User.prototype.decryptdata = function(to, cb, opt){
+    function decryptdata(to, cb, opt){
         // gun graph to decrypt key to return value
         console.log("`.decryptdata` PROTOTYPE API MAY BE DELETED OR CHANGED OR RENAMED USE!");
         cb = cb || function(ctx) { return ctx };
         opt = opt || {};
         let gun = this, user = gun.back(-1).user(), pair = user._.sea, path = '';
-        opt.sharekeytype = opt.sharekeytype || gun._.root.opt.sharekeytype;
+        //opt.sharekeytype = opt.sharekeytype || gun._.root.opt.sharekeytype;
         opt.sharekeydebug = opt.sharekeydebug ||  gun._.root.opt.sharekeydebug;
         opt.sharekeyvalue = opt.sharekeyvalue ||  gun._.root.opt.sharekeyvalue;
         opt.sharekeytrust = opt.sharekeytrust ||  gun._.root.opt.sharekeytrust;
@@ -591,13 +585,14 @@
             console.log("User graph net set!");
             return gun;
         }
+        console.log(opt.sharekeydebug);
 
         if (gun._.$ instanceof Gun.User){//check gun node is user object
             //console.log("User PASS");
-            opt.sharekeytype = "path";
+            opt.sharekeytype = opt.sharekeytype || "path";
         }else{
             //console.log("Gun PASS");
-            opt.sharekeytype = "graph";
+            opt.sharekeytype = opt.sharekeytype || "graph";
         }
     
         gun.back(function(at){ if(at.is){ return } path += (at.get||'') });
@@ -669,7 +664,11 @@
         }());
         return gun;
     }
-    //this deal with gun root function call
+    //SETUP FUNCTION for GUN
+    Gun.chain.grantkey = grantkey;
+    Gun.chain.revokekey = revokekey;
+    Gun.chain.encryptput = encryptput;
+    Gun.chain.decryptvalue = decryptvalue;
     Gun.chain.decryptdata = decryptdata;
     
 }());

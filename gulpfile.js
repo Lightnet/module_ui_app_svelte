@@ -5,19 +5,19 @@ const dev = mode === 'development';
 const prod = mode === 'production';
 var started = false;
 
-//const path = require('path');
-//const fs = require('fs');
-var gulp = require('gulp');
-//var clean = require('gulp-clean'); // outdate
-const del = require('del');
-var rename = require('gulp-rename');
-var nodemon = require('gulp-nodemon');
-const svelte = require('rollup-plugin-svelte');
-const resolve = require('rollup-plugin-node-resolve');
-const commonjs = require('rollup-plugin-commonjs');
-const rollup = require('gulp-better-rollup');
-var browserSync = require('browser-sync').create();
-//const babel = require('gulp-babel');
+//const path        = require('path');
+//const fs          = require('fs');
+var gulp            = require('gulp');
+//var clean         = require('gulp-clean'); // outdate
+const del           = require('del');
+var rename          = require('gulp-rename');
+var nodemon         = require('gulp-nodemon');
+const svelte        = require('rollup-plugin-svelte');
+const resolve       = require('rollup-plugin-node-resolve');
+const commonjs      = require('rollup-plugin-commonjs');
+const rollup        = require('gulp-better-rollup');
+var browserSync     = require('browser-sync').create();
+//const babel       = require('gulp-babel');
 
 //===============================================
 // Rollup
@@ -25,6 +25,9 @@ var browserSync = require('browser-sync').create();
 var frontrollupconfig = {
     //input: 'src/main.js',
     plugins: [
+        commonjs({
+            include: 'node_modules/**'
+        }),
         svelte({
 			dev: !dev,
 			css: css => {
@@ -32,7 +35,7 @@ var frontrollupconfig = {
 			}
         }),
         resolve(),
-		commonjs(),
+		
     ]
 }
 
@@ -45,9 +48,9 @@ function frontrollup_build(){
 }
 exports.frontrollup_build = frontrollup_build;
 function lib_test(){
-    return gulp.src('src/client/gunjstrustsharekey.js')
+    return gulp.src('src/common/gunjstrustsharekeyv2.js')
     //.pipe(rollup(frontrollupconfig, 'umd'))
-    //.pipe(rename('bundle.js'))
+    .pipe(rename('gunjstrustsharekey.js'))
     .pipe(gulp.dest('public/'));
 }
 exports.lib_test = lib_test;
@@ -120,7 +123,8 @@ exports.refreshbrowser = refreshbrowser;
 function watch(done) {
     gulp.watch(['./server.js','./src/server/**/*.*'], gulp.series(backend_build));
     //gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontrollup_build, lib_test, refreshbrowser));
-    gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontrollup_build, lib_test));
+    gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontrollup_build));
+    gulp.watch(['./src/common/**/*.*'], gulp.series( lib_test));
     return done();
 }
 exports.watch = watch;
