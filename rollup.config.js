@@ -8,7 +8,6 @@ const production = !process.env.ROLLUP_WATCH;
 
 export default {
 	input: [
-		//'@babel/polyfill',
 		'src/client/main.js'
 	],
 	output: {

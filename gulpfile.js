@@ -25,9 +25,6 @@ var browserSync     = require('browser-sync').create();
 var frontrollupconfig = {
     //input: 'src/main.js',
     plugins: [
-        commonjs({
-            include: 'node_modules/**'
-        }),
         svelte({
 			dev: !dev,
 			css: css => {
@@ -35,7 +32,8 @@ var frontrollupconfig = {
 			}
         }),
         resolve(),
-		
+        commonjs(),
+        
     ]
 }
 
@@ -76,7 +74,7 @@ async function cleanbundle(done){
     //return gulp.src(['public/bundle.js','public/bundle.js.map'], {read: false, allowEmpty:true})
         //.pipe(clean());
     //del
-    del.sync([ 'public/bundle.js','public/bundle.js.map','public/gunjstrustsharekey.js' ]);
+    del.sync([ 'public/bundle.js','public/bundle.js.map']);
     return done();
 }
 exports.cleanbundle = cleanbundle;

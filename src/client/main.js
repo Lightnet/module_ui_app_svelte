@@ -6,17 +6,18 @@
  License: MIT
 
  Information: Work in progres.
- */
-'use strict';
+ */	
+
+localStorage.clear();
+
+//'use strict';
 import '@babel/polyfill';
 import App from './App.svelte';
 //import App from './Test.svelte';
-//import svelte from 'svelte/compiler';
+//import App from './Test.svelte';
 //console.log(`running svelte version ${svelte.VERSION}`);
 
-//import {StringProperty} from './component/props/StringProperty'
 import {utils} from './mjs';
-import mjs from './mjs';
 /*
 import Gun from 'gun/gun';
 import 'gun/lib/then';
@@ -24,9 +25,6 @@ import '../common/gunjstrustsharekeyv2';
 import 'gun/sea';
 */
 //require('gun/sea');
-//require('gun/sea');
-
-
 
 //localStorage.clear();
 //window.localStorage.clear(); //try this to clear all local storage
@@ -68,7 +66,7 @@ import object_ot_helpreportabug from './component/types/object_ot_helpreportabug
 
 //area right click menu
 import object_ot_joinarea from './component/types/object_ot_joinarea'
-import object_ot_splitarea from './component/types/object_ot_splitarea'
+//import object_ot_splitarea from './component/types/object_ot_splitarea'
 import object_ot_headershowmenus from './component/types/object_ot_headershowmenus'
 
 //ops.object_ot_test = new object_ot_test();
@@ -78,7 +76,7 @@ import object_ot_headershowmenus from './component/types/object_ot_headershowmen
 //register_class(menutest);
 
 let register_class = utils.register_class;
-
+/*
 register_class(object_ot_exportobj);
 
 register_class(object_ot_filenew);
@@ -113,28 +111,15 @@ register_class(object_ot_helpmanual);
 register_class(object_ot_helpreportabug);
 
 register_class(object_ot_joinarea);
-register_class(object_ot_splitarea);
+//register_class(object_ot_splitarea);
 
 register_class(object_ot_headershowmenus);
-
-/*
-AFRAME.registerComponent('natural-size', {
-	init(){
-		//console.log(this.el);
-	},
-	update(){
-
-	},
-	remove() {
-		//console.log(this.el);
-	}
-});
 */
 
 const app = new App({
 	target: document.body,
 	props: {
-		name: 'MJS App.'
+		name: 'MJS'
 	}
 });
 
@@ -143,41 +128,5 @@ app.$on("workspace",(event)=>{
 	//console.log(event);
 	//console.log("workspace: " + event.detail);
 })
-//console.log(app);
-//mjs.Main.set(app);
-//mjs.Main = app;
-window.app = app;
-var text = "test";
-window.text = text;
-
-
-//let strtest = new mjs.props.StringProperty({name:"test",default:"beta"});
-//console.log(mjs);
 
 export default app;
-
-/*
-// Will resolve after 200ms
-let promiseA = new Promise((resolve, reject) => {
-	let wait = setTimeout(() => {
-		clearTimeout(wait);
-	  	resolve('Promise A win!');
-	}, 200)
-  })
-  
-  // Will resolve after 400ms
-  let promiseB = new Promise((resolve, reject) => {
-	let wait = setTimeout(() => {
-		clearTimeout(wait);
-	  	resolve('Promise B win!');
-	}, 400)
-  })
-  
-  // Let's race our promises
-  let race = Promise.race([
-	promiseA,
-	promiseB
-  ])
-  
-  race.then((res) => console.log(res)) // -> Promise A win!
-  */
