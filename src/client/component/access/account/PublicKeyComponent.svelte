@@ -1,7 +1,7 @@
 <script>
     import { onMount, onDestroy } from 'svelte';
-    import { generateId } from '../helper/generateid.js';
-    import { onPub } from '../../mjs.js';
+    import { generateId } from '../../helper/generateid.js';
+    import { onPub } from '../../../mjs.js';
 
     let publickey = generateId(20);
     let pub = "";

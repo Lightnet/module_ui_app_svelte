@@ -1,6 +1,6 @@
 <script>
     import { onMount, onDestroy } from 'svelte';
-    import { onUserName, gun } from '../../mjs.js';
+    import { onUserName, gun } from '../../../mjs.js';
     //let username = "Guest";
 
     //const onUserNameUnsubscribe = onUserName.subscribe(value => {

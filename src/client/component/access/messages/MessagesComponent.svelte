@@ -1,6 +1,6 @@
 <script>
     import { onMount, onDestroy } from 'svelte';
-    import { gun, onUserName } from '../../mjs.js';
+    import { gun, onUserName } from '../../../mjs.js';
 
     let messages=[];
     let contacts=[];

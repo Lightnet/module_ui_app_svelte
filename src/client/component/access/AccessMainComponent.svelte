@@ -1,19 +1,23 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
     import AutoSizeDivComponent from "../base/AutoSizeDivComponent.svelte";
-    import LoginComponent from "./LoginComponent.svelte";
-    import ForgotComponent from "./ForgotComponent.svelte";
+    import LoginComponent from "./account/LoginComponent.svelte";
+    import ForgotComponent from "./account/ForgotComponent.svelte";
 
-    import ProfileComponent from "./ProfileComponent.svelte";
-    import ContactsComponent from "./ContactsComponent.svelte";
-    import UserPassphaseHintComponent from "./UserPassphaseHintComponent.svelte";
-    import UserChangePassphaseComponent from "./UserChangePassphaseComponent.svelte";
-    import LogoutComponent from "./LogoutComponent.svelte";
-    import AdminComponent from "./AdminComponent.svelte";
-    import MessagesComponent from "./MessagesComponent.svelte";
+    //import ProfileComponent from "./account/ProfileComponent.svelte";
+    import AccountComponent from "./account/AccountComponent.svelte";
+    //import ContactsComponent from "./contacts/ContactsComponent.svelte";
+    //import UserPassphaseHintComponent from "./account/UserPassphaseHintComponent.svelte";
+    //import UserChangePassphaseComponent from "./account/UserChangePassphaseComponent.svelte";
+    import LogoutComponent from "./account/LogoutComponent.svelte";
+    import AdminComponent from "./admin/AdminComponent.svelte";
+    import MessagesComponent from "./messages/MessagesComponent.svelte";
 
-    import DatabaseComponent from "./DatabaseComponent.svelte";
-    import TestAreaComponent from "./TestAreaComponent.svelte";
+    import ForumComponent from "./forum/ForumComponent.svelte";
+    import ChatComponent from "./chat/ChatComponent.svelte";
+
+    import DatabaseComponent from "./database/DatabaseComponent.svelte";
+    import TestAreaComponent from "./gun/TestAreaComponent.svelte";
 
     import { generateId } from '../helper/generateid.js';
     import { gun, onLogin } from '../../mjs.js';
@@ -24,7 +28,7 @@
     let blogin = false;
     let bforgot = false;
     let navmenus = [];
-    let accessview = ProfileComponent;
+    let accessview = AccountComponent;
     //accessview = TestAreaComponent;
 
     const LoginuUsub = onLogin.subscribe(value => {
@@ -40,11 +44,14 @@
         //console.log(mjs.getGun());
         //console.log(getGun());
         navmenus.push({name:"Test Area",context:"testarea",comp:TestAreaComponent});
-        navmenus.push({name:"Profile",context:"profile",comp:ProfileComponent});
+        navmenus.push({name:"Account",context:"account",comp:AccountComponent});
+        //navmenus.push({name:"Profile",context:"profile",comp:ProfileComponent});
         navmenus.push({name:"Messages",context:"messages",comp:MessagesComponent});
-        navmenus.push({name:"Contacts",context:"contacts",comp:ContactsComponent});
-        navmenus.push({name:"Passphase Hint",context:"passphasehint",comp:UserPassphaseHintComponent});
-        navmenus.push({name:"Change Passphase",context:"changepassphase",comp:UserChangePassphaseComponent});
+        //navmenus.push({name:"Contacts",context:"contacts",comp:ContactsComponent});
+        navmenus.push({name:"Chat",context:"chat",comp:ChatComponent});
+        navmenus.push({name:"Forum",context:"forum",comp:ForumComponent});
+        //navmenus.push({name:"Passphase Hint",context:"passphasehint",comp:UserPassphaseHintComponent});
+        //navmenus.push({name:"Change Passphase",context:"changepassphase",comp:UserChangePassphaseComponent});
         navmenus.push({name:"Database",context:"database",comp:DatabaseComponent});
         navmenus.push({name:"Admin",context:"admin",comp:AdminComponent});
         navmenus.push({name:"Logout",context:"logout",comp:LogoutComponent});

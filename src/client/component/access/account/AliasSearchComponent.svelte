@@ -1,7 +1,8 @@
 <script>
     import { onMount, onDestroy } from 'svelte';
-    import { generateId } from '../helper/generateid.js';
-    import { gun } from '../../mjs.js';
+    import { generateId } from '../../helper/generateid.js';
+    import { gun, pair } from '../../../mjs.js';
+    
     let idcomponent = generateId(20);
     let publickey = "";
     //publickey = "";

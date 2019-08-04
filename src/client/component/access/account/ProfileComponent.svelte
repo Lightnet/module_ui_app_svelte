@@ -4,7 +4,7 @@
     import DisplayUser from './DisplayUserComponent.svelte';
     import PublicKeyComponent from "./PublicKeyComponent.svelte";
     import AliasSearchComponent from "./AliasSearchComponent.svelte"
-    import { generateId } from '../helper/generateid.js';
+    import { generateId } from '../../helper/generateid.js';
 
     let idcomponent = generateId(20);
     

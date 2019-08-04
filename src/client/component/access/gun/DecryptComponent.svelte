@@ -1,7 +1,7 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import { generateId } from '../helper/generateid.js';
-    import { gun } from '../../mjs.js';
+    import { generateId } from '../../helper/generateid.js';
+    import { gun } from '../../../mjs.js';
 
     //const dispatch = createEventDispatcher();
     let idcomponent = generateId(20);

@@ -1,7 +1,7 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
     import AutoSizeDivComponent from "../base/AlignRegionComponent.svelte";
-    import DisplayUser from "./DisplayUserComponent.svelte";
+    import DisplayUser from "./account/DisplayUserComponent.svelte";
     
     import { generateId } from '../helper/generateid.js';
 

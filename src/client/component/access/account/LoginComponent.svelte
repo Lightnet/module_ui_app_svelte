@@ -1,8 +1,8 @@
 <script>
     import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte';
-    import ModalComponent from "../base/ModalComponent.svelte";
-    import { generateId } from '../helper/generateid.js';
-    import { gun, setSea, onLogin, setUser } from '../../mjs.js';
+    import ModalComponent from "../../base/ModalComponent.svelte";
+    import { generateId } from '../../helper/generateid.js';
+    import { gun, setSea, onLogin, setUser } from '../../../mjs.js';
 
     const dispatch = createEventDispatcher();
     let idcomponent = generateId(20);
