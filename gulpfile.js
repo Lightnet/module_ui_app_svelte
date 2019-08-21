@@ -46,9 +46,9 @@ function frontrollup_build(){
 }
 exports.frontrollup_build = frontrollup_build;
 function lib_test(){
-    return gulp.src('src/common/gunjstrustsharekeyv2.js')
+    return gulp.src('src/common/*.js')
     //.pipe(rollup(frontrollupconfig, 'umd'))
-    .pipe(rename('gunjstrustsharekey.js'))
+    //.pipe(rename('gunjstrustsharekey.js'))
     .pipe(gulp.dest('public/'));
 }
 exports.lib_test = lib_test;
@@ -121,7 +121,7 @@ exports.refreshbrowser = refreshbrowser;
 function watch(done) {
     gulp.watch(['./server.js','./src/server/**/*.*'], gulp.series(backend_build));
     //gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontrollup_build, lib_test, refreshbrowser));
-    gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontrollup_build));
+    gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontrollup_build, copy_html));
     gulp.watch(['./src/common/**/*.*'], gulp.series( lib_test));
     return done();
 }

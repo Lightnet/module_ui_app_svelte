@@ -103,13 +103,18 @@
 </script>
 
 <style>
-
+    .access_navmenu{
+        height:22px;
+        width:100%;
+    }
 </style>
 <AutoSizeDivComponent idcomponent={idcomponent}>
     {#if blogin}
-        {#each navmenus as menu}
-            <a href="/#" on:click="{()=>h_context(menu.comp)}">{menu.name} </a>
-        {/each}
+        <div class="access_navmenu">
+            {#each navmenus as menu}
+                <a href="/#" on:click="{()=>h_context(menu.comp)}">{menu.name} </a>
+            {/each}
+        </div>
         {#if accessview !=null}
             <svelte:component this={accessview} on:hevent={hevent}/>
         {/if}
