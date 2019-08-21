@@ -33,10 +33,8 @@ var frontrollupconfig = {
         }),
         resolve(),
         commonjs(),
-        
     ]
 }
-
 function frontrollup_build(){
     return gulp.src('src/client/main.js')
     .pipe(rollup(frontrollupconfig, 'umd'))
@@ -52,11 +50,10 @@ function lib_test(){
     .pipe(gulp.dest('public/'));
 }
 exports.lib_test = lib_test;
-
 //===============================================
-//
+// Backend Server Build
 //===============================================
-function backend_build(){
+function backend_build(done){
     return gulp.src('./app.js')
 		//.pipe(babel({
             //presets: ['@babel/preset-env', { modules: false }],
@@ -67,7 +64,8 @@ function backend_build(){
             //]
         //}))
         .pipe(rename('backend.js'))
-		.pipe(gulp.dest('./'))
+        .pipe(gulp.dest('./'))
+    done();
 }
 exports.backend_build = backend_build;
 async function cleanbundle(done){
@@ -81,11 +79,11 @@ exports.cleanbundle = cleanbundle;
 function serve(done){
     var stream = nodemon({
         //nodemon: require('nodemon'),
-        script: 'backend.js',
+        script: 'app.js',
         //watch:['src/client'],
-        watch:['public/'],
+        //watch:['public/'],
         ext: 'js svelte',
-        ignore: ['backend.js','gulpfile.js','rollup.config.js','node_modules/','data/'],
+        ignore: ['gulpfile.js','rollup.config.js','node_modules/','data/'],
         //tasks: ['cleanscript'],
         done: done,
 	}).on('start', function () {
@@ -119,7 +117,7 @@ function refreshbrowser(cb){
 }
 exports.refreshbrowser = refreshbrowser;
 function watch(done) {
-    gulp.watch(['./server.js','./src/server/**/*.*'], gulp.series(backend_build));
+    gulp.watch(['./app.js','./src/server/**/*.*'], gulp.series(backend_build));
     //gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontrollup_build, lib_test, refreshbrowser));
     gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontrollup_build, copy_html));
     gulp.watch(['./src/common/**/*.*'], gulp.series( lib_test));

@@ -1,5 +1,5 @@
 //===============================================
-// entry point for server
+// entry point for server polka
 
 // https://timonweb.com/tutorials/how-to-enable-ecmascript-6-imports-in-nodejs/
 // https://github.com/nodejs/modules/blob/master/doc/announcement.md
