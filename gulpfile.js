@@ -87,7 +87,7 @@ function serve(done){
         //tasks: ['cleanscript'],
         done: done,
 	}).on('start', function () {
-        console.log('===================================');
+        //console.log('===================================');
         console.log('started!');
 		// to avoid nodemon being started multiple times
 		// thanks @matthisk
@@ -95,16 +95,16 @@ function serve(done){
 			done();
 			started = true; 
         } 
-        console.log('started END=========!');
+        //console.log('started END=========!');
     }).on('restart', function () {
-        console.log('===================================');
+        //console.log('===================================');
         console.log('restarted!');
         //cleanscript();
         if(browserSync){
             browserSync.reload();
         }
     }).on('crash', function() {
-        console.log('===================================');
+        //console.log('===================================');
         console.error('Application has crashed!\n');
         stream.emit('restart', 5);  // restart the server in 5 seconds
     });

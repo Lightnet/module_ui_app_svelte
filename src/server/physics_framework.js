@@ -6,6 +6,23 @@
 var gun;
 const OIMO = require('../common/oimo');
 var world;
+
+// The Bit of a collision group
+var group1 = 1 << 0;  // 00000000 00000000 00000000 00000001
+var group2 = 1 << 1;  // 00000000 00000000 00000000 00000010
+var group3 = 1 << 2;  // 00000000 00000000 00000000 00000100
+var all = 0xffffffff; // 11111111 11111111 11111111 11111111
+
+var config = [
+    1, // The density of the shape.
+    0.4, // The coefficient of friction of the shape.
+    0.2, // The coefficient of restitution of the shape.
+    1, // The bits of the collision groups to which the shape belongs.
+    all // The bits of the collision groups with which the shape collides.
+];
+
+var bodies=[];
+
 export function initPhysics(arg){
     arg = arg || {};
 
@@ -41,6 +58,7 @@ function initWorld(){
 }
 
 function initTest(){
+    /*
     var body = world.add({ 
         type:'sphere', // type of shape : sphere, box, cylinder 
         size:[1,1,1], // size of shape
@@ -53,8 +71,20 @@ function initTest(){
         belongsTo: 1, // The bits of the collision groups to which the shape belongs.
         collidesWith: 0xffffffff, // The bits of the collision groups with which the shape collides.
     });
+    */
+   
+    let x = 0;
+    let y = 200;
+    let z = 0;
 
-    var ground = world.add({size:[50, 10, 50], pos:[0,-5,0], density:1 });
+    let w = 32;
+    let h = 32;
+    let d = 32;
+
+    var cube = world.add({type:'box', size:[w,h,d], pos:[x,y,z], move:true, config:config, name:'box'});
+    //console.log(cube);
+    bodies.push(cube);
+    var ground = world.add({size:[50, 10, 50], pos:[0,0,0], density:1 });
 
     //var body = world.add({ 
         //type:'jointHinge', // type of joint : jointDistance, jointHinge, jointPrisme, jointSlide, jointWheel
@@ -64,6 +94,7 @@ function initTest(){
 
     // update world
     world.step();
+    //console.log(world);
 }
 
 function initbodies(){
@@ -77,8 +108,13 @@ function initPostLoop(){
 
 function postLoop () {
     //world.step();
-    //console.log("loop world?")
-
+    //console.log("loop world?");
+    for(let idx in bodies){
+        //console.log(body)
+        //console.log(body.position[1])
+        //console.dir(body.position)
+        //console.log(bodies[idx].position);
+    }
 }
 
 export default {

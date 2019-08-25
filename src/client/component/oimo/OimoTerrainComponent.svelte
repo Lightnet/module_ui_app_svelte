@@ -1,27 +1,39 @@
-https://github.com/lo-th/Oimo.js/blob/gh-pages/examples/test_terrain.html
-https://www.babylonjs-playground.com/#DLBW7#10
-http://www.html5gamedevs.com/topic/22329-heightmapoimo-physics/
-https://lo-th.github.io/Oimo.js/examples/test_terrain.html
+<script>
+    //import { onMount, afterUpdate, onDestroy, createEventDispatcher } from 'svelte'
+    import { onMount, onDestroy } from 'svelte';
+    import OIMO from '../../../common/oimo';
 
-    var isMobile = false;
-    var antialias = true;
+    import {ImprovedNoise} from '../../../common/ImprovedNoise';
+    //import { UserName } from '../../stores.js';
+
+    let idcanvas="canvas";
+    let elcanvas;
+
+    let isMobile = false;
+    let antialias = true;
     // three var
-    var camera, scene, light, renderer, canvas, content;
-    var meshs = [];
-    var grounds = [];
-    var paddel;
-    var matBox, matSphere, matBoxSleep, matSphereSleep, matGround, matGroundTrans;
-    var buffgeoSphere, buffgeoBox;
-    var ray, mouse;
-    var terrain;
-    var ToRad = Math.PI / 180;
+    let camera, scene, light, renderer, canvas, content, controls;
+    let meshs = [];
+    let grounds = [];
+    let paddel;
+    let matBox, matSphere, matBoxSleep, matSphereSleep, matGround, matGroundTrans;
+    let buffgeoSphere, buffgeoBox;
+    let ray, mouse;
+    let terrain;
+    let ToRad = Math.PI / 180;
     //oimo var
-    var world = null;
-    var bodys = null;
-    var infos;
-    var type=1;
-    init();
-    loop();
+    let world = null;
+    let bodys = null;
+    let infos;
+    let type=1;
+    
+    onMount(() => {
+        console.log("mount");
+        elcanvas = document.getElementById(idcanvas);
+        init();
+        loop();
+    });
+
     function init() {
         var n = navigator.userAgent;
         if (n.match(/Android/i) || n.match(/webOS/i) || n.match(/iPhone/i) || n.match(/iPad/i) || n.match(/iPod/i) || n.match(/BlackBerry/i) || n.match(/Windows Phone/i)){ isMobile = true;  antialias = false; document.getElementById("MaxNumber").value = 200; }
@@ -80,17 +92,31 @@ https://lo-th.github.io/Oimo.js/examples/test_terrain.html
         // physics
         initOimoPhysics();
     }
+
     function loop() {
-        
         updateOimoPhysics();
         renderer.render( scene, camera );
         requestAnimationFrame( loop );
     }
+
     function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
+        if(elcanvas ==null){
+            console.log("null?")
+            elcanvas = document.getElementById(idcanvas);
+            return;
+        }
+        let parent = elcanvas.parentNode;
+        let w = parent.clientWidth;
+        let h = parent.clientHeight;
+        console.log(w );
+        
+        //camera.aspect = window.innerWidth / window.innerHeight;
+        camera.aspect = w / h;
         camera.updateProjectionMatrix();
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        //renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize( w, h );
     }
+
     function addStaticBox(size, position, rotation, spec) {
         var mesh;
         if(spec) mesh = new THREE.Mesh( buffgeoBox, matGroundTrans );
@@ -104,6 +130,7 @@ https://lo-th.github.io/Oimo.js/examples/test_terrain.html
         mesh.castShadow = true;
         mesh.receiveShadow = true;
     }
+
     function clearMesh(){
         var i=meshs.length;
         while (i--) scene.remove(meshs[ i ]);
@@ -116,6 +143,7 @@ https://lo-th.github.io/Oimo.js/examples/test_terrain.html
         grounds = [];
         meshs = [];
     }
+
     //----------------------------------
     //  OIMO PHYSICS
     //----------------------------------
@@ -125,6 +153,7 @@ https://lo-th.github.io/Oimo.js/examples/test_terrain.html
         populate(1);
         //setInterval(updateOimoPhysics, 1000/60);
     }
+
     function initTerrain(w, h) {
         w = 32 || w;
         h = 32 || h;
@@ -169,8 +198,6 @@ https://lo-th.github.io/Oimo.js/examples/test_terrain.html
         var phyterrain = world.add({type:types, size:sizes, pos:positions, move:false })
         phyterrain.resetPosition(0,0,0);*/
         
-        
-        
         g.computeFaceNormals();
         g.computeVertexNormals();
         terrain = new THREE.Mesh(g, new THREE.MeshPhongMaterial ({color: 0x3D4143, shininess:60 }));
@@ -178,6 +205,7 @@ https://lo-th.github.io/Oimo.js/examples/test_terrain.html
         terrain.receiveShadow = true;
         content.add(terrain);
     }
+
     function populate(n) {
         
         // The Bit of a collision group
@@ -203,6 +231,7 @@ https://lo-th.github.io/Oimo.js/examples/test_terrain.html
         // now add object
         var x, y, z, w, h, d;
         var i = max;
+        var t;
         while (i--){
             if(type===3) t = Math.floor(Math.random()*2)+1;
             else t = type;
@@ -235,7 +264,7 @@ https://lo-th.github.io/Oimo.js/examples/test_terrain.html
         meshs[max].scale.set( 20, 40, 20 );
         scene.add( meshs[max] );
     }
-    var f0, f1, f2 = 0;
+    let f0, f1, f2 = 0;
     
     function updateOimoPhysics() {
         if(world == null) return;
@@ -332,3 +361,32 @@ https://lo-th.github.io/Oimo.js/examples/test_terrain.html
             paddel.position.copy( intersects[0].point.add(new THREE.Vector3( 0, 20, 0 )) );
         }
     }
+
+    onDestroy(() => {
+        console.log("onDestroy")
+    });
+</script>
+
+<style>
+    .topleft{
+        position:fixed;
+        /*top:0;*/
+        /*left:0;*/
+    }
+
+    .bottominfo{
+        position:fixed;
+        bottom:10px;
+        left:10px;
+        color:blue;
+    }
+
+</style>
+<canvas id="canvas" class="topleft"></canvas>
+<div id='interface' class="topleft">
+    <input type="button" value="demo" onClick=populate(1)>
+    <input type="number" name="quantity" min="10" max="2000" value="100"  id='MaxNumber'>
+    <input type="submit" onClick=populate()>
+    <input type="number" name="gravity" min="-20" max="20" value="-10" id='gravity' onChange=gravity() >
+</div>
+<div id='info' class="bottominfo"></div>

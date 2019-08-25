@@ -1,4 +1,6 @@
 //http://lo-th.github.io/Oimo.js/index.html#basic
+
+```javascript
 function demo() {
 
     cam ( 0, 10, 40 );
@@ -93,3 +95,4 @@ function postLoop () {
     editor.tell( world.getInfo() );
 
 }
+```
