@@ -3,9 +3,11 @@
 
  http://lo-th.github.io/Oimo.js/index.html#basic
 */
-var gun;
+
+const uuidv4 = require('uuid/v4');
 const OIMO = require('../common/oimo');
 var world;
+var gun;
 
 // The Bit of a collision group
 var group1 = 1 << 0;  // 00000000 00000000 00000000 00000001
@@ -22,6 +24,7 @@ var config = [
 ];
 
 var bodies=[];
+var gunworld;
 
 export function initPhysics(arg){
     arg = arg || {};
@@ -35,6 +38,8 @@ export function initPhysics(arg){
     //console.log(gun);
     //console.log(OIMO);
     initWorld();//setup world
+
+    initGun();//init gun
 
     initTest();//setup test object
 
@@ -57,6 +62,25 @@ function initWorld(){
     console.log("init world physics...");
 }
 
+function initGun(){
+    gun.get('action').on(ack=>{
+        //console.log(ack);
+        if(ack.reset == true){
+            console.log("reset world!");
+            resetPosition();
+        }
+    });
+    gunworld = gun.get('world').get('objects');
+
+    //gunworld = gun.get('world').get('objects').get({'.':{'*':"*"}}).on(data=>{
+        //console.log(data);
+    //})
+}
+
+function resetPosition(){
+    bodies[0].resetPosition(0,100,0);
+}
+
 function initTest(){
     /*
     var body = world.add({ 
@@ -72,16 +96,16 @@ function initTest(){
         collidesWith: 0xffffffff, // The bits of the collision groups with which the shape collides.
     });
     */
-   
     let x = 0;
     let y = 200;
     let z = 0;
-
     let w = 32;
     let h = 32;
     let d = 32;
-
     var cube = world.add({type:'box', size:[w,h,d], pos:[x,y,z], move:true, config:config, name:'box'});
+    //cube.uuid = uuidv4();
+    //cube.uuid = uuidv4();
+    cube.uuid = "57bb5a1f-d879-411c-b228-809439f5752a";
     //console.log(cube);
     bodies.push(cube);
     var ground = world.add({size:[50, 10, 50], pos:[0,0,0], density:1 });
@@ -110,10 +134,20 @@ function postLoop () {
     //world.step();
     //console.log("loop world?");
     for(let idx in bodies){
-        //console.log(body)
+        //console.log(bodies[idx])
         //console.log(body.position[1])
         //console.dir(body.position)
         //console.log(bodies[idx].position);
+        //console.log("update?")
+        //console.log(bodies[idx].uuid)
+        //gunworld.get(bodies[idx].uuid).put({
+        gun.get('world').get('objects').get(bodies[idx].uuid).put({
+            position:{
+                x:bodies[idx].position.x,
+                y:bodies[idx].position.y,
+                z:bodies[idx].position.z,
+            }
+        });
     }
 }
 

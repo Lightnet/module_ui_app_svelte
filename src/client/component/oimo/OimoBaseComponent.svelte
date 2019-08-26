@@ -26,10 +26,14 @@
     let bodys = null;
     let infos;
     let type=1;
+    let gun;
     
     onMount(() => {
         console.log("mount");
         elcanvas = document.getElementById(idcanvas);
+        gun=Gun("http://localhost:8080/gun");
+        initGunObject();
+
         init();
         loop();
     });
@@ -101,14 +105,14 @@
 
     function onWindowResize() {
         if(elcanvas ==null){
-            console.log("null?")
+            //console.log("null?");
             elcanvas = document.getElementById(idcanvas);
             return;
         }
         let parent = elcanvas.parentNode;
         let w = parent.clientWidth;
         let h = parent.clientHeight;
-        console.log(w );
+        //console.log(w );
         
         //camera.aspect = window.innerWidth / window.innerHeight;
         camera.aspect = w / h;
@@ -157,6 +161,8 @@
         initbasetest();
     }
 
+    var scube;
+
     function initbasetest(){
         var all = 0xffffffff;
         var config = [
@@ -181,10 +187,10 @@
 
         let d = 32;
 
-        bodys[0] = world.add({type:'box', size:[w,h,d], pos:[x,y,z], move:true, config:config, name:'box'});
-        meshs[0] = new THREE.Mesh( buffgeoBox, matBox );
-        meshs[0].scale.set( w, h, d );
-        scene.add( meshs[0] );
+        //bodys[0] = world.add({type:'box', size:[w,h,d], pos:[x,y,z], move:true, config:config, name:'box'});
+        //meshs[0] = new THREE.Mesh( buffgeoBox, matBox );
+        //meshs[0].scale.set( w, h, d );
+        //scene.add( meshs[0] );
 
         //y = 300;
         //bodys[1] = world.add({type:'box', size:[w,h,d], pos:[x,y,z], move:true, config:config, name:'box'});
@@ -192,11 +198,59 @@
         //meshs[1].scale.set( w, h, d );
         //scene.add( meshs[1] );
 
+        scube = new THREE.Mesh( buffgeoBox, matBox );
+        scube.scale.set( w, h, d );
+        scene.add( scube );
+
+
         var ground = world.add({size:[50, 10, 50], pos:[0,0,0], density:1 });
+        console.log(meshs[0]);
+        //console.log(bodys[0]);
+        //console.log(world);
+    }
 
-        console.log(bodys[0]);
+    function initGunObject(){
+        console.log('map?');
+        //gun.get('world').get('objects').get("57bb5a1f-d879-411c-b228-809439f5752a").on(function(data){
+            //console.log(data)
+        //});
 
-        console.log(world);
+        //gun.get('world').get('objects').get({'.': {'*':'*'},'%': 50000}).map().once(data=>{
+            //console.log(data);
+        //})
+        //gun.get('world').on(data=>{
+            //console.log(data);
+        //})
+
+        //gun.get('world').get('objects').on(data=>{
+            //console.log(data["_"]["#"]);
+            //gun.get(data["_"]["#"]).once(data=>{
+                //console.log(data);
+            //})
+        //});
+
+        //gun.get('world').get('objects').get("57bb5a1f-d879-411c-b228-809439f5752a").map().on(data=>{
+            //console.log(data);
+            //console.log(data["_"]["#"]);
+            //gun.get(data["_"]["#"]).once(data=>{
+                //console.log(data);
+            //})
+        //});
+
+        gun.get('world').get('objects').get({'.': {'*':'57bb5a1f-d879-411c-b228-809439f5752a'},'%': 50000}).map().on((data,key)=>{
+            //console.log(data);
+            //console.log(key)
+            gun.get(data.position["#"]).once(pdata=>{
+                //console.log(pdata);
+                if(scube !=null){
+                    scube.position.set(pdata.x,pdata.y,pdata.z);
+                }
+            })
+            //console.log(data["_"]["#"]);
+            //gun.get(data["_"]["#"]).once(data=>{
+                //console.log(data);
+            //})
+        });
     }
 
     function initTerrain(w, h) {
@@ -416,6 +470,18 @@
     function btncheck(){
         console.log(world);
     }
+
+    function btnreset(){
+        console.log("reset");
+        console.log(bodys[0]);
+        //bodys[0].position.y = 100;
+        bodys[0].resetPosition(0,100,0);
+    }
+
+    function btnresetserver(){
+        console.log("reset server");
+        gun.get('action').get('reset').put(true);
+    }
 </script>
 
 <style>
@@ -440,5 +506,7 @@
     <input type="submit" onClick=populate()>
     <input type="number" name="gravity" min="-20" max="20" value="-10" id='gravity' onChange=gravity() >
     <input type="submit" on:click={btncheck} value="check">
+    <input type="submit" on:click={btnreset} value="reset">
+    <input type="submit" on:click={btnresetserver} value="reset server">
 </div>
 <div id='info' class="bottominfo"></div>
