@@ -30,6 +30,7 @@
         clientEngine = new ClientEngine(gameEngine, options, Renderer);
 
         clientEngine.start();
+        //element id viewport > threerenderer.js
     });
 
     onDestroy(function(){
@@ -44,5 +45,5 @@
     }
 </style>
 
-<canvas id="canvas" class="topleft"></canvas>
-<div id="viewport" class="topleft"></div>
+<!--<canvas id="canvas" class="topleft"></canvas>-->
+<div id="viewport" class="topleft" style="width:100%;height:100%;"></div>

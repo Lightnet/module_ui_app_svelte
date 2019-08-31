@@ -9,11 +9,27 @@ export default class ThreeRenderer extends Renderer {
         this.camera = null;
         this.renderer = null;
         this.antialias = true;
+        this.elviewport = null;
+    }
+
+    onWindowResize(){
+        //console.log("resize");
+        //console.log(this.camera);
+        //let w = window.innerWidth; //parent.clientWidth;
+        //let h = window.innerHeight;//parent.clientHeight;
+        let parent = this.elviewport.parentNode;
+        let w = parent.clientWidth;
+        let h = parent.clientHeight;
+        //camera.aspect = window.innerWidth / window.innerHeight;
+        this.camera.aspect = w / h;
+        this.camera.updateProjectionMatrix();
+        //renderer.setSize( window.innerWidth, window.innerHeight );
+        this.renderer.setSize( w, h );
     }
 
     // setup the 3D scene
     init() {
-        super.init();
+        
 
         // setup the scene
         this.scene = new THREE.Scene();
@@ -24,18 +40,23 @@ export default class ThreeRenderer extends Renderer {
             antialias: this.antialias
         });
         document.getElementById('viewport').appendChild(this.renderer.domElement);
-
+        this.elviewport = document.getElementById('viewport');
         // a local raycaster
         this.raycaster = new THREE.Raycaster();
 
         // TODO: is this still needed?
         this.THREE = THREE;
+        //need to place here for on event trigger correctly?
+        super.init();
+
+        window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
+        this.onWindowResize();
         return Promise.resolve(); // eslint-disable-line new-cap
     }
 
     // single step
     draw() {
-        //console.log("draw");
+        //console.log("render draw");
         this.renderer.render(this.scene, this.camera);
     }
 
@@ -48,4 +69,5 @@ export default class ThreeRenderer extends Renderer {
     removeObject(o) {
         this.scene.remove(o);
     }
+
 }

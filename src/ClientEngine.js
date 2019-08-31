@@ -1,6 +1,6 @@
 
 //https://github.com/lance-gg/lance/tree/master/src
-
+import Serializer from './serialize/Serializer';
 import Scheduler from './lib/Scheduler';
 const GAME_UPS = 60; // default number of game steps per second
 
@@ -16,13 +16,13 @@ class ClientEngine{
             serverURL: null,
         }, inputOptions);
 
-        //this.serializer = new Serializer();
+        this.serializer = new Serializer();
         this.gameEngine = gameEngine;
-        //this.gameEngine.registerClasses(this.serializer);
+        this.gameEngine.registerClasses(this.serializer);
         //this.networkTransmitter = new NetworkTransmitter(this.serializer);
         //this.networkMonitor = new NetworkMonitor();
-        //this.inboundMessages = [];
-        //this.outboundMessages = [];
+        this.inboundMessages = [];
+        this.outboundMessages = [];
 
         // create the renderer
         this.renderer = this.gameEngine.renderer = new Renderer(gameEngine, this);
@@ -67,7 +67,8 @@ class ClientEngine{
         // initialize the renderer
         // the render loop waits for next animation frame
         if (!this.renderer) alert('ERROR: game has not defined a renderer');
-        console.log("init loop?")
+        console.log("init loop?");
+        
         let renderLoop = (timestamp) => {
             //console.log("loop?");
             if (this.stopped) {
@@ -80,8 +81,11 @@ class ClientEngine{
             this.lastTimestamp = timestamp;
             window.requestAnimationFrame(renderLoop);
         };
-
+        console.log("client return here ?")
+        this.gameEngine.start(); //just testing...
+        //need to fixed this!!!
         return this.renderer.init().then(() => {
+            console.log("client run start?")
             this.gameEngine.start();
 
             if (this.options.scheduler === 'fixed') {

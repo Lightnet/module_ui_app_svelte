@@ -6,7 +6,7 @@
  * It represents an instance of the game world, and includes all the game objects.
  * It is the state of the game.
  */
-class GameWorld {
+export default class GameWorld {
 
     /**
      * Constructor of the World instance.  Invoked by Lance on startup.
@@ -126,5 +126,3 @@ class GameWorld {
         }
     }
 }
-
-export default GameWorld;

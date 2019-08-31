@@ -1,6 +1,7 @@
 
 import fs from 'fs';
 import Scheduler from './lib/Scheduler';
+import Serializer from './serialize/Serializer';
 
 
 class ServerEngine {
@@ -19,7 +20,15 @@ class ServerEngine {
         }, options);
 
         this.io = io;
+        /**
+         * reference to game engine
+         * @member {GameEngine}
+         */
+        this.serializer = new Serializer();
         this.gameEngine = gameEngine;
+        this.gameEngine.registerClasses(this.serializer);
+        //this.networkTransmitter = new NetworkTransmitter(this.serializer);
+        //this.networkMonitor = new NetworkMonitor(this);
 
 
         this.DEFAULT_ROOM_NAME = '/lobby';
