@@ -37,7 +37,13 @@ var frontrollupconfig = {
 }
 function frontrollup_build(){
     return gulp.src('src/client/main.js')
-    .pipe(rollup(frontrollupconfig, 'umd'))
+    //.pipe(rollup(frontrollupconfig, 'umd'))
+    .pipe(rollup(
+        frontrollupconfig,
+        {
+            format: 'cjs',
+        }
+    ))
     //.pipe(rollup(require('./rollup.config.js'), 'umd'))
     .pipe(rename('bundle.js'))
     .pipe(gulp.dest('public/'));
@@ -117,9 +123,9 @@ function refreshbrowser(cb){
 }
 exports.refreshbrowser = refreshbrowser;
 function watch(done) {
-    gulp.watch(['./app.js','./src/server/**/*.*'], gulp.series(backend_build));
+    gulp.watch(['./app.js','./src/**/*.*'], gulp.series(backend_build));
     //gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontrollup_build, lib_test, refreshbrowser));
-    gulp.watch(['./src/client/**/*.*'], gulp.series( cleanbundle, frontrollup_build, copy_html));
+    gulp.watch(['./src/**/*.*'], gulp.series( cleanbundle, frontrollup_build, copy_html));
     gulp.watch(['./src/common/**/*.*'], gulp.series( lib_test));
     return done();
 }

@@ -12,7 +12,8 @@ export default {
 	],
 	output: {
 		sourcemap: true,
-		format: 'iife',
+		//format: 'iife', //default
+		format: 'cjs',
 		name: 'app',
 		file: 'public/bundle.js'
 	},

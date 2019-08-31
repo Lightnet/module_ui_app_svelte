@@ -11,10 +11,11 @@
 localStorage.clear();
 
 //'use strict';
-//import '@babel/polyfill';
-import App from './App.svelte';
+//import "@babel/polyfill";
+//import App from './App.svelte';
 //import App from './Test.svelte';
 //import App from './component/oimo/OimoMainComponent.svelte';
+import App from './component/engine/ClientEngineComponent.svelte';
 //console.log(`running svelte version ${svelte.VERSION}`);
 
 import {utils} from './mjs';
@@ -124,9 +125,7 @@ const app = new App({
 });
 
 app.$on("workspace",(event)=>{
-	//console.log('workspace');
-	//console.log(event);
 	//console.log("workspace: " + event.detail);
 })
-
-export default app;
+//console.log("main app");
+//export default app;
