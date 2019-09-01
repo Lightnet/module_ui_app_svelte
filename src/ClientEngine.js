@@ -2,7 +2,10 @@
 //https://github.com/lance-gg/lance/tree/master/src
 import Serializer from './serialize/Serializer';
 import Scheduler from './lib/Scheduler';
+
 const GAME_UPS = 60; // default number of game steps per second
+const STEP_DELAY_MSEC = 12; // if forward drift detected, delay next execution by this amount
+const STEP_HURRY_MSEC = 8; // if backward drift detected, hurry next execution by this amount
 
 class ClientEngine{
     constructor(gameEngine, inputOptions, Renderer) {
@@ -83,11 +86,12 @@ class ClientEngine{
         };
         console.log("client return here ?")
         this.gameEngine.start(); //just testing...
+        let self = this;
         //need to fixed this!!!
         return this.renderer.init().then(() => {
-            console.log("client run start?")
-            this.gameEngine.start();
-
+            console.log("client run start RENDERER?")
+            //self.gameEngine.start();
+            console.log(this.options.scheduler);
             if (this.options.scheduler === 'fixed') {
                 // schedule and start the game loop
                 this.scheduler = new Scheduler({
@@ -138,7 +142,7 @@ class ClientEngine{
     // execute a single game step.  This is normally called by the Renderer
     // at each draw event.
     step(t, dt, physicsOnly) {
-        console.log("step render/physics")
+        //console.log("step render/physics");
 
         if (!this.resolved) {
             const result = this.gameEngine.getPlayerGameOverResult();
@@ -172,7 +176,7 @@ class ClientEngine{
         //}
 
         // check for server/client step drift without update
-        this.checkDrift('onEveryStep');
+        //this.checkDrift('onEveryStep');
 
         // perform game engine step
         if (this.options.standaloneMode !== true) {

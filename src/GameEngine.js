@@ -4,7 +4,7 @@ import GameWorld from './GameWorld';
 import Timer from './game/Timer';
 import Trace from './lib/Trace';
 
-class GameEngine {
+export default class GameEngine {
 
     constructor(options) {
 
@@ -206,7 +206,9 @@ class GameEngine {
     isOwnedByPlayer(object) {
         return (object.playerId == this.playerId);
     }
+    
+    getPlayerGameOverResult() {
+        return null;
+    }
 
 }
-
-export default GameEngine;

@@ -11,7 +11,8 @@
     let defaults = {
         //traceLevel: Lib.Trace.TRACE_NONE,
         delayInputCount: 3,
-        scheduler: 'render-schedule',
+        //scheduler: 'render-schedule',//server
+        scheduler: 'fixed',//client
         syncOptions: {
             //sync: qsOptions.sync || 'extrapolate',
             remoteObjBending: 0.8,

@@ -25,7 +25,10 @@ class Renderer {
             console.log('renderer invoked on server side.');
         }
         this.gameEngine.emit('client__rendererReady');
-        return Promise.resolve(); // eslint-disable-line new-cap
+        // an immediately resolved promise
+        let promise = new Promise(resolve => resolve("done!"));
+        return promise;
+        //return Promise.resolve('Success'); // eslint-disable-line new-cap
     }
 
     reportSlowFrameRate() {

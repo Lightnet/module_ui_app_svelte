@@ -20,6 +20,14 @@ class OimoPhysicsEngine extends PhysicsEngine {
 
     constructor(options) {
         super(options);
+        this.isServer = false;
+        if(typeof window !== "undefined"){
+            this.isServer = false;
+        }else{
+            this.isServer = true;
+        }
+        console.log("Server: ",this.isServer)
+
         //console.log("physics engine?")
         this.options.dt = this.options.dt || (1 / 60);
         //console.log(global.OIMO);
@@ -45,7 +53,9 @@ class OimoPhysicsEngine extends PhysicsEngine {
 
     // entry point for a single step of the Simple Physics
     step(dt, objectFilter) {
-        //console.log('step physics world');
+        //if(this.isServer == false){//client checks
+            //console.log('step physics world');
+        //}
         this.world.step(dt || this.options.dt);
     }
 
