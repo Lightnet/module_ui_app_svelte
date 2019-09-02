@@ -2,7 +2,7 @@ let singleton = null;
 
 const TIME_RESET_THRESHOLD = 100;
 
-class Renderer {
+export default class Renderer {
 
     static getInstance() {
         return singleton;
@@ -36,7 +36,7 @@ class Renderer {
     }
 
     draw(t, dt) {
-        console.log("render draw")
+        //console.log("render draw");
         this.gameEngine.emit('client__draw');
 
         if (this.clientEngine.options.scheduler === 'render-schedule')
@@ -84,5 +84,3 @@ class Renderer {
 
     stop() {}
 }
-
-export default Renderer;

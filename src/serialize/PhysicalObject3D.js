@@ -90,14 +90,15 @@ export default class PhysicalObject3D extends GameObject {
     syncTo(other, options) {
 
         super.syncTo(other);
+        console.log("syncTo");
 
         this.position.copy(other.position);
-        this.quaternion.copy(other.quaternion);
-        this.angularVelocity.copy(other.angularVelocity);
+        //this.quaternion.copy(other.quaternion);
+        //this.angularVelocity.copy(other.angularVelocity);
 
-        if (!options || !options.keepVelocity) {
-            this.velocity.copy(other.velocity);
-        }
+        //if (!options || !options.keepVelocity) {
+            //this.velocity.copy(other.velocity);
+        //}
 
         if (this.physicsObj)
             this.refreshToPhysics();
@@ -105,7 +106,7 @@ export default class PhysicalObject3D extends GameObject {
 
     // update position, quaternion, and velocity from new physical state.
     refreshFromPhysics() {
-        //this.position.copy(this.physicsObj.position);
+        this.position.copy(this.physicsObj.position);
         //this.quaternion.copy(this.physicsObj.quaternion);
         //this.velocity.copy(this.physicsObj.velocity);
         //this.angularVelocity.copy(this.physicsObj.angularVelocity);
@@ -114,9 +115,9 @@ export default class PhysicalObject3D extends GameObject {
     // update position, quaternion, and velocity from new game state.
     refreshToPhysics() {
         this.physicsObj.position.copy(this.position);
-        this.physicsObj.quaternion.copy(this.quaternion);
-        this.physicsObj.velocity.copy(this.velocity);
-        this.physicsObj.angularVelocity.copy(this.angularVelocity);
+        //this.physicsObj.quaternion.copy(this.quaternion);
+        //this.physicsObj.velocity.copy(this.velocity);
+        //this.physicsObj.angularVelocity.copy(this.angularVelocity);
     }
 
     // apply one increment of bending
@@ -151,7 +152,7 @@ export default class PhysicalObject3D extends GameObject {
 
         // slerp to target position
         this.position.lerp(nextObj.position, percent);
-        this.quaternion.slerp(nextObj.quaternion, percent);
+        //this.quaternion.slerp(nextObj.quaternion, percent);
     }
 
 }

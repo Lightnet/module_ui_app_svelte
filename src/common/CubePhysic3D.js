@@ -1,14 +1,15 @@
 import PhysicalObject3D from "../serialize/PhysicalObject3D";
 import ThreeVector from "../serialize/ThreeVector";
 
-let game = null;
-let p2 = null;
+//let game = null;
+//let p2 = null;
 
 export default class CubePhysic3D extends PhysicalObject3D{
 
     constructor(gameEngine, options, props) {
         super(gameEngine, options, props);
-        this.position = new ThreeVector(0, 0, 0);
+        this.class = CubePhysic3D;
+        //this.position = new ThreeVector(0, 0, 0);
     }
 
     // on add-to-world, create a physics body
@@ -17,8 +18,10 @@ export default class CubePhysic3D extends PhysicalObject3D{
         //let THREE;
         let camera;
         console.log("Add Cube");
-        game = this.gameEngine;
-        console.log(game.renderer);
+        let game = this.gameEngine;
+        let world;
+        //console.log(game.renderer);
+        this.Object3D =null;
         if(game.renderer !=null){
             //THREE = game.renderer.THREE;
             scene = game.renderer.scene;
@@ -27,12 +30,45 @@ export default class CubePhysic3D extends PhysicalObject3D{
             var geometry = new THREE.BoxGeometry( 1, 1, 1 );
             var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
             var cube = new THREE.Mesh( geometry, material );
+            //console.log(this.position);
+            cube.position.set(this.position.x,this.position.y,this.position.z);
+            cube.scale.set( 32, 32, 32 );
+            this.Object3D = cube;
             scene.add( cube );
-            camera.position.z = 5;
+            //Camera
+            camera.position.z = 200;
+            camera.position.y = 100;
         }
-        //p2 = game.physicsEngine.p2;
+        var all = 0xffffffff;
+        var config = [
+            1, // The density of the shape.
+            0.4, // The coefficient of friction of the shape.
+            0.2, // The coefficient of restitution of the shape.
+            1, // The bits of the collision groups to which the shape belongs.
+            all // The bits of the collision groups with which the shape collides.
+        ];
+        world = game.physicsEngine.world;
+        let x = this.position.x;
+        let y = this.position.y;
+        let z = this.position.z;
+
+        let w = 32;
+        let h = 32;
+        let d = 32;
+        console.log(this.position);
+
+        this.physicsObj = world.add({type:'box', size:[w,h,d], pos:[x,y,z], move:true, config:config, name:'box'})
+        console.log(this.physicsObj);
+        if(this.Object3D !=null){
+            this.Object3D.position.set(this.physicsObj.position.x,this.physicsObj.position.y,this.physicsObj.position.x);
+        }
         //console.log(game.physicsEngine.OIMO);
-        
+    }
+
+    updateRender(){
+        if(this.Object3D !=null){
+            this.Object3D.position.set(this.physicsObj.position.x,this.physicsObj.position.y,this.physicsObj.position.x);
+        }
     }
 
     // on remove-from-world, remove the physics body
@@ -42,6 +78,7 @@ export default class CubePhysic3D extends PhysicalObject3D{
 
     syncTo(other) {
         super.syncTo(other);
+        console.log("syncTo")
     }
 
     toString() {

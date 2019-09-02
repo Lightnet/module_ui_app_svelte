@@ -2,6 +2,8 @@ import GameEngine from "../GameEngine";
 import PhysicsEngine from "../physics/OimoPhysicsEngine";
 
 import CubePhysic3D from "./CubePhysic3D";
+import PlanePhysic3D from "./PlanePhysic3D";
+
 import ThreeVector from "../serialize/ThreeVector";
 
 export default class Game extends GameEngine {
@@ -27,6 +29,7 @@ export default class Game extends GameEngine {
         console.log("Register GameObject!")
         //serializer.registerClass(YourGameObject);
         serializer.registerClass(CubePhysic3D);
+        serializer.registerClass(PlanePhysic3D);
     }
 
     gameLogic() {
@@ -64,7 +67,9 @@ export default class Game extends GameEngine {
     clientSideInit() {
         //testing add scene objects
         //this.addObjectToWorld(new Paddle(this, null, { playerID: 0, position: new TwoVector(PADDING, 0) }));
-        this.addObjectToWorld(new CubePhysic3D(this, {}, { playerID: 0 }));
+        this.addObjectToWorld(new CubePhysic3D(this, {}, { playerID: 0 ,position: new ThreeVector(0, 100, 0)}));
+
+        this.addObjectToWorld(new PlanePhysic3D(this, {}, { }));
         //CubePhysic3D
         
         //this.controls = new KeyboardControls(this.renderer.clientEngine);
@@ -73,6 +78,14 @@ export default class Game extends GameEngine {
     }
 
     clientSideDraw() {
+        //console.log("update draw?");
+        let cubePhysics = this.world.queryObjects({ instanceType: CubePhysic3D });
+        //console.log(cubePhysics);
+        for(let idx in cubePhysics){
+            //console.log(cubePhysics[idx]);
+            cubePhysics[idx].updateRender();
+        }
+
         //function updateEl(el, obj) {
             //let health = obj.health>0?obj.health:15;
             //el.style.top = obj.position.y + 10 + 'px';

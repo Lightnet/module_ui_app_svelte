@@ -20,16 +20,19 @@ class OimoPhysicsEngine extends PhysicsEngine {
 
     constructor(options) {
         super(options);
+        //console.log("init physics engine");
         this.isServer = false;
         if(typeof window !== "undefined"){
             this.isServer = false;
         }else{
             this.isServer = true;
         }
-        console.log("Server: ",this.isServer)
-
-        //console.log("physics engine?")
+        console.log("Server: ",this.isServer);
+        this.objects=[];
+        
+        console.log("STEP TIME:",this.options.dt);
         this.options.dt = this.options.dt || (1 / 60);
+        console.log("STEP TIME:",this.options.dt);
         //console.log(global.OIMO);
         let world = this.world = new OIMO.World({ 
         //let world = this.world = new World({ 
@@ -40,7 +43,7 @@ class OimoPhysicsEngine extends PhysicsEngine {
             worldscale: 1, // scale full world 
             random: true,  // randomize sample
             info: false,   // calculate statistic or not
-            gravity: [0,-9.8,0] 
+            gravity: [0,-9.8,0]
         });
         
         //world.quatNormalizeSkip = 0;
@@ -51,11 +54,19 @@ class OimoPhysicsEngine extends PhysicsEngine {
         //console.log(OIMO);
     }
 
+    add(o){
+        this.objects.push(o);
+    }
+
+    remove(o){
+        this.objects.push(o);
+    }
+
     // entry point for a single step of the Simple Physics
     step(dt, objectFilter) {
-        //if(this.isServer == false){//client checks
+        if(this.isServer == false){//client checks
             //console.log('step physics world');
-        //}
+        }
         this.world.step(dt || this.options.dt);
     }
 

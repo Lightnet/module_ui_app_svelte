@@ -86,11 +86,12 @@ class ClientEngine{
         };
         console.log("client return here ?")
         this.gameEngine.start(); //just testing...
-        let self = this;
+        //let self = this;
         //need to fixed this!!!
         return this.renderer.init().then(() => {
             console.log("client run start RENDERER?")
             //self.gameEngine.start();
+            //this.gameEngine.start();
             console.log(this.options.scheduler);
             if (this.options.scheduler === 'fixed') {
                 // schedule and start the game loop
