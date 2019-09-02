@@ -102,10 +102,13 @@ export default class GameEngine {
 
     step(isReenact, t, dt, physicsOnly) {
         //console.log("step world");
+        //console.log(dt);
         // physics-only step
         if (physicsOnly) {
+            //console.log(dt);
             if (dt) dt /= 1000; // physics engines work in seconds
             this.physicsEngine.step(dt, objectFilter);
+            //console.log("test...");
             return;
         }
 
@@ -125,7 +128,14 @@ export default class GameEngine {
 
         // physics step
         if (this.physicsEngine && !this.ignorePhysics) {
+            //console.log(dt);
             if (dt) dt /= 1000; // physics engines work in seconds
+            //console.log(dt);
+            //console.log(dt);
+            //dt = 16;
+            //dt = 0.0001;//0.000016666666666666667
+            //dt = 0.000016666666666666667;
+            //dt = 1000;
             this.physicsEngine.step(dt, objectFilter);
         }
 

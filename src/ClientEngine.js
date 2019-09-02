@@ -15,6 +15,7 @@ class ClientEngine{
             healthCheckInterval: 1000,
             healthCheckRTTSample: 10,
             stepPeriod: 1000 / GAME_UPS,
+            //stepPeriod: 1/60, //work with physics
             scheduler: 'render-schedule',
             serverURL: null,
         }, inputOptions);
@@ -64,13 +65,13 @@ class ClientEngine{
     }
 
     start() {
-        console.log("start render");
+        //console.log("start client engine render");
         this.stopped = false;
         this.resolved = false;
         // initialize the renderer
         // the render loop waits for next animation frame
         if (!this.renderer) alert('ERROR: game has not defined a renderer');
-        console.log("init loop?");
+        //console.log("init loop?");
         
         let renderLoop = (timestamp) => {
             //console.log("loop?");
@@ -84,16 +85,18 @@ class ClientEngine{
             this.lastTimestamp = timestamp;
             window.requestAnimationFrame(renderLoop);
         };
-        console.log("client return here ?")
+        //console.log("client return here ?")
         this.gameEngine.start(); //just testing...
         //let self = this;
         //need to fixed this!!!
         return this.renderer.init().then(() => {
-            console.log("client run start RENDERER?")
+            //console.log("client run start RENDERER?")
             //self.gameEngine.start();
             //this.gameEngine.start();
             console.log(this.options.scheduler);
             if (this.options.scheduler === 'fixed') {
+                //console.log("FIXED scheduler");
+                //console.log(this.options.stepPeriod);
                 // schedule and start the game loop
                 this.scheduler = new Scheduler({
                     period: this.options.stepPeriod,
@@ -144,6 +147,10 @@ class ClientEngine{
     // at each draw event.
     step(t, dt, physicsOnly) {
         //console.log("step render/physics");
+        //console.log(dt);
+        //console.log(this.options.stepPeriod);
+        dt = dt || this.options.stepPeriod;
+        //console.log(dt);
 
         if (!this.resolved) {
             const result = this.gameEngine.getPlayerGameOverResult();
@@ -158,11 +165,12 @@ class ClientEngine{
         // physics only case
         if (physicsOnly) {
             this.gameEngine.step(false, t, dt, physicsOnly);
+            console.log("physicsOnly");
             return;
         }
 
         // first update the trace state
-        this.gameEngine.trace.setStep(this.gameEngine.world.stepCount + 1);
+        //this.gameEngine.trace.setStep(this.gameEngine.world.stepCount + 1);
 
         // skip one step if requested
         if (this.skipOneStep === true) {
