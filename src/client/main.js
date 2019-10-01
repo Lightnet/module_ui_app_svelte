@@ -15,7 +15,9 @@ localStorage.clear();
 //import App from './App.svelte';
 //import App from './Test.svelte';
 //import App from './component/oimo/OimoMainComponent.svelte';
-import App from './component/engine/ClientEngineComponent.svelte';
+//import App from './component/engine/ClientEngineComponent.svelte';
+import App from './component/engine/Threejs01Component.svelte';
+
 //console.log(`running svelte version ${svelte.VERSION}`);
 
 import {utils} from './mjs';
