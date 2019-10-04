@@ -25,6 +25,7 @@
     "browser-sync": "^2.26.7",
     "compression": "^1.7.4",
     "del": "^5.0.0",
+    "ecsy": "^0.1.4",
     "esm": "^3.2.25",
     "event-emitter": "^0.3.5",
     "gulp": "4.0.2",
