@@ -1,8 +1,7 @@
 
-import fs from 'fs';
+//import fs from 'fs';
 import Scheduler from './lib/Scheduler';
 import Serializer from './serialize/Serializer';
-
 
 class ServerEngine {
     constructor(io, gameEngine, options) {

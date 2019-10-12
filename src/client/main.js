@@ -12,14 +12,14 @@ localStorage.clear();
 
 //'use strict';
 //import "@babel/polyfill";
-//import App from './App.svelte';
+import App from './App.svelte';
 //import App from './Test.svelte';
 //import App from './component/oimo/OimoMainComponent.svelte';
 //import App from './component/engine/ClientEngineComponent.svelte';
 //import App from './component/engine/Threejs01Component.svelte';
 //import App from './component/engine/CanvasECSYComponent.svelte';
 
-import App from './component/engine/ThreejsECSYComponent.svelte';
+//import App from './component/engine/ThreejsECSYComponent.svelte';
 
 //console.log(`running svelte version ${svelte.VERSION}`);
 

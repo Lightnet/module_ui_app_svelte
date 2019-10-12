@@ -103,13 +103,14 @@
     }
 
     onMount(function(){
-         world
+        world
             .registerSystem(RotatingSystem)
             .registerSystem(PulsatingColorSystem)
             .registerSystem(PulsatingScaleSystem)
             .registerSystem(TimeoutSystem)
             .registerSystem(ColliderSystem)
             .registerSystem(MovingSystem);
+            
         world
             .registerComponent(Object3D)
             .registerComponent(Collidable)

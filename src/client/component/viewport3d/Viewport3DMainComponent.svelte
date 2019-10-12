@@ -53,7 +53,7 @@
         let ascene = document.querySelector('a-scene').object3D;
         //console.dir(ascene);
         //console.log(scene);
-        ascene.add(scene);
+        //ascene.add(scene);
     });
     //do not put it here it will over lap
     //AFRAME.registerComponent('natural-size', {
@@ -81,9 +81,11 @@
         let ascene = document.querySelector('a-scene');
         //console.log(ascene);
         //console.dir(ascene.object3D);
-        if(ascene){
+        if(ascene !=null){
             //let scene = ascene.object3D;
-            ascene.object3D.remove(scene)//remove scene from renderer
+            if(scene !=null){
+                //ascene.object3D.remove(scene)//remove scene from renderer
+            }
             //console.log(scene);
             //console.log(ascene.object3D)
             //scene.dispose();
